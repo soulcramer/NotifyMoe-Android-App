@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>detekt report</title>
+    <style>
+h2 {
+  background-color: #666666;
+  padding: 0.2em;
+  color: #ffffff;
+}
+h3 {
+  background-color:#f8dfdf;
+  padding:0.5em;
+}
+.rule {
+  background-color: #dddddd;
+  padding: 0.3em;
+  font-weight: bold;
+}
+.description {
+  color:#000000;
+  padding:0.3em;
+}
+.location {
+  color: #690505;
+  font-family: monospace;
+}
+.message {
+  font-size: 0.8em;
+  color: #444444;
+}
+.rule-container {
+  border: 0.1em dashed #dddddd;
+  padding: 0.1em;
+  line-height: 1.5em;
+}
+
+
+    </style>
+</head>
+<body>
+
+<h1>detekt report</h1>
+
+<h2>Metrics</h2>
+
+<ul>
+    <li>
+        number of kt files: 37
+    </li>
+    <li>
+        number of packages: 14
+    </li>
+    <li>
+        number of classes: 40
+    </li>
+    <li>
+        number of functions: 99
+    </li>
+    <li>
+        number of properties: 64
+    </li>
+</ul>
+
+<h2>Findings</h2>
+<h3>exceptions</h3>
+<div class="rule-container">
+<span class="rule">
+TooGenericExceptionCaught
+</span>
+    <span class="description">
+Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.
+</span>
+</div>
+<ul>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/viewmodel/NotifyMoeViewModelFactory.kt:20:18
+</span>
+        <br/>
+        <span class="message">
+Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/repository/UserRepository.kt:66:22
+</span>
+        <br/>
+        <span class="message">
+Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled.
+</span>
+    </li>
+</ul>
+<div class="rule-container">
+<span class="rule">
+TooGenericExceptionThrown
+</span>
+    <span class="description">
+Thrown exception is too generic. Prefer throwing project specific exceptions to handle error cases.
+</span>
+</div>
+<ul>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/viewmodel/NotifyMoeViewModelFactory.kt:21:13
+</span>
+        <br/>
+        <span class="message">
+RuntimeException is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case.
+</span>
+    </li>
+</ul>
+<h3>style</h3>
+<div class="rule-container">
+<span class="rule">
+NewLineAtEndOfFile
+</span>
+    <span class="description">
+Checks whether files end with a line separator.
+</span>
+</div>
+<ul>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/viewmodel/NotifyMoeViewModelFactory.kt:24:1
+</span>
+        <br/>
+        <span class="message">
+The file NotifyMoeViewModelFactory.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/ui/animelist/AnimeListViewModel.kt:37:1
+</span>
+        <br/>
+        <span class="message">
+The file AnimeListViewModel.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/ui/user/UserViewModel.kt:37:1
+</span>
+        <br/>
+        <span class="message">
+The file UserViewModel.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/ui/common/NavigationController.kt:19:1
+</span>
+        <br/>
+        <span class="message">
+The file NavigationController.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/vo/NickToUser.kt:12:1
+</span>
+        <br/>
+        <span class="message">
+The file NickToUser.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/vo/User.kt:18:1
+</span>
+        <br/>
+        <span class="message">
+The file User.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/vo/Resource.kt:21:1
+</span>
+        <br/>
+        <span class="message">
+The file Resource.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/repository/UserRepository.kt:82:1
+</span>
+        <br/>
+        <span class="message">
+The file UserRepository.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/repository/NetworkBoundResource.kt:111:1
+</span>
+        <br/>
+        <span class="message">
+The file NetworkBoundResource.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/AppModule.kt:50:1
+</span>
+        <br/>
+        <span class="message">
+The file AppModule.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/FragmentBuildersModule.kt:20:1
+</span>
+        <br/>
+        <span class="message">
+The file FragmentBuildersModule.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/Injectable.kt:6:20
+</span>
+        <br/>
+        <span class="message">
+The file Injectable.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/AppInjector.kt:71:1
+</span>
+        <br/>
+        <span class="message">
+The file AppInjector.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/MainActivityModule.kt:12:1
+</span>
+        <br/>
+        <span class="message">
+The file MainActivityModule.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/ViewModelModule.kt:21:1
+</span>
+        <br/>
+        <span class="message">
+The file ViewModelModule.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/AppComponent.kt:27:1
+</span>
+        <br/>
+        <span class="message">
+The file AppComponent.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/ViewModelKey.kt:15:63
+</span>
+        <br/>
+        <span class="message">
+The file ViewModelKey.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/AbsentLiveData.kt:19:1
+</span>
+        <br/>
+        <span class="message">
+The file AbsentLiveData.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/RateLimiter.kt:32:1
+</span>
+        <br/>
+        <span class="message">
+The file RateLimiter.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/AutoClearedValue.kt:41:64
+</span>
+        <br/>
+        <span class="message">
+The file AutoClearedValue.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/LiveDataCallAdapter.kt:40:1
+</span>
+        <br/>
+        <span class="message">
+The file LiveDataCallAdapter.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/LiveDataCallAdapterFactory.kt:31:1
+</span>
+        <br/>
+        <span class="message">
+The file LiveDataCallAdapterFactory.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/common/LiveDataExtension.kt:9:1
+</span>
+        <br/>
+        <span class="message">
+The file LiveDataExtension.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/NotifyMoeAppGlideModule.kt:10:3
+</span>
+        <br/>
+        <span class="message">
+The file NotifyMoeAppGlideModule.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/db/UserDao.kt:23:1
+</span>
+        <br/>
+        <span class="message">
+The file UserDao.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/db/GithubTypeConverters.kt:27:1
+</span>
+        <br/>
+        <span class="message">
+The file GithubTypeConverters.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/db/NotifyMoeDb.kt:36:1
+</span>
+        <br/>
+        <span class="message">
+The file NotifyMoeDb.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/api/NotifyMoeService.kt:32:1
+</span>
+        <br/>
+        <span class="message">
+The file NotifyMoeService.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/api/ApiResponse.kt:92:75
+</span>
+        <br/>
+        <span class="message">
+The file ApiResponse.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/AppCoroutineDispatchers.kt:31:1
+</span>
+        <br/>
+        <span class="message">
+The file AppCoroutineDispatchers.kt is not ending with a new line.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/NotifyMoe.kt:33:1
+</span>
+        <br/>
+        <span class="message">
+The file NotifyMoe.kt is not ending with a new line.
+</span>
+    </li>
+</ul>
+<div class="rule-container">
+<span class="rule">
+WildcardImport
+</span>
+    <span class="description">
+Wildcard imports should be replaced with imports using fully qualified class names. Wildcard imports can lead to naming conflicts. A library update can introduce naming clashes with your classes which results in compilation errors.
+</span>
+</div>
+<ul>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/LiveDataCallAdapterFactory.kt:5:1
+</span>
+        <br/>
+        <span class="message">
+retrofit2.CallAdapter.* is a wildcard import. Replace it with fully qualified imports.
+</span>
+    </li>
+</ul>
+<div class="rule-container">
+<span class="rule">
+MagicNumber
+</span>
+    <span class="description">
+Report magic numbers. Magic number is a numeric literal that is not defined as a constant and hence it's unclear what the purpose of this number is. It's better to declare such numbers as constants and give them a proper name. By default, -1, 0, 1, and 2 are not considered to be magic numbers.
+</span>
+</div>
+<ul>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/db/NotifyMoeDb.kt:14:15
+</span>
+        <br/>
+        <span class="message">
+This expression contains a magic number. Consider defining it to a well named constant.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/api/ApiResponse.kt:21:56
+</span>
+        <br/>
+        <span class="message">
+This expression contains a magic number. Consider defining it to a well named constant.
+</span>
+    </li>
+    <li>
+<span class="location">
+/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/AppCoroutineDispatchers.kt:21:38
+</span>
+        <br/>
+        <span class="message">
+This expression contains a magic number. Consider defining it to a well named constant.
+</span>
+    </li>
+</ul>
+
+</body>
+</html>

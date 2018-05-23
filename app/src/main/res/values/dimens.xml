@@ -1,0 +1,11 @@
+<resources>
+    <dimen name="font_size_small">12sp</dimen>
+    <dimen name="font_size_medium">14sp</dimen>
+    <dimen name="font_size_large">18sp</dimen>
+    <dimen name="font_size_huge">24sp</dimen>
+
+    <dimen name="spacing_small">4dp</dimen>
+    <dimen name="spacing_medium">8dp</dimen>
+    <dimen name="spacing_large">16dp</dimen>
+    <dimen name="spacing_huge">32dp</dimen>
+</resources>

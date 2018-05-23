@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/dashboard">
+
+    <activity
+        android:id="@+id/homeActivity"
+        android:name="studio.lunabee.arn.ui.HomeActivity"
+        android:label="HomeActivity"
+        tools:layout="@layout/activity_main" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="studio.lunabee.arn.ui.settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/animeList"
+        android:name="studio.lunabee.arn.ui.animelist.AnimeListFragment"
+        android:label="AnimeListFragment"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="studio.lunabee.arn.ui.user.UserFragment"
+        android:label="UserFragment"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/dashboard"
+        android:name="studio.lunabee.arn.ui.dashboard.DashboardFragment"
+        android:label="DashboardFragment"
+        tools:layout="@layout/fragment_user" />
+</navigation>

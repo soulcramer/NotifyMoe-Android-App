@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MAMAMAMA</string>
+
+    <string name="tab_myprofile_title">My profile</string>
+    <string name="common_error_title">Oh no !</string>
+    <string name="common_error_description">An error has occurred !</string>
+    <string name="common_empty_title">Oh oh ?</string>
+    <string name="common_empty_description">It\'s empty here. This is weird…</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

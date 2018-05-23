@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<checkstyle version="4.3">
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/viewmodel/NotifyMoeViewModelFactory.kt">
+        <error column="18" line="20"
+            message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled."
+            severity="error" source="detekt.TooGenericExceptionCaught" />
+        <error column="13" line="21"
+            message="RuntimeException is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case."
+            severity="error" source="detekt.TooGenericExceptionThrown" />
+        <error column="1" line="24"
+            message="The file NotifyMoeViewModelFactory.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/repository/UserRepository.kt">
+        <error column="22" line="66"
+            message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled."
+            severity="error" source="detekt.TooGenericExceptionCaught" />
+        <error column="1" line="82"
+            message="The file UserRepository.kt is not ending with a new line." severity="warning"
+            source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/ui/animelist/AnimeListViewModel.kt">
+        <error column="1" line="37"
+            message="The file AnimeListViewModel.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/ui/user/UserViewModel.kt">
+        <error column="1" line="37"
+            message="The file UserViewModel.kt is not ending with a new line." severity="warning"
+            source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/ui/common/NavigationController.kt">
+        <error column="1" line="19"
+            message="The file NavigationController.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/vo/NickToUser.kt">
+        <error column="1" line="12" message="The file NickToUser.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/vo/User.kt">
+        <error column="1" line="18" message="The file User.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/vo/Resource.kt">
+        <error column="1" line="21" message="The file Resource.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/repository/NetworkBoundResource.kt">
+        <error column="1" line="111"
+            message="The file NetworkBoundResource.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/AppModule.kt">
+        <error column="1" line="50" message="The file AppModule.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/FragmentBuildersModule.kt">
+        <error column="1" line="20"
+            message="The file FragmentBuildersModule.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/Injectable.kt">
+        <error column="20" line="6" message="The file Injectable.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/AppInjector.kt">
+        <error column="1" line="71" message="The file AppInjector.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/MainActivityModule.kt">
+        <error column="1" line="12"
+            message="The file MainActivityModule.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/ViewModelModule.kt">
+        <error column="1" line="21"
+            message="The file ViewModelModule.kt is not ending with a new line." severity="warning"
+            source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/AppComponent.kt">
+        <error column="1" line="27"
+            message="The file AppComponent.kt is not ending with a new line." severity="warning"
+            source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/di/ViewModelKey.kt">
+        <error column="63" line="15"
+            message="The file ViewModelKey.kt is not ending with a new line." severity="warning"
+            source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/AbsentLiveData.kt">
+        <error column="1" line="19"
+            message="The file AbsentLiveData.kt is not ending with a new line." severity="warning"
+            source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/RateLimiter.kt">
+        <error column="1" line="32" message="The file RateLimiter.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/AutoClearedValue.kt">
+        <error column="64" line="41"
+            message="The file AutoClearedValue.kt is not ending with a new line." severity="warning"
+            source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/LiveDataCallAdapter.kt">
+        <error column="1" line="40"
+            message="The file LiveDataCallAdapter.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/util/LiveDataCallAdapterFactory.kt">
+        <error column="1" line="31"
+            message="The file LiveDataCallAdapterFactory.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+        <error column="1" line="5"
+            message="retrofit2.CallAdapter.* is a wildcard import. Replace it with fully qualified imports."
+            severity="warning" source="detekt.WildcardImport" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/common/LiveDataExtension.kt">
+        <error column="1" line="9"
+            message="The file LiveDataExtension.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/NotifyMoeAppGlideModule.kt">
+        <error column="3" line="10"
+            message="The file NotifyMoeAppGlideModule.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/db/UserDao.kt">
+        <error column="1" line="23" message="The file UserDao.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/db/GithubTypeConverters.kt">
+        <error column="1" line="27"
+            message="The file GithubTypeConverters.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/db/NotifyMoeDb.kt">
+        <error column="1" line="36" message="The file NotifyMoeDb.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+        <error column="15" line="14"
+            message="This expression contains a magic number. Consider defining it to a well named constant."
+            severity="warning" source="detekt.MagicNumber" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/api/NotifyMoeService.kt">
+        <error column="1" line="32"
+            message="The file NotifyMoeService.kt is not ending with a new line." severity="warning"
+            source="detekt.NewLineAtEndOfFile" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/api/ApiResponse.kt">
+        <error column="75" line="92"
+            message="The file ApiResponse.kt is not ending with a new line." severity="warning"
+            source="detekt.NewLineAtEndOfFile" />
+        <error column="56" line="21"
+            message="This expression contains a magic number. Consider defining it to a well named constant."
+            severity="warning" source="detekt.MagicNumber" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/AppCoroutineDispatchers.kt">
+        <error column="1" line="31"
+            message="The file AppCoroutineDispatchers.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+        <error column="38" line="21"
+            message="This expression contains a magic number. Consider defining it to a well named constant."
+            severity="warning" source="detekt.MagicNumber" />
+    </file>
+    <file
+        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/NotifyMoe.kt">
+        <error column="1" line="33" message="The file NotifyMoe.kt is not ending with a new line."
+            severity="warning" source="detekt.NewLineAtEndOfFile" />
+    </file>
+</checkstyle>

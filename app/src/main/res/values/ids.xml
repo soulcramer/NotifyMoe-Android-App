@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="drawerLayout_base" type="id" />
+    <item name="drawer_debug" type="id" />
+    <item name="item_manga" type="id" />
+</resources>
