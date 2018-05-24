@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">MAMAMAMA</string>
+    <string name="app.name">MAMAMAMA</string>
 
-    <string name="tab_myprofile_title">My profile</string>
-    <string name="common_error_title">Oh no !</string>
-    <string name="common_error_description">An error has occurred !</string>
-    <string name="common_empty_title">Oh oh ?</string>
-    <string name="common_empty_description">It\'s empty here. This is weird…</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="tab.myprofile.title">My profile</string>
+    <string name="common.empty.title">Oh oh ?</string>
+    <string name="common.empty.description">It\'s empty here. This is weird…</string>
+    <string name="common.error.title">Oh no !</string>
+    <string name="common.error.description">Something went wrong…</string>
+    <string name="common.error.no_result">No result</string>
+    <string name="network.no_connection.error.title">No connexion</string>
+    <string name="network.no_connection.error.description">We\'re not able to connect to the server, do you have internet?</string>
 </resources>
