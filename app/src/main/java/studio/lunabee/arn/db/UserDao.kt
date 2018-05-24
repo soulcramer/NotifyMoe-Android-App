@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class UserDao @Inject constructor(private val monarchy: Monarchy) {
 
     fun insert(user: User) {
-        monarchy.doWithRealm { it.copyToRealmOrUpdate(user) }
+        monarchy.runTransactionSync { it.copyToRealmOrUpdate(user) }
     }
 
     fun findByNick(nickname: String): LiveData<List<User>> {
