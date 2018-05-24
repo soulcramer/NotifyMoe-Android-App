@@ -3,7 +3,7 @@ package studio.lunabee.arn.db
 import android.arch.lifecycle.LiveData
 import com.zhuinden.monarchy.Monarchy
 import io.realm.kotlin.where
-import studio.lunabee.arn.vo.User
+import studio.lunabee.arn.vo.user.User
 import javax.inject.Inject
 import javax.inject.Singleton
 

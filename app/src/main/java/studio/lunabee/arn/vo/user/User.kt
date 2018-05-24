@@ -1,4 +1,4 @@
-package studio.lunabee.arn.vo
+package studio.lunabee.arn.vo.user
 
 import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject

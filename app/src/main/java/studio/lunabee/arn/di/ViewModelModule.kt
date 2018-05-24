@@ -5,6 +5,7 @@ import android.arch.lifecycle.ViewModelProvider
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import studio.lunabee.arn.ui.animelist.AnimeListViewModel
 import studio.lunabee.arn.ui.dashboard.DashboardViewModel
 import studio.lunabee.arn.ui.user.UserViewModel
 import studio.lunabee.arn.viewmodel.NotifyMoeViewModelFactory
@@ -21,6 +22,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(DashboardViewModel::class)
     abstract fun bindDashboardViewModel(dashboardViewModel: DashboardViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AnimeListViewModel::class)
+    abstract fun bindAnimeListViewModel(animeListViewModel: AnimeListViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: NotifyMoeViewModelFactory): ViewModelProvider.Factory

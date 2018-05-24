@@ -18,7 +18,7 @@
         android:id="@+id/animeList"
         android:name="studio.lunabee.arn.ui.animelist.AnimeListFragment"
         android:label="AnimeListFragment"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_animelist" />
     <fragment
         android:id="@+id/profile"
         android:name="studio.lunabee.arn.ui.user.UserFragment"
@@ -28,5 +28,5 @@
         android:id="@+id/dashboard"
         android:name="studio.lunabee.arn.ui.dashboard.DashboardFragment"
         android:label="DashboardFragment"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_dashboard" />
 </navigation>

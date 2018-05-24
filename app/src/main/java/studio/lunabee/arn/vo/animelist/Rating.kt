@@ -1,4 +1,4 @@
-package studio.lunabee.arn.vo
+package studio.lunabee.arn.vo.animelist
 
 import io.realm.RealmObject
 import io.realm.annotations.RealmClass

@@ -7,7 +7,7 @@ import android.arch.lifecycle.ViewModel
 import studio.lunabee.arn.repository.UserRepository
 import studio.lunabee.arn.util.AbsentLiveData
 import studio.lunabee.arn.vo.Resource
-import studio.lunabee.arn.vo.User
+import studio.lunabee.arn.vo.user.User
 import javax.inject.Inject
 
 class UserViewModel @Inject constructor(userRepository: UserRepository) : ViewModel() {

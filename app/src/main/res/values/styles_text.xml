@@ -3,28 +3,28 @@
 
     <style name="TextAppearance.NotifyMoe" parent="TextAppearance.AppCompat" />
 
-    <style name="TextAppearance.NotifyMoe.HeadLine1" parent="TextAppearance.MaterialComponents.Headline1"></style>
+    <style name="TextAppearance.NotifyMoe.HeadLine1" parent="TextAppearance.MaterialComponents.Headline1" />
 
-    <style name="TextAppearance.NotifyMoe.HeadLine2" parent="TextAppearance.MaterialComponents.Headline2"></style>
+    <style name="TextAppearance.NotifyMoe.HeadLine2" parent="TextAppearance.MaterialComponents.Headline2" />
 
-    <style name="TextAppearance.NotifyMoe.Headline3" parent="TextAppearance.MaterialComponents.Headline3"></style>
+    <style name="TextAppearance.NotifyMoe.Headline3" parent="TextAppearance.MaterialComponents.Headline3" />
 
-    <style name="TextAppearance.NotifyMoe.Headline4" parent="TextAppearance.MaterialComponents.Headline4"></style>
+    <style name="TextAppearance.NotifyMoe.Headline4" parent="TextAppearance.MaterialComponents.Headline4" />
 
-    <style name="TextAppearance.NotifyMoe.Headline5" parent="TextAppearance.MaterialComponents.Headline5"></style>
+    <style name="TextAppearance.NotifyMoe.Headline5" parent="TextAppearance.MaterialComponents.Headline5" />
 
-    <style name="TextAppearance.NotifyMoe.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1"></style>
+    <style name="TextAppearance.NotifyMoe.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1" />
 
-    <style name="TextAppearance.NotifyMoe.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2"></style>
+    <style name="TextAppearance.NotifyMoe.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2" />
 
-    <style name="TextAppearance.NotifyMoe.Body1" parent="TextAppearance.MaterialComponents.Body1"></style>
+    <style name="TextAppearance.NotifyMoe.Body1" parent="TextAppearance.MaterialComponents.Body1" />
 
-    <style name="TextAppearance.NotifyMoe.Body2" parent="TextAppearance.MaterialComponents.Body2"></style>
+    <style name="TextAppearance.NotifyMoe.Body2" parent="TextAppearance.MaterialComponents.Body2" />
 
-    <style name="TextAppearance.NotifyMoe.Caption" parent="TextAppearance.MaterialComponents.Caption"></style>
+    <style name="TextAppearance.NotifyMoe.Caption" parent="TextAppearance.MaterialComponents.Caption" />
 
-    <style name="TextAppearance.NotifyMoe.Button" parent="TextAppearance.MaterialComponents.Button"></style>
+    <style name="TextAppearance.NotifyMoe.Button" parent="TextAppearance.MaterialComponents.Button" />
 
-    <style name="TextAppearance.NotifyMoe.Overline" parent="TextAppearance.MaterialComponents.Overline"></style>
+    <style name="TextAppearance.NotifyMoe.Overline" parent="TextAppearance.MaterialComponents.Overline" />
 
 </resources>

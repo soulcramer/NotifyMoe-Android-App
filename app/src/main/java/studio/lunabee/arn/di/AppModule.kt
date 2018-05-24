@@ -1,5 +1,6 @@
 package studio.lunabee.arn.di
 
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import com.zhuinden.monarchy.Monarchy
 import dagger.Module
@@ -13,6 +14,8 @@ import studio.lunabee.arn.api.NotifyMoeService
 import studio.lunabee.arn.db.UserDao
 import studio.lunabee.arn.db.userDao
 import studio.lunabee.arn.util.LiveDataCallAdapterFactory
+import studio.lunabee.arn.vo.animelist.AnimeListItem
+import studio.lunabee.arn.vo.animelist.AnimeListItemDeserializer
 import javax.inject.Singleton
 
 @Module(includes = [ViewModelModule::class])
@@ -20,12 +23,15 @@ class AppModule {
     @Singleton
     @Provides
     fun provideGithubService(): NotifyMoeService {
+        val gson = GsonBuilder().registerTypeAdapter(AnimeListItem::class.java,
+            AnimeListItemDeserializer()).create()
+
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder().addInterceptor(logging).build()
+
         return Retrofit.Builder()
-            .baseUrl("https://notify.moe/")
-            .addConverterFactory(GsonConverterFactory.create())
+            .baseUrl("https://notify.moe/").addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(LiveDataCallAdapterFactory())
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .client(client)

@@ -9,9 +9,9 @@ import studio.lunabee.arn.api.ApiErrorResponse
 import studio.lunabee.arn.api.ApiResponse
 import studio.lunabee.arn.api.NotifyMoeService
 import studio.lunabee.arn.db.UserDao
-import studio.lunabee.arn.vo.NickToUser
 import studio.lunabee.arn.vo.Resource
-import studio.lunabee.arn.vo.User
+import studio.lunabee.arn.vo.user.NickToUser
+import studio.lunabee.arn.vo.user.User
 import javax.inject.Inject
 import javax.inject.Singleton
 
