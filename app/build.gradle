@@ -90,7 +90,7 @@ dependencies {
     implementation "androidx.core:core-ktx:0.3"
 
 
-    implementation "com.github.Zhuinden:realm-monarchy:0.2.1"
+    implementation "com.github.Zhuinden:realm-monarchy:0.2.2"
 
     // Dagger
     implementation "com.google.dagger:dagger:${versions.dagger}"
