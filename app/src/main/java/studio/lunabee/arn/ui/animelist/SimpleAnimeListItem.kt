@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.TextView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
+import kotlinx.android.synthetic.main.simple_animelist_item.view.*
 import studio.lunabee.arn.R
 
 class SimpleAnimeListItem : AbstractItem<SimpleAnimeListItem, SimpleAnimeListItem.ViewHolder>() {

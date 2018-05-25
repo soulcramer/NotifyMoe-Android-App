@@ -15,10 +15,12 @@ sealed class ApiResponse<T> {
             return ApiErrorResponse(error.message ?: "unknown error")
         }
 
+        private const val NO_CONTENT_RESPONSE_CODE = 204
+
         fun <T> create(response: Response<T>): ApiResponse<T> {
             return if (response.isSuccessful) {
                 val body = response.body()
-                if (body == null || response.code() == 204) {
+                if (body == null || response.code() == NO_CONTENT_RESPONSE_CODE) {
                     ApiEmptyResponse()
                 } else {
                     ApiSuccessResponse(

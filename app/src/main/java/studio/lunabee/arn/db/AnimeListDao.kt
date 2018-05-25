@@ -10,27 +10,31 @@ import javax.inject.Singleton
 @Singleton
 class AnimeListDao @Inject constructor(private val monarchy: Monarchy) {
 
-    fun insert(item: AnimeListItem) {
+    fun insert(userId: String, item: AnimeListItem) {
         monarchy.runTransactionSync {
+            item.userId = userId
             item.compoundPrimaryKey()
             it.insertOrUpdate(item)
         }
     }
 
-    fun insert(items: List<AnimeListItem>) {
-        items.forEach(AnimeListItem::compoundPrimaryKey)
-        monarchy.runTransactionSync { it.copyToRealmOrUpdate(items) }
+    fun insert(userId: String, items: List<AnimeListItem>) {
+        items.forEach {
+            it.userId = userId
+            it.compoundPrimaryKey()
+        }
+        monarchy.runTransactionSync { it.insertOrUpdate(items) }
     }
 
     fun findByUserId(userId: String): LiveData<List<AnimeListItem>> {
         return monarchy.findAllCopiedWithChanges({ realm ->
-            realm.where<AnimeListItem>().like("userId", userId)
+            realm.where<AnimeListItem>().equalTo("userId", userId)
         })
     }
 
     fun findByAnimeId(animeId: String): LiveData<List<AnimeListItem>> {
         return monarchy.findAllCopiedWithChanges({ realm ->
-            realm.where<AnimeListItem>().like("animeId", animeId)
+            realm.where<AnimeListItem>().equalTo("animeId", animeId)
         })
     }
 

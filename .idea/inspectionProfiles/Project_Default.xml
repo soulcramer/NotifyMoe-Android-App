@@ -2,6 +2,19 @@
   <profile version="1.0">
     <option name="myName" value="Project Default" />
     <inspection_tool class="AddVarianceModifier" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintBackButton" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintIconExpectedSize" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintKotlinPropertyAccess" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintLambdaLast" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintNegativeMargin" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintNewerVersionAvailable" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintNoHardKeywords" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintPermissionImpliesUnsupportedChromeOsHardware" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintSelectableText" enabled="true" level="WEAK WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintTypographyQuotes" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintUnknownNullness" enabled="true" level="WARNING" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintUnsupportedChromeOsHardware" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="AndroidLintWrongThreadInterprocedural" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="ArrayInDataClass" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="CanBeParameter" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="CanBePrimaryConstructorProperty" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -32,6 +45,7 @@
     <inspection_tool class="HasPlatformType" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="IfThenToElvis" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="IfThenToSafeAccess" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="InconsistentLineSeparators" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="IntroduceWhenSubject" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="JoinDeclarationAndAssignment" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="KDocMissingDocumentation" enabled="false" level="ERROR" enabled_by_default="false" />
@@ -53,7 +67,9 @@
     <inspection_tool class="OverridingDeprecatedMember" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="PackageDirectoryMismatch" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="PackageName" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="PermissionUsageInspection" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="PrivatePropertyName" enabled="false" level="ERROR" enabled_by_default="false" />
+    <inspection_tool class="ProblematicWhitespace" enabled="true" level="WARNING" enabled_by_default="true" />
     <inspection_tool class="PropertyName" enabled="false" level="ERROR" enabled_by_default="false" />
     <inspection_tool class="ProtectedInFinal" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="RecursivePropertyAccessor" enabled="true" level="ERROR" enabled_by_default="true" />
@@ -62,6 +78,7 @@
     <inspection_tool class="RedundantIf" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="RedundantLambdaArrow" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="RedundantModalityModifier" enabled="true" level="ERROR" enabled_by_default="true" />
+    <inspection_tool class="RedundantNotNullExtensionReceiverOfInline" enabled="true" level="INFORMATION" enabled_by_default="true" />
     <inspection_tool class="RedundantSamConstructor" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="RedundantSemicolon" enabled="true" level="ERROR" enabled_by_default="true" />
     <inspection_tool class="RedundantSetter" enabled="true" level="ERROR" enabled_by_default="true" />

@@ -21,7 +21,10 @@ class DashboardFragment : Fragment(), Injectable {
     private lateinit var dashboardViewModel: DashboardViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
 
@@ -30,10 +33,9 @@ class DashboardFragment : Fragment(), Injectable {
         dashboardViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(DashboardViewModel::class.java)
 
-
         dashboardViewModel.setNickname("Scott")
         dashboardViewModel.user.observeK(this) { userResource ->
-            userResource?.data?.firstOrNull()?.run {
+            userResource.data?.firstOrNull()?.run {
                 nickNameTextView.text = nickName
                 roleTextView.text = role
                 Picasso.get().load("https://media.notify.moe/images/avatars/large/$id.png").into(

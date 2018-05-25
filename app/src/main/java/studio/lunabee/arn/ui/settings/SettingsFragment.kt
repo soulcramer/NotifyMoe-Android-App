@@ -16,7 +16,10 @@ class SettingsFragment : Fragment(), Injectable {
     //private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
 

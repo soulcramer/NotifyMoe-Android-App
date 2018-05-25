@@ -13,7 +13,8 @@ import javax.inject.Singleton
 open class AppCoroutineDispatchers(
     val disk: CoroutineDispatcher,
     val network: CoroutineDispatcher,
-    val main: CoroutineDispatcher) {
+    val main: CoroutineDispatcher
+) {
 
     @Inject
     constructor() : this(

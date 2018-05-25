@@ -21,7 +21,10 @@ class UserFragment : Fragment(), Injectable {
     private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_user, container, false)
     }
 
@@ -30,10 +33,9 @@ class UserFragment : Fragment(), Injectable {
         userViewModel = ViewModelProviders.of(this, viewModelFactory)
             .get(UserViewModel::class.java)
 
-
         userViewModel.setNickname("Scott")
         userViewModel.user.observeK(this) { userResource ->
-            userResource?.data?.firstOrNull()?.run {
+            userResource.data?.firstOrNull()?.run {
                 nickNameTextView.text = nickName
                 roleTextView.text = role
                 Picasso.get().load("https://media.notify.moe/images/avatars/large/$id.png").into(

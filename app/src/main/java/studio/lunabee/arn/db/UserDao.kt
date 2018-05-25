@@ -15,16 +15,14 @@ class UserDao @Inject constructor(private val monarchy: Monarchy) {
     }
 
     fun findByNick(nickname: String): LiveData<List<User>> {
-        return monarchy.findAllCopiedWithChanges({ realm ->
-            realm.where<User>()
-                .like("nickName", nickname)
-        })
+        return monarchy.findAllCopiedWithChanges { realm ->
+            realm.where<User>().like("nickName", nickname)
+        }
     }
 
     fun findById(id: String): LiveData<List<User>> {
-        return monarchy.findAllCopiedWithChanges({ realm ->
-            realm.where<User>()
-                .equalTo("id", id)
-        })
+        return monarchy.findAllCopiedWithChanges { realm ->
+            realm.where<User>().equalTo("id", id)
+        }
     }
 }

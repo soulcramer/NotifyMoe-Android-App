@@ -13,13 +13,16 @@ import javax.inject.Singleton
  * Repository that handles User objects.
  */
 @Singleton
-class AnimeListRepository @Inject constructor(private val dispatchers: AppCoroutineDispatchers,
-    private val animeListDao: AnimeListDao, private val service: NotifyMoeService) {
+class AnimeListRepository @Inject constructor(
+    private val dispatchers: AppCoroutineDispatchers,
+    private val animeListDao: AnimeListDao,
+    private val service: NotifyMoeService
+) {
 
     fun loadAnimeListItemsByUserId(id: String): LiveData<Resource<List<AnimeListItem>>> {
         return object : NetworkBoundResource<List<AnimeListItem>, List<AnimeListItem>>(dispatchers) {
-            override fun saveCallResult(items: List<AnimeListItem>) {
-                animeListDao.insert(items)
+            override fun saveCallResult(item: List<AnimeListItem>) {
+                animeListDao.insert(id, item)
             }
 
             override fun shouldFetch(data: List<AnimeListItem>?) = data == null || data.isEmpty()

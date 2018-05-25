@@ -22,7 +22,8 @@ import javax.inject.Singleton
 class UserRepository @Inject constructor(
     private val dispatchers: AppCoroutineDispatchers,
     private val userDao: UserDao,
-    private val service: NotifyMoeService) {
+    private val service: NotifyMoeService
+) {
 
     fun loadUserById(id: String): LiveData<Resource<List<User>>> {
         return object : NetworkBoundResource<List<User>, User>(dispatchers) {
@@ -53,7 +54,8 @@ class UserRepository @Inject constructor(
     }
 
     private fun loadUserByNick(
-        nick: String): MutableLiveData<ApiResponse<User>> {
+        nick: String
+    ): MutableLiveData<ApiResponse<User>> {
         val dispatchResult = MutableLiveData<ApiResponse<User>>()
         launch {
             try {
@@ -70,8 +72,10 @@ class UserRepository @Inject constructor(
         return dispatchResult
     }
 
-    private suspend fun loadUserById(nickResponse: Response<NickToUser>,
-        dispatchResult: MutableLiveData<ApiResponse<User>>) {
+    private suspend fun loadUserById(
+        nickResponse: Response<NickToUser>,
+        dispatchResult: MutableLiveData<ApiResponse<User>>
+    ) {
         val idResponse = service.getUserByIdK(nickResponse.body()?.userId!!).await()
         if (idResponse.isSuccessful) {
             dispatchResult.postValue(ApiResponse.create(idResponse))

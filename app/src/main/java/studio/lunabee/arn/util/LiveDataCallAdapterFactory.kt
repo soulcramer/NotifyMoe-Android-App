@@ -2,7 +2,7 @@ package studio.lunabee.arn.util
 
 import android.arch.lifecycle.LiveData
 import retrofit2.CallAdapter
-import retrofit2.CallAdapter.*
+import retrofit2.CallAdapter.Factory
 import retrofit2.Retrofit
 import studio.lunabee.arn.api.ApiResponse
 import java.lang.reflect.ParameterizedType
