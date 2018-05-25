@@ -16,24 +16,24 @@ interface NotifyMoeService {
     /**
      * @param userId
      */
-    @GET("/api/mItems/{userId}")
+    @GET("api/user/{userId}")
     fun getUserById(@Path("userId") userId: String): LiveData<ApiResponse<User>>
 
     /**
      * @param userId
      */
-    @GET("/api/mItems/{userId}")
+    @GET("api/user/{userId}")
     fun getUserByIdK(@Path("userId") userId: String): Deferred<Response<User>>
 
     /**
      * @param userNickname
      */
-    @GET("/api/nicktouser/{userNickname}")
+    @GET("api/nicktouser/{userNickname}")
     fun getUserIdByNick(@Path("userNickname") userNickname: String): Deferred<Response<NickToUser>>
 
     /**
      * @param userId
      */
-    @GET("/api/animelist/{userId}")
+    @GET("api/animelist/{userId}")
     fun getAnimeListItemsByUserId(@Path("userId") userId: String): LiveData<ApiResponse<List<AnimeListItem>>>
 }
