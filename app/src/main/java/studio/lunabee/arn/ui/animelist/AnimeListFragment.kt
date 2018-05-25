@@ -10,9 +10,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
+import kotlinx.android.synthetic.main.default_error_view.*
+import kotlinx.android.synthetic.main.fragment_animelist.*
 import studio.lunabee.arn.R
 import studio.lunabee.arn.common.observeK
 import studio.lunabee.arn.di.Injectable
+import studio.lunabee.arn.ui.common.statefulview.Data
+import studio.lunabee.arn.vo.Error
+import studio.lunabee.arn.vo.Loading
+import studio.lunabee.arn.vo.Success
 import javax.inject.Inject
 
 class AnimeListFragment : Fragment(), Injectable {
@@ -23,7 +29,10 @@ class AnimeListFragment : Fragment(), Injectable {
     private lateinit var fastAdapter: FastAdapter<SimpleAnimeListItem>
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_animelist, container, false)
     }
 
@@ -41,18 +50,34 @@ class AnimeListFragment : Fragment(), Injectable {
             setHasFixedSize(true)
         }
 
+        statefulView.state = statefulView.loadingState
 
         animeListViewModel.setUserId("4J6qpK1ve")
         animeListViewModel.mItems.observeK(this) { userResource ->
-            userResource?.data?.run {
-                val items = this.asSequence().filter {
-                    it.status == "watching"
-                }.map {
-                        SimpleAnimeListItem().apply {
-                            title = it.animeId
+            when (userResource.status) {
+                is Loading -> statefulView.state = statefulView.loadingState
+                is Error -> {
+                    subtitle.text = userResource.message
+                    statefulView.state = statefulView.errorState
+                }
+                is Success -> {
+                    userResource.data?.apply {
+                        val items = this.asSequence().filter {
+                            it.status == "watching"
+                        }.map {
+                            SimpleAnimeListItem().apply {
+                                title = it.animeId
+                            }
+                        }.toList()
+
+                        statefulView.state = if (items.isEmpty()) {
+                            statefulView.emptyState
+                        } else {
+                            itemAdapter.add(items)
+                            Data()
                         }
-                    }.toList()
-                itemAdapter.add(items)
+                    }
+                }
             }
         }
     }

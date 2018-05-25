@@ -18,7 +18,7 @@ class StatefulView : FrameLayout {
 
     private lateinit var container: FrameLayout
     private lateinit var progressBar: ContentLoadingProgressBar
-    private val childViews = ArrayList<View>(3)
+    private val childViews = ArrayList<View>()
     lateinit var swipeRefreshLayout: SwipeRefreshLayout
         private set
     var errorState: Error = Error()
@@ -35,17 +35,24 @@ class StatefulView : FrameLayout {
             }
         }
 
-    @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null,
-        defStyleAttr: Int = 0) : super(context, attrs, defStyleAttr) {
-        init()
+    @JvmOverloads constructor(
+        context: Context,
+        attrs: AttributeSet? = null,
+        defStyleAttr: Int = 0
+    ) : super(context, attrs, defStyleAttr) {
+        isSwipeRefreshEnable = false
     }
 
     @Suppress("unused") @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP) constructor(
-        context: Context, attrs: AttributeSet, defStyleAttr: Int, defStyleRes: Int) : super(context,
+        context: Context,
+        attrs: AttributeSet,
+        defStyleAttr: Int,
+        defStyleRes: Int
+    ) : super(context,
         attrs,
         defStyleAttr,
         defStyleRes) {
-        init()
+        isSwipeRefreshEnable = false
     }
 
     override fun onFinishInflate() {
@@ -64,19 +71,21 @@ class StatefulView : FrameLayout {
     }
 
     override fun addView(child: View, index: Int, params: ViewGroup.LayoutParams) {
-        if (child.visibility == View.VISIBLE && (child.tag == null || child.tag != TAG) && child !is SwipeRefreshLayout) {
-            childViews.add(child)
-            return
+        if (child.visibility == View.VISIBLE) {
+            if (child.tag == null || child.tag != TAG) {
+                if (child !is SwipeRefreshLayout) {
+                    childViews.add(child)
+                    return
+                }
+            }
         }
         super.addView(child, index, params)
     }
 
-    private fun init() {
-        isSwipeRefreshEnable = false
-    }
-
     private fun updateState() {
         when (state) {
+        //FIXME: The loading states doesn't show the progress bar even when the show time is
+        // higher than 500ms.
             is Loading -> {
                 resetSwipeRefresh()
                 emptyState.view?.visibility = GONE
@@ -84,7 +93,7 @@ class StatefulView : FrameLayout {
                 errorState.view?.visibility = GONE
                 noNetworkState.view?.visibility = GONE
                 progressBar.show()
-                hideDataView()
+                setChildVisibility(View.GONE)
             }
             is Empty -> {
                 resetSwipeRefresh()
@@ -93,7 +102,7 @@ class StatefulView : FrameLayout {
                 emptyAfterSearchState.view?.visibility = GONE
                 errorState.view?.visibility = GONE
                 noNetworkState.view?.visibility = GONE
-                hideDataView()
+                setChildVisibility(View.GONE)
             }
             is EmptyAfterSearch -> {
                 resetSwipeRefresh()
@@ -102,7 +111,7 @@ class StatefulView : FrameLayout {
                 emptyAfterSearchState.view?.visibility = VISIBLE
                 errorState.view?.visibility = GONE
                 noNetworkState.view?.visibility = GONE
-                hideDataView()
+                setChildVisibility(View.GONE)
             }
             is NoNetwork -> {
                 resetSwipeRefresh()
@@ -111,7 +120,7 @@ class StatefulView : FrameLayout {
                 emptyAfterSearchState.view?.visibility = GONE
                 errorState.view?.visibility = GONE
                 noNetworkState.view?.visibility = VISIBLE
-                hideDataView()
+                setChildVisibility(View.GONE)
             }
             is Error -> {
                 resetSwipeRefresh()
@@ -120,7 +129,7 @@ class StatefulView : FrameLayout {
                 emptyAfterSearchState.view?.visibility = GONE
                 errorState.view?.visibility = VISIBLE
                 noNetworkState.view?.visibility = GONE
-                hideDataView()
+                setChildVisibility(View.GONE)
             }
             is Data -> {
                 resetSwipeRefresh()
@@ -129,17 +138,9 @@ class StatefulView : FrameLayout {
                 emptyAfterSearchState.view?.visibility = GONE
                 errorState.view?.visibility = GONE
                 noNetworkState.view?.visibility = GONE
-                showDataView()
+                setChildVisibility(View.VISIBLE)
             }
         }
-    }
-
-    private fun showDataView() {
-        setChildVisibility(View.VISIBLE)
-    }
-
-    private fun hideDataView() {
-        setChildVisibility(View.GONE)
     }
 
     fun resetSwipeRefresh() {
