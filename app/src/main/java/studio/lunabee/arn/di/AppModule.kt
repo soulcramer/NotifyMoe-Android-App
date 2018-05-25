@@ -11,7 +11,9 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import studio.lunabee.arn.api.NotifyMoeService
+import studio.lunabee.arn.db.AnimeListDao
 import studio.lunabee.arn.db.UserDao
+import studio.lunabee.arn.db.animeListDao
 import studio.lunabee.arn.db.userDao
 import studio.lunabee.arn.util.LiveDataCallAdapterFactory
 import studio.lunabee.arn.vo.animelist.AnimeListTypeAdapterFactory
@@ -45,6 +47,10 @@ class AppModule {
     @Singleton
     @Provides
     fun provideUserDao(monarchy: Monarchy): UserDao = monarchy.userDao()
+
+    @Singleton
+    @Provides
+    fun provideAnimeListDao(monarchy: Monarchy): AnimeListDao = monarchy.animeListDao()
 
     @Provides
     @Singleton

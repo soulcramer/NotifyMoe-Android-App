@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.TextView
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
-import kotlinx.android.synthetic.main.simple_animelist_item.view.*
+import kotlinx.android.synthetic.main.item_simple_animelist.view.*
 import studio.lunabee.arn.R
 
 class SimpleAnimeListItem : AbstractItem<SimpleAnimeListItem, SimpleAnimeListItem.ViewHolder>() {
@@ -14,7 +14,7 @@ class SimpleAnimeListItem : AbstractItem<SimpleAnimeListItem, SimpleAnimeListIte
     override fun getType(): Int = R.id.simple_animelist_item
 
     //The layout to be used for this type of item
-    override fun getLayoutRes(): Int = R.layout.simple_animelist_item
+    override fun getLayoutRes(): Int = R.layout.item_simple_animelist
 
     override fun getViewHolder(v: View): ViewHolder = ViewHolder(v)
 

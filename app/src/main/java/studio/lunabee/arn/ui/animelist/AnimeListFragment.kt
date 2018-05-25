@@ -12,6 +12,9 @@ import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import kotlinx.android.synthetic.main.default_error_view.*
 import kotlinx.android.synthetic.main.fragment_animelist.*
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
 import studio.lunabee.arn.R
 import studio.lunabee.arn.common.observeK
 import studio.lunabee.arn.di.Injectable
@@ -32,9 +35,7 @@ class AnimeListFragment : Fragment(), Injectable {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_animelist, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_animelist, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -50,8 +51,6 @@ class AnimeListFragment : Fragment(), Injectable {
             setHasFixedSize(true)
         }
 
-        statefulView.state = statefulView.loadingState
-
         animeListViewModel.setUserId("4J6qpK1ve")
         animeListViewModel.mItems.observeK(this) { userResource ->
             when (userResource.status) {
@@ -61,21 +60,27 @@ class AnimeListFragment : Fragment(), Injectable {
                     statefulView.state = statefulView.errorState
                 }
                 is Success -> {
-                    userResource.data?.apply {
-                        val items = this.asSequence().filter {
-                            it.status == "watching"
-                        }.map {
-                            SimpleAnimeListItem().apply {
-                                title = it.animeId
-                            }
-                        }.toList()
+                    userResource.data?.let { animeListItems ->
+                        launch(CommonPool) {
+                            val items = animeListItems.asSequence().filter {
+                                it.status == "watching"
+                            }.map {
+                                SimpleAnimeListItem().apply {
+                                    title = it.animeId
+                                    withIdentifier(it.animeId.hashCode().toLong())
+                                }
+                            }.toList()
 
-                        statefulView.state = if (items.isEmpty()) {
-                            statefulView.emptyState
-                        } else {
-                            itemAdapter.add(items)
-                            Data()
+                            launch(UI) {
+                                statefulView.state = if (items.isEmpty()) {
+                                    statefulView.emptyState
+                                } else {
+                                    itemAdapter.set(items)
+                                    Data()
+                                }
+                            }
                         }
+
                     }
                 }
             }

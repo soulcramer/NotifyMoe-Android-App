@@ -35,5 +35,6 @@
         android:textSize="1sp"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline" />
+        app:layout_constraintTop_toTopOf="@+id/guideline"
+        tools:ignore="SmallSp" />
 </android.support.constraint.ConstraintLayout>
