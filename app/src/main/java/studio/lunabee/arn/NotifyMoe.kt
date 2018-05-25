@@ -17,6 +17,8 @@ class NotifyMoe : Application(), HasActivityInjector {
 
     override fun onCreate() {
         super.onCreate()
+        Monarchy.init(this)
+        AppInjector.init(this)
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
             StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
@@ -24,9 +26,12 @@ class NotifyMoe : Application(), HasActivityInjector {
                 .penaltyLog()
                 .build()
             )
+            StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder()
+                .detectAll()
+                .penaltyLog()
+                .build()
+            )
         }
-        Monarchy.init(this)
-        AppInjector.init(this)
     }
 
     override fun activityInjector() = dispatchingAndroidInjector
