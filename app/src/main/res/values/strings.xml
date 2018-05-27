@@ -9,4 +9,7 @@
     <string name="common.error.no_result">No result</string>
     <string name="network.no_connection.error.title">No connexion</string>
     <string name="network.no_connection.error.description">We\'re not able to connect to the server, do you have internet?</string>
+    <string name="user_cover_image_cd">user cover image</string>
+    <string name="user_avatar_image_cd">user avatar image</string>
+    <string name="anime_cover_image_cd">anime cover image</string>
 </resources>

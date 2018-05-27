@@ -24,9 +24,7 @@ class UserFragment : Fragment(), Injectable {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_user, container, false)
-    }
+    ): View? = inflater.inflate(R.layout.fragment_user, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -38,10 +36,14 @@ class UserFragment : Fragment(), Injectable {
             userResource.data?.firstOrNull()?.run {
                 nickNameTextView.text = nickName
                 roleTextView.text = role
-                Picasso.get().load("https://media.notify.moe/images/avatars/large/$id.png").into(
-                    avatarImageView)
-                Picasso.get().load("https://media.notify.moe/images/covers/large/$id.jpg").into(
-                    coverImageView)
+                Picasso.get()
+                    .load("https://media.notify.moe/images/avatars/large/$id.png")
+                    .priority(Picasso.Priority.HIGH)
+                    .into(avatarImageView)
+                Picasso.get()
+                    .load("https://media.notify.moe/images/covers/large/$id.jpg")
+                    .priority(Picasso.Priority.NORMAL)
+                    .into(coverImageView)
             }
         }
     }

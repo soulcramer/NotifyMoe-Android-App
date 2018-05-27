@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +18,8 @@ import kotlinx.coroutines.experimental.launch
 import studio.lunabee.arn.R
 import studio.lunabee.arn.common.observeK
 import studio.lunabee.arn.di.Injectable
+import studio.lunabee.arn.ui.common.EqualSpacingItemDecoration
+import studio.lunabee.arn.ui.common.dpToPx
 import studio.lunabee.arn.ui.common.statefulview.Data
 import studio.lunabee.arn.vo.Error
 import studio.lunabee.arn.vo.Loading
@@ -47,7 +49,13 @@ class AnimeListFragment : Fragment(), Injectable {
 
         recyclerView.apply {
             adapter = fastAdapter
-            layoutManager = LinearLayoutManager(context)
+            val columns = resources.getInteger(R.integer.animelist_columns)
+            layoutManager = GridLayoutManager(context, columns)
+
+            val itemsPadding = 20f.dpToPx(resources.displayMetrics)
+            addItemDecoration(EqualSpacingItemDecoration(itemsPadding,
+                EqualSpacingItemDecoration.GRID))
+
             setHasFixedSize(true)
         }
 
@@ -75,7 +83,7 @@ class AnimeListFragment : Fragment(), Injectable {
                                 statefulView.state = if (items.isEmpty()) {
                                     statefulView.emptyState
                                 } else {
-                                    itemAdapter.set(items)
+                                    itemAdapter.setNewList(items)
                                     Data()
                                 }
                             }
