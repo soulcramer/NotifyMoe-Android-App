@@ -7,7 +7,7 @@ import io.realm.annotations.RealmClass
 
 @RealmClass
 open class NickToUser(
-    @field:SerializedName("nick")
+    @field:SerializedName("animeId")
     var nickName: String = "",
     @field:Index
     var userId: String = ""

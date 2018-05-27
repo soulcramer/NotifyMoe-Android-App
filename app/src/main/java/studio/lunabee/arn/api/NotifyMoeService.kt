@@ -5,6 +5,7 @@ import kotlinx.coroutines.experimental.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
+import studio.lunabee.arn.vo.anime.Anime
 import studio.lunabee.arn.vo.animelist.AnimeListItem
 import studio.lunabee.arn.vo.user.NickToUser
 import studio.lunabee.arn.vo.user.User
@@ -36,4 +37,10 @@ interface NotifyMoeService {
      */
     @GET("api/animelist/{userId}")
     fun getAnimeListItemsByUserId(@Path("userId") userId: String): LiveData<ApiResponse<List<AnimeListItem>>>
+
+    /**
+     * @param animeId
+     */
+    @GET("api/anime/{animeId}")
+    fun getAnimeById(@Path("animeId") animeId: String): LiveData<ApiResponse<Anime>>
 }

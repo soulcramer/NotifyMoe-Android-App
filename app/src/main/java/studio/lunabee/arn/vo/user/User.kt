@@ -12,7 +12,7 @@ open class User : RealmObject() {
     @field:PrimaryKey
     @field:Required
     var id: String = ""
-    @field:SerializedName("nick")
+    @field:SerializedName("animeId")
     @field:Index
     var nickName: String = ""
     var role: String = ""

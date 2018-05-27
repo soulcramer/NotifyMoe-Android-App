@@ -26,16 +26,4 @@ class SettingsFragment : Fragment(), Injectable {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
     }
-
-    companion object {
-        private const val LOGIN_KEY = "login"
-
-        fun create(login: String): SettingsFragment {
-            val userFragment = SettingsFragment()
-            val bundle = Bundle()
-            bundle.putString(LOGIN_KEY, login)
-            userFragment.arguments = bundle
-            return userFragment
-        }
-    }
 }

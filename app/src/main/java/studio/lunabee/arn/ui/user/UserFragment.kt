@@ -47,16 +47,4 @@ class UserFragment : Fragment(), Injectable {
             }
         }
     }
-
-    companion object {
-        private const val LOGIN_KEY = "login"
-
-        fun create(login: String): UserFragment {
-            val userFragment = UserFragment()
-            val bundle = Bundle()
-            bundle.putString(LOGIN_KEY, login)
-            userFragment.arguments = bundle
-            return userFragment
-        }
-    }
 }

@@ -2,6 +2,7 @@ package studio.lunabee.arn.di
 
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
+import studio.lunabee.arn.ui.anime.AnimeDetailFragment
 import studio.lunabee.arn.ui.animelist.AnimeListFragment
 import studio.lunabee.arn.ui.dashboard.DashboardFragment
 import studio.lunabee.arn.ui.settings.SettingsFragment
@@ -21,4 +22,7 @@ abstract class FragmentBuildersModule {
 
     @ContributesAndroidInjector
     abstract fun contributeDashboardFragment(): DashboardFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAnimeDetailFragment(): AnimeDetailFragment
 }

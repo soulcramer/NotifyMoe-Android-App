@@ -94,16 +94,4 @@ class AnimeListFragment : Fragment(), Injectable {
             }
         }
     }
-
-    companion object {
-        private const val LOGIN_KEY = "login"
-
-        fun create(login: String): AnimeListFragment {
-            val userFragment = AnimeListFragment()
-            val bundle = Bundle()
-            bundle.putString(LOGIN_KEY, login)
-            userFragment.arguments = bundle
-            return userFragment
-        }
-    }
 }
