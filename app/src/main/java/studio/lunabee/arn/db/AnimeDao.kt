@@ -1,6 +1,7 @@
 package studio.lunabee.arn.db
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.Transformations
 import com.zhuinden.monarchy.Monarchy
 import io.realm.kotlin.where
 import studio.lunabee.arn.vo.anime.Anime
@@ -12,18 +13,19 @@ import javax.inject.Singleton
 class AnimeDao @Inject constructor(private val monarchy: Monarchy) {
 
     fun insert(item: Anime) {
-        monarchy.runTransactionSync {
-            it.insertOrUpdate(item)
-        }
+        monarchy.runTransactionSync { it.insertOrUpdate(item) }
     }
 
-    fun insert(userId: String, items: List<Anime>) {
+    fun insert(items: List<Anime>) {
         monarchy.runTransactionSync { it.insertOrUpdate(items) }
     }
 
-    fun findById(id: String): LiveData<List<Anime>> {
-        return monarchy.findAllCopiedWithChanges({ realm ->
+    fun findById(id: String): LiveData<Anime> {
+        val anime = monarchy.findAllCopiedWithChanges({ realm ->
             realm.where<Anime>().equalTo(AnimeFields.ID, id)
         })
+        return Transformations.map(anime) {
+            it.first()
+        }
     }
 }

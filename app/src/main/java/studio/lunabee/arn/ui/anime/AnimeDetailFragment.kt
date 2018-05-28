@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.default_error_view.*
+import kotlinx.android.synthetic.main.fragment_animedetail.*
 import kotlinx.android.synthetic.main.fragment_animelist.*
 import studio.lunabee.arn.R
 import studio.lunabee.arn.common.observeK
@@ -41,6 +42,9 @@ class AnimeDetailFragment : Fragment(), Injectable {
                     statefulView.state = statefulView.errorState
                 }
                 is Success -> {
+                    userResource.data?.let {
+                        animeTitleTextView.text = it.status
+                    }
                 }
             }
         }

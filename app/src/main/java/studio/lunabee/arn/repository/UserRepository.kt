@@ -25,13 +25,13 @@ class UserRepository @Inject constructor(
     private val service: NotifyMoeService
 ) {
 
-    fun loadUserById(id: String): LiveData<Resource<List<User>>> {
-        return object : NetworkBoundResource<List<User>, User>(dispatchers) {
+    fun loadUserById(id: String): LiveData<Resource<User>> {
+        return object : NetworkBoundResource<User, User>(dispatchers) {
             override fun saveCallResult(item: User) {
                 userDao.insert(item)
             }
 
-            override fun shouldFetch(data: List<User>?) = data == null || data.isEmpty()
+            override fun shouldFetch(data: User?) = data == null
 
             override fun loadFromDb() = userDao.findById(id)
 
@@ -39,13 +39,13 @@ class UserRepository @Inject constructor(
         }.asLiveData()
     }
 
-    fun loadUserByNickName(nick: String): LiveData<Resource<List<User>>> {
-        return object : NetworkBoundResource<List<User>, User>(dispatchers) {
+    fun loadUserByNickName(nick: String): LiveData<Resource<User>> {
+        return object : NetworkBoundResource<User, User>(dispatchers) {
             override fun saveCallResult(item: User) {
                 userDao.insert(item)
             }
 
-            override fun shouldFetch(data: List<User>?) = data == null || data.isEmpty()
+            override fun shouldFetch(data: User?) = data == null
 
             override fun loadFromDb() = userDao.findByNick(nick)
 

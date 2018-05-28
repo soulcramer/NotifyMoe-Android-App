@@ -17,7 +17,7 @@ class AnimeDetailViewModel @Inject constructor(
     private val _animeId = MutableLiveData<String>()
     val animeId: LiveData<String>
         get() = _animeId
-    val anime: LiveData<Resource<List<Anime>>> = Transformations.switchMap(_animeId) { id ->
+    val anime: LiveData<Resource<Anime>> = Transformations.switchMap(_animeId) { id ->
         if (id == null) {
             AbsentLiveData.create()
         } else {

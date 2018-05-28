@@ -15,12 +15,14 @@ import kotlinx.android.synthetic.main.fragment_animelist.*
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.withContext
 import studio.lunabee.arn.R
 import studio.lunabee.arn.common.observeK
 import studio.lunabee.arn.di.Injectable
 import studio.lunabee.arn.ui.common.EqualSpacingItemDecoration
 import studio.lunabee.arn.ui.common.dpToPx
 import studio.lunabee.arn.ui.common.statefulview.Data
+import studio.lunabee.arn.ui.user.UserViewModel
 import studio.lunabee.arn.vo.Error
 import studio.lunabee.arn.vo.Loading
 import studio.lunabee.arn.vo.Success
@@ -30,6 +32,8 @@ class AnimeListFragment : Fragment(), Injectable {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var animeListViewModel: AnimeListViewModel
+    private lateinit var userViewModel: UserViewModel
+
     private lateinit var itemAdapter: ItemAdapter<SimpleAnimeListItem>
     private lateinit var fastAdapter: FastAdapter<SimpleAnimeListItem>
 
@@ -43,6 +47,8 @@ class AnimeListFragment : Fragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
         animeListViewModel = ViewModelProviders.of(this,
             viewModelFactory).get(AnimeListViewModel::class.java)
+        userViewModel = ViewModelProviders.of(requireActivity(),
+            viewModelFactory).get(UserViewModel::class.java)
 
         itemAdapter = ItemAdapter()
         fastAdapter = FastAdapter.with(itemAdapter)
@@ -58,8 +64,7 @@ class AnimeListFragment : Fragment(), Injectable {
 
             setHasFixedSize(true)
         }
-
-        animeListViewModel.setUserId("4J6qpK1ve")
+        userViewModel.userId.observeK(this, animeListViewModel::setUserId)
         animeListViewModel.mItems.observeK(this) { userResource ->
             when (userResource.status) {
                 is Loading -> statefulView.state = statefulView.loadingState
@@ -70,16 +75,17 @@ class AnimeListFragment : Fragment(), Injectable {
                 is Success -> {
                     userResource.data?.let { animeListItems ->
                         launch(CommonPool) {
-                            val items = animeListItems.asSequence().filter {
-                                it.status == "watching"
-                            }.map {
-                                SimpleAnimeListItem().apply {
-                                    title = it.animeId
-                                    withIdentifier(it.animeId.hashCode().toLong())
-                                }
-                            }.toList()
+                            val items = animeListItems.asSequence()
+                                .filter {
+                                    it.status == "watching"
+                                }.map {
+                                    SimpleAnimeListItem().apply {
+                                        title = it.animeId
+                                        withIdentifier(it.animeId.hashCode().toLong())
+                                    }
+                                }.toList()
 
-                            launch(UI) {
+                            withContext(UI) {
                                 statefulView.state = if (items.isEmpty()) {
                                     statefulView.emptyState
                                 } else {

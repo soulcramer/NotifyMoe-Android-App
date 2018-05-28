@@ -28,12 +28,12 @@ class UserFragment : Fragment(), Injectable {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        userViewModel = ViewModelProviders.of(this, viewModelFactory)
+        userViewModel = ViewModelProviders.of(requireActivity(), viewModelFactory)
             .get(UserViewModel::class.java)
 
         userViewModel.setNickname("Scott")
         userViewModel.user.observeK(this) { userResource ->
-            userResource.data?.firstOrNull()?.run {
+            userResource.data?.run {
                 nickNameTextView.text = nickName
                 roleTextView.text = role
                 Picasso.get()

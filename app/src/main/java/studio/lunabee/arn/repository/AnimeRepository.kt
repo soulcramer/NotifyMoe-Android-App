@@ -19,13 +19,13 @@ class AnimeRepository @Inject constructor(
     private val service: NotifyMoeService
 ) {
 
-    fun loadAnimeById(id: String): LiveData<Resource<List<Anime>>> {
-        return object : NetworkBoundResource<List<Anime>, Anime>(dispatchers) {
+    fun loadAnimeById(id: String): LiveData<Resource<Anime>> {
+        return object : NetworkBoundResource<Anime, Anime>(dispatchers) {
             override fun saveCallResult(item: Anime) {
                 animeDao.insert(item)
             }
 
-            override fun shouldFetch(data: List<Anime>?) = data == null || data.isEmpty()
+            override fun shouldFetch(data: Anime?) = data == null
 
             override fun loadFromDb() = animeDao.findById(id)
 

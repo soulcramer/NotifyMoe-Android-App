@@ -11,27 +11,36 @@ import studio.lunabee.arn.vo.user.User
 import javax.inject.Inject
 
 class UserViewModel @Inject constructor(userRepository: UserRepository) : ViewModel() {
-    private val _nick = MutableLiveData<String>()
-    val nick: LiveData<String>
-        get() = _nick
-    val user: LiveData<Resource<List<User>>> = Transformations
-        .switchMap(_nick) { id ->
-            if (id == null) {
+    private val _nickname = MutableLiveData<String>()
+    val nickname: LiveData<String>
+        get() = _nickname
+
+    val user: LiveData<Resource<User>> = getUserLiveData(userRepository)
+
+    val userId: LiveData<String> = Transformations.switchMap(user) { user ->
+        MutableLiveData<String>().also { it.value = user.data?.id }
+    }
+
+    private fun getUserLiveData(
+        userRepository: UserRepository): LiveData<Resource<User>> {
+        return Transformations.switchMap(_nickname) { nick ->
+            if (nick == null) {
                 AbsentLiveData.create()
             } else {
-                userRepository.loadUserByNickName(id)
+                userRepository.loadUserByNickName(nick)
             }
         }
+    }
 
-    fun setNickname(nick: String?) {
-        if (_nick.value != nick) {
-            _nick.value = nick
+    fun setNickname(nickname: String?) {
+        if (_nickname.value != nickname) {
+            _nickname.value = nickname
         }
     }
 
     fun retry() {
-        _nick.value?.let {
-            _nick.value = it
+        _nickname.value?.let {
+            _nickname.value = it
         }
     }
 }
