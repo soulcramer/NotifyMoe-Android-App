@@ -25,7 +25,7 @@ class AnimeDao @Inject constructor(private val monarchy: Monarchy) {
             realm.where<Anime>().equalTo(AnimeFields.ID, id)
         })
         return Transformations.map(anime) {
-            it.first()
+            it.firstOrNull()
         }
     }
 }

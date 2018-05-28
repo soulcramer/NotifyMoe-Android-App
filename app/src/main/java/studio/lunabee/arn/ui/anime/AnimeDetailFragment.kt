@@ -9,10 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.default_error_view.*
 import kotlinx.android.synthetic.main.fragment_animedetail.*
-import kotlinx.android.synthetic.main.fragment_animelist.*
 import studio.lunabee.arn.R
 import studio.lunabee.arn.common.observeK
 import studio.lunabee.arn.di.Injectable
+import studio.lunabee.arn.ui.common.statefulview.Data
 import studio.lunabee.arn.vo.Error
 import studio.lunabee.arn.vo.Loading
 import studio.lunabee.arn.vo.Success
@@ -33,7 +33,10 @@ class AnimeDetailFragment : Fragment(), Injectable {
         super.onActivityCreated(savedInstanceState)
         animeDetailViewModel = ViewModelProviders.of(this,
             viewModelFactory).get(AnimeDetailViewModel::class.java)
-        animeDetailViewModel.setAnimeId("4J6qpK1ve")
+
+        val userId = AnimeDetailFragmentArgs.fromBundle(arguments).userId
+
+        animeDetailViewModel.setAnimeId(userId)
         animeDetailViewModel.anime.observeK(this) { userResource ->
             when (userResource.status) {
                 is Loading -> statefulView.state = statefulView.loadingState
@@ -43,6 +46,7 @@ class AnimeDetailFragment : Fragment(), Injectable {
                 }
                 is Success -> {
                     userResource.data?.let {
+                        statefulView.state = Data()
                         animeTitleTextView.text = it.status
                     }
                 }

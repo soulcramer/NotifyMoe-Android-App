@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/profile">
@@ -18,7 +19,12 @@
         android:id="@+id/animeList"
         android:name="studio.lunabee.arn.ui.animelist.AnimeListFragment"
         android:label="AnimeListFragment"
-        tools:layout="@layout/fragment_animelist" />
+        tools:layout="@layout/fragment_animelist">
+        <action
+            android:id="@+id/itemClick"
+            app:destination="@id/animeDetailFragment"
+            app:popUpTo="@+id/animeList" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="studio.lunabee.arn.ui.user.UserFragment"
@@ -29,4 +35,12 @@
         android:name="studio.lunabee.arn.ui.dashboard.DashboardFragment"
         android:label="DashboardFragment"
         tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/animeDetailFragment"
+        android:name="studio.lunabee.arn.ui.anime.AnimeDetailFragment"
+        android:label="AnimeDetailFragment">
+        <argument
+            android:name="userId"
+            app:type="string" />
+    </fragment>
 </navigation>

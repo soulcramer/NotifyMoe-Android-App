@@ -8,6 +8,7 @@ import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
 import kotlinx.android.synthetic.main.default_error_view.*
@@ -26,6 +27,7 @@ import studio.lunabee.arn.ui.user.UserViewModel
 import studio.lunabee.arn.vo.Error
 import studio.lunabee.arn.vo.Loading
 import studio.lunabee.arn.vo.Success
+import studio.lunabee.arn.vo.animelist.AnimeListItem
 import javax.inject.Inject
 
 class AnimeListFragment : Fragment(), Injectable {
@@ -61,8 +63,6 @@ class AnimeListFragment : Fragment(), Injectable {
             val itemsPadding = 20f.dpToPx(resources.displayMetrics)
             addItemDecoration(EqualSpacingItemDecoration(itemsPadding,
                 EqualSpacingItemDecoration.GRID))
-
-            setHasFixedSize(true)
         }
         userViewModel.userId.observeK(this, animeListViewModel::setUserId)
         animeListViewModel.mItems.observeK(this) { userResource ->
@@ -74,16 +74,12 @@ class AnimeListFragment : Fragment(), Injectable {
                 }
                 is Success -> {
                     userResource.data?.let { animeListItems ->
+                        //TODO Refactor this block, it's way too deep
                         launch(CommonPool) {
                             val items = animeListItems.asSequence()
                                 .filter {
                                     it.status == "watching"
-                                }.map {
-                                    SimpleAnimeListItem().apply {
-                                        title = it.animeId
-                                        withIdentifier(it.animeId.hashCode().toLong())
-                                    }
-                                }.toList()
+                                }.map(this@AnimeListFragment::toFaItem).toList()
 
                             withContext(UI) {
                                 statefulView.state = if (items.isEmpty()) {
@@ -97,6 +93,19 @@ class AnimeListFragment : Fragment(), Injectable {
 
                     }
                 }
+            }
+        }
+    }
+
+    private fun toFaItem(it: AnimeListItem): SimpleAnimeListItem {
+        return SimpleAnimeListItem().apply {
+            title = it.animeId
+            withIdentifier(it.animeId.hashCode().toLong())
+            withOnItemClickListener { v, _, item, _ ->
+                val direction = AnimeListFragmentDirections.ItemClick(
+                    item.title)
+                v?.findNavController()?.navigate(direction)
+                true
             }
         }
     }
