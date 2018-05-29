@@ -21,7 +21,7 @@ class UserDao @Inject constructor(private val monarchy: Monarchy) {
             realm.where<User>().like(UserFields.NICK_NAME, nickname)
         }
         return Transformations.map(usersLiveData) {
-            it.first()
+            it.firstOrNull()
         }
     }
 
@@ -30,7 +30,7 @@ class UserDao @Inject constructor(private val monarchy: Monarchy) {
             realm.where<User>().equalTo(UserFields.ID, id)
         }
         return Transformations.map(usersLiveData) {
-            it.first()
+            it.firstOrNull()
         }
     }
 }

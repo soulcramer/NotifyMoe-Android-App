@@ -134,6 +134,15 @@
                             <option name="y" value="279" />
                           </Point>
                         </option>
+                        <option name="myPositions">
+                          <map>
+                            <entry key="itemClick">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
                       </LayoutPositions>
                     </value>
                   </entry>

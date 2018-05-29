@@ -1,6 +1,7 @@
 package studio.lunabee.arn.vo.animelist
 
 import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
 import io.realm.RealmObject
 import io.realm.annotations.Index
 import io.realm.annotations.PrimaryKey
@@ -19,7 +20,8 @@ open class AnimeListItem(
     @field:Index
     var status: String = "",
     var episodes: Int = 0,
-    var rating: Rating? = null,
+    @field:SerializedName("rating")
+    var userRating: UserRating? = null,
     var notes: String = "",
     var rewatch: Int = 0,
     var created: String = "",

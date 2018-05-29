@@ -47,7 +47,7 @@ class AnimeDetailFragment : Fragment(), Injectable {
                 is Success -> {
                     userResource.data?.let {
                         statefulView.state = Data()
-                        animeTitleTextView.text = it.status
+                        animeTitleTextView.text = it.title?.canonical
                     }
                 }
             }
