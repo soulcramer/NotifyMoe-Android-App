@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MAMAMAMA</string>
+    <string name="app_name">AniNotifier</string>
 
     <string name="tab.myprofile.title">My profile</string>
     <string name="common.empty.title">Oh oh ?</string>
