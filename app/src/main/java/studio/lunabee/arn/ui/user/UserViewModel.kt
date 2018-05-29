@@ -17,8 +17,14 @@ class UserViewModel @Inject constructor(userRepository: UserRepository) : ViewMo
 
     val user: LiveData<Resource<User>> = getUserLiveData(userRepository)
 
-    val userId: LiveData<String> = Transformations.switchMap(user) { user ->
-        MutableLiveData<String>().also { it.value = user.data?.id }
+    val userId: LiveData<String> = Transformations.switchMap(user) { resource ->
+        MutableLiveData<String>().also {
+            it.value = when (resource) {
+                is Resource.Success -> resource.data?.id
+                is Resource.Failure -> null
+                is Resource.Loading -> null
+            }
+        }
     }
 
     private fun getUserLiveData(

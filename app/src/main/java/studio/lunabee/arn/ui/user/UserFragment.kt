@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.fragment_user.*
 import studio.lunabee.arn.R
 import studio.lunabee.arn.common.observeK
 import studio.lunabee.arn.di.Injectable
+import studio.lunabee.arn.vo.Resource
 import javax.inject.Inject
 
 class UserFragment : Fragment(), Injectable {
@@ -33,17 +34,21 @@ class UserFragment : Fragment(), Injectable {
 
         userViewModel.setNickname("Scott")
         userViewModel.user.observeK(this) { userResource ->
-            userResource.data?.run {
-                nickNameTextView.text = nickName
-                roleTextView.text = role
-                Picasso.get()
-                    .load("https://media.notify.moe/images/avatars/large/$id.png")
-                    .priority(Picasso.Priority.HIGH)
-                    .into(avatarImageView)
-                Picasso.get()
-                    .load("https://media.notify.moe/images/covers/large/$id.jpg")
-                    .priority(Picasso.Priority.NORMAL)
-                    .into(coverImageView)
+            when (userResource) {
+                is Resource.Success -> {
+                    userResource.data?.run {
+                        nickNameTextView.text = nickName
+                        roleTextView.text = role
+                        Picasso.get()
+                            .load("https://media.notify.moe/images/avatars/large/$id.png")
+                            .priority(Picasso.Priority.HIGH)
+                            .into(avatarImageView)
+                        Picasso.get()
+                            .load("https://media.notify.moe/images/covers/large/$id.jpg")
+                            .priority(Picasso.Priority.NORMAL)
+                            .into(coverImageView)
+                    }
+                }
             }
         }
     }

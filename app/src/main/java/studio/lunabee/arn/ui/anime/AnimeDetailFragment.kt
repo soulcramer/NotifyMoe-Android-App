@@ -13,9 +13,7 @@ import studio.lunabee.arn.R
 import studio.lunabee.arn.common.observeK
 import studio.lunabee.arn.di.Injectable
 import studio.lunabee.arn.ui.common.statefulview.Data
-import studio.lunabee.arn.vo.Error
-import studio.lunabee.arn.vo.Loading
-import studio.lunabee.arn.vo.Success
+import studio.lunabee.arn.vo.Resource
 import javax.inject.Inject
 
 class AnimeDetailFragment : Fragment(), Injectable {
@@ -38,13 +36,13 @@ class AnimeDetailFragment : Fragment(), Injectable {
 
         animeDetailViewModel.setAnimeId(userId)
         animeDetailViewModel.anime.observeK(this) { userResource ->
-            when (userResource.status) {
-                is Loading -> statefulView.state = statefulView.loadingState
-                is Error -> {
-                    subtitle.text = userResource.message
+            when (userResource) {
+                is Resource.Loading -> statefulView.state = statefulView.loadingState
+                is Resource.Failure -> {
+                    subtitle.text = userResource.msg
                     statefulView.state = statefulView.errorState
                 }
-                is Success -> {
+                is Resource.Success -> {
                     userResource.data?.let {
                         statefulView.state = Data()
                         animeTitleTextView.text = it.title?.canonical
