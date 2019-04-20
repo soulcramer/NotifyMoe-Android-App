@@ -1,26 +1,29 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'realm-android'
-apply plugin: 'androidx.navigation.safeargs'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply plugin: 'kotlin-kapt'
 kapt {
     correctErrorTypes = true
     mapDiagnosticLocations = true
 }
+apply plugin: 'realm-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.getkeepsafe.dexcount'
+androidExtensions {
+    experimental = true
+}
 
 android {
 
     compileSdkVersion buildConfig.compileSdk
 
     defaultConfig {
-        applicationId "studio.lunabee.arn"
+        applicationId "app.soulcramer.arn"
         minSdkVersion buildConfig.minSdk
-        targetSdkVersion 'P'
+        targetSdkVersion buildConfig.targetSdk
         versionCode 1
         versionName "0.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        resConfigs "en", "fr"
     }
 
     signingConfigs {
@@ -31,10 +34,36 @@ android {
             storeFile file('../keystore/debug.keystore')
         }
         release {
-            keyAlias 'bbhotel'
-            keyPassword '***REMOVED***'
+            keyAlias ''
+            keyPassword ''
             storeFile file('../keystore/release.keystore')
-            storePassword '***REMOVED***'
+            storePassword ''
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    flavorDimensions "dev"
+    productFlavors {
+        prod {
+            dimension "dev"
+        }
+
+        dev {
+            dimension "dev"
+            // Compile just these resources
+            resConfigs "en", "fr", "xxhdpi"
+            // Forbid crashlytics to create a unique crash id on each build
+            ext.alwaysUpdateBuildId = false
+            // Disable crashlytics (code gen, etc…)
+            ext.enableCrashlytics = false
+            // Disable png crushing (reducing size of png)
+            aaptOptions.cruncherEnabled false
+            // Disable split
+            splits.abi.enable = false
+            splits.density.enable = false
         }
     }
 
@@ -43,22 +72,29 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
-    lintOptions {
-        // Disable lintVital. Not needed since lint is run on CI
-        checkReleaseBuilds false
-
-        // Disable StringFormatMatches due to https://issuetracker.google.com/issues/76490033
-        disable 'StringFormatMatches'
+    packagingOptions {
+        // Exclude AndroidX version files
+        exclude 'META-INF/*.version'
+        // Exclude consumer proguard files
+        exclude 'META-INF/proguard/*'
+        // Exclude the Firebase/Fabric/other random properties files
+        exclude '/*.properties'
+        exclude 'fabric/*.properties'
+        exclude 'META-INF/*.properties'
     }
 
     buildTypes {
         debug {
+            shrinkResources true
+            minifyEnabled true
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
         }
         release {
-            shrinkResources false
-            minifyEnabled false
+            shrinkResources true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -67,37 +103,33 @@ android {
 
 dependencies {
     // Kotlin JDK
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
-
-    // Arch Comp
-    implementation 'android.arch.lifecycle:extensions:1.1.1'
-    implementation 'android.arch.lifecycle:common-java8:1.1.1'
-    implementation 'android.arch.persistence.room:runtime:1.1.1-rc1'
-    kapt 'android.arch.persistence.room:compiler:1.1.1-rc1'
-    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0-alpha01"
-    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0-alpha01"
-
-    implementation "com.android.support:support-compat:28.0.0-alpha1"
-    implementation "com.android.support:support-core-ui:28.0.0-alpha1"
-    implementation "com.android.support:support-fragment:28.0.0-alpha1"
-    implementation "com.android.support:appcompat-v7:28.0.0-alpha1"
-    implementation "com.android.support:recyclerview-v7:28.0.0-alpha1"
-    implementation "com.android.support:support-vector-drawable:28.0.0-alpha1"
-    implementation "com.android.support:animated-vector-drawable:28.0.0-alpha1"
-    implementation "com.android.support:support-annotations:28.0.0-alpha1"
-    implementation "com.android.support:design:28.0.0-alpha1"
-    implementation "com.android.support:customtabs:28.0.0-alpha1"
-    implementation "com.android.support.constraint:constraint-layout:1.1.0"
-    implementation "androidx.core:core-ktx:0.3"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
 
 
-    implementation "com.github.Zhuinden:realm-monarchy:0.2.2"
+    // AndroidX
+    implementation "androidx.lifecycle:lifecycle-extensions:${versions.androidx.lifecycle}"
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.androidx.navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.androidx.navigation}"
+    implementation "androidx.recyclerview:recyclerview:${versions.androidx.recyclerview}"
+    implementation "com.google.android.material:material:${versions.material}"
+    implementation "androidx.constraintlayout:constraintlayout:${versions.androidx.constraint_layout}"
+    implementation "androidx.core:core-ktx:${versions.androidx.core_ktx}"
+    kapt "androidx.databinding:compiler:3.2.0-alpha11"
+
+    // DI
+    implementation "org.koin:koin-core:${versions.koin}"
+    implementation "org.koin:koin-android:${versions.koin}"
+    implementation "org.koin:koin-androidx-scope:${versions.koin}"
+    implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
+
+    implementation "com.github.Zhuinden:realm-monarchy:${versions.monarchy}"
     kapt 'dk.ilios:realmfieldnameshelper:1.1.1'
 
-    implementation "com.mikepenz:fastadapter:3.2.5"
-    implementation "com.mikepenz:fastadapter-commons:3.2.5"
-    implementation "com.mikepenz:fastadapter-extensions-expandable:3.2.5"
-    implementation "com.mikepenz:fastadapter-extensions:3.2.5"
+    implementation "com.mikepenz:fastadapter:3.2.7"
+    implementation "com.mikepenz:fastadapter-commons:3.2.7"
+    implementation "com.mikepenz:fastadapter-extensions-expandable:3.2.7"
+    implementation "com.mikepenz:fastadapter-extensions:3.2.7"
 
     // Dagger
     implementation "com.google.dagger:dagger:${versions.dagger}"
@@ -106,20 +138,21 @@ dependencies {
     kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
     kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
 
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+    // Leak Canary
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leakcanary}"
 
-    implementation 'com.squareup.picasso:picasso:2.71828'
-    //implementation 'com.github.bumptech.glide:glide:4.7.1'
-    //implementation 'com.github.bumptech.glide:annotations:4.7.1'
-    //kapt 'com.github.bumptech.glide:compiler:4.7.1'
+    implementation "com.github.bumptech.glide:glide:${versions.glide}"
+    implementation "com.github.bumptech.glide:annotations:${versions.glide}"
+    kapt "com.github.bumptech.glide:compiler:${versions.glide}"
 
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
     implementation "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}"
-    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp_logging_interceptor}"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-experimental-adapter:1.0.0"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
 
-    implementation "com.github.bumptech.glide:okhttp3-integration:4.7.1"
+    implementation "com.github.bumptech.glide:okhttp3-integration:${versions.glide}"
     implementation "com.github.ajalt:timberkt:${versions.timberkt}"
 
 }

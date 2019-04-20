@@ -7,17 +7,17 @@
 
     <activity
         android:id="@+id/homeActivity"
-        android:name="studio.lunabee.arn.ui.HomeActivity"
+        android:name="app.soulcramer.arn.ui.HomeActivity"
         android:label="HomeActivity"
         tools:layout="@layout/activity_main" />
     <fragment
         android:id="@+id/settings"
-        android:name="studio.lunabee.arn.ui.settings.SettingsFragment"
+        android:name="app.soulcramer.arn.ui.settings.SettingsFragment"
         android:label="SettingsFragment"
         tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/animeList"
-        android:name="studio.lunabee.arn.ui.animelist.AnimeListFragment"
+        android:name="app.soulcramer.arn.ui.animelist.AnimeListFragment"
         android:label="AnimeListFragment"
         tools:layout="@layout/fragment_animelist">
         <action
@@ -31,20 +31,20 @@
     </fragment>
     <fragment
         android:id="@+id/profile"
-        android:name="studio.lunabee.arn.ui.user.UserFragment"
+        android:name="app.soulcramer.arn.ui.user.UserFragment"
         android:label="UserFragment"
         tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/dashboard"
-        android:name="studio.lunabee.arn.ui.dashboard.DashboardFragment"
+        android:name="app.soulcramer.arn.ui.dashboard.DashboardFragment"
         android:label="DashboardFragment"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
         android:id="@+id/animeDetailFragment"
-        android:name="studio.lunabee.arn.ui.anime.AnimeDetailFragment"
+        android:name="app.soulcramer.arn.ui.anime.AnimeDetailFragment"
         android:label="AnimeDetailFragment">
         <argument
             android:name="userId"
-            app:type="string" />
+            app:argType="string" />
     </fragment>
 </navigation>

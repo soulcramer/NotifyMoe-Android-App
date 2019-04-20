@@ -24,3 +24,5 @@
   **[] $VALUES;
   public *;
 }
+
+-dontobfuscate
