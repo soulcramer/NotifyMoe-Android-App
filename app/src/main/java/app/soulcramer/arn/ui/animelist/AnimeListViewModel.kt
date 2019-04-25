@@ -38,7 +38,7 @@ class AnimeListViewModel(
             if (id == null) {
                 _items.postValue(null)
             } else {
-                loadItemsByUserId = animeListRepository.loaditemsByUserId(id)
+                loadItemsByUserId = animeListRepository.loadItemsByUserId(id)
                 _items.addSource(loadItemsByUserId) { resource ->
                     var items: List<SimpleAnimeListItem>? = null
                     resource!!.data?.apply {
@@ -65,10 +65,10 @@ class AnimeListViewModel(
 
     private fun toFaItem(it: AnimeListItem): SimpleAnimeListItem {
         return SimpleAnimeListItem().apply {
-            anime = it.anime
+            animeListItem = it
             withIdentifier(it.animeId.hashCode().toLong())
             withOnItemClickListener { v, _, item, _ ->
-                val direction = AnimeListFragmentDirections.itemClick(item.anime?.id ?: "")
+                val direction = AnimeListFragmentDirections.itemClick(item.animeListItem?.animeId ?: "")
                 v?.findNavController()?.navigate(direction)
                 true
             }

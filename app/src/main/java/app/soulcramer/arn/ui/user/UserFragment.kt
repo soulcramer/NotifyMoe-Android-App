@@ -5,18 +5,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import app.soulcramer.arn.GlideApp
 import app.soulcramer.arn.R
 import app.soulcramer.arn.common.observeK
 import com.bumptech.glide.Priority
 import kotlinx.android.synthetic.main.fragment_user.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import javax.inject.Inject
 
 class UserFragment : Fragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val userViewModel by sharedViewModel<UserViewModel>()
 

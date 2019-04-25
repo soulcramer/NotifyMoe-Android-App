@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import app.soulcramer.arn.R
 import app.soulcramer.arn.common.observeK
@@ -24,11 +23,8 @@ import kotlinx.android.synthetic.main.fragment_animelist.*
 import kotlinx.coroutines.Job
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import javax.inject.Inject
 
 class AnimeListFragment : Fragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val animeListViewModel by viewModel<AnimeListViewModel>()
     private val userViewModel by sharedViewModel<UserViewModel>()
 

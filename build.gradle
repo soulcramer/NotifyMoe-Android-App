@@ -1,6 +1,6 @@
 buildscript {
     ext.versions = [
-            'android_gradle' : '3.5.0-alpha12',
+            'android_gradle' : '3.5.0-alpha13',
             'androidx'       : [
                     'appcompat'        : '1.1.0-aplha03',
                     'arch_core_testing': '2.0.0',

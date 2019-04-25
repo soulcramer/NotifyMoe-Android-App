@@ -131,13 +131,6 @@ dependencies {
     implementation "com.mikepenz:fastadapter-extensions-expandable:3.2.7"
     implementation "com.mikepenz:fastadapter-extensions:3.2.7"
 
-    // Dagger
-    implementation "com.google.dagger:dagger:${versions.dagger}"
-    implementation "com.google.dagger:dagger-android:${versions.dagger}"
-    implementation "com.google.dagger:dagger-android-support:${versions.dagger}"
-    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
-    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
-
     // Leak Canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leakcanary}"

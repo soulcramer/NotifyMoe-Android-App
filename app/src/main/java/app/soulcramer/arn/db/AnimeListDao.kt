@@ -5,11 +5,8 @@ import app.soulcramer.arn.vo.animelist.AnimeListItem
 import app.soulcramer.arn.vo.animelist.AnimeListItemFields
 import com.zhuinden.monarchy.Monarchy
 import io.realm.kotlin.where
-import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class AnimeListDao @Inject constructor(private val monarchy: Monarchy) {
+class AnimeListDao(private val monarchy: Monarchy) {
 
     fun insert(userId: String, item: AnimeListItem) {
         monarchy.writeAsync {
@@ -27,8 +24,8 @@ class AnimeListDao @Inject constructor(private val monarchy: Monarchy) {
         monarchy.writeAsync { it.insertOrUpdate(items) }
     }
 
-    fun findByUserId(userId: String): LiveData<Monarchy.ManagedChangeSet<AnimeListItem>> {
-        return monarchy.findAllManagedWithChanges { realm ->
+    fun findByUserId(userId: String): LiveData<List<AnimeListItem>> {
+        return monarchy.findAllCopiedWithChanges { realm ->
             realm.where<AnimeListItem>().equalTo(AnimeListItemFields.USER_ID, userId)
         }
     }

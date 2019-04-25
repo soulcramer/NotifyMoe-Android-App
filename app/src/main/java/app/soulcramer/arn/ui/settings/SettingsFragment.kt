@@ -5,13 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import app.soulcramer.arn.R
-import javax.inject.Inject
 
 class SettingsFragment : Fragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     //private lateinit var userViewModel: UserViewModel
 
     override fun onCreateView(

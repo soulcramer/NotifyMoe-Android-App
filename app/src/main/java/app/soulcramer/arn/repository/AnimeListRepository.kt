@@ -1,7 +1,6 @@
 package app.soulcramer.arn.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import app.soulcramer.arn.api.NotifyMoeService
 import app.soulcramer.arn.db.AnimeListDao
 import app.soulcramer.arn.vo.Resource
@@ -15,7 +14,7 @@ class AnimeListRepository(
     private val service: NotifyMoeService
 ) {
 
-    fun loaditemsByUserId(id: String): LiveData<Resource<List<AnimeListItem>>> {
+    fun loadItemsByUserId(id: String): LiveData<Resource<List<AnimeListItem>>> {
 
         return object : NetworkBoundResource<List<AnimeListItem>, List<AnimeListItem>>() {
             override fun saveCallResult(item: List<AnimeListItem>) {
@@ -25,11 +24,7 @@ class AnimeListRepository(
             override fun shouldFetch(data: List<AnimeListItem>?) = data?.isEmpty() ?: true
 
             override fun loadFromDb(): LiveData<List<AnimeListItem>> {
-                val mediatorLiveData = MediatorLiveData<List<AnimeListItem>>()
-                mediatorLiveData.addSource(animeListDao.findByUserId(id)) {
-                    mediatorLiveData.postValue(it?.realmResults?.toList())
-                }
-                return mediatorLiveData
+                return animeListDao.findByUserId(id)
             }
 
             override fun createCall() = service.getAnimeListItemsByUserId(id)

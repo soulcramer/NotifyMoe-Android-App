@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import app.soulcramer.arn.R
 import app.soulcramer.arn.common.observeK
@@ -16,11 +15,8 @@ import app.soulcramer.arn.vo.Success
 import kotlinx.android.synthetic.main.default_error_view.*
 import kotlinx.android.synthetic.main.fragment_animedetail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import javax.inject.Inject
 
 class AnimeDetailFragment : Fragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
     private val animeDetailViewModel by viewModel<AnimeDetailViewModel>()
     private val args by navArgs<AnimeDetailFragmentArgs>()
 
