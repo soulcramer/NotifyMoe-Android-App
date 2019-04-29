@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_profile"
+    app:startDestination="@id/profile">
+
+    <fragment
+        android:id="@+id/profile"
+        android:name="app.soulcramer.arn.ui.user.UserFragment"
+        android:label="UserFragment"
+        tools:layout="@layout/fragment_user" />
+</navigation>
