@@ -1,13 +1,12 @@
 package app.soulcramer.arn.vo.anime
 
-import io.realm.RealmObject
-import io.realm.annotations.RealmClass
+import androidx.room.Embedded
 
-@RealmClass
-open class Image(
-    var extension: String = "",
-    var width: String = "",
-    var height: String = "",
-    var averageColor: AverageColor? = null,
-    var lastModified: String = ""
-) : RealmObject()
+data class Image(
+    val extension: String,
+    val width: String,
+    val height: String,
+    @Embedded
+    val averageColor: AverageColor,
+    val lastModified: String
+)

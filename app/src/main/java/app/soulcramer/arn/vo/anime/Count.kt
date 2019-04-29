@@ -1,12 +1,8 @@
 package app.soulcramer.arn.vo.anime
 
-import io.realm.RealmObject
-import io.realm.annotations.RealmClass
-
-@RealmClass
-open class Count(
-    var overall: Int = 0,
-    var story: Int = 0,
-    var visuals: Int = 0,
-    var soundtrack: Int = 0
-) : RealmObject()
+data class Count(
+    val overall: Int,
+    val story: Int,
+    val visuals: Int,
+    val soundtrack: Int
+)

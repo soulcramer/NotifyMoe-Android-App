@@ -1,34 +1,29 @@
 package app.soulcramer.arn.db
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import app.soulcramer.arn.vo.anime.Anime
-import app.soulcramer.arn.vo.anime.AnimeFields
-import com.zhuinden.monarchy.Monarchy
-import io.realm.kotlin.where
 
-class AnimeDao(private val monarchy: Monarchy) {
+@Dao
+interface AnimeDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAnimes(vararg animes: Anime)
 
-    fun insert(item: Anime) {
-        monarchy.runTransactionSync { it.insertOrUpdate(item) }
-    }
+    @Update
+    fun updateAnimes(vararg animes: Anime)
 
-    fun insert(items: List<Anime>) {
-        monarchy.runTransactionSync { it.insertOrUpdate(items) }
-    }
+    @Delete
+    fun deleteAnimes(vararg animes: Anime)
 
-    fun findById(id: String): LiveData<Anime> {
-        val anime = monarchy.findAllCopiedWithChanges { realm ->
-            realm.where<Anime>().equalTo(AnimeFields.ID, id)
-        }
-        return Transformations.map(anime) {
-            it.firstOrNull()
-        }
-    }
+    @Query("SELECT * FROM animes WHERE id = :animeId")
+    fun loadById(animeId: String): LiveData<Anime>
 
-    fun findByIdSync(id: String): Anime? {
-        val anime: Anime? = null
-        monarchy.runTransactionSync { it.where<Anime>().equalTo(AnimeFields.ID, id) }
-        return anime
-    }
+    @Query("SELECT * FROM animes WHERE id = :animeId")
+    fun loadByIdSync(animeId: String): Anime
+
 }

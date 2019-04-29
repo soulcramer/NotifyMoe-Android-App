@@ -17,12 +17,12 @@ class AnimeRepository(
     fun loadAnimeById(id: String): LiveData<Resource<Anime>> {
         return object : NetworkBoundResource<Anime, Anime>() {
             override fun saveCallResult(item: Anime) {
-                animeDao.insert(item)
+                animeDao.insertAnimes(item)
             }
 
             override fun shouldFetch(data: Anime?) = data == null
 
-            override fun loadFromDb() = animeDao.findById(id)
+            override fun loadFromDb() = animeDao.loadById(id)
 
             override fun createCall() = service.getAnimeById(id)
         }.asLiveData()

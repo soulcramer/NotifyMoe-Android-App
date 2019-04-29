@@ -1,13 +1,12 @@
 package app.soulcramer.arn.vo.anime
 
-import io.realm.RealmObject
-import io.realm.annotations.RealmClass
+import androidx.room.Embedded
 
-@RealmClass
-open class Rating(
-    var overall: Double = 0.0,
-    var story: Double = 0.0,
-    var visuals: Double = 0.0,
-    var soundtrack: Double = 0.0,
-    var count: Count? = null
-) : RealmObject()
+data class Rating(
+    val overall: Double,
+    val story: Double,
+    val visuals: Double,
+    val soundtrack: Double,
+    @Embedded(prefix = "count_")
+    val count: Count
+)

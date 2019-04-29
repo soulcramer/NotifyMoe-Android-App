@@ -1,15 +1,18 @@
 package app.soulcramer.arn.vo.anime
 
-import io.realm.RealmList
-import io.realm.RealmObject
-import io.realm.annotations.RealmClass
+import androidx.room.ColumnInfo
+import androidx.room.Ignore
 
-@RealmClass
-open class Title(
-    var canonical: String = "",
-    var romaji: String = "",
-    var english: String = "",
-    var japanese: String = "",
-    var hiragana: String = "",
-    var synonyms: RealmList<String> = RealmList()
-) : RealmObject()
+data class Title(
+    var canonical: String,
+    var romaji: String,
+    var english: String,
+    var japanese: String,
+    var hiragana: String,
+    @ColumnInfo(name = "synonyms") val _synonyms: String? = null
+) {
+    @delegate:Ignore
+    val synonyms by lazy(LazyThreadSafetyMode.NONE) {
+        _synonyms?.split(",")?.map { it.trim() } ?: emptyList()
+    }
+}

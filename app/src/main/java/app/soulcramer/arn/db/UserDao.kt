@@ -1,33 +1,29 @@
 package app.soulcramer.arn.db
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.room.Dao
+import androidx.room.Delete
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import androidx.room.Update
 import app.soulcramer.arn.vo.user.User
-import app.soulcramer.arn.vo.user.UserFields
-import com.zhuinden.monarchy.Monarchy
-import io.realm.kotlin.where
 
-class UserDao(private val monarchy: Monarchy) {
+@Dao
+interface UserDao {
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertUsers(vararg users: User)
 
-    fun insert(user: User) {
-        monarchy.runTransactionSync { it.copyToRealmOrUpdate(user) }
-    }
+    @Update
+    fun updateUsers(vararg users: User)
 
-    fun findByNick(nickname: String): LiveData<User> {
-        val usersLiveData = monarchy.findAllCopiedWithChanges { realm ->
-            realm.where<User>().like(UserFields.NICK_NAME, nickname)
-        }
-        return Transformations.map(usersLiveData) {
-            it.firstOrNull()
-        }
-    }
+    @Delete
+    fun deleteUsers(vararg users: User)
 
-    fun findById(id: String): LiveData<User> {
-        val usersLiveData = monarchy.findAllCopiedWithChanges { realm ->
-            realm.where<User>().equalTo(UserFields.ID, id)
-        }
-        return Transformations.map(usersLiveData) {
-            it.firstOrNull()
-        }
-    }
+    @Query("SELECT * FROM users WHERE id = :userId")
+    fun loadById(userId: String): LiveData<User>
+
+    @Query("SELECT * FROM users WHERE nickName = :nickname")
+    fun loadByNick(nickname: String): LiveData<User>
+
 }

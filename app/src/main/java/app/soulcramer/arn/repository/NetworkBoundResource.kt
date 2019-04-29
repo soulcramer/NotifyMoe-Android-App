@@ -12,6 +12,7 @@ import app.soulcramer.arn.vo.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * A generic class that can provide a resource backed by both the realm database and the network.
@@ -60,7 +61,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                 is ApiSuccessResponse -> {
                     GlobalScope.launch(Dispatchers.IO) {
                         saveCallResult(processResponse(response))
-                        launch(Dispatchers.Main) {
+                        withContext(Dispatchers.Main) {
                             // we specially request a new live data,
                             // otherwise we will get immediately last cached value,
                             // which may not be updated with latest results received from network.

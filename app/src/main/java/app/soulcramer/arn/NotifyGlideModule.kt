@@ -21,5 +21,5 @@ class NotifyGlideModule : AppGlideModule() {
         builder.setDefaultRequestOptions(options)
     }
 
-    override fun isManifestParsingEnabled() = false
+    override fun isManifestParsingEnabled(): Boolean = false
 }

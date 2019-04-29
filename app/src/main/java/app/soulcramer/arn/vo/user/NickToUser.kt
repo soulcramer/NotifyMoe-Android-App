@@ -1,14 +1,13 @@
 package app.soulcramer.arn.vo.user
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
-import io.realm.annotations.RealmClass
 
-@RealmClass
-open class NickToUser(
-    @field:PrimaryKey
-    var userId: String = "",
-    @field:SerializedName("nick")
-    var nickName: String = ""
-) : RealmObject()
+@Entity
+data class NickToUser(
+    @PrimaryKey
+    var userId: String,
+    @SerializedName("nick")
+    var nickName: String
+)

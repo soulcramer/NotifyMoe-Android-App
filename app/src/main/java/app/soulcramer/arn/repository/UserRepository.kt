@@ -9,6 +9,7 @@ import app.soulcramer.arn.db.UserDao
 import app.soulcramer.arn.vo.Resource
 import app.soulcramer.arn.vo.user.NickToUser
 import app.soulcramer.arn.vo.user.User
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import retrofit2.Response
@@ -24,12 +25,12 @@ class UserRepository(
     fun loadUserById(id: String): LiveData<Resource<User>> {
         return object : NetworkBoundResource<User, User>() {
             override fun saveCallResult(item: User) {
-                userDao.insert(item)
+                userDao.insertUsers(item)
             }
 
             override fun shouldFetch(data: User?) = data == null
 
-            override fun loadFromDb() = userDao.findById(id)
+            override fun loadFromDb() = userDao.loadById(id)
 
             override fun createCall() = service.getUserById(id)
         }.asLiveData()
@@ -38,12 +39,12 @@ class UserRepository(
     fun loadUserByNickName(nick: String): LiveData<Resource<User>> {
         return object : NetworkBoundResource<User, User>() {
             override fun saveCallResult(item: User) {
-                userDao.insert(item)
+                userDao.insertUsers(item)
             }
 
             override fun shouldFetch(data: User?) = data == null
 
-            override fun loadFromDb() = userDao.findByNick(nick)
+            override fun loadFromDb() = userDao.loadByNick(nick)
 
             override fun createCall(): LiveData<ApiResponse<User>> = loadUserByNick(nick)
         }.asLiveData()
@@ -53,7 +54,7 @@ class UserRepository(
         nick: String
     ): MutableLiveData<ApiResponse<User>> {
         val dispatchResult = MutableLiveData<ApiResponse<User>>()
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.IO) {
             try {
                 val nickResponse = service.getUserIdByNick(nick).await()
                 if (nickResponse.isSuccessful) {

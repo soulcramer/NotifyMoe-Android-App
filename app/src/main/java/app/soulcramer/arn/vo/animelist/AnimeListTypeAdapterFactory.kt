@@ -1,6 +1,7 @@
 package app.soulcramer.arn.vo.animelist
 
 import com.google.gson.Gson
+import com.google.gson.JsonArray
 import com.google.gson.JsonElement
 import com.google.gson.TypeAdapter
 import com.google.gson.TypeAdapterFactory
@@ -31,6 +32,15 @@ class AnimeListTypeAdapterFactory : TypeAdapterFactory {
                     val jsonObject = jsonElement.asJsonObject
                     if (jsonObject.has("items") && jsonObject.get("items").isJsonArray) {
                         jsonElement = jsonObject.get("items")
+                        val items = jsonElement.asJsonArray.map { item ->
+                            item.asJsonObject.addProperty("userId", jsonObject.get("userId").asString)
+                            return@map item
+                        }
+                        jsonElement = JsonArray(items.size).apply {
+                            items.forEach {
+                                add(it)
+                            }
+                        }
                     }
                 }
 

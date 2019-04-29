@@ -5,6 +5,7 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import app.soulcramer.arn.db.MappedAnimeItem
 import app.soulcramer.arn.repository.AnimeListRepository
 import app.soulcramer.arn.repository.AnimeRepository
 import app.soulcramer.arn.util.AbsentLiveData
@@ -12,7 +13,6 @@ import app.soulcramer.arn.vo.Error
 import app.soulcramer.arn.vo.Loading
 import app.soulcramer.arn.vo.Resource
 import app.soulcramer.arn.vo.Success
-import app.soulcramer.arn.vo.animelist.AnimeListItem
 
 class AnimeListViewModel(
     animeListRepository: AnimeListRepository,
@@ -27,7 +27,7 @@ class AnimeListViewModel(
     val watchingStatus: LiveData<String>
         get() = _watchingStatus
 
-    private var loadItemsByUserId: LiveData<Resource<List<AnimeListItem>>> = AbsentLiveData.create()
+    private var loadItemsByUserId: LiveData<Resource<List<MappedAnimeItem>>> = AbsentLiveData.create()
 
     private val _items: MediatorLiveData<Resource<List<SimpleAnimeListItem>>> = MediatorLiveData()
     val items: LiveData<Resource<List<SimpleAnimeListItem>>>
@@ -63,7 +63,7 @@ class AnimeListViewModel(
         super.onCleared()
     }
 
-    private fun toFaItem(it: AnimeListItem): SimpleAnimeListItem {
+    private fun toFaItem(it: MappedAnimeItem): SimpleAnimeListItem {
         return SimpleAnimeListItem().apply {
             animeListItem = it
             withIdentifier(it.animeId.hashCode().toLong())
@@ -76,7 +76,7 @@ class AnimeListViewModel(
         }
     }
 
-    private fun processData(animeListItems: List<AnimeListItem>?): List<SimpleAnimeListItem> {
+    private fun processData(animeListItems: List<MappedAnimeItem>?): List<SimpleAnimeListItem> {
         return animeListItems?.asSequence()
             ?.filter {
                 it.status == "watching"

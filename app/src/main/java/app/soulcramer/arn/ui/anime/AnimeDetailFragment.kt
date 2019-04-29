@@ -34,7 +34,7 @@ class AnimeDetailFragment : Fragment() {
             if (userResource.data != null) {
                 userResource.data.let {
                     statefulView.state = Data()
-                    animeTitleTextView.text = it.title?.canonical
+                    animeTitleTextView.text = it.title.canonical
                 }
 
             } else {
@@ -47,7 +47,7 @@ class AnimeDetailFragment : Fragment() {
                     is Success -> {
                         userResource.data?.let {
                             statefulView.state = Data()
-                            animeTitleTextView.text = it.title?.canonical
+                            animeTitleTextView.text = it.title.canonical
                         }
                     }
                 }

@@ -1,28 +1,33 @@
 package app.soulcramer.arn.vo.anime
 
-import io.realm.RealmList
-import io.realm.RealmObject
-import io.realm.annotations.PrimaryKey
-import io.realm.annotations.RealmClass
+import androidx.room.ColumnInfo
+import androidx.room.Embedded
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 
-@RealmClass
-open class Anime(
-    @field:PrimaryKey
-    var id: String = "",
-    var type: String = "",
-    var title: Title? = null,
-    var summary: String = "",
-    var status: String = "",
-    var genres: RealmList<String> = RealmList(),
-    var startDate: String = "",
-    var endDate: String = "",
-    var episodeCount: Int = 1,
-    var episodeLength: Int = 1,
-    var source: String = "",
-    var image: Image? = null,
-    var rating: Rating? = null,
-    var notes: String = "",
-    var rewatch: Int = 0,
-    var created: String = "",
-    var edited: String = ""
-) : RealmObject()
+@Entity(tableName = "animes")
+data class Anime(
+    @PrimaryKey val id: String,
+    val type: String,
+    @Embedded val title: Title,
+    val summary: String,
+    val status: String,
+    @ColumnInfo(name = "genres") val _genres: String? = null,
+    val startDate: String,
+    val endDate: String,
+    val episodeCount: Int,
+    val episodeLength: Int,
+    val source: String,
+    @Embedded val image: Image,
+    @Embedded val rating: Rating,
+    val notes: String?,
+    val rewatch: Int = 0,
+    val createdBy: String,
+    val editedBy: String
+) {
+    @delegate:Ignore
+    val genres by lazy(LazyThreadSafetyMode.NONE) {
+        _genres?.split(",")?.map { it.trim() }?.toSet() ?: emptySet()
+    }
+}

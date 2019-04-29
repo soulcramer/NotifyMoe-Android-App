@@ -1,9 +1,9 @@
 package app.soulcramer.arn.di
 
+import android.os.Debug
+import androidx.room.Room
 import app.soulcramer.arn.api.NotifyMoeService
-import app.soulcramer.arn.db.AnimeDao
-import app.soulcramer.arn.db.AnimeListDao
-import app.soulcramer.arn.db.UserDao
+import app.soulcramer.arn.db.NotifyMoeDatabase
 import app.soulcramer.arn.repository.AnimeListRepository
 import app.soulcramer.arn.repository.AnimeRepository
 import app.soulcramer.arn.repository.UserRepository
@@ -45,7 +45,7 @@ val appModule: Module = module {
     }
 
     single {
-        AnimeListRepository(get(), get())
+        AnimeListRepository(get(), get(), get())
     }
 
     single {
@@ -56,9 +56,18 @@ val appModule: Module = module {
         AnimeRepository(get(), get())
     }
 
-    single { AnimeListDao(get()) }
-    single { UserDao(get()) }
-    single { AnimeDao(get()) }
+    single { get<NotifyMoeDatabase>().userDao() }
+    single { get<NotifyMoeDatabase>().animeListDao() }
+    single { get<NotifyMoeDatabase>().animeDao() }
+
+    single {
+        val builder = Room.databaseBuilder(get(), NotifyMoeDatabase::class.java, "notify.db")
+            .fallbackToDestructiveMigration()
+        if (Debug.isDebuggerConnected()) {
+            builder.allowMainThreadQueries()
+        }
+        return@single builder.build()
+    }
 
     single<NotifyMoeService> {
         Retrofit.Builder()

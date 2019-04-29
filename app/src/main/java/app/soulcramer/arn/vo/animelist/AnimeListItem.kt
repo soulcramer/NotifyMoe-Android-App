@@ -1,38 +1,42 @@
 package app.soulcramer.arn.vo.animelist
 
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.Index
 import app.soulcramer.arn.vo.anime.Anime
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
-import io.realm.RealmObject
-import io.realm.annotations.Index
-import io.realm.annotations.PrimaryKey
-import io.realm.annotations.RealmClass
-import io.realm.annotations.Required
+import app.soulcramer.arn.vo.user.User
 
-@RealmClass
+@Entity(
+    tableName = "anime_list_items",
+    primaryKeys = ["user_id", "anime_id"],
+    indices = [Index("user_id", "anime_id", unique = true)],
+    foreignKeys = [
+        ForeignKey(
+            entity = Anime::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("anime_id"),
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
+        ),
+        ForeignKey(
+            entity = User::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("user_id"),
+            onDelete = ForeignKey.CASCADE,
+            onUpdate = ForeignKey.CASCADE
+        )
+    ]
+)
 open class AnimeListItem(
-    @field:PrimaryKey
-    @field:Expose(serialize = false)
-    var id: String = "",
-    @field:Required
-    var userId: String = "",
-    @field:Required
-    var animeId: String = "",
-    var anime: Anime? = null,
-    @field:Index
-    var status: String = "",
-    var episodes: Int = 0,
-    @field:SerializedName("rating")
-    var userRating: UserRating? = null,
-    var notes: String = "",
-    var rewatch: Int = 0,
-    var created: String = "",
-    var edited: String = ""
-) : RealmObject() {
-
-    fun compoundPrimaryKey() {
-        if (!isManaged) {
-            id = "$userId$animeId"
-        }
-    }
-}
+    @ColumnInfo(name = "user_id")
+    val userId: String,
+    @ColumnInfo(name = "anime_id")
+    val animeId: String,
+    val status: String,
+    val episodes: Int,
+    val notes: String,
+    val rewatch: Int,
+    val created: String,
+    val edited: String
+)
