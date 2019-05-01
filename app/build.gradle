@@ -6,7 +6,6 @@ kapt {
     correctErrorTypes = true
     mapDiagnosticLocations = true
 }
-apply plugin: 'realm-android'
 apply plugin: 'kotlin-android-extensions'
 androidExtensions {
     experimental = true
@@ -130,13 +129,10 @@ dependencies {
     implementation "org.koin:koin-androidx-scope:${versions.koin}"
     implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
 
-    implementation "com.github.Zhuinden:realm-monarchy:${versions.monarchy}"
-    kapt 'dk.ilios:realmfieldnameshelper:1.1.1'
-
-    implementation "com.mikepenz:fastadapter:3.2.7"
-    implementation "com.mikepenz:fastadapter-commons:3.2.7"
-    implementation "com.mikepenz:fastadapter-extensions-expandable:3.2.7"
-    implementation "com.mikepenz:fastadapter-extensions:3.2.7"
+    implementation "com.mikepenz:fastadapter:${versions.fast_adapter}"
+    implementation "com.mikepenz:fastadapter-commons:${versions.fast_adapter}"
+    implementation "com.mikepenz:fastadapter-extensions-expandable:${versions.fast_adapter}"
+    implementation "com.mikepenz:fastadapter-extensions:${versions.fast_adapter}"
 
     // Leak Canary
     debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"

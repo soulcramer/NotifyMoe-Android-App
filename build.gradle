@@ -55,8 +55,6 @@ buildscript {
             'parse_livequery': '1.0.6',
             'photoview'      : '2.1.3',
             'recyclerview'   : '1.0.0',
-            'realm'          : '5.3.1',
-            'realmNameHelper': '1.1.1',
             'retrofit'       : '2.5.0',
             'timberkt'       : '1.5.1',
             'threetenabp'    : '1.2.0'
@@ -79,7 +77,6 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:${versions.android_gradle}"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
-        classpath "io.realm:realm-gradle-plugin:${versions.realm}"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.androidx.navigation}"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:${versions.kotlin}"
         classpath 'com.google.gms:google-services:4.2.0'

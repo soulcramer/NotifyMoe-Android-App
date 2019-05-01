@@ -15,8 +15,6 @@ import app.soulcramer.arn.util.LiveDataCallAdapterFactory
 import app.soulcramer.arn.vo.animelist.AnimeListTypeAdapterFactory
 import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
-import com.zhuinden.monarchy.Monarchy
-import io.realm.RealmConfiguration
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -84,17 +82,6 @@ val appModule: Module = module {
         OkHttpClient.Builder()
             .addInterceptor(get())
             .build()
-    }
-
-    single {
-        Monarchy.Builder() //
-            .setRealmConfiguration(get()) //
-            .build()
-    }
-
-    single {
-        RealmConfiguration.Builder() //
-            .deleteRealmIfMigrationNeeded().build()
     }
 
     single {

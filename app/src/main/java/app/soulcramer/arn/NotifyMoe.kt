@@ -17,7 +17,6 @@ class NotifyMoe : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        Monarchy.init(this)
         startKoin {
             androidLogger()
             // Android context
