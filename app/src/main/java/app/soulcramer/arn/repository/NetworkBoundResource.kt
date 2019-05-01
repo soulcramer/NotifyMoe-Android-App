@@ -13,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import setValueIfNew
 
 /**
  * A generic class that can provide a resource backed by both the realm database and the network.
@@ -35,16 +36,9 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                 fetchFromNetwork(dbSource)
             } else {
                 result.addSource(dbSource) { newData ->
-                    setValue(Resource.success(newData))
+                    result.setValueIfNew(Resource.success(newData))
                 }
             }
-        }
-    }
-
-    @MainThread
-    private fun setValue(newValue: Resource<ResultType>) {
-        if (result.value != newValue) {
-            result.value = newValue
         }
     }
 
@@ -52,7 +46,7 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
         val apiResponse = createCall()
         // we re-attach dbSource as a new source, it will dispatch its latest value quickly
         result.addSource(dbSource) { newData ->
-            setValue(Resource.loading(newData))
+            result.setValueIfNew(Resource.loading(newData))
         }
         result.addSource<ApiResponse<RequestType>>(apiResponse) { response ->
             result.removeSource(apiResponse)
@@ -61,28 +55,28 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                 is ApiSuccessResponse -> {
                     GlobalScope.launch(Dispatchers.IO) {
                         saveCallResult(processResponse(response))
-                        withContext(Dispatchers.Main) {
+                        withContext(Dispatchers.Main.immediate) {
                             // we specially request a new live data,
                             // otherwise we will get immediately last cached value,
                             // which may not be updated with latest results received from network.
                             result.addSource(loadFromDb()) { newData ->
-                                setValue(Resource.success(newData))
+                                result.setValueIfNew(Resource.success(newData))
                             }
                         }
                     }
                 }
                 is ApiEmptyResponse -> {
-                    GlobalScope.launch(Dispatchers.Main) {
+                    GlobalScope.launch(Dispatchers.Main.immediate) {
                         // reload from disk whatever we had
                         result.addSource(loadFromDb()) { newData ->
-                            setValue(Resource.success(newData))
+                            result.setValueIfNew(Resource.success(newData))
                         }
                     }
                 }
                 is ApiErrorResponse -> {
                     onFetchFailed()
                     result.addSource(dbSource) { newData ->
-                        setValue(Resource.error(response.errorMessage, newData))
+                        result.setValueIfNew(Resource.error(response.errorMessage, newData))
                     }
                 }
             }
