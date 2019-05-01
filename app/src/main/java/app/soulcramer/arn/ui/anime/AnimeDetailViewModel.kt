@@ -18,7 +18,7 @@ class AnimeDetailViewModel(
         get() = _animeId
     val anime: LiveData<Resource<Anime>> = Transformations.switchMap(_animeId) { id ->
         if (id == null) {
-            AbsentLiveData.create<Resource<Anime>>()
+            AbsentLiveData.create()
         } else {
             animeRepository.loadAnimeById(id)
         }

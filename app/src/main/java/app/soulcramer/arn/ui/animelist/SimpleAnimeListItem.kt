@@ -11,7 +11,7 @@ import com.mikepenz.fastadapter.items.AbstractItem
 import kotlinx.android.synthetic.main.item_simple_animelist.view.*
 
 class SimpleAnimeListItem : AbstractItem<SimpleAnimeListItem, SimpleAnimeListItem.ViewHolder>() {
-    var animeListItem: MappedAnimeItem? = null
+    lateinit var animeListItem: MappedAnimeItem
 
     //The unique ID for this type of item
     override fun getType(): Int = R.id.simple_animelist_item
@@ -34,10 +34,10 @@ class SimpleAnimeListItem : AbstractItem<SimpleAnimeListItem, SimpleAnimeListIte
 
         override fun bindView(item: SimpleAnimeListItem, payloads: List<Any>) {
             item.apply {
-                titleTextView.text = animeListItem?.animeName
+                titleTextView.text = animeListItem.animeName
                 GlideApp.with(this@ViewHolder.itemView)
                     .saturateOnLoad()
-                    .load("https://media.notify.moe/images/anime/medium/${animeListItem?.animeId}@2.webp")
+                    .load("https://media.notify.moe/images/anime/medium/${animeListItem.animeId}@2.webp")
                     .into(animeCoverImageView)
             }
         }

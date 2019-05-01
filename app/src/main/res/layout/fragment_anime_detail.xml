@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="app.soulcramer.arn.vo.anime.Anime" />
+
+        <variable
+            name="anime"
+            type="Anime" />
+    </data>
+
+    <app.soulcramer.arn.ui.common.statefulview.StatefulView
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/statefulView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/animeTitleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="@dimen/spacing_large"
+                    android:layout_marginTop="@dimen/spacing_large"
+                    android:layout_marginEnd="@dimen/spacing_large"
+                    android:text="@{anime.title.canonical}"
+                    android:textAppearance="?attr/textAppearanceSubtitle1"
+                    android:textIsSelectable="true"
+                    app:layout_constraintBottom_toTopOf="@+id/synopsis"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="anime title" />
+
+
+                <app.soulcramer.arn.ui.common.BaselineGridTextView
+                    android:id="@+id/synopsis"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="?android:selectableItemBackground"
+                    android:ellipsize="end"
+                    android:padding="@dimen/spacing_large"
+                    android:text="@{anime.summary}"
+                    android:textAppearance="?attr/textAppearanceBody2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/animeTitleTextView"
+                    app:maxLinesToggle="@{4}"
+                    tools:text="@tools:sample/lorem/random" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+    </app.soulcramer.arn.ui.common.statefulview.StatefulView>
+</layout>

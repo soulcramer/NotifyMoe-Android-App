@@ -68,7 +68,8 @@ class AnimeListViewModel(
             animeListItem = it
             withIdentifier(it.animeId.hashCode().toLong())
             withOnItemClickListener { v, _, item, _ ->
-                val direction = AnimeListFragmentDirections.itemClick(item.animeListItem?.animeId ?: "")
+                val listItem = item.animeListItem
+                val direction = AnimeListFragmentDirections.navigateToDetail(listItem.animeId, listItem.animeName)
                 v?.findNavController()?.navigate(direction)
                 true
             }
