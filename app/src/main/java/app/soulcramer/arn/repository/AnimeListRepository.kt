@@ -1,7 +1,7 @@
 package app.soulcramer.arn.repository
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.MediatorLiveData
 import app.soulcramer.arn.api.ApiResponse
 import app.soulcramer.arn.api.ApiSuccessResponse
 import app.soulcramer.arn.api.NotifyMoeService
@@ -38,7 +38,8 @@ class AnimeListRepository(
 
             override fun createCall(): LiveData<ApiResponse<List<AnimeListItem>>> {
                 val items = service.getAnimeListItemsByUserId(id)
-                return Transformations.map(items) { response ->
+                val result = MediatorLiveData<ApiResponse<List<AnimeListItem>>>()
+                result.addSource<ApiResponse<List<AnimeListItem>>>(items) { response ->
                     runBlocking(Dispatchers.IO) {
                         if (response is ApiSuccessResponse<List<AnimeListItem>>) {
                             val animes = response.body.map {
@@ -50,9 +51,10 @@ class AnimeListRepository(
                             }
                             animeDao.insertAnimes(*animes.toTypedArray())
                         }
+                        result.postValue(response)
                     }
-                    return@map response
                 }
+                return result
             }
 
         }.asLiveData()
