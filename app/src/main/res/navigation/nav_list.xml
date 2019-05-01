@@ -4,28 +4,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_list"
-    app:startDestination="@id/animeList">
+    app:startDestination="@id/animeListFragment">
 
     <fragment
         android:id="@+id/animeDetailFragment"
         android:name="app.soulcramer.arn.ui.anime.AnimeDetailFragment"
-        android:label="AnimeDetailFragment">
+        android:label="{animeTitle}"
+        tools:layout="@layout/fragment_anime_detail">
         <argument
             android:name="userId"
             app:argType="string" />
+        <argument
+            android:name="animeTitle"
+            app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/animeList"
+        android:id="@+id/animeListFragment"
         android:name="app.soulcramer.arn.ui.animelist.AnimeListFragment"
         android:label="AnimeListFragment"
         tools:layout="@layout/fragment_animelist">
         <action
-            android:id="@+id/itemClick"
+            android:id="@+id/navigateToDetail"
             app:destination="@id/animeDetailFragment"
             app:enterAnim="@anim/slide_from_bottom"
             app:exitAnim="@anim/nav_default_exit_anim"
             app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim"
-            app:popUpTo="@+id/animeList" />
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
 </navigation>

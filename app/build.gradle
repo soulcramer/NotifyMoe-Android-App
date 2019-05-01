@@ -107,9 +107,12 @@ dependencies {
 
 
     // AndroidX
+    implementation "androidx.activity:activity-ktx:${versions.androidx.activity}"
+    implementation "androidx.fragment:fragment-ktx:${versions.androidx.fragment}"
     implementation "androidx.lifecycle:lifecycle-extensions:${versions.androidx.lifecycle}"
     implementation "androidx.navigation:navigation-fragment-ktx:${versions.androidx.navigation}"
     implementation "androidx.navigation:navigation-ui-ktx:${versions.androidx.navigation}"
+    implementation "androidx.recyclerview:recyclerview:${versions.androidx.recyclerview}"
     implementation "androidx.recyclerview:recyclerview:${versions.androidx.recyclerview}"
     implementation "com.google.android.material:material:${versions.material}"
     implementation "androidx.constraintlayout:constraintlayout:${versions.androidx.constraint_layout}"
@@ -118,10 +121,9 @@ dependencies {
     kapt "androidx.room:room-compiler:${versions.androidx.room}"
     implementation "androidx.room:room-ktx:${versions.androidx.room}"
     implementation "androidx.emoji:emoji:${versions.androidx.emoji}"
-    kapt "androidx.databinding:compiler:3.2.0-alpha11"
 
-    implementation "com.jakewharton.threetenabp:threetenabp:1.2.0"
-    implementation "org.threeten:threetenbp:1.3.8:no-tzdb"
+    implementation "com.jakewharton.threetenabp:threetenabp:${versions.threetenabp}"
+    implementation "org.threeten:threetenbp:${versions.threetenbp}:no-tzdb"
 
     // DI
     implementation "org.koin:koin-core:${versions.koin}"

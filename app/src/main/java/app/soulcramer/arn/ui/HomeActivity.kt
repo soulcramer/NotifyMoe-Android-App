@@ -1,7 +1,10 @@
 package app.soulcramer.arn.ui
 
 import android.os.Bundle
+import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
+import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -16,12 +19,29 @@ class HomeActivity : AppCompatActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
 
+    private var toolbar: Toolbar? = null
+
+    private val bottomNavDestinations: Set<Int> = setOf(
+        R.id.dashboardFragment,
+        R.id.profileFragment,
+        R.id.animeListFragment,
+        R.id.settingsFragment
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+
         if (savedInstanceState == null) {
             setupBottomNavigationBar()
+            bottomNavigationView.selectedItemId = R.id.profileFragment
         } // Else, need to wait for onRestoreInstanceState
+
+        onBackPressedDispatcher.addCallback(this) {
+            currentNavController?.value?.popBackStack()
+        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -53,8 +73,11 @@ class HomeActivity : AppCompatActivity() {
 
         // Whenever the selected controller changes, setup the action bar.
         controller.observe(this, Observer { navController ->
-            val appBarConfiguration = AppBarConfiguration(navController.graph)
+            val appBarConfiguration = AppBarConfiguration(bottomNavDestinations)
             toolbar?.setupWithNavController(navController, appBarConfiguration)
+            navController.addOnDestinationChangedListener { _, destination, _ ->
+                bottomNavigationView.isVisible = bottomNavDestinations.contains(destination.id)
+            }
         })
         currentNavController = controller
     }

@@ -4,7 +4,6 @@ import android.app.Application
 import app.soulcramer.arn.di.appModule
 import com.github.ajalt.timberkt.Timber
 import com.jakewharton.threetenabp.AndroidThreeTen
-import com.zhuinden.monarchy.Monarchy
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

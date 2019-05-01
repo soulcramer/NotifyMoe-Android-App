@@ -2,19 +2,21 @@ buildscript {
     ext.versions = [
             'android_gradle' : '3.5.0-alpha13',
             'androidx'       : [
-                    'appcompat'        : '1.1.0-aplha03',
+                    'activity'         : '1.0.0-alpha07',
+                    'appcompat'        : '1.1.0-aplha04',
                     'arch_core_testing': '2.0.0',
                     'browser'          : '1.0.0',
                     'cardview'         : '1.0.0',
-                    'core'             : '1.0.1',
-                    'constraint_layout': '2.0.0-alpha4',
+                    'core'             : '1.1.0-alpha05',
+                    'constraint_layout': '2.0.0-alpha5',
                     'core_ktx'         : '1.1.0-alpha05',
-                    'fragment'         : '1.0.0',
+                    'databinding'      : '1.1.0-alpha05',
+                    'fragment'         : '1.1.0-alpha07',
                     'emoji'            : '1.0.0',
                     'lifecycle'        : '2.1.0-alpha04',
                     'multidex'         : '2.0.1',
                     'navigation'       : '2.1.0-alpha02',
-                    'paging'           : '2.0.0',
+                    'paging'           : '2.1.0',
                     'recyclerview'     : '1.1.0-alpha04',
                     'room'             : '2.1.0-alpha07',
                     'test_core'        : '1.0.0',
@@ -25,7 +27,7 @@ buildscript {
             'anko'           : '0.10.4',
             'bolts'          : '1.4.0',
             'cardview'       : '1.0.0',
-            'coroutines'     : '1.0.0',
+            'coroutines'     : '1.1.1',
             'dagger'         : '2.22.1',
             'dokka'          : '0.9.16',
             'fast_adapter'   : '3.3.1',
@@ -57,7 +59,8 @@ buildscript {
             'recyclerview'   : '1.0.0',
             'retrofit'       : '2.5.0',
             'timberkt'       : '1.5.1',
-            'threetenabp'    : '1.2.0'
+            'threetenabp'    : '1.2.0',
+            'threetenbp'     : '1.3.8'
 
     ]
 
