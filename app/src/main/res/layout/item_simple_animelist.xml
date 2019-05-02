@@ -13,7 +13,6 @@
         android:layout_height="0dp"
         android:contentDescription="@string/anime_cover_image_cd"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/titleTextView"
         app:layout_constraintDimensionRatio="w,1.5:1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,9 +25,10 @@
         android:layout_height="wrap_content"
         android:padding="8dp"
         android:textAppearance="?textAppearanceBody2"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/animeCoverImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
         tools:text="Shingeki no Kyojin" />
 </androidx.constraintlayout.widget.ConstraintLayout>

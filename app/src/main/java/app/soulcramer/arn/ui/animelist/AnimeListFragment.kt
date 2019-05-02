@@ -57,7 +57,7 @@ class AnimeListFragment : Fragment() {
             val columns = resources.getInteger(R.integer.animelist_columns)
             layoutManager = GridLayoutManager(context, columns)
 
-            val itemsPadding = 20f.dpToPx(resources.displayMetrics)
+            val itemsPadding = 4f.dpToPx(resources.displayMetrics)
             addItemDecoration(EqualSpacingItemDecoration(itemsPadding,
                 EqualSpacingItemDecoration.GRID))
         }
