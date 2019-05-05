@@ -27,7 +27,7 @@ data class Anime(
     val editedBy: String
 ) {
     @delegate:Ignore
-    val genres by lazy(LazyThreadSafetyMode.NONE) {
-        _genres?.split(",")?.map { it.trim() }?.toSet() ?: emptySet()
+    val genres: List<Genre> by lazy(LazyThreadSafetyMode.NONE) {
+        _genres?.split(",")?.mapNotNull { Genre.fromTraktValue(it.trim()) } ?: emptyList()
     }
 }

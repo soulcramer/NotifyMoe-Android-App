@@ -1,5 +1,6 @@
 package app.soulcramer.arn.di
 
+import android.content.Context
 import android.os.Debug
 import androidx.room.Room
 import app.soulcramer.arn.api.NotifyMoeService
@@ -7,7 +8,9 @@ import app.soulcramer.arn.db.NotifyMoeDatabase
 import app.soulcramer.arn.repository.AnimeListRepository
 import app.soulcramer.arn.repository.AnimeRepository
 import app.soulcramer.arn.repository.UserRepository
+import app.soulcramer.arn.ui.anime.AnimeDetailFragment
 import app.soulcramer.arn.ui.anime.AnimeDetailViewModel
+import app.soulcramer.arn.ui.anime.AnimeDetailsTextCreator
 import app.soulcramer.arn.ui.animelist.AnimeListViewModel
 import app.soulcramer.arn.ui.dashboard.DashboardViewModel
 import app.soulcramer.arn.ui.user.UserViewModel
@@ -20,6 +23,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.core.module.Module
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -40,6 +44,10 @@ val appModule: Module = module {
 
     viewModel {
         UserViewModel(get())
+    }
+
+    scope(named<AnimeDetailFragment>()) {
+        scoped { (context: Context) -> AnimeDetailsTextCreator(context) }
     }
 
     single {

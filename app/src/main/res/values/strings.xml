@@ -12,4 +12,38 @@
     <string name="user_cover_image_cd">user cover image</string>
     <string name="user_avatar_image_cd">user avatar image</string>
     <string name="anime_cover_image_cd">anime cover image</string>
+
+
+    <string name="genre_label_drama">Drama</string>
+    <string name="genre_label_fantasy">Fantasy</string>
+    <string name="genre_label_science_fiction">Science Fiction</string>
+    <string name="genre_label_action">Action</string>
+    <string name="genre_label_adventure">Adventure</string>
+    <string name="genre_label_thriller">Thriller</string>
+    <string name="genre_label_comedy">Comedy</string>
+    <string name="genre_label_horror">Horror</string>
+    <string name="genre_label_mystery">Mystery</string>
+    <string name="genre_label_cars">Cars</string>
+    <string name="genre_label_ecchi">Ecchi</string>
+    <string name="genre_label_game">Game</string>
+    <string name="genre_label_harem">Harem</string>
+    <string name="genre_label_historical">Historical</string>
+    <string name="genre_label_kids">Kids</string>
+    <string name="genre_label_magic">Magic</string>
+    <string name="genre_label_martial_arts">Martial Arts</string>
+    <string name="genre_label_mecha">Mecha</string>
+    <string name="genre_label_military">Military</string>
+    <string name="genre_label_music">Music</string>
+    <string name="genre_label_psychological">Psychological</string>
+    <string name="genre_label_romance">Romance</string>
+    <string name="genre_label_school">School</string>
+    <string name="genre_label_seinen">Seinen</string>
+    <string name="genre_label_shoujo">Shoujo</string>
+    <string name="genre_label_shounen">Shounen</string>
+    <string name="genre_label_slice_of_life">Slice of life</string>
+    <string name="genre_label_space">Space</string>
+    <string name="genre_label_sports">Sports</string>
+    <string name="genre_label_super_power">Super Powers</string>
+    <string name="genre_label_supernatural">Supernatural</string>
+    <string name="genre_label_vampire">Vampire</string>
 </resources>

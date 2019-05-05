@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import app.soulcramer.arn.GlideApp
 import app.soulcramer.arn.common.observeK
 import app.soulcramer.arn.databinding.FragmentAnimeDetailBinding
 import app.soulcramer.arn.ui.common.statefulview.Data
@@ -14,12 +15,15 @@ import app.soulcramer.arn.vo.Loading
 import app.soulcramer.arn.vo.Success
 import kotlinx.android.synthetic.main.default_empty_view.view.*
 import kotlinx.android.synthetic.main.fragment_anime_detail.*
+import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import org.koin.core.parameter.parametersOf
 
 class AnimeDetailFragment : Fragment() {
     private val animeDetailViewModel by viewModel<AnimeDetailViewModel>()
     private val args by navArgs<AnimeDetailFragmentArgs>()
     private lateinit var binding: FragmentAnimeDetailBinding
+    private val textCreator: AnimeDetailsTextCreator by currentScope.inject { parametersOf(context!!) }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         binding = FragmentAnimeDetailBinding.inflate(layoutInflater, container, false)
@@ -35,7 +39,11 @@ class AnimeDetailFragment : Fragment() {
             if (userResource.data != null) {
                 userResource.data.let {
                     binding.statefulView.state = Data()
+                    binding.textCreator = textCreator
                     binding.anime = it
+                    GlideApp.with(this)
+                        .load("https://media.notify.moe/images/anime/medium/${it.id}@2.webp")
+                        .into(binding.poster)
                 }
 
             } else {
@@ -48,6 +56,7 @@ class AnimeDetailFragment : Fragment() {
                     is Success -> {
                         userResource.data?.let {
                             binding.statefulView.state = Data()
+                            binding.textCreator = textCreator
                             binding.anime = it
                         }
                     }
