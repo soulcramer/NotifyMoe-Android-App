@@ -2,7 +2,7 @@ package app.soulcramer.arn.ui.common
 
 import androidx.annotation.StringRes
 import app.soulcramer.arn.R
-import app.soulcramer.arn.vo.anime.Genre
+import app.soulcramer.arn.model.anime.Genre
 
 object GenreStringer {
     fun getEmoji(genre: Genre): String = when (genre) {

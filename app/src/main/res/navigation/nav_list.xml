@@ -12,7 +12,7 @@
         android:label="{animeTitle}"
         tools:layout="@layout/fragment_anime_detail">
         <argument
-            android:name="userId"
+            android:name="animeId"
             app:argType="string" />
         <argument
             android:name="animeTitle"

@@ -1,74 +1,4 @@
 buildscript {
-    ext.versions = [
-            'android_gradle' : '3.5.0-alpha13',
-            'androidx'       : [
-                    'activity'         : '1.0.0-alpha07',
-                    'appcompat'        : '1.1.0-aplha04',
-                    'arch_core_testing': '2.0.0',
-                    'browser'          : '1.0.0',
-                    'cardview'         : '1.0.0',
-                    'core'             : '1.1.0-alpha05',
-                    'constraint_layout': '2.0.0-alpha5',
-                    'core_ktx'         : '1.1.0-alpha05',
-                    'databinding'      : '1.1.0-alpha05',
-                    'fragment'         : '1.1.0-alpha07',
-                    'emoji'            : '1.0.0',
-                    'lifecycle'        : '2.1.0-alpha04',
-                    'multidex'         : '2.0.1',
-                    'navigation'       : '2.1.0-alpha02',
-                    'paging'           : '2.1.0',
-                    'recyclerview'     : '1.1.0-alpha04',
-                    'room'             : '2.1.0-alpha07',
-                    'test_core'        : '1.0.0',
-                    'test_junit'       : '1.0.0',
-                    'test_runner'      : '1.1.0',
-                    'test_rules'       : '1.1.0',
-            ],
-            'anko'           : '0.10.4',
-            'bolts'          : '1.4.0',
-            'cardview'       : '1.0.0',
-            'coroutines'     : '1.1.1',
-            'dagger'         : '2.22.1',
-            'dokka'          : '0.9.16',
-            'fast_adapter'   : '3.3.1',
-            'glide'          : '4.9.0',
-            'gson'           : '2.8.5',
-            'jfrog'          : '4.7.3',
-            'koin'           : '2.0.0-rc-2',
-            'kotlin'         : '1.3.31',
-            'ktlint'         : '0.22.0',
-            'leakcanary'     : '1.6.3',
-            lunabee          : [
-                    "appmainteance"   : "1.1.0",
-                    "bottomnavigation": "1.2.0",
-                    "calendar"        : "1.2.0",
-                    "edittoolbar"     : "1.1.0",
-                    "extension"       : "1.5.0",
-                    "photoviewer"     : "1.1.0",
-                    "recyclerview"    : "1.12.0",
-                    "statefulview"    : "1.0.0",
-                    "synchronisation" : "1.3.3",
-                    "webview"         : "1.4.0"
-            ],
-            'material'       : '1.1.0-alpha05',
-            'monarchy'       : '0.5.1',
-            'okhttp'         : '3.14.1',
-            'parse'          : '1.17.3',
-            'parse_livequery': '1.0.6',
-            'photoview'      : '2.1.3',
-            'recyclerview'   : '1.0.0',
-            'retrofit'       : '2.5.0',
-            'timberkt'       : '1.5.1',
-            'threetenabp'    : '1.2.0',
-            'threetenbp'     : '1.3.8'
-
-    ]
-
-    ext.buildConfig = [
-            'compileSdk': 28,
-            'minSdk'    : 21,
-            'targetSdk' : 28,
-    ]
 
     repositories {
         google()
@@ -78,19 +8,21 @@ buildscript {
         }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:${versions.android_gradle}"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${versions.kotlin}"
-        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${versions.androidx.navigation}"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:${versions.kotlin}"
+        classpath "com.android.tools.build:gradle:${Versions.android_gradle}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:${Versions.kotlin}"
         classpath 'com.google.gms:google-services:4.2.0'
         classpath 'io.fabric.tools:gradle:1.28.0'
-        classpath 'com.google.firebase:firebase-plugins:1.2.0'
+        classpath 'com.google.firebase:firebase-plugins:2.0.0'
     }
 }
 
 plugins {
     id "io.gitlab.arturbosch.detekt" version "1.0.0-RC12"
     id "com.diffplug.gradle.spotless" version "3.16.0"
+    id "com.github.ben-manes.versions" version "0.21.0"
+
 }
 
 allprojects {
@@ -115,7 +47,7 @@ subprojects {
     spotless {
         kotlin {
             target "**/*.kt"
-            ktlint(versions.ktlint)
+            ktlint(Versions.ktlint)
         }
     }
 

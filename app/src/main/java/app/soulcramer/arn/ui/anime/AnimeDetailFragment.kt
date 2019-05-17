@@ -7,21 +7,21 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import app.soulcramer.arn.GlideApp
-import app.soulcramer.arn.common.observeK
 import app.soulcramer.arn.databinding.FragmentAnimeDetailBinding
+import app.soulcramer.arn.model.anime.Genre
+import app.soulcramer.arn.ui.anime.MangaDetailsContext.Action.LoadMangaInformations
 import app.soulcramer.arn.ui.common.statefulview.Data
-import app.soulcramer.arn.vo.Error
-import app.soulcramer.arn.vo.Loading
-import app.soulcramer.arn.vo.Success
-import kotlinx.android.synthetic.main.default_empty_view.view.*
-import kotlinx.android.synthetic.main.fragment_anime_detail.*
+import app.soulcramer.arn.ui.common.statefulview.Loading
+import bind
+import distinctUntilChanged
+import map
 import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.parameter.parametersOf
 
 class AnimeDetailFragment : Fragment() {
-    private val animeDetailViewModel by viewModel<AnimeDetailViewModel>()
     private val args by navArgs<AnimeDetailFragmentArgs>()
+    private val animeDetailViewModel by viewModel<AnimeDetailViewModel> { parametersOf(args.animeId) }
     private lateinit var binding: FragmentAnimeDetailBinding
     private val textCreator: AnimeDetailsTextCreator by currentScope.inject { parametersOf(context!!) }
 
@@ -34,34 +34,38 @@ class AnimeDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        animeDetailViewModel.setAnimeId(args.userId)
-        animeDetailViewModel.anime.observeK(this) { userResource ->
-            if (userResource.data != null) {
-                userResource.data.let {
-                    binding.statefulView.state = Data()
-                    binding.textCreator = textCreator
-                    binding.anime = it
-                    GlideApp.with(this)
-                        .load("https://media.notify.moe/images/anime/medium/${it.id}@2.webp")
-                        .into(binding.poster)
-                }
+        binding.statefulView.state = Data()
+        animeDetailViewModel.state.map { it.poster }.distinctUntilChanged().bind(this, this::onThumbnailChanged)
+        animeDetailViewModel.state.map { it.title }.distinctUntilChanged().bind(this, this::onTitleChanged)
+        animeDetailViewModel.state.map { it.summary }.distinctUntilChanged().bind(this, this::onSummaryChanged)
+        animeDetailViewModel.state.map { it.genres }.distinctUntilChanged().bind(this, this::onGenresChanged)
+        animeDetailViewModel.handle(LoadMangaInformations)
+    }
 
-            } else {
-                when (userResource.status) {
-                    is Loading -> statefulView.state = statefulView.loadingState
-                    is Error -> {
-                        binding.statefulView.subtitle.text = userResource.message
-                        binding.statefulView.state = statefulView.errorState
-                    }
-                    is Success -> {
-                        userResource.data?.let {
-                            binding.statefulView.state = Data()
-                            binding.textCreator = textCreator
-                            binding.anime = it
-                        }
-                    }
-                }
-            }
+    private fun onThumbnailChanged(newPoster: String) {
+        GlideApp.with(this)
+            .load(newPoster)
+            .into(binding.poster)
+    }
+
+    private fun onTitleChanged(newTitle: CharSequence) {
+        binding.title = newTitle
+    }
+
+    private fun onSummaryChanged(newSummary: CharSequence) {
+        binding.summary = newSummary
+    }
+
+    private fun onViewStateChanged(isLoading: Boolean) {
+        binding.statefulView.state = if (isLoading) {
+            Loading()
+        } else {
+            Data()
         }
+    }
+
+    private fun onGenresChanged(newGenres: List<Genre>?) {
+        binding.genresString = textCreator.genreString(newGenres)
+        binding.genresContentDescription = textCreator.genreContentDescription(newGenres)
     }
 }

@@ -5,14 +5,14 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-import app.soulcramer.arn.db.MappedAnimeItem
+import app.soulcramer.arn.model.Error
+import app.soulcramer.arn.model.Loading
+import app.soulcramer.arn.model.Resource
+import app.soulcramer.arn.model.Success
+import app.soulcramer.arn.model.animelist.MappedAnimeItem
 import app.soulcramer.arn.repository.AnimeListRepository
 import app.soulcramer.arn.repository.AnimeRepository
 import app.soulcramer.arn.util.AbsentLiveData
-import app.soulcramer.arn.vo.Error
-import app.soulcramer.arn.vo.Loading
-import app.soulcramer.arn.vo.Resource
-import app.soulcramer.arn.vo.Success
 
 class AnimeListViewModel(
     animeListRepository: AnimeListRepository,
@@ -45,7 +45,8 @@ class AnimeListViewModel(
                         items = processData(resource.data)
                     }
                     val value = when (resource.status) {
-                        is Error -> Resource.error(resource.message!!, items)
+                        is Error -> Resource.error(resource.message!!,
+                            items)
                         is Loading -> Resource.loading(items)
                         is Success -> {
                             Resource.success(items)

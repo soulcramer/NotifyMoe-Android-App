@@ -5,10 +5,10 @@ import androidx.core.text.buildSpannedString
 import androidx.core.text.inSpans
 import androidx.emoji.text.EmojiCompat
 import app.soulcramer.arn.R
+import app.soulcramer.arn.model.anime.Anime
+import app.soulcramer.arn.model.anime.Genre
 import app.soulcramer.arn.ui.common.GenreStringer
 import app.soulcramer.arn.ui.common.text.textAppearanceSpanForAttribute
-import app.soulcramer.arn.vo.anime.Anime
-import app.soulcramer.arn.vo.anime.Genre
 
 class AnimeDetailsTextCreator(
     private val context: Context

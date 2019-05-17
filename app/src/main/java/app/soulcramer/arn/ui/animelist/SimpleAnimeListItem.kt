@@ -5,7 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import app.soulcramer.arn.GlideApp
 import app.soulcramer.arn.R
-import app.soulcramer.arn.db.MappedAnimeItem
+import app.soulcramer.arn.model.animelist.MappedAnimeItem
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.items.AbstractItem
 import kotlinx.android.synthetic.main.item_simple_animelist.view.*

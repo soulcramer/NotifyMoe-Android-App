@@ -4,10 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import app.soulcramer.arn.model.Resource
+import app.soulcramer.arn.model.user.User
 import app.soulcramer.arn.repository.UserRepository
 import app.soulcramer.arn.util.AbsentLiveData
-import app.soulcramer.arn.vo.Resource
-import app.soulcramer.arn.vo.user.User
 
 class UserViewModel(userRepository: UserRepository) : ViewModel() {
     private val _nickname = MutableLiveData<String>()
@@ -27,7 +27,7 @@ class UserViewModel(userRepository: UserRepository) : ViewModel() {
         userRepository: UserRepository): LiveData<Resource<User>> {
         return Transformations.switchMap(_nickname) { nick ->
             if (nick == null) {
-                AbsentLiveData.create<Resource<User>>()
+                AbsentLiveData.create()
             } else {
                 userRepository.loadUserByNickName(nick)
             }

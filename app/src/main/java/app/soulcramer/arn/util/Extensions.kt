@@ -31,8 +31,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -138,9 +141,36 @@ fun Parcel.readBoolean() = readInt() != 0
 // endregion
 // region LiveData
 
+fun <T> MutableLiveData<T>.setValueIfNew(newValue: T) {
+    if (this.value != newValue) value = newValue
+}
+
+fun <T> MutableLiveData<T>.postValueIfNew(newValue: T) {
+    if (this.value != newValue) postValue(newValue)
+}
+
+fun <A, B> LiveData<A>.combineLatest(b: LiveData<B>): LiveData<Pair<A, B>> {
+    return MediatorLiveData<Pair<A, B>>().apply {
+        var lastA: A? = null
+        var lastB: B? = null
+
+        addSource(this@combineLatest) {
+            if (it == null && value != null) value = null
+            lastA = it
+            if (lastA != null && lastB != null) value = lastA!! to lastB!!
+        }
+
+        addSource(b) {
+            if (it == null && value != null) value = null
+            lastB = it
+            if (lastA != null && lastB != null) value = lastA!! to lastB!!
+        }
+    }
+}
+
 /** Uses `Transformations.map` on a LiveData */
-fun <X, Y> LiveData<X>.map(body: (X) -> Y): LiveData<Y> {
-    return Transformations.map(this, body)
+fun <T, R> LiveData<T>.map(function: (T) -> R): LiveData<R> {
+    return Transformations.map(this, function)
 }
 
 /** Uses `Transformations.switchMap` on a LiveData */
@@ -148,12 +178,29 @@ fun <X, Y> LiveData<X>.switchMap(body: (X) -> LiveData<Y>): LiveData<Y> {
     return Transformations.switchMap(this, body)
 }
 
-fun <T> MutableLiveData<T>.setValueIfNew(newValue: T) {
-    if (this.value != newValue) value = newValue
+fun <T> LiveData<T>.distinctUntilChanged(): LiveData<T> {
+    val distinctLiveData = MediatorLiveData<T>()
+    distinctLiveData.addSource(this, object : Observer<T> {
+        private var initialized = false
+        private var lastObj: T? = null
+
+        override fun onChanged(obj: T?) {
+            if (!initialized) {
+                initialized = true
+                lastObj = obj
+                distinctLiveData.postValue(lastObj)
+            } else if ((obj == null && lastObj != null) || obj != lastObj) {
+                lastObj = obj
+                distinctLiveData.postValue(lastObj)
+            }
+        }
+    })
+
+    return distinctLiveData
 }
 
-fun <T> MutableLiveData<T>.postValueIfNew(newValue: T) {
-    if (this.value != newValue) postValue(newValue)
+fun <T> LiveData<T>.bind(owner: LifecycleOwner, function: (T) -> Unit) {
+    this.observe(owner, Observer { function(it) })
 }
 // endregion
 

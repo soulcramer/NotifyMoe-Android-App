@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+kapt {
+    correctErrorTypes = true
+    mapDiagnosticLocations = true
+}
+
+android {
+    compileSdkVersion BuildConfigs.compileSdk
+
+
+    defaultConfig {
+        minSdkVersion BuildConfigs.minSdk
+        targetSdkVersion BuildConfigs.targetSdk
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+
+    // Kotlin
+    implementation Libraries.kotlinStandardLibrary
+
+    implementation LibrariesAndroidX.lifecycle
+
+    implementation LibrariesAndroidX.room
+    implementation LibrariesAndroidX.roomRuntime
+    kapt LibrariesAndroidX.roomCompiler
+
+    implementation Libraries.koin
+    implementation Libraries.koinAndroid
+
+    implementation Libraries.threetenbp
+    implementation Libraries.threetenabp
+
+
+    implementation project(":model")
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}

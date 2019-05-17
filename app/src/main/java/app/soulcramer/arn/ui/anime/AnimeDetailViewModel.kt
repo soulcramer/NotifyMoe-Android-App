@@ -1,32 +1,44 @@
 package app.soulcramer.arn.ui.anime
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
 import app.soulcramer.arn.repository.AnimeRepository
-import app.soulcramer.arn.util.AbsentLiveData
-import app.soulcramer.arn.vo.Resource
-import app.soulcramer.arn.vo.anime.Anime
+import app.soulcramer.arn.ui.anime.MangaDetailsContext.Action
+import app.soulcramer.arn.ui.anime.MangaDetailsContext.Action.LoadMangaInformations
+import app.soulcramer.arn.ui.anime.MangaDetailsContext.State
+import app.soulcramer.arn.ui.common.BaseViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class AnimeDetailViewModel(
-    animeRepository: AnimeRepository
-) : ViewModel() {
+    private val animeRepository: AnimeRepository,
+    private val animeId: String
+) : BaseViewModel<Action, State>(State()) {
 
-    private val _animeId = MutableLiveData<String>()
-    val animeId: LiveData<String>
-        get() = _animeId
-    val anime: LiveData<Resource<Anime>> = Transformations.switchMap(_animeId) { id ->
-        if (id == null) {
-            AbsentLiveData.create()
-        } else {
-            animeRepository.loadAnimeById(id)
+    private suspend fun loadAnimeInformations() {
+        //        updateState { state ->
+        //            state.copy(
+        //                isLoading = true
+        //            )
+        //        }
+        val anime = withContext(Dispatchers.IO) {
+            animeRepository.loadAnimeById(animeId)
+        }
+
+        if (anime != null) {
+            updateState { state ->
+                state.copy(
+                    title = anime.title.canonical,
+                    genres = anime.genres,
+                    poster = "https://media.notify.moe/images/anime/medium/${anime.id}@2.webp",
+                    type = anime.type,
+                    summary = anime.summary
+                )
+            }
         }
     }
 
-    fun setAnimeId(id: String?) {
-        if (_animeId.value != id) {
-            _animeId.value = id
+    override suspend fun onHandle(action: Action) {
+        when (action) {
+            is LoadMangaInformations -> loadAnimeInformations()
         }
     }
 }

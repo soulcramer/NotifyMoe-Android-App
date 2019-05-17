@@ -6,15 +6,22 @@
 
     <data>
 
-        <import type="app.soulcramer.arn.vo.anime.Anime" />
+        <variable
+            name="title"
+            type="CharSequence" />
 
         <variable
-            name="anime"
-            type="Anime" />
+            name="genresString"
+            type="CharSequence" />
 
         <variable
-            name="textCreator"
-            type="app.soulcramer.arn.ui.anime.AnimeDetailsTextCreator" />
+            name="genresContentDescription"
+            type="CharSequence" />
+
+        <variable
+            name="summary"
+            type="CharSequence" />
+
     </data>
 
     <app.soulcramer.arn.ui.common.statefulview.StatefulView
@@ -53,7 +60,7 @@
                     android:layout_marginStart="@dimen/spacing_large"
                     android:layout_marginEnd="@dimen/spacing_large"
                     android:ellipsize="end"
-                    android:text="@{textCreator.showTitle(anime)}"
+                    android:text="@{title}"
                     android:textAppearance="?attr/textAppearanceHeadline6"
                     android:textIsSelectable="true"
                     app:layout_constraintBottom_toBottomOf="@+id/poster"
@@ -72,9 +79,9 @@
                     android:layout_marginStart="@dimen/spacing_large"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="@dimen/spacing_large"
-                    android:contentDescription="@{textCreator.genreContentDescription(anime.genres)}"
+                    android:contentDescription="@{genresContentDescription}"
                     android:ellipsize="end"
-                    android:text="@{textCreator.genreString(anime.genres)}"
+                    android:text="@{genresString}"
                     android:textAppearance="?attr/textAppearanceCaption"
                     android:textColor="#000000"
                     app:layout_constraintBottom_toTopOf="@+id/synopsis"
@@ -92,7 +99,7 @@
                     android:background="?android:selectableItemBackground"
                     android:ellipsize="end"
                     android:padding="@dimen/spacing_large"
-                    android:text="@{anime.summary}"
+                    android:text="@{summary}"
                     android:textAppearance="?attr/textAppearanceBody2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

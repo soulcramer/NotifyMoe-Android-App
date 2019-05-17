@@ -13,32 +13,18 @@ androidExtensions {
 
 android {
 
-    compileSdkVersion buildConfig.compileSdk
+    compileSdkVersion BuildConfigs.compileSdk
 
     defaultConfig {
         applicationId "app.soulcramer.arn"
-        minSdkVersion buildConfig.minSdk
-        targetSdkVersion buildConfig.targetSdk
+        minSdkVersion BuildConfigs.minSdk
+        targetSdkVersion BuildConfigs.targetSdk
         versionCode 1
         versionName "0.0.1"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         resConfigs "en", "fr"
     }
 
-    signingConfigs {
-        config {
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storePassword 'android'
-            storeFile file('../keystore/debug.keystore')
-        }
-        release {
-            keyAlias ''
-            keyPassword ''
-            storeFile file('../keystore/release.keystore')
-            storePassword ''
-        }
-    }
 
     dataBinding {
         enabled = true
@@ -95,62 +81,53 @@ android {
             shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.release
+            signingConfig signingConfigs.debug
         }
     }
 }
 
 dependencies {
     // Kotlin JDK
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${versions.kotlin}"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+    implementation Libraries.kotlinStandardLibrary
+    implementation Libraries.kotlinCoroutines
+
+    implementation project(Modules.core)
+    implementation project(Modules.repository)
+    implementation project(Modules.model)
 
 
     // AndroidX
-    implementation "androidx.activity:activity-ktx:${versions.androidx.activity}"
-    implementation "androidx.fragment:fragment-ktx:${versions.androidx.fragment}"
-    implementation "androidx.lifecycle:lifecycle-extensions:${versions.androidx.lifecycle}"
-    implementation "androidx.navigation:navigation-fragment-ktx:${versions.androidx.navigation}"
-    implementation "androidx.navigation:navigation-ui-ktx:${versions.androidx.navigation}"
-    implementation "androidx.recyclerview:recyclerview:${versions.androidx.recyclerview}"
-    implementation "androidx.recyclerview:recyclerview:${versions.androidx.recyclerview}"
-    implementation "com.google.android.material:material:${versions.material}"
-    implementation "androidx.constraintlayout:constraintlayout:${versions.androidx.constraint_layout}"
-    implementation "androidx.core:core-ktx:${versions.androidx.core_ktx}"
-    implementation "androidx.room:room-runtime:${versions.androidx.room}"
-    kapt "androidx.room:room-compiler:${versions.androidx.room}"
-    implementation "androidx.room:room-ktx:${versions.androidx.room}"
-    implementation "androidx.emoji:emoji:${versions.androidx.emoji}"
+    implementation LibrariesAndroidX.activity
+    implementation LibrariesAndroidX.fragment
+    implementation LibrariesAndroidX.navigationFragment
+    implementation LibrariesAndroidX.navigationUi
+    implementation LibrariesAndroidX.recyclerView
+    implementation LibrariesAndroidX.materialComponent
+    implementation LibrariesAndroidX.constraintLayout
+    implementation LibrariesAndroidX.core
+    implementation LibrariesAndroidX.lifecycle
+    implementation LibrariesAndroidX.emoji
 
-    implementation "com.jakewharton.threetenabp:threetenabp:${versions.threetenabp}"
-    implementation "org.threeten:threetenbp:${versions.threetenbp}:no-tzdb"
+    implementation Libraries.threetenbp
+    implementation Libraries.threetenabp
 
     // DI
-    implementation "org.koin:koin-core:${versions.koin}"
-    implementation "org.koin:koin-android:${versions.koin}"
-    implementation "org.koin:koin-androidx-scope:${versions.koin}"
-    implementation "org.koin:koin-androidx-viewmodel:${versions.koin}"
 
-    implementation "com.mikepenz:fastadapter:${versions.fast_adapter}"
-    implementation "com.mikepenz:fastadapter-commons:${versions.fast_adapter}"
-    implementation "com.mikepenz:fastadapter-extensions-expandable:${versions.fast_adapter}"
-    implementation "com.mikepenz:fastadapter-extensions:${versions.fast_adapter}"
+    implementation Libraries.koinAndroidXScope
+    implementation Libraries.koinViewModel
+
+    implementation Libraries.fastAdapter
+    implementation Libraries.fastAdapterCommons
+    implementation Libraries.fastAdapterExtensions
+    implementation Libraries.fastAdapterExpandable
 
     // Leak Canary
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:${versions.leakcanary}"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:${versions.leakcanary}"
+    debugImplementation Libraries.leackCanary
 
-    implementation "com.github.bumptech.glide:glide:${versions.glide}"
-    implementation "com.github.bumptech.glide:annotations:${versions.glide}"
-    kapt "com.github.bumptech.glide:compiler:${versions.glide}"
+    implementation Libraries.glide
+    implementation Libraries.glideAnnotation
+    kapt Libraries.glideCompiler
 
-    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
-    implementation "com.squareup.retrofit2:retrofit-mock:${versions.retrofit}"
-    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
-
-    implementation "com.github.bumptech.glide:okhttp3-integration:${versions.glide}"
-    implementation "com.github.ajalt:timberkt:${versions.timberkt}"
-
+    implementation Libraries.glideOkhttp
+    implementation Libraries.timberKt
 }
