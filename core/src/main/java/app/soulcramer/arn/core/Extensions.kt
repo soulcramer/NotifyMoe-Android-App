@@ -2,13 +2,9 @@ package app.soulcramer.arn.core
 
 import android.content.Context
 import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
-import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
@@ -29,15 +25,6 @@ fun <T> lazyFast(operation: () -> T): Lazy<T> = lazy(LazyThreadSafetyMode.NONE) 
 inline fun consume(f: () -> Unit): Boolean {
     f()
     return true
-}
-
-/**
- * Allows calls like
- *
- * `viewGroup.inflate(R.layout.foo)`
- */
-fun ViewGroup.inflate(@LayoutRes layout: Int, attachToRoot: Boolean = false): View {
-    return LayoutInflater.from(context).inflate(layout, this, attachToRoot)
 }
 
 // region LiveData
