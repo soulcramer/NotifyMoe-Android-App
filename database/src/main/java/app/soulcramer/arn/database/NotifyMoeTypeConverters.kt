@@ -1,9 +1,9 @@
 package app.soulcramer.arn.database
 
 import androidx.room.TypeConverter
-import java.time.Instant
-import java.time.OffsetDateTime
-import java.time.format.DateTimeFormatter
+import org.threeten.bp.Instant
+import org.threeten.bp.OffsetDateTime
+import org.threeten.bp.format.DateTimeFormatter
 
 object NotifyMoeTypeConverters {
     private val formatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME

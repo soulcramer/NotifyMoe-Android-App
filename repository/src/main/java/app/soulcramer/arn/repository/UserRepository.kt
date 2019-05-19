@@ -56,7 +56,7 @@ class UserRepository(
             try {
                 val nickResponse = service.getUserIdByNick(nick).await()
                 if (nickResponse.isSuccessful) {
-                    //                    loadUserById(nickResponse, dispatchResult)
+                    loadUserById(nickResponse, dispatchResult)
                 } else {
                     dispatchResult.postValue(ApiErrorResponse(nickResponse.message()))
                 }
