@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import app.soulcramer.arn.database.UserDao
 import app.soulcramer.arn.model.Resource
+import app.soulcramer.arn.model.user.NickToUser
 import app.soulcramer.arn.model.user.User
 import app.soulcramer.arn.service.ApiErrorResponse
 import app.soulcramer.arn.service.ApiResponse
@@ -11,6 +12,7 @@ import app.soulcramer.arn.service.NotifyMoeService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import retrofit2.Response
 
 /**
  * Repository that handles User objects.
@@ -66,16 +68,12 @@ class UserRepository(
         }
         return dispatchResult
     }
-    //
-    //    private suspend fun loadUserById(
-    //        nickResponse: Response<NickToUser>,
-    //        dispatchResult: MutableLiveData<ApiResponse<User>>
-    //    ) {
-    //        val idResponse = service.getUserByIdK(nickResponse.body()?.userId!!).await()
-    //        if (idResponse.isSuccessful) {
-    //            dispatchResult.postValue(ApiResponse.create(idResponse))
-    //        } else {
-    //            dispatchResult.postValue(ApiResponse.create(idResponse))
-    //        }
-    //    }
+
+    private suspend fun loadUserById(
+        nickResponse: Response<NickToUser>,
+        dispatchResult: MutableLiveData<ApiResponse<User>>
+    ) {
+        val idResponse = service.getUserByIdK(nickResponse.body()?.userId!!).await()
+        dispatchResult.postValue(ApiResponse.create(idResponse))
+    }
 }
