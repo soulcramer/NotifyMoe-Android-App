@@ -7,12 +7,13 @@ object Modules {
 
     val database = ":database"
 
-    val repository = ":repository"
+    val data = ":data"
+    val domain = ":domain"
 }
 
 object Versions {
     val kotlin = "1.3.31"
-    val android_gradle = "3.5.0-beta01"
+    val android_gradle = "3.5.0-beta02"
 
     val activity = "1.0.0-alpha08"
     val appcompat = "1.1.0-aplha04"
@@ -26,6 +27,7 @@ object Versions {
     val fragment = "1.1.0-alpha09"
     val emoji = "1.0.0"
     val lifecycle = "2.2.0-alpha01"
+    val livedata = "2.2.0-alpha01"
     val multidex = "2.0.1"
     val navigation = "2.1.0-alpha04"
     val paging = "2.1.0"
@@ -58,6 +60,27 @@ object Versions {
     val timberkt = "1.5.1"
     val threetenabp = "1.2.0"
     val threetenbp = "1.4.0"
+
+    object Test {
+        // Core library
+        val core = "1.0.0"
+
+        // AndroidJUnitRunner and JUnit Rules
+        val runner = "1.1.0"
+        val rules = "1.1.0"
+
+        // Assertions
+        val junitKtx = "1.0.0"
+        val truthKtx = "1.0.0"
+        val truth = "0.42"
+
+        // Espresso dependencies
+        val espresso = "3.1.0"
+
+        val robolectric = "4.0"
+        val mockk = "1.9.3"
+
+    }
 
 }
 
@@ -96,6 +119,38 @@ object Libraries {
     val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
 
+    object Test {
+        // Core library
+        val core = "androidx.test:core:${Versions.Test.core}"
+
+        // AndroidJUnitRunner and JUnit Rules
+        val runner = "androidx.test:runner:${Versions.Test.runner}"
+        val rules = "androidx.test:rules:${Versions.Test.rules}"
+
+        // Assertions
+        val junitKtx = "androidx.test.ext:junit:${Versions.Test.junitKtx}"
+        val truthKtx = "androidx.test.ext:truth:${Versions.Test.truthKtx}"
+        val truth = "com.google.truth:truth:${Versions.Test.truth}"
+
+        // Espresso dependencies
+        val espressoCore = "androidx.test.espresso:espresso-core:${Versions.Test.espresso}"
+        val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.Test.espresso}"
+        val espressoIntents = "androidx.test.espresso:espresso-intents:${Versions.Test.espresso}"
+        val espressoAccessibility = "androidx.test.espresso:espresso-accessibility:${Versions.Test.espresso}"
+        val espressoWeb = "androidx.test.espresso:espresso-web:${Versions.Test.espresso}"
+        val espressoIdlingConcurent = "androidx.test.espresso.idling:idling-concurrent:${Versions.Test.espresso}"
+
+        // The following Espresso dependency can be either "implementation"
+        // or "androidTestImplementation", depending on whether you want the
+        // dependency to appear on your APK's compile classpath or the test APK
+        // classpath.
+        val espressoIdlingRes = "androidx.test.espresso:espresso-idling-resource:${Versions.Test.espresso}"
+
+        val robolectric = "org.robolectric:robolectric:${Versions.Test.robolectric}"
+
+        val mockk = "io.mockk:mockk:${Versions.Test.mockk}"
+    }
+
 }
 
 object LibrariesAndroidX {
@@ -107,6 +162,7 @@ object LibrariesAndroidX {
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
     val core = "androidx.core:core-ktx:${Versions.core_ktx}"
     val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    val livedata = "androidx.lifecycle:lifecycle-livedata:${Versions.livedata}"
     val emoji = "androidx.emoji:emoji:${Versions.emoji}"
     val room = "androidx.room:room-ktx:${Versions.room}"
     val roomRuntime = "androidx.room:room-runtime:${Versions.room}"

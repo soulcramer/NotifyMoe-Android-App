@@ -1,4 +1,4 @@
-package app.soulcramer.arn.repository
+package app.soulcramer.arn.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <uses-library
+            android:name="android.test.runner"
+            android:required="false" />
         <activity
             android:name="app.soulcramer.arn.ui.HomeActivity"
             android:launchMode="singleTop">

@@ -1,6 +1,6 @@
 package app.soulcramer.arn.ui.anime
 
-import app.soulcramer.arn.repository.AnimeRepository
+import app.soulcramer.arn.data.AnimeRepository
 import app.soulcramer.arn.ui.anime.MangaDetailsContext.Action
 import app.soulcramer.arn.ui.anime.MangaDetailsContext.Action.LoadMangaInformations
 import app.soulcramer.arn.ui.anime.MangaDetailsContext.State

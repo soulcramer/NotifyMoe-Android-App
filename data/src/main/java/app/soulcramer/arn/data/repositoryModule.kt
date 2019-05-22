@@ -1,4 +1,4 @@
-package app.soulcramer.arn.repository
+package app.soulcramer.arn.data
 
 import app.soulcramer.arn.database.databaseModule
 import app.soulcramer.arn.service.serviceModule

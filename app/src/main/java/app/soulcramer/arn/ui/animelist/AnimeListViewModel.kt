@@ -5,13 +5,13 @@ import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
+import app.soulcramer.arn.data.AnimeListRepository
+import app.soulcramer.arn.data.AnimeRepository
 import app.soulcramer.arn.model.Error
 import app.soulcramer.arn.model.Loading
 import app.soulcramer.arn.model.Resource
 import app.soulcramer.arn.model.Success
 import app.soulcramer.arn.model.animelist.MappedAnimeItem
-import app.soulcramer.arn.repository.AnimeListRepository
-import app.soulcramer.arn.repository.AnimeRepository
 import app.soulcramer.arn.util.AbsentLiveData
 
 class AnimeListViewModel(

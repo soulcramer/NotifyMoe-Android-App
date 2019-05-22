@@ -68,7 +68,7 @@ dependencies {
     implementation(Libraries.kotlinCoroutines)
 
     implementation(project(Modules.core))
-    implementation(project(Modules.repository))
+    implementation(project(Modules.data))
     implementation(project(Modules.model))
 
     // AndroidX

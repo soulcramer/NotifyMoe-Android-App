@@ -31,6 +31,7 @@ dependencies {
     implementation(Libraries.kotlinCoroutines)
 
     implementation(project(Modules.core))
+    implementation(project(Modules.domain))
     implementation(project(Modules.database))
     implementation(project(Modules.service))
     api(project(Modules.model))

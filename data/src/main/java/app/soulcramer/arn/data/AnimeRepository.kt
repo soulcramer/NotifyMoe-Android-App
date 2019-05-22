@@ -1,4 +1,4 @@
-package app.soulcramer.arn.repository
+package app.soulcramer.arn.data
 
 import app.soulcramer.arn.database.AnimeDao
 import app.soulcramer.arn.model.anime.Anime

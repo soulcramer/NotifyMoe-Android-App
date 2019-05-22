@@ -1,8 +1,8 @@
 package app.soulcramer.arn
 
 import android.app.Application
+import app.soulcramer.arn.data.repositoryModules
 import app.soulcramer.arn.di.appModule
-import app.soulcramer.arn.repository.repositoryModules
 import com.github.ajalt.timberkt.Timber
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.Dispatchers
