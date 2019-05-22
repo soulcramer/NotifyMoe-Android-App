@@ -16,7 +16,7 @@ open class UserRemoteDataStore(private val userRemote: UserRemote) :
     }
 
     /**
-     * Retrieve a list of [BufferooEntity] instances from the API
+     * Retrieve a [UserEntity] instances from the API
      */
     override fun getUser(userId: String): UserEntity {
         return userRemote.getUser(userId)

@@ -6,7 +6,6 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import app.soulcramer.arn.model.Resource
 import app.soulcramer.arn.model.user.User
-import app.soulcramer.arn.repository.UserRepository
 import app.soulcramer.arn.util.AbsentLiveData
 
 class UserViewModel(userRepository: UserRepository) : ViewModel() {

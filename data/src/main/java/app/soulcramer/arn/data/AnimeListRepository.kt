@@ -7,9 +7,9 @@ import app.soulcramer.arn.database.AnimeListDao
 import app.soulcramer.arn.model.Resource
 import app.soulcramer.arn.model.animelist.AnimeListItem
 import app.soulcramer.arn.model.animelist.MappedAnimeItem
-import app.soulcramer.arn.service.ApiResponse
-import app.soulcramer.arn.service.ApiSuccessResponse
-import app.soulcramer.arn.service.NotifyMoeService
+import app.soulcramer.arn.remote.ApiResponse
+import app.soulcramer.arn.remote.ApiSuccessResponse
+import app.soulcramer.arn.remote.NotifyMoeService
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async

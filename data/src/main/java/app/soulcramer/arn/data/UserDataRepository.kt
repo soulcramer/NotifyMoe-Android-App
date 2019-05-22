@@ -1,5 +1,9 @@
 package app.soulcramer.arn.data
 
+import app.soulcramer.arn.data.mapper.UserMapper
+import app.soulcramer.arn.data.model.UserEntity
+import app.soulcramer.arn.data.source.UserDataStoreFactory
+import app.soulcramer.arn.data.source.UserRemoteDataStore
 import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.domain.repository.UserRepository
 
@@ -12,19 +16,19 @@ class UserDataRepository(
     private val userMapper: UserMapper) : UserRepository {
 
     override fun getUser(userId: String): User {
-        val dataStore = factory.retrieveDataStore().getUser(userId)
+        val dataStore = factory.retrieveDataStore()
         return dataStore.getUser(userId).let {
             if (dataStore is UserRemoteDataStore) {
                 saveUserEntity(it)
             }
             it
-        }.run { user ->
+        }.let { user ->
             userMapper.mapFromEntity(user)
         }
     }
 
-    private fun saveUserEntity(user: UserEntity): Completable {
-        return factory.retrieveCacheDataStore().saveUSer(user)
+    private fun saveUserEntity(user: UserEntity) {
+        return factory.retrieveCacheDataStore().saveUser(user)
     }
 
 }

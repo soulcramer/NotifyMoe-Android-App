@@ -6,10 +6,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import app.soulcramer.arn.core.setValueIfNew
 import app.soulcramer.arn.model.Resource
-import app.soulcramer.arn.service.ApiEmptyResponse
-import app.soulcramer.arn.service.ApiErrorResponse
-import app.soulcramer.arn.service.ApiResponse
-import app.soulcramer.arn.service.ApiSuccessResponse
+import app.soulcramer.arn.remote.ApiEmptyResponse
+import app.soulcramer.arn.remote.ApiErrorResponse
+import app.soulcramer.arn.remote.ApiResponse
+import app.soulcramer.arn.remote.ApiSuccessResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch

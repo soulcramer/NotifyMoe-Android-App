@@ -3,7 +3,6 @@ package app.soulcramer.arn.ui.dashboard
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import app.soulcramer.arn.repository.UserRepository
 
 class DashboardViewModel(userRepository: UserRepository) : ViewModel() {
     private val _nick = MutableLiveData<String>()

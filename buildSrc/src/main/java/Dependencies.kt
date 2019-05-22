@@ -3,7 +3,7 @@ object Modules {
     val model = ":model"
 
     val core = ":core"
-    val service = ":service"
+    val remote = ":remote"
 
     val database = ":database"
 

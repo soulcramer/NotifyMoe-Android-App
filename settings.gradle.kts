@@ -1,1 +1,1 @@
-include(":app", ":data", ":database", ":service", ":core", ":model", ":domain")
+include(":app", ":data", ":database", ":remote", ":core", ":model", ":domain")

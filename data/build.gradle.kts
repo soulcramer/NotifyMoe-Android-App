@@ -33,16 +33,20 @@ dependencies {
     implementation(project(Modules.core))
     implementation(project(Modules.domain))
     implementation(project(Modules.database))
-    implementation(project(Modules.service))
+    implementation(project(Modules.remote))
     api(project(Modules.model))
 
     implementation(Libraries.retrofit)
     implementation(Libraries.koin)
 
     implementation(LibrariesAndroidX.core)
+    implementation(LibrariesAndroidX.livedata)
 
-    testImplementation("junit:junit:4.12")
-    androidTestImplementation("androidx.test.ext:junit:1.1.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0-alpha01")
+
+    testImplementation(Libraries.Test.core)
+    testImplementation(Libraries.Test.runner)
+    testImplementation(Libraries.Test.truth)
+    testImplementation(Libraries.Test.truthKtx)
+    testImplementation(Libraries.Test.robolectric)
+    testImplementation(Libraries.Test.mockk)
 }
