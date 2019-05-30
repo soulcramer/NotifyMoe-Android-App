@@ -36,22 +36,21 @@ class UserFragment : Fragment() {
     }
 
     private fun onStatusChanged(status: Status) {
-        TODO("not implemented")
     }
 
     private fun onRoleChanged(role: String) {
-        TODO("not implemented")
+        binding.role = role
     }
 
     private fun onNameChanged(name: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        binding.nickname = name
     }
 
     private fun onCoverChanged(coverUrl: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        binding.cover = coverUrl
     }
 
     private fun onAvatarChanged(avatarUrl: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        binding.avatar = avatarUrl
     }
 }

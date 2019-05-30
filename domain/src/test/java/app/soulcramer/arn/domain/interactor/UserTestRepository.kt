@@ -1,8 +1,8 @@
 package app.soulcramer.arn.domain.interactor
 
 import app.soulcramer.arn.domain.model.User
-import app.soulcramer.arn.domain.model.UserFactory
 import app.soulcramer.arn.domain.repository.UserRepository
+import app.soulcramer.arn.domain.test.factory.UserFactory
 
 class UserTestRepository : UserRepository {
 

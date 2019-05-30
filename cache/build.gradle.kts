@@ -42,6 +42,7 @@ kapt {
 }
 
 dependencies {
+    implementation(project(Modules.core))
     implementation(project(Modules.data))
 
     // Kotlin

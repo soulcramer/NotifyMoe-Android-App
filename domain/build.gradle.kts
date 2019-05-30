@@ -40,6 +40,8 @@ android {
 }
 
 dependencies {
+    implementation(project(Modules.core))
+
     implementation(Libraries.kotlinStandardLibrary)
     implementation(Libraries.kotlinCoroutines)
 

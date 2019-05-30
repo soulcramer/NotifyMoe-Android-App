@@ -1,4 +1,4 @@
-package app.soulcramer.arn.data.test.factory
+package app.soulcramer.arn.core.test.factory
 
 import java.util.concurrent.ThreadLocalRandom
 

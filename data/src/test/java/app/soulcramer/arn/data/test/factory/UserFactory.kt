@@ -1,7 +1,7 @@
 package app.soulcramer.arn.data.test.factory
 
+import app.soulcramer.arn.core.test.factory.DataFactory.Factory.randomUuid
 import app.soulcramer.arn.data.model.UserEntity
-import app.soulcramer.arn.data.test.factory.DataFactory.Factory.randomUuid
 import app.soulcramer.arn.domain.model.User
 
 /**

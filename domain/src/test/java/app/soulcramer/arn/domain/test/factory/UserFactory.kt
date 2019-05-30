@@ -1,6 +1,7 @@
-package app.soulcramer.arn.domain.model
+package app.soulcramer.arn.domain.test.factory
 
-import app.soulcramer.arn.data.test.factory.DataFactory.Factory.randomUuid
+import app.soulcramer.arn.core.test.factory.DataFactory.Factory.randomUuid
+import app.soulcramer.arn.domain.model.User
 
 /**
  * Factory class for User related instances

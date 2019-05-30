@@ -40,6 +40,7 @@ android {
 dependencies {
 
     implementation(project(Modules.data))
+    implementation(project(Modules.core))
 
     implementation(Libraries.koin)
 
