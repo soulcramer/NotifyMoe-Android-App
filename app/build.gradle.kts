@@ -1,5 +1,8 @@
+import com.android.build.gradle.internal.dsl.TestOptions
+
 plugins {
     id("com.android.application")
+    id("jacoco")
     kotlin("android")
     id("kotlin-android-extensions")
     kotlin("kapt")
@@ -55,7 +58,17 @@ android {
             isMinifyEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("debug")
+            isTestCoverageEnabled = true
         }
+    }
+
+    testOptions {
+        execution = "ANDROID_TEST_ORCHESTRATOR"
+        animationsDisabled = true
+
+        unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
+            setIncludeAndroidResources(true)
+        })
     }
 }
 
@@ -111,4 +124,46 @@ dependencies {
 
 fun <T> propOrDef(propertyName: String, defaultValue: T): T {
     return if (hasProperty(propertyName)) property(propertyName) as T else defaultValue
+}
+
+
+jacoco {
+    toolVersion = "0.8.0"
+}
+
+tasks.withType(Test::class.java) {
+    configure<JacocoTaskExtension> {
+        isIncludeNoLocationClasses = true
+    }
+}
+
+tasks.register<JacocoReport>("jacocoTestReport") {
+
+    dependsOn("testDebugUnitTest")
+    group = "reporting"
+    description = "Generate Jacoco coverage reports for the debug build."
+
+    reports {
+        xml.isEnabled = true
+        html.isEnabled = true
+    }
+
+    val fileFilter = mutableSetOf("**/R.class",
+        "**/R$*.class",
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        "**/*Test*.*",
+        "android/**/*.*")
+    val debugTree = fileTree("${project.buildDir}/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    }
+
+    val mainSrc = "${project.projectDir}/src/main/java"
+
+    sourceDirectories.setFrom(files(mainSrc))
+    classDirectories.setFrom(files(debugTree))
+
+    executionData.setFrom(fileTree(project.buildDir) {
+        include("jacoco/testDebugUnitTest.exec", "outputs/code-coverage/connected/*coverage.ec")
+    })
 }
