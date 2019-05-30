@@ -27,7 +27,7 @@ android {
 
 dependencies {
 
-    implementation(project(Modules.model))
+    implementation(project(Modules.data))
 
     implementation(Libraries.koin)
 
@@ -35,12 +35,15 @@ dependencies {
     implementation(Libraries.retrofitGson)
     implementation(Libraries.okhttpLogging)
 
-    implementation(LibrariesAndroidX.lifecycle)
+    implementation(LibrariesAndroidX.livedata)
 
 
     implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
 
-    testImplementation("junit:junit:4.12")
-    androidTestImplementation("androidx.test.ext:junit:1.1.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
+    testImplementation(Libraries.Test.core)
+    testImplementation(Libraries.Test.runner)
+    testImplementation(Libraries.Test.truth)
+    testImplementation(Libraries.Test.truthKtx)
+    testImplementation(Libraries.Test.robolectric)
+    testImplementation(Libraries.Test.mockk)
 }

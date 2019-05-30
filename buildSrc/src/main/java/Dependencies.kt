@@ -5,7 +5,7 @@ object Modules {
     val core = ":core"
     val remote = ":remote"
 
-    val database = ":database"
+    val cache = ":cache"
 
     val data = ":data"
     val domain = ":domain"
@@ -27,7 +27,6 @@ object Versions {
     val fragment = "1.1.0-alpha09"
     val emoji = "1.0.0"
     val lifecycle = "2.2.0-alpha01"
-    val livedata = "2.2.0-alpha01"
     val multidex = "2.0.1"
     val navigation = "2.1.0-alpha04"
     val paging = "2.1.0"
@@ -162,7 +161,7 @@ object LibrariesAndroidX {
     val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
     val core = "androidx.core:core-ktx:${Versions.core_ktx}"
     val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
-    val livedata = "androidx.lifecycle:lifecycle-livedata:${Versions.livedata}"
+    val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     val emoji = "androidx.emoji:emoji:${Versions.emoji}"
     val room = "androidx.room:room-ktx:${Versions.room}"
     val roomRuntime = "androidx.room:room-runtime:${Versions.room}"

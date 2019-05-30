@@ -1,8 +1,8 @@
 package app.soulcramer.arn.domain.interactor
 
+import app.soulcramer.arn.domain.interactor.Result.Error
+import app.soulcramer.arn.domain.interactor.Result.Success
 import app.soulcramer.arn.domain.repository.UserRepository
-import app.soulcramer.arn.model.Result.Error
-import app.soulcramer.arn.model.Result.Success
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -39,11 +39,12 @@ class GetUserTest {
     @Test
     fun `Given existant user When getting the user by id Then return user`() {
         runBlocking {
-            val result = getUser.executeNow("1")
+            val testUser = (testUserRepository as UserTestRepository).users[0]
+            val result = getUser.executeNow(testUser.id)
             assertThat(result).isInstanceOf(Success::class.java)
 
             val user = (result as Success).data
-            assertThat(user.name).isEqualTo("user 1")
+            assertThat(user.name).isEqualTo(testUser.name)
         }
     }
 }

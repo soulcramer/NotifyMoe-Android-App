@@ -48,6 +48,7 @@ android {
             versionNameSuffix = "-debug"
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
             signingConfig = signingConfigs.getByName("debug")
+            isTestCoverageEnabled = true
         }
         getByName("release") {
             isShrinkResources = true
@@ -68,8 +69,10 @@ dependencies {
     implementation(Libraries.kotlinCoroutines)
 
     implementation(project(Modules.core))
+    implementation(project(Modules.domain))
     implementation(project(Modules.data))
-    implementation(project(Modules.model))
+    implementation(project(Modules.cache))
+    implementation(project(Modules.remote))
 
     // AndroidX
     implementation(LibrariesAndroidX.activity)

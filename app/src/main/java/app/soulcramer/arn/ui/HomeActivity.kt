@@ -22,10 +22,7 @@ class HomeActivity : AppCompatActivity() {
     private var toolbar: Toolbar? = null
 
     private val bottomNavDestinations: Set<Int> = setOf(
-        R.id.dashboardFragment,
-        R.id.profileFragment,
-        R.id.animeListFragment,
-        R.id.settingsFragment
+        R.id.profileFragment
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,10 +55,7 @@ class HomeActivity : AppCompatActivity() {
     private fun setupBottomNavigationBar() {
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
-        val navGraphIds = listOf(R.navigation.nav_list,
-            R.navigation.nav_dashboard,
-            R.navigation.nav_profile,
-            R.navigation.nav_settings)
+        val navGraphIds = listOf(R.navigation.nav_profile)
 
         // Setup the bottom navigation view with a list of navigation graphs
         val controller = bottomNavigationView.setupWithNavController(

@@ -1,47 +1,33 @@
 package app.soulcramer.arn.ui.user
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
-import app.soulcramer.arn.model.Resource
-import app.soulcramer.arn.model.user.User
-import app.soulcramer.arn.util.AbsentLiveData
+import app.soulcramer.arn.domain.interactor.Error
+import app.soulcramer.arn.domain.interactor.GetUser
+import app.soulcramer.arn.domain.interactor.Result.Success
+import app.soulcramer.arn.domain.model.User
+import app.soulcramer.arn.ui.common.BaseViewModel
+import app.soulcramer.arn.ui.user.UserContext.Action
+import app.soulcramer.arn.ui.user.UserContext.Action.LoadUser
+import app.soulcramer.arn.ui.user.UserContext.State
 
-class UserViewModel(userRepository: UserRepository) : ViewModel() {
-    private val _nickname = MutableLiveData<String>()
-    val nickname: LiveData<String>
-        get() = _nickname
+class UserViewModel(private val getUser: GetUser) : BaseViewModel<Action, State>(State()) {
 
-    val user: LiveData<Resource<User>> = getUserLiveData(userRepository)
-
-    val userId: LiveData<String> = Transformations.switchMap(user) { resource ->
-        MutableLiveData<String>().also {
-            it.value = resource.data?.id
-
-        }
-    }
-
-    private fun getUserLiveData(
-        userRepository: UserRepository): LiveData<Resource<User>> {
-        return Transformations.switchMap(_nickname) { nick ->
-            if (nick == null) {
-                AbsentLiveData.create()
-            } else {
-                userRepository.loadUserByNickName(nick)
+    override suspend fun onHandle(action: Action) {
+        when (action) {
+            is LoadUser -> {
+                val result = getUser.executeNow(action.userId)
+                updateState { state ->
+                    if (result !is Success<User>) return@updateState state.copy(status = Error)
+                    val user = result.data
+                    state.copy(
+                        title = user.title,
+                        name = user.name,
+                        avatar = user.avatar,
+                        cover = user.cover,
+                        status = app.soulcramer.arn.domain.interactor.Success
+                    )
+                }
             }
         }
-    }
-
-    fun setNickname(nickname: String?) {
-        if (_nickname.value != nickname) {
-            _nickname.value = nickname
-        }
-    }
-
-    fun retry() {
-        _nickname.value?.let {
-            _nickname.value = it
-        }
+        // No action defined yet
     }
 }

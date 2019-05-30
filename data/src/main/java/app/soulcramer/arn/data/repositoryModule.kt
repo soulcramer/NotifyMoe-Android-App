@@ -1,22 +1,11 @@
 package app.soulcramer.arn.data
 
-import app.soulcramer.arn.database.databaseModule
-import app.soulcramer.arn.remote.serviceModule
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-private val repositoryModule: Module = module {
+private val dataModule: Module = module {
 
-    //    factory {
-    //        AnimeListRepository(get(), get(), get())
-    //    }
-    //
-    //    factory {
-    //        UserRepository(get(), get())
-    //    }
-    //
-    //    factory {
-    //        AnimeRepository(get(), get())
-    //    }
+    factory {
+        UserDataRepository(get(), get())
+    }
 }
-val repositoryModules = listOf(repositoryModule, databaseModule, serviceModule)

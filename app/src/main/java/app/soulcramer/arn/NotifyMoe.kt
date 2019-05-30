@@ -1,8 +1,9 @@
 package app.soulcramer.arn
 
 import android.app.Application
-import app.soulcramer.arn.data.repositoryModules
+import app.soulcramer.arn.cache.cacheModule
 import app.soulcramer.arn.di.appModule
+import app.soulcramer.arn.remote.remoteModule
 import com.github.ajalt.timberkt.Timber
 import com.jakewharton.threetenabp.AndroidThreeTen
 import kotlinx.coroutines.Dispatchers
@@ -22,7 +23,7 @@ class NotifyMoe : Application() {
             // Android context
             androidContext(this@NotifyMoe)
             // modules
-            modules(appModule, *repositoryModules.toTypedArray())
+            modules(appModule, remoteModule, cacheModule)
         }
 
         // Init ThreeTenABP

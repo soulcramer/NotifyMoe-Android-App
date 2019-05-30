@@ -13,7 +13,7 @@ open class UserMapper : Mapper<UserEntity, User> {
      * Map a [UserEntity] instance to a [User] instance
      */
     override fun mapFromEntity(type: UserEntity): User {
-        return User(type.id, type.name, type.title, type.avatar, type.cover)
+        return User(type.id, type.nickname, type.role, type.avatar, type.cover)
     }
 
     /**

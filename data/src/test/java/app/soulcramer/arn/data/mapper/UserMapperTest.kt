@@ -35,8 +35,8 @@ class UserMapperTest {
     }
 
     private fun assertUserDataEquality(userFactoryEntity: UserEntity, user: User) {
-        assertEquals(userFactoryEntity.name, user.name)
-        assertEquals(userFactoryEntity.title, user.title)
+        assertEquals(userFactoryEntity.nickname, user.name)
+        assertEquals(userFactoryEntity.role, user.title)
         assertEquals(userFactoryEntity.avatar, user.avatar)
     }
 }
