@@ -20,7 +20,7 @@ abstract class UseCase<in P, R> {
      *
      */
     suspend operator fun invoke(parameters: P, result: MutableLiveData<Result<R>>) {
-        // result.value = Result.Loading TODO: add data to Loading to avoid glitches
+        // result.value = Result.Loading add data to Loading to avoid glitches
         try {
             withContext(dispatcher) {
                 try {

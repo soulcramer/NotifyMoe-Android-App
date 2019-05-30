@@ -139,7 +139,7 @@ tasks.withType(Test::class.java) {
 
 tasks.register<JacocoReport>("jacocoTestReport") {
 
-    dependsOn("testDebugUnitTest")
+    dependsOn("testDebugUnitTest", "createDebugCoverageReport")
     group = "reporting"
     description = "Generate Jacoco coverage reports for the debug build."
 

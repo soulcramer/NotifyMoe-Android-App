@@ -9,8 +9,6 @@ import app.soulcramer.arn.data.model.UserEntity
  */
 interface UserDataStore {
 
-    //    fun clearBufferoos(): Completable
-
     fun saveUser(user: UserEntity)
 
     fun getUser(userId: String): UserEntity

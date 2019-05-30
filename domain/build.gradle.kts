@@ -18,8 +18,13 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            isTestCoverageEnabled = true
+        }
+
         getByName("release") {
             isMinifyEnabled = true
+            isTestCoverageEnabled = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -70,7 +75,7 @@ tasks.withType(Test::class.java) {
 
 tasks.register<JacocoReport>("jacocoTestReport") {
 
-    dependsOn("testDebugUnitTest")
+    dependsOn("testDebugUnitTest", "createDebugCoverageReport")
     group = "reporting"
     description = "Generate Jacoco coverage reports for the debug build."
 

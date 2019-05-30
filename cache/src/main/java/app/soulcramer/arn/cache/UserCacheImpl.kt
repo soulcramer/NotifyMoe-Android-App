@@ -25,7 +25,7 @@ class UserCacheImpl(private val database: NotifyMoeDatabase,
      * Save the given list of [UserEntity] instances to the database.
      */
     override fun saveUser(user: UserEntity) {
-        return userDao.insertUsers(entityMapper.mapToCached(user))
+        return saveUser(entityMapper.mapToCached(user))
     }
 
     /**

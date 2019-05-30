@@ -11,21 +11,12 @@ import app.soulcramer.arn.data.repository.UserDataStore
 open class UserCacheDataStore(private val userCache: UserCache) :
     UserDataStore {
 
-    //    /**
-    //     * Clear all Bufferoos from the cache
-    //     */
-    //    override fun clearBufferoos(): Completable {
-    //        return bufferooCache.clearBufferoos()
-    //    }
-    //
     /**
      * Save a given [UserEntity] instance to the cache
      */
     override fun saveUser(user: UserEntity) {
         userCache.saveUser(user)
-        //            .doOnComplete {
-        //                userCache.setLastCacheTime(System.currentTimeMillis())
-        //            }
+        userCache.setLastCacheTime(System.currentTimeMillis())
     }
 
     /**
