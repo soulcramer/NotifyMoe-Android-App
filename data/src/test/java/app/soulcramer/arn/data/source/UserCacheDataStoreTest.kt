@@ -31,11 +31,9 @@ class UserCacheDataStoreTest {
     fun saveUserCompletes() {
         val testUserEntity = UserFactory.makeUserEntity()
         stubUserCacheSaveUser()
-        stubUserCacheGetUser(testUserEntity)
+        stubUserCacheLastCacheTime()
 
         userCacheDataStore.saveUser(testUserEntity)
-        val userEntity = userCacheDataStore.getUser(testUserEntity.id)
-        assertThat(userEntity).isSameAs(testUserEntity)
     }
     //</editor-fold>
 
@@ -58,6 +56,10 @@ class UserCacheDataStoreTest {
 
     private fun stubUserCacheGetUser(user: UserEntity) {
         every { userCache.getUser(any()) } returns user
+    }
+
+    private fun stubUserCacheLastCacheTime() {
+        every { userCache.setLastCacheTime(any()) } just Runs
     }
     //</editor-fold>
 }
