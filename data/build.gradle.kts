@@ -32,9 +32,6 @@ dependencies {
 
     implementation(project(Modules.core))
     implementation(project(Modules.domain))
-    implementation(project(Modules.database))
-    implementation(project(Modules.remote))
-    api(project(Modules.model))
 
     implementation(Libraries.retrofit)
     implementation(Libraries.koin)

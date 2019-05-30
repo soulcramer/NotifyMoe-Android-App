@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@id/nav_dashboard"
+        android:id="@+id/dashboard"
         android:icon="@drawable/ic_person_outline_black_24dp"
         android:title="Dashboard" />
     <item
@@ -10,12 +11,12 @@
         android:icon="@drawable/ic_person_outline_black_24dp"
         android:title="Profile" />
     <item
-        android:id="@id/nav_list"
+        android:id="@+id/list"
         android:icon="@drawable/ic_view_list_black_24dp"
         android:checked="true"
         android:title="List" />
     <item
-        android:id="@id/nav_settings"
+        android:id="@+id/settings"
         android:icon="@drawable/ic_settings_black_24dp"
         android:title="Settings" />
 </menu>

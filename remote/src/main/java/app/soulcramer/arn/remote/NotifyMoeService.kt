@@ -1,52 +1,34 @@
 package app.soulcramer.arn.remote
 
-import androidx.lifecycle.LiveData
-import app.soulcramer.arn.model.anime.Anime
-import app.soulcramer.arn.model.animelist.AnimeListItem
-import app.soulcramer.arn.model.user.NickToUser
-import app.soulcramer.arn.model.user.User
-import kotlinx.coroutines.Deferred
-import retrofit2.Response
+import app.soulcramer.arn.remote.model.UserModel
 import retrofit2.http.GET
 import retrofit2.http.Path
 
 /**
- * REST API access points
+ * Defines the abstract methods used for interacting with the NotifyMoe API
  */
 interface NotifyMoeService {
     /**
      * @param userId
      */
     @GET("api/user/{userId}")
-    fun getUserById(@Path("userId") userId: String): LiveData<ApiResponse<User>>
+    fun getUserById(@Path("userId") userId: String): ApiResponse<UserModel>
 
     /**
-     * @param userId
+     * @param nick
      */
     @GET("api/user/{userId}")
-    fun getUserByIdK(@Path("userId") userId: String): Deferred<Response<User>>
+    fun getUserByNickname(@Path("nick") nick: String): ApiResponse<UserModel>
 
-    /**
-     * @param userNickname
-     */
-    @GET("api/nicktouser/{userNickname}")
-    fun getUserIdByNick(@Path("userNickname") userNickname: String): Deferred<Response<NickToUser>>
+    //    /**
+    //     * @param userId
+    //     */
+    //    @GET("api/user/{userId}")
+    //    fun getUserByIdK(@Path("userId") userId: String): Deferred<Response<User>>
 
-    /**
-     * @param userId
-     */
-    @GET("api/animelist/{userId}")
-    fun getAnimeListItemsByUserId(@Path("userId") userId: String): LiveData<ApiResponse<List<AnimeListItem>>>
-
-    /**
-     * @param animeId
-     */
-    @GET("api/anime/{animeId}")
-    fun getAnimeById(@Path("animeId") animeId: String): Anime
-
-    /**
-     * @param animeId
-     */
-    @GET("api/anime/{animeId}")
-    fun getAnimeByIdDeffered(@Path("animeId") animeId: String): Deferred<Response<Anime>>
+    //    /**
+    //     * @param userNickname
+    //     */
+    //    @GET("api/nicktouser/{userNickname}")
+    //    fun getUserIdByNick(@Path("userNickname") userNickname: String): Deferred<Response<NickToUser>>
 }

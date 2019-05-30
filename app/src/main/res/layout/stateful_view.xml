@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            tools:visibility="gone"
-            android:theme="?android:attr/progressBarStyle" />
+            android:theme="?android:attr/progressBarStyle"
+            tools:visibility="gone" />
     </FrameLayout>
 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

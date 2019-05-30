@@ -13,4 +13,9 @@ interface UserRemote {
      */
     fun getUser(userId: String): UserEntity
 
+    /**
+     * Retrieve a user, from the cache
+     */
+    fun getUserByNickname(nick: String): UserEntity
+
 }

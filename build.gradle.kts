@@ -1,3 +1,5 @@
+import io.gitlab.arturbosch.detekt.detekt
+
 buildscript {
     repositories {
         google()
@@ -13,6 +15,7 @@ buildscript {
         classpath("com.google.gms:google-services:4.2.0")
         classpath("io.fabric.tools:gradle:1.29.0")
         classpath("com.google.firebase:firebase-plugins:2.0.0")
+        classpath("org.jacoco:org.jacoco.core:0.8.4")
     }
 }
 
