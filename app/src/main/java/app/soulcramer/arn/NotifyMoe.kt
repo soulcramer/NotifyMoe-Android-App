@@ -23,7 +23,7 @@ class NotifyMoe : Application() {
             // Android context
             androidContext(this@NotifyMoe)
             // modules
-            modules(appModule, remoteModule, cacheModule)
+            modules(remoteModule, cacheModule, appModule)
         }
 
         // Init ThreeTenABP

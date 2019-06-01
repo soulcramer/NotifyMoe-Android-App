@@ -3,6 +3,7 @@ package app.soulcramer.arn.remote
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -26,6 +27,7 @@ object NotifyMoeServiceFactory {
             .baseUrl("https://notify.moe/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create(gson))
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
         return retrofit.create(NotifyMoeService::class.java)
     }

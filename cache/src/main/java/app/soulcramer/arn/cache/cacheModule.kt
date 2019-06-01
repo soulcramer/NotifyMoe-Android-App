@@ -3,6 +3,7 @@ package app.soulcramer.arn.cache
 import android.os.Debug
 import androidx.room.Room
 import app.soulcramer.arn.cache.mapper.UserEntityMapper
+import app.soulcramer.arn.data.repository.UserCache
 import app.soulcramer.arn.data.repository.UserDataStore
 import app.soulcramer.arn.data.source.UserCacheDataStore
 import org.koin.android.ext.koin.androidContext
@@ -26,7 +27,7 @@ val cacheModule: Module = module(override = true) {
 
     factory { UserEntityMapper() }
 
-    factory { UserCacheImpl(get(), get(), get(), get()) }
+    factory<UserCache> { UserCacheImpl(get(), get(), get(), get()) }
 
     factory<UserDataStore>(named("local")) { UserCacheDataStore(get()) }
 

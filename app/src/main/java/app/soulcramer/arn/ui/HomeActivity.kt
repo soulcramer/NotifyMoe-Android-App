@@ -1,7 +1,6 @@
 package app.soulcramer.arn.ui
 
 import android.os.Bundle
-import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
@@ -13,7 +12,6 @@ import androidx.navigation.ui.setupWithNavController
 import app.soulcramer.arn.R
 import app.soulcramer.arn.util.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.activity_main.*
 
 class HomeActivity : AppCompatActivity() {
 
@@ -32,13 +30,13 @@ class HomeActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         if (savedInstanceState == null) {
-            setupBottomNavigationBar()
-            bottomNavigationView.selectedItemId = R.id.profileFragment
+            //            setupBottomNavigationBar()
+            //            bottomNavigationView.selectedItemId = R.id.profileFragment
         } // Else, need to wait for onRestoreInstanceState
 
-        onBackPressedDispatcher.addCallback(this) {
-            currentNavController?.value?.popBackStack()
-        }
+        //        onBackPressedDispatcher.addCallback(this) {
+        //            currentNavController?.value?.popBackStack()
+        //        }
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
@@ -46,7 +44,7 @@ class HomeActivity : AppCompatActivity() {
         // Now that BottomNavigationBar has restored its instance state
         // and its selectedItemId, we can proceed with setting up the
         // BottomNavigationBar with Navigation
-        setupBottomNavigationBar()
+        //        setupBottomNavigationBar()
     }
 
     /**
@@ -76,7 +74,7 @@ class HomeActivity : AppCompatActivity() {
         currentNavController = controller
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return currentNavController?.value?.navigateUp() ?: false
-    }
+    //    override fun onSupportNavigateUp(): Boolean {
+    //        return currentNavController?.value?.navigateUp() ?: false
+    //    }
 }

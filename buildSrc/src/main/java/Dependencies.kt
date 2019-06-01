@@ -1,176 +1,157 @@
+@file:Suppress("PublicApiImplicitType")
 object Modules {
-    val app = ":app"
-    val model = ":model"
+    const val app = ":app"
 
-    val core = ":core"
-    val remote = ":remote"
+    const val core = ":core"
+    const val remote = ":remote"
 
-    val cache = ":cache"
+    const val cache = ":cache"
 
-    val data = ":data"
-    val domain = ":domain"
+    const val data = ":data"
+    const val domain = ":domain"
 }
 
 object Versions {
-    val kotlin = "1.3.31"
-    val android_gradle = "3.5.0-beta02"
+    const val kotlin = "1.3.31"
+    const val android_gradle = "3.5.0-beta03"
 
-    val activity = "1.0.0-alpha08"
-    val appcompat = "1.1.0-aplha04"
-    val arch_core_testing = "2.0.0"
-    val browser = "1.0.0"
-    val cardview = "1.0.0"
-    val core = "1.1.0-alpha05"
-    val constraint_layout = "2.0.0-beta1"
-    val core_ktx = "1.2.0-alpha01"
-    val databinding = "1.1.0-alpha05"
-    val fragment = "1.1.0-alpha09"
-    val emoji = "1.0.0"
-    val lifecycle = "2.2.0-alpha01"
-    val multidex = "2.0.1"
-    val navigation = "2.1.0-alpha04"
-    val paging = "2.1.0"
-    val recyclerview = "1.1.0-alpha05"
-    val room = "2.1.0-beta01"
-    val test_core = "1.0.0"
-    val test_junit = "1.0.0"
-    val test_runner = "1.1.0"
-    val test_rules = "1.1.0"
+    const val activity = "1.0.0-alpha08"
+    const val core = "1.1.0-alpha05"
+    const val constraint_layout = "2.0.0-beta1"
+    const val core_ktx = "1.2.0-alpha01"
+    const val fragment = "1.1.0-alpha09"
+    const val emoji = "1.0.0"
+    const val lifecycle = "2.2.0-alpha01"
+    const val navigation = "2.1.0-alpha04"
+    const val recyclerview = "1.1.0-alpha05"
+    const val room = "2.1.0-beta01"
 
-    val anko = "0.10.4"
-    val bolts = "1.4.0"
-    val coroutines = "1.2.1"
-    val dagger = "2.22.1"
-    val dokka = "0.9.16"
-    val fast_adapter = "3.3.1"
-    val glide = "4.9.0"
-    val gson = "2.8.5"
-    val jfrog = "4.7.3"
-    val koin = "2.0.0-rc-3"
-    val ktlint = "0.22.0"
-    val leakcanary = "2.0-alpha-1"
-    val material = "1.1.0-alpha06"
-    val monarchy = "0.5.1"
-    val okhttp = "3.14.1"
-    val parse = "1.17.3"
-    val parse_livequery = "1.0.6"
-    val photoview = "2.1.3"
-    val retrofit = "2.5.0"
-    val timberkt = "1.5.1"
-    val threetenabp = "1.2.0"
-    val threetenbp = "1.4.0"
+    const val coroutines = "1.2.1"
+    const val fast_adapter = "3.3.1"
+    const val glide = "4.9.0"
+    const val gson = "2.8.5"
+    const val koin = "2.0.0-rc-3"
+    const val ktlint = "0.22.0"
+    const val leakcanary = "2.0-alpha-1"
+    const val material = "1.1.0-alpha06"
+    const val okhttp = "3.14.1"
+    const val photoview = "2.1.3"
+    const val retrofit = "2.5.0"
+    const val timberkt = "1.5.1"
+    const val threetenabp = "1.2.0"
+    const val threetenbp = "1.4.0"
 
     object Test {
         // Core library
-        val core = "1.0.0"
+        const val core = "1.0.0"
 
         // AndroidJUnitRunner and JUnit Rules
-        val runner = "1.1.0"
-        val rules = "1.1.0"
+        const val runner = "1.1.0"
+        const val rules = "1.1.0"
 
         // Assertions
-        val junitKtx = "1.0.0"
-        val truthKtx = "1.0.0"
-        val truth = "0.42"
+        const val junitKtx = "1.0.0"
+        const val truthKtx = "1.0.0"
+        const val truth = "0.42"
 
         // Espresso dependencies
-        val espresso = "3.1.0"
+        const val espresso = "3.1.0"
 
-        val robolectric = "4.0"
-        val mockk = "1.9.3"
+        const val robolectric = "4.0"
+        const val mockk = "1.9.3"
 
     }
 
 }
 
 object Libraries {
-    val kotlinStandardLibrary = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
-    val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    const val kotlinStandardLibrary = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
+    const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
-    val threetenabp = "com.jakewharton.threetenabp:threetenabp:${Versions.threetenabp}"
-    val threetenbp = "org.threeten:threetenbp:${Versions.threetenbp}:no-tzdb"
+    const val threetenabp = "com.jakewharton.threetenabp:threetenabp:${Versions.threetenabp}"
+    const val threetenbp = "org.threeten:threetenbp:${Versions.threetenbp}:no-tzdb"
 
     // DI
 
-    val koin = "org.koin:koin-core:${Versions.koin}"
-    val koinAndroid = "org.koin:koin-android:${Versions.koin}"
-    val koinAndroidXScope = "org.koin:koin-androidx-scope:${Versions.koin}"
-    val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+    const val koin = "org.koin:koin-core:${Versions.koin}"
+    const val koinAndroid = "org.koin:koin-android:${Versions.koin}"
+    const val koinAndroidXScope = "org.koin:koin-androidx-scope:${Versions.koin}"
+    const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
 
-    val fastAdapter = "com.mikepenz:fastadapter:${Versions.fast_adapter}"
-    val fastAdapterCommons = "com.mikepenz:fastadapter-commons:${Versions.fast_adapter}"
-    val fastAdapterExtensions = "com.mikepenz:fastadapter-extensions:${Versions.fast_adapter}"
-    val fastAdapterExpandable = "com.mikepenz:fastadapter-extensions-expandable:${Versions.fast_adapter}"
+    const val fastAdapter = "com.mikepenz:fastadapter:${Versions.fast_adapter}"
+    const val fastAdapterCommons = "com.mikepenz:fastadapter-commons:${Versions.fast_adapter}"
+    const val fastAdapterExtensions = "com.mikepenz:fastadapter-extensions:${Versions.fast_adapter}"
+    const val fastAdapterExpandable = "com.mikepenz:fastadapter-extensions-expandable:${Versions.fast_adapter}"
 
     // Leak Canary
-    val leackCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"
+    const val leackCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"
 
-    val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
-    val glideAnnotation = "com.github.bumptech.glide:annotations:${Versions.glide}"
-    val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
+    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    const val glideAnnotation = "com.github.bumptech.glide:annotations:${Versions.glide}"
+    const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 
-    val glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
-    val timberKt = "com.github.ajalt:timberkt:${Versions.timberkt}"
+    const val glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
+    const val timberKt = "com.github.ajalt:timberkt:${Versions.timberkt}"
 
-    val gson = "com.google.code.gson:gson:${Versions.gson}"
+    const val gson = "com.google.code.gson:gson:${Versions.gson}"
 
-    val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
-    val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
-    val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    const val okhttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okhttp}"
 
     object Test {
         // Core library
-        val core = "androidx.test:core:${Versions.Test.core}"
+        const val core = "androidx.test:core:${Versions.Test.core}"
 
         // AndroidJUnitRunner and JUnit Rules
-        val runner = "androidx.test:runner:${Versions.Test.runner}"
-        val rules = "androidx.test:rules:${Versions.Test.rules}"
+        const val runner = "androidx.test:runner:${Versions.Test.runner}"
+        const val rules = "androidx.test:rules:${Versions.Test.rules}"
 
         // Assertions
-        val junitKtx = "androidx.test.ext:junit:${Versions.Test.junitKtx}"
-        val truthKtx = "androidx.test.ext:truth:${Versions.Test.truthKtx}"
-        val truth = "com.google.truth:truth:${Versions.Test.truth}"
+        const val junitKtx = "androidx.test.ext:junit:${Versions.Test.junitKtx}"
+        const val truthKtx = "androidx.test.ext:truth:${Versions.Test.truthKtx}"
+        const val truth = "com.google.truth:truth:${Versions.Test.truth}"
 
         // Espresso dependencies
-        val espressoCore = "androidx.test.espresso:espresso-core:${Versions.Test.espresso}"
-        val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.Test.espresso}"
-        val espressoIntents = "androidx.test.espresso:espresso-intents:${Versions.Test.espresso}"
-        val espressoAccessibility = "androidx.test.espresso:espresso-accessibility:${Versions.Test.espresso}"
-        val espressoWeb = "androidx.test.espresso:espresso-web:${Versions.Test.espresso}"
-        val espressoIdlingConcurent = "androidx.test.espresso.idling:idling-concurrent:${Versions.Test.espresso}"
+        const val espressoCore = "androidx.test.espresso:espresso-core:${Versions.Test.espresso}"
+        const val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.Test.espresso}"
+        const val espressoIntents = "androidx.test.espresso:espresso-intents:${Versions.Test.espresso}"
+        const val espressoAccessibility = "androidx.test.espresso:espresso-accessibility:${Versions.Test.espresso}"
+        const val espressoWeb = "androidx.test.espresso:espresso-web:${Versions.Test.espresso}"
+        const val espressoIdlingConcurent = "androidx.test.espresso.idling:idling-concurrent:${Versions.Test.espresso}"
 
         // The following Espresso dependency can be either "implementation"
         // or "androidTestImplementation", depending on whether you want the
         // dependency to appear on your APK's compile classpath or the test APK
         // classpath.
-        val espressoIdlingRes = "androidx.test.espresso:espresso-idling-resource:${Versions.Test.espresso}"
+        const val espressoIdlingRes = "androidx.test.espresso:espresso-idling-resource:${Versions.Test.espresso}"
 
-        val robolectric = "org.robolectric:robolectric:${Versions.Test.robolectric}"
+        const val robolectric = "org.robolectric:robolectric:${Versions.Test.robolectric}"
 
-        val mockk = "io.mockk:mockk:${Versions.Test.mockk}"
+        const val mockk = "io.mockk:mockk:${Versions.Test.mockk}"
     }
 
 }
 
 object LibrariesAndroidX {
-    val activity = "androidx.activity:activity-ktx:${Versions.activity}"
-    val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
-    val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
-    val materialComponent = "com.google.android.material:material:${Versions.material}"
-    val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
-    val core = "androidx.core:core-ktx:${Versions.core_ktx}"
-    val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
-    val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    val emoji = "androidx.emoji:emoji:${Versions.emoji}"
-    val room = "androidx.room:room-ktx:${Versions.room}"
-    val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
-    val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
-    val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
+    const val activity = "androidx.activity:activity-ktx:${Versions.activity}"
+    const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
+    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+    const val materialComponent = "com.google.android.material:material:${Versions.material}"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
+    const val core = "androidx.core:core-ktx:${Versions.core_ktx}"
+    const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+    const val emoji = "androidx.emoji:emoji:${Versions.emoji}"
+    const val room = "androidx.room:room-ktx:${Versions.room}"
+    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
 }
 
 object BuildConfigs {
-    val compileSdk = 28
-    val minSdk = 23
-    val targetSdk = 28
+    const val compileSdk = 28
+    const val minSdk = 23
+    const val targetSdk = 28
 }
