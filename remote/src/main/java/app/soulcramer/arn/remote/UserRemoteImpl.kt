@@ -4,7 +4,6 @@ import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.data.repository.UserRemote
 import app.soulcramer.arn.remote.mapper.UserEntityMapper
 import app.soulcramer.arn.remote.model.UserModel
-import kotlinx.coroutines.runBlocking
 
 /**
  * Remote implementation for retrieving User instance. This class implements the
@@ -19,13 +18,11 @@ class UserRemoteImpl(private val service: NotifyMoeService,
      * Retrieve a [UserEntity] instances from the [NotifyMoeService].
      */
     override fun getUser(userId: String): UserEntity {
-        return runBlocking {
-            service.getUserById(userId).await().let { response ->
-                require(response.isSuccessful)
-                requireNotNull(response.body())
-                val user = response.body()!!
-                entityMapper.mapFromRemote(user)
-            }
+        return service.getUserById(userId).let { response ->
+            require(response.isSuccessful)
+            requireNotNull(response.body())
+            val user = response.body()!!
+            entityMapper.mapFromRemote(user)
         }
     }
 

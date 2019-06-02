@@ -14,7 +14,7 @@ class UserViewModel(private val getUser: GetUser) : BaseViewModel<Action, State>
     override suspend fun onHandle(action: Action) {
         when (action) {
             is LoadUser -> {
-                val result = getUser.executeNow(action.userId)
+                val result = getUser(action.userId)
                 updateState { state ->
                     if (result !is Success<User>) return@updateState state.copy(status = Error)
                     val user = result.data

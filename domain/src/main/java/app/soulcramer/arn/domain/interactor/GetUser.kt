@@ -7,5 +7,5 @@ import app.soulcramer.arn.domain.repository.UserRepository
  * Use case used for retreiving a [User] instances from the [UserRepository]
  */
 open class GetUser(val userRepository: UserRepository) : UseCase<String, User>() {
-    override fun execute(parameters: String): User = userRepository.getUser(parameters)
+    override suspend fun execute(parameters: String): User = userRepository.getUser(parameters)
 }

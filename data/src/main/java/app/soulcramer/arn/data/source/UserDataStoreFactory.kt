@@ -15,7 +15,7 @@ open class UserDataStoreFactory(
      * Returns a DataStore based on whether or not there is content in the cache and the cache
      * has not expired
      */
-    open fun retrieveDataStore(): UserDataStore {
+    open suspend fun retrieveDataStore(userId: String): UserDataStore {
         if (userCache.isCached() && !userCache.isExpired()) {
             return retrieveCacheDataStore()
         }

@@ -23,7 +23,7 @@ class GetUserTest {
     @Test
     fun `Given empty userId When getting the user by id Then return error`() {
         runBlocking {
-            val result = getUser.executeNow("")
+            val result = getUser("")
             assertThat(result).isInstanceOf(Error::class.java)
         }
     }
@@ -31,7 +31,7 @@ class GetUserTest {
     @Test
     fun `Given userID for inexistant user When getting the user by id Then return error`() {
         runBlocking {
-            val result = getUser.executeNow("234")
+            val result = getUser("234")
             assertThat(result).isInstanceOf(Error::class.java)
         }
     }
@@ -40,7 +40,7 @@ class GetUserTest {
     fun `Given existant user When getting the user by id Then return user`() {
         runBlocking {
             val testUser = (testUserRepository as UserTestRepository).users[0]
-            val result = getUser.executeNow(testUser.id)
+            val result = getUser(testUser.id)
             assertThat(result).isInstanceOf(Success::class.java)
 
             val user = (result as Success).data

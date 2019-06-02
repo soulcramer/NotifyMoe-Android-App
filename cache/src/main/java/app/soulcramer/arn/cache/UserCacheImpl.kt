@@ -5,6 +5,7 @@ import app.soulcramer.arn.cache.model.CachedUser
 import app.soulcramer.arn.data.mapper.UserMapper
 import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.data.repository.UserCache
+import java.util.concurrent.TimeUnit
 
 /**
  * Cached implementation for retrieving and saving User instances. This class implements the
@@ -17,7 +18,7 @@ class UserCacheImpl(private val database: NotifyMoeDatabase,
     private val preferencesHelper: PreferencesHelper) :
     UserCache {
 
-    private val EXPIRATION_TIME = (60 * 10 * 1000).toLong()
+    private val EXPIRATION_TIME = TimeUnit.HOURS.toMillis(3)
 
     private val userDao = database.userDao()
 
@@ -31,7 +32,7 @@ class UserCacheImpl(private val database: NotifyMoeDatabase,
     /**
      * Retrieve a list of [UserEntity] instances from the database.
      */
-    override fun getUser(userId: String): UserEntity {
+    override suspend fun getUser(userId: String): UserEntity {
         val cachedUser = userDao.loadById(userId)
         return entityMapper.mapFromCached(cachedUser)
     }
@@ -46,7 +47,7 @@ class UserCacheImpl(private val database: NotifyMoeDatabase,
     /**
      * Checked whether there are instances of [CachedUser] stored in the cache
      */
-    override fun isCached(): Boolean {
+    override suspend fun isCached(): Boolean {
         return userDao.allUserCount() > 0
     }
 

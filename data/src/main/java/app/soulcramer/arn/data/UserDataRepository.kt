@@ -8,15 +8,15 @@ import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.domain.repository.UserRepository
 
 /**
- * Provides an implementation of the [BufferooRepository] interface for communicating to and from
+ * Provides an implementation of the [UserRepository] interface for communicating to and from
  * data sources
  */
 class UserDataRepository(
     private val factory: UserDataStoreFactory,
     private val userMapper: UserMapper) : UserRepository {
 
-    override fun getUser(userId: String): User {
-        val dataStore = factory.retrieveDataStore()
+    override suspend fun getUser(userId: String): User {
+        val dataStore = factory.retrieveDataStore(userId)
         return dataStore.getUser(userId).let {
             if (dataStore is UserRemoteDataStore) {
                 saveUserEntity(it)

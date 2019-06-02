@@ -21,15 +21,15 @@ interface UserCache {
     /**
      * Retrieve a list of Bufferoos, from the cache
      */
-    fun getUser(userId: String): UserEntity
+    suspend fun getUser(userId: String): UserEntity
 
     /**
      * Checks if an element (User) exists in the cache.
      * @param userId The id used to look for inside the cache.
-     * *
+     *
      * @return true if the element is cached, otherwise false.
      */
-    fun isCached(): Boolean
+    suspend fun isCached(): Boolean
 
     /**
      * Checks if an element (User) exists in the cache.

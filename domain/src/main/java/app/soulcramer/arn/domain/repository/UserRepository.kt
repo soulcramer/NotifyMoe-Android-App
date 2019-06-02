@@ -9,6 +9,6 @@ import app.soulcramer.arn.domain.model.User
  */
 interface UserRepository {
 
-    fun getUser(userId: String): User
+    suspend fun getUser(userId: String): User
 
 }

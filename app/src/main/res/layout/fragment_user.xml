@@ -22,6 +22,10 @@
             name="role"
             type="String" />
 
+        <variable
+            name="status"
+            type="String" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -55,7 +59,7 @@
             app:imageSaturateOnLoad="@{true}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:url="@{cover}"
+            app:url="@{avatar}"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -66,10 +70,10 @@
             android:layout_marginEnd="@dimen/spacing_normal"
             android:text="@{nickname}"
             android:textAppearance="?textAppearanceHeadline4"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/roleTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/avatarImageView"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed"
             tools:text="@tools:sample/first_names" />
 
@@ -80,12 +84,12 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
             android:text="@{role}"
-            android:textAppearance="?textAppearanceHeadline5"
-            app:layout_constraintBottom_toBottomOf="@+id/avatarImageView"
+            android:textAppearance="?textAppearanceSubtitle1"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/coverImageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/avatarImageView"
-            app:layout_constraintTop_toBottomOf="@+id/nickNameTextView"
             tools:text="@tools:sample/lorem" />
 
         <Space
@@ -95,6 +99,16 @@
             android:layout_marginStart="@dimen/spacing_small"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/avatarImageView" />
+
+        <TextView
+            android:id="@+id/statusTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{status}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/coverImageView" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

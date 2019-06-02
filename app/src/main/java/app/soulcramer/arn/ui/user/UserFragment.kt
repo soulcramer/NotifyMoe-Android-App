@@ -9,9 +9,13 @@ import app.soulcramer.arn.core.bind
 import app.soulcramer.arn.core.distinctUntilChanged
 import app.soulcramer.arn.core.map
 import app.soulcramer.arn.databinding.FragmentUserBinding
+import app.soulcramer.arn.domain.interactor.Error
+import app.soulcramer.arn.domain.interactor.Loading
 import app.soulcramer.arn.domain.interactor.Status
+import app.soulcramer.arn.domain.interactor.Success
 import app.soulcramer.arn.ui.user.UserContext.Action.LoadUser
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import timber.log.Timber
 
 class UserFragment : Fragment() {
 
@@ -34,10 +38,15 @@ class UserFragment : Fragment() {
         userViewModel.state.map { it.title }.distinctUntilChanged().bind(this, ::onRoleChanged)
         userViewModel.state.map { it.status }.distinctUntilChanged().bind(this, ::onStatusChanged)
         userViewModel.handle(LoadUser("VJOK1ckvx"))
-
     }
 
     private fun onStatusChanged(status: Status) {
+        Timber.d("$status")
+        binding.status = when (status) {
+            is Success -> "success"
+            is Error -> "error"
+            is Loading -> "loading"
+        }
     }
 
     private fun onRoleChanged(role: String) {
@@ -49,6 +58,7 @@ class UserFragment : Fragment() {
     }
 
     private fun onCoverChanged(coverUrl: String) {
+        Timber.d(coverUrl)
         binding.cover = coverUrl
     }
 

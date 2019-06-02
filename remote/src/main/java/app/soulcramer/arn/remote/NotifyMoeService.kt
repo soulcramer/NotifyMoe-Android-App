@@ -1,7 +1,6 @@
 package app.soulcramer.arn.remote
 
 import app.soulcramer.arn.remote.model.UserModel
-import kotlinx.coroutines.Deferred
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -14,7 +13,7 @@ interface NotifyMoeService {
      * @param userId
      */
     @GET("api/user/{userId}")
-    fun getUserById(@Path("userId") userId: String): Deferred<Response<UserModel>>
+    fun getUserById(@Path("userId") userId: String): Response<UserModel>
 
     /**
      * @param nick

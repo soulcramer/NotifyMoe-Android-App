@@ -12,7 +12,7 @@ class UserTestRepository : UserRepository {
         it.id to it
     }
 
-    override fun getUser(userId: String): User {
+    override suspend fun getUser(userId: String): User {
         val user = data[userId]
         checkNotNull(user)
         return user

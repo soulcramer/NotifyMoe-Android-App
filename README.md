@@ -1,4 +1,4 @@
-[![Build Status](https://app.bitrise.io/app/920e3307dfd10c44/status.svg?token=17aNyeTKh78euNlTU9U-ag&branch=master)](https://app.bitrise.io/app/920e3307dfd10c44)
+[![Build Status](https://app.bitrise.io/app/920e3307dfd10c44/status.svg?token=17aNyeTKh78euNlTU9U-ag&branch=master)](https://app.bitrise.io/app/920e3307dfd10c44) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=soulcramer_NotifyMoe-Android-App&metric=alert_status)](https://sonarcloud.io/dashboard?id=soulcramer_NotifyMoe-Android-App) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=soulcramer_NotifyMoe-Android-App&metric=coverage)](https://sonarcloud.io/dashboard?id=soulcramer_NotifyMoe-Android-App)
 
 Disclaimer: This app will be focused at first (v1) for my personal usage so don't expect any support.
 

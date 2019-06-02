@@ -20,8 +20,8 @@ interface UserDao {
     fun deleteUsers(vararg users: CachedUser)
 
     @Query("SELECT * FROM users WHERE id = :userId")
-    fun loadById(userId: String): CachedUser
+    suspend fun loadById(userId: String): CachedUser
 
     @Query("SELECT count(name) FROM users")
-    fun allUserCount(): Int
+    suspend fun allUserCount(): Int
 }
