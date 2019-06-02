@@ -5,6 +5,7 @@ import app.soulcramer.arn.data.repository.UserCache
 import app.soulcramer.arn.data.test.factory.UserFactory
 import com.google.common.truth.Truth.assertThat
 import io.mockk.Runs
+import io.mockk.coEvery
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
@@ -55,7 +56,7 @@ class UserCacheDataStoreTest {
     }
 
     private fun stubUserCacheGetUser(user: UserEntity) {
-        every { userCache.getUser(any()) } returns user
+        coEvery { userCache.getUser(any()) } returns user
     }
 
     private fun stubUserCacheLastCacheTime() {
