@@ -48,7 +48,14 @@ spotless {
 
 detekt {
     toolVersion = "1.0.0-RC12"
-    input = files("$projectDir/app/src/main/java")
+    input = files("$projectDir/app/src/main/java",
+        "$projectDir/cache/src/main/java",
+        "$projectDir/core/src/main/java",
+        "$projectDir/data/src/main/java",
+        "$projectDir/domain/src/main/java",
+        "$projectDir/local/src/main/java",
+        "$projectDir/remote/src/main/java"
+    )
     config = files("$projectDir/default-detekt-config.yml")
     baseline = file("$projectDir/reports/baseline.xml")
     filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
@@ -56,6 +63,10 @@ detekt {
         html {
             enabled = true
             destination = file("reports/detekt.html")
+        }
+        xml {
+            enabled = true
+            destination = file("reports/detekt.xml")
         }
     }
 }

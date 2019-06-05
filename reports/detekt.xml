@@ -1,30 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <checkstyle version="4.3">
-    <file
-        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/viewmodel/NotifyMoeViewModelFactory.kt">
-        <error column="18" line="20"
-            message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled."
-            severity="error" source="detekt.TooGenericExceptionCaught" />
-        <error column="13" line="21"
-            message="RuntimeException is a too generic Exception. Prefer throwing specific exceptions that indicate a specific error case."
-            severity="error" source="detekt.TooGenericExceptionThrown" />
-    </file>
-    <file
-        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/repository/UserRepository.kt">
-        <error column="22" line="68"
-            message="Caught exception is too generic. Prefer catching specific exceptions to the case that is currently handled."
-            severity="error" source="detekt.TooGenericExceptionCaught" />
-    </file>
-    <file
-        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/NotifyMoeAppGlideModule.kt">
-        <error column="3" line="10"
-            message="The file NotifyMoeAppGlideModule.kt is not ending with a new line."
-            severity="warning" source="detekt.NewLineAtEndOfFile" />
-    </file>
-    <file
-        name="/Users/scott/projects/android/AnimeReleaseNotifier/app/src/main/java/studio/lunabee/arn/AppCoroutineDispatchers.kt">
-        <error column="38" line="22"
-            message="This expression contains a magic number. Consider defining it to a well named constant."
-            severity="warning" source="detekt.MagicNumber" />
-    </file>
 </checkstyle>
