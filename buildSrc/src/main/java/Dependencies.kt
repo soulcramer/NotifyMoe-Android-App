@@ -13,7 +13,7 @@ object Modules {
 
 object Versions {
     const val kotlin = "1.3.31"
-    const val android_gradle = "3.5.0-beta03"
+    const val android_gradle = "3.5.0-beta04"
 
     const val activity = "1.0.0-alpha08"
     const val core = "1.1.0-alpha05"
@@ -31,7 +31,8 @@ object Versions {
     const val glide = "4.9.0"
     const val gson = "2.8.5"
     const val koin = "2.0.0-rc-3"
-    const val ktlint = "0.22.0"
+    const val ktlint = "0.31.0"
+    const val ktlintGradle = "8.0.0"
     const val leakcanary = "2.0-alpha-1"
     const val material = "1.1.0-alpha06"
     const val okhttp = "3.14.1"

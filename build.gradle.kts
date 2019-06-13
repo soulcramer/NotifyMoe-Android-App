@@ -1,4 +1,5 @@
 import io.gitlab.arturbosch.detekt.detekt
+import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
 buildscript {
     repositories {
@@ -21,28 +22,35 @@ buildscript {
 
 plugins {
     id("io.gitlab.arturbosch.detekt").version("1.0.0-RC14")
-    id("com.diffplug.gradle.spotless").version("3.23.0")
     id("com.github.ben-manes.versions").version("0.21.0")
-
+    id("org.jlleitschuh.gradle.ktlint").version(Versions.ktlintGradle)
+    `git-hooks`
 }
 
 allprojects {
+
+    apply { plugin("org.jlleitschuh.gradle.ktlint") }
+
+
     repositories {
         google()
         jcenter()
         maven(url = "https://jitpack.io")
         maven(url = "https://maven.fabric.io/public")
     }
-}
 
-spotless {
-    kotlin {
-        target("**/*.kt")
-        ktlint(Versions.ktlint)
-    }
-    kotlinGradle {
-        target("*.gradle.kts")
-        ktlint(Versions.ktlint)
+    ktlint {
+        verbose.set(true)
+        android.set(true)
+        outputToConsole.set(true)
+        coloredOutput.set(true)
+        reporters.set(setOf(ReporterType.CHECKSTYLE))
+        ignoreFailures.set(true)
+
+        filter {
+            exclude("**/generated/**")
+            include("**/kotlin/**")
+        }
     }
 }
 
@@ -69,4 +77,10 @@ detekt {
             destination = file("reports/detekt.xml")
         }
     }
+}
+
+tasks.register<Delete>("clean") {
+    description = "Delete the root project build folder"
+    group = "cleanup"
+    delete(rootProject.buildDir)
 }
