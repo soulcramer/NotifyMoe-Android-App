@@ -16,6 +16,7 @@ object Versions {
     const val android_gradle = "3.5.0-beta04"
 
     const val activity = "1.0.0-alpha08"
+    const val benManes = "0.21.0"
     const val core = "1.1.0-alpha05"
     const val constraint_layout = "2.0.0-beta1"
     const val core_ktx = "1.2.0-alpha01"
