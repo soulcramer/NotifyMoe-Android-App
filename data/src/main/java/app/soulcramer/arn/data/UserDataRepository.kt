@@ -13,7 +13,8 @@ import app.soulcramer.arn.domain.repository.UserRepository
  */
 class UserDataRepository(
     private val factory: UserDataStoreFactory,
-    private val userMapper: UserMapper) : UserRepository {
+    private val userMapper: UserMapper
+) : UserRepository {
 
     override suspend fun getUser(userId: String): User {
         val dataStore = factory.retrieveDataStore(userId)
@@ -30,5 +31,4 @@ class UserDataRepository(
     private fun saveUserEntity(user: UserEntity) {
         return factory.retrieveCacheDataStore().saveUser(user)
     }
-
 }

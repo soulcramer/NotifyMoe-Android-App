@@ -31,7 +31,7 @@ class UserRemoteImplTest {
         userRemoteImpl = UserRemoteImpl(notifyMoeService, entityMapper)
     }
 
-    //<editor-fold desc="Get User">
+    // <editor-fold desc="Get User">
     @Test
     fun getUserCompletes() {
         val user = UserFactory.makeUserResponse()
@@ -48,7 +48,7 @@ class UserRemoteImplTest {
         val responseUser = userRemoteImpl.getUser("")
         assertThat(responseUser).isInstanceOf(UserEntity::class.java)
     }
-    //</editor-fold>
+    // </editor-fold>
 
     private fun stubNotifyMoeServiceGetUser(user: UserModel) {
         every { notifyMoeService.getUserById(any()) } returns Response.success(user)

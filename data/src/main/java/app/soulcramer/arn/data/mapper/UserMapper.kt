@@ -22,5 +22,4 @@ open class UserMapper : Mapper<UserEntity, User> {
     override fun mapToEntity(type: User): UserEntity {
         return UserEntity(type.id, type.name, type.title, type.avatar, type.cover)
     }
-
 }

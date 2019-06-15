@@ -29,5 +29,4 @@ class UserEntityMapperTest {
         assertThat(userEntity.avatar).isEqualTo("${userEntityMapper.avatarImageUrl}${userModel.id}.webp")
         assertThat(userEntity.cover).isEqualTo("${userEntityMapper.coverImageUrl}${userModel.id}.webp")
     }
-
 }

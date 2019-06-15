@@ -17,7 +17,5 @@ class UserFactory {
         fun makeUserModel(): UserModel {
             return UserModel(randomUuid(), randomUuid(), randomUuid())
         }
-
     }
-
 }

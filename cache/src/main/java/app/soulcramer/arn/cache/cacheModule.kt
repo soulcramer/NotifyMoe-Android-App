@@ -30,5 +30,4 @@ val cacheModule: Module = module(override = true) {
     factory<UserCache> { UserCacheImpl(get(), get(), get(), get()) }
 
     factory<UserDataStore>(named("local")) { UserCacheDataStore(get()) }
-
 }

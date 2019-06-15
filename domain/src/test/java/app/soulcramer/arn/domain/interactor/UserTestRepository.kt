@@ -17,5 +17,4 @@ class UserTestRepository : UserRepository {
         checkNotNull(user)
         return user
     }
-
 }

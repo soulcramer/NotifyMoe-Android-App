@@ -10,9 +10,10 @@ import app.soulcramer.arn.remote.model.UserModel
  * [UserRemote] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class UserRemoteImpl(private val service: NotifyMoeService,
-    private val entityMapper: UserEntityMapper) :
-    UserRemote {
+class UserRemoteImpl(
+    private val service: NotifyMoeService,
+    private val entityMapper: UserEntityMapper
+) : UserRemote {
 
     /**
      * Retrieve a [UserEntity] instances from the [NotifyMoeService].
@@ -36,5 +37,4 @@ class UserRemoteImpl(private val service: NotifyMoeService,
             entityMapper.mapFromRemote(user)
         }
     }
-
 }

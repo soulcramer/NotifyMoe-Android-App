@@ -22,5 +22,4 @@ open class UserEntityMapper : EntityMapper<UserModel, UserEntity> {
             "$avatarImageUrl${type.id}.webp",
             "$coverImageUrl${type.id}.webp")
     }
-
 }
