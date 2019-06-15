@@ -44,7 +44,7 @@ class UserCacheDataStoreTest {
         val testUserEntity = UserFactory.makeUserEntity()
         stubUserCacheGetUser(testUserEntity)
         val userEntity = userCacheDataStore.getUser(testUserEntity.id)
-        assertThat(userEntity).isSameAs(testUserEntity)
+        assertThat(userEntity).isEqualTo(testUserEntity)
 
     }
     //</editor-fold>

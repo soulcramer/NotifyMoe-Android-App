@@ -21,7 +21,7 @@ buildscript {
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC14")
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC15")
     id("org.jlleitschuh.gradle.ktlint").version(Versions.ktlintGradle)
     id("com.github.ben-manes.versions").version(Versions.benManes)
     `git-hooks`
@@ -41,10 +41,7 @@ subprojects {
     apply { plugin("org.jlleitschuh.gradle.ktlint") }
 
     ktlint {
-        verbose.set(true)
         android.set(true)
-        outputToConsole.set(true)
-        coloredOutput.set(true)
         reporters.set(setOf(ReporterType.CHECKSTYLE))
         ignoreFailures.set(true)
 
@@ -90,7 +87,7 @@ tasks {
 
     register("runChecksForDanger") {
         group = "Reporting"
-        dependsOn("ktlintCheck",
+        dependsOn(named("ktlintCheck"),
             "${Modules.domain}:lint",
             "${Modules.data}:lint",
             "${Modules.cache}:lint",

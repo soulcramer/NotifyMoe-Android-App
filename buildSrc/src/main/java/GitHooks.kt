@@ -19,13 +19,6 @@ class GitHooksPlugin : Plugin<Project> {
     override fun apply(project: Project): Unit = project.run {
 
         tasks {
-            register("greet") {
-                group = "sample"
-                description = "Prints a description of ${project.name}."
-                doLast {
-                    println("I'm ${project.name}.")
-                }
-            }
 
             register("copyGitHooks", Copy::class.java) {
                 description = "Copies the git hooks from scripts/git-hooks to the .git folder."
