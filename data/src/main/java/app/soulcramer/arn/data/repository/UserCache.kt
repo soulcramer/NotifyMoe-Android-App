@@ -44,5 +44,4 @@ interface UserCache {
      * @return true, the cache is expired, otherwise false.
      */
     fun isExpired(): Boolean
-
 }

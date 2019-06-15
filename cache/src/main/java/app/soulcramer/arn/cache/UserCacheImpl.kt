@@ -12,11 +12,12 @@ import java.util.concurrent.TimeUnit
  * [UserCache] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class UserCacheImpl(private val database: NotifyMoeDatabase,
+class UserCacheImpl(
+    private val database: NotifyMoeDatabase,
     private val entityMapper: UserEntityMapper,
     private val mapper: UserMapper,
-    private val preferencesHelper: PreferencesHelper) :
-    UserCache {
+    private val preferencesHelper: PreferencesHelper
+) : UserCache {
 
     private val EXPIRATION_TIME = TimeUnit.HOURS.toMillis(3)
 
@@ -73,5 +74,4 @@ class UserCacheImpl(private val database: NotifyMoeDatabase,
     private fun getLastCacheUpdateTimeMillis(): Long {
         return preferencesHelper.lastCacheTime
     }
-
 }

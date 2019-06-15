@@ -21,16 +21,13 @@ buildscript {
 }
 
 plugins {
-    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC14")
-    id("com.github.ben-manes.versions").version("0.21.0")
+    id("io.gitlab.arturbosch.detekt").version("1.0.0-RC15")
     id("org.jlleitschuh.gradle.ktlint").version(Versions.ktlintGradle)
+    id("com.github.ben-manes.versions").version(Versions.benManes)
     `git-hooks`
 }
 
 allprojects {
-
-    apply { plugin("org.jlleitschuh.gradle.ktlint") }
-
 
     repositories {
         google()
@@ -38,17 +35,18 @@ allprojects {
         maven(url = "https://jitpack.io")
         maven(url = "https://maven.fabric.io/public")
     }
+}
+
+subprojects {
+    apply { plugin("org.jlleitschuh.gradle.ktlint") }
 
     ktlint {
-        verbose.set(true)
         android.set(true)
-        outputToConsole.set(true)
-        coloredOutput.set(true)
         reporters.set(setOf(ReporterType.CHECKSTYLE))
         ignoreFailures.set(true)
 
         filter {
-            exclude("**/generated/**")
+            exclude("**/generated/**", "**/*.kts")
             include("**/kotlin/**")
         }
     }
@@ -79,8 +77,28 @@ detekt {
     }
 }
 
-tasks.register<Delete>("clean") {
-    description = "Delete the root project build folder"
-    group = "cleanup"
-    delete(rootProject.buildDir)
+tasks {
+
+    register<Delete>("clean") {
+        description = "Delete the root project build folder"
+        group = "cleanup"
+        delete(rootProject.buildDir)
+    }
+
+    register("runChecksForDanger") {
+        group = "Reporting"
+        dependsOn(named("ktlintCheck"),
+            "${Modules.domain}:lint",
+            "${Modules.data}:lint",
+            "${Modules.cache}:lint",
+            "${Modules.remote}:lint",
+            "${Modules.core}:lint",
+            "${Modules.app}:lint"
+        )
+
+        val file = file("${project.rootDir}/build/reports/ktlint")
+        if (!file.exists()) file.mkdirs()
+        val lintFile = File("${project.rootDir}/build/reports/lint")
+        if (!lintFile.exists()) lintFile.mkdirs()
+    }
 }

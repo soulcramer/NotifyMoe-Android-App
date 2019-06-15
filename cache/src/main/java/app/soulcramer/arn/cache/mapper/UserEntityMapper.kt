@@ -22,5 +22,4 @@ class UserEntityMapper : EntityMapper<CachedUser, UserEntity> {
     override fun mapFromCached(type: CachedUser): UserEntity {
         return UserEntity(type.id, type.name, type.title, type.avatar, type.cover)
     }
-
 }

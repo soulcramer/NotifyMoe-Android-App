@@ -9,7 +9,8 @@ import app.soulcramer.arn.data.repository.UserDataStore
 open class UserDataStoreFactory(
     private val userCache: UserCache,
     private val userCacheDataStore: UserCacheDataStore,
-    private val userRemoteDataStore: UserRemoteDataStore) {
+    private val userRemoteDataStore: UserRemoteDataStore
+) {
 
     /**
      * Returns a DataStore based on whether or not there is content in the cache and the cache
@@ -35,5 +36,4 @@ open class UserDataStoreFactory(
     open fun retrieveRemoteDataStore(): UserDataStore {
         return userRemoteDataStore
     }
-
 }

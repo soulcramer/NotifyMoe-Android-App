@@ -15,27 +15,27 @@ object Versions {
     const val kotlin = "1.3.31"
     const val android_gradle = "3.5.0-beta04"
 
-    const val activity = "1.0.0-alpha08"
-    const val core = "1.1.0-alpha05"
+    const val activity = "1.0.0-beta01"
+    const val benManes = "0.21.0"
+    const val core = "1.2.0-alpha02"
     const val constraint_layout = "2.0.0-beta1"
-    const val core_ktx = "1.2.0-alpha01"
-    const val fragment = "1.1.0-alpha09"
+    const val fragment = "1.1.0-beta01"
     const val emoji = "1.0.0"
     const val lifecycle = "2.2.0-alpha01"
-    const val navigation = "2.1.0-alpha04"
-    const val recyclerview = "1.1.0-alpha05"
-    const val room = "2.1.0-beta01"
+    const val navigation = "2.1.0-alpha05"
+    const val recyclerview = "1.1.0-alpha06"
+    const val room = "2.1.0"
 
     const val coroutines = "1.2.1"
     const val fast_adapter = "3.3.1"
     const val glide = "4.9.0"
     const val gson = "2.8.5"
-    const val koin = "2.0.0-rc-3"
-    const val ktlint = "0.31.0"
+    const val koin = "2.0.1"
+    const val ktlint = "0.33.0"
     const val ktlintGradle = "8.0.0"
-    const val leakcanary = "2.0-alpha-1"
-    const val material = "1.1.0-alpha06"
-    const val okhttp = "3.14.1"
+    const val leakcanary = "2.0-alpha-2"
+    const val material = "1.1.0-alpha07"
+    const val okhttp = "4.0.0-alpha02"
     const val photoview = "2.1.3"
     const val retrofit = "2.5.0"
     const val timberkt = "1.5.1"
@@ -44,21 +44,21 @@ object Versions {
 
     object Test {
         // Core library
-        const val core = "1.0.0"
+        const val core = "1.2.0"
 
         // AndroidJUnitRunner and JUnit Rules
-        const val runner = "1.1.0"
+        const val runner = "1.2.0"
         const val rules = "1.1.0"
 
         // Assertions
-        const val junitKtx = "1.0.0"
-        const val truthKtx = "1.0.0"
-        const val truth = "0.42"
+        const val junitKtx = "1.1.1"
+        const val truthKtx = "1.2.0"
+        const val truth = "0.45"
 
         // Espresso dependencies
-        const val espresso = "3.1.0"
+        const val espresso = "3.2.0"
 
-        const val robolectric = "4.0"
+        const val robolectric = "4.3"
         const val mockk = "1.9.3"
 
     }
@@ -141,7 +141,7 @@ object LibrariesAndroidX {
     const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     const val materialComponent = "com.google.android.material:material:${Versions.material}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
-    const val core = "androidx.core:core-ktx:${Versions.core_ktx}"
+    const val core = "androidx.core:core-ktx:${Versions.core}"
     const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
     const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     const val emoji = "androidx.emoji:emoji:${Versions.emoji}"

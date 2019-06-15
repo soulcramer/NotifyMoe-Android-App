@@ -26,5 +26,4 @@ open class UserCacheDataStore(private val userCache: UserCache) :
     override fun getUser(userId: String): UserEntity {
         return runBlocking { userCache.getUser(userId) }
     }
-
 }

@@ -21,7 +21,5 @@ class UserFactory {
             }
             return bufferoos
         }
-
     }
-
 }

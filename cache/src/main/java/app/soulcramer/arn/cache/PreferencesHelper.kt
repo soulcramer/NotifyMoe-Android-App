@@ -26,5 +26,4 @@ class PreferencesHelper(context: Context) {
     var lastCacheTime: Long
         get() = bufferPref.getLong(PREF_KEY_LAST_CACHE, 0)
         set(lastCache) = bufferPref.edit().putLong(PREF_KEY_LAST_CACHE, lastCache).apply()
-
 }

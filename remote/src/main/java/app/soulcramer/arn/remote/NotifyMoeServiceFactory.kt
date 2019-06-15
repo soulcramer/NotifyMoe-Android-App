@@ -57,5 +57,4 @@ object NotifyMoeServiceFactory {
         }
         return logging
     }
-
 }

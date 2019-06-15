@@ -21,5 +21,4 @@ open class UserRemoteDataStore(private val userRemote: UserRemote) :
     override fun getUser(userId: String): UserEntity {
         return userRemote.getUser(userId)
     }
-
 }
