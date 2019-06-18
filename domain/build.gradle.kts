@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.dsl.TestOptions
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.library")
@@ -47,6 +48,10 @@ android {
     useLibrary("android.test.base")
     useLibrary("android.test.mock")
 
+}
+
+tasks.withType<KotlinCompile>().all {
+    kotlinOptions.freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
 }
 
 dependencies {

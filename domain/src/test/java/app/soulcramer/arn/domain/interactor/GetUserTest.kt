@@ -1,6 +1,6 @@
 package app.soulcramer.arn.domain.interactor
 
-import app.soulcramer.arn.domain.interactor.Result.Error
+import app.soulcramer.arn.domain.interactor.Result.Failure
 import app.soulcramer.arn.domain.interactor.Result.Success
 import app.soulcramer.arn.domain.repository.UserRepository
 import com.google.common.truth.Truth.assertThat
@@ -24,7 +24,7 @@ class GetUserTest {
     fun `Given empty userId When getting the user by id Then return error`() {
         runBlocking {
             val result = getUser("")
-            assertThat(result).isInstanceOf(Error::class.java)
+            assertThat(result).isInstanceOf(Failure::class.java)
         }
     }
 
@@ -32,7 +32,7 @@ class GetUserTest {
     fun `Given userID for inexistant user When getting the user by id Then return error`() {
         runBlocking {
             val result = getUser("234")
-            assertThat(result).isInstanceOf(Error::class.java)
+            assertThat(result).isInstanceOf(Failure::class.java)
         }
     }
 

@@ -27,12 +27,12 @@ abstract class UseCase<in P, R> {
                     }
                 } catch (e: Exception) {
                     Timber.e(e)
-                    Result.Error(e)
+                    Result.Failure(e)
                 }
             }
         } catch (e: Exception) {
             Timber.d(e)
-            Result.Error(e)
+            Result.Failure(e)
         }
     }
 
