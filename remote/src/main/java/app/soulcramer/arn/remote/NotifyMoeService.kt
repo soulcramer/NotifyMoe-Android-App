@@ -1,7 +1,6 @@
 package app.soulcramer.arn.remote
 
 import app.soulcramer.arn.remote.model.UserModel
-import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -13,7 +12,7 @@ interface NotifyMoeService {
      * @param userId
      */
     @GET("api/user/{userId}")
-    fun getUserById(@Path("userId") userId: String): Response<UserModel>
+    suspend fun getUserById(@Path("userId") userId: String): UserModel
 
     /**
      * @param nick

@@ -29,6 +29,8 @@ sealed class Result<out R> {
 @UseExperimental(ExperimentalContracts::class)
 val Result<*>.succeeded: Boolean
     get() {
-        contract { returns(true) implies (this@succeeded is Success) }
+        contract {
+            returns(true) implies (this@succeeded is Success<*>)
+        }
         return this is Success && data != null
     }

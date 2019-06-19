@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.dsl.TestOptions
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")
@@ -70,6 +71,10 @@ android {
             setIncludeAndroidResources(true)
         })
     }
+}
+
+tasks.withType<KotlinCompile>().all {
+    kotlinOptions.freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
 }
 
 kapt {

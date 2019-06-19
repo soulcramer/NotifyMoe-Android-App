@@ -11,5 +11,5 @@ interface UserDataStore {
 
     fun saveUser(user: UserEntity)
 
-    fun getUser(userId: String): UserEntity
+    suspend fun getUser(userId: String): UserEntity
 }

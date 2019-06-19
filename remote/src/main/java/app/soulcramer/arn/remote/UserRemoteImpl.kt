@@ -18,13 +18,9 @@ class UserRemoteImpl(
     /**
      * Retrieve a [UserEntity] instances from the [NotifyMoeService].
      */
-    override fun getUser(userId: String): UserEntity {
-        return service.getUserById(userId).let { response ->
-            require(response.isSuccessful)
-            requireNotNull(response.body())
-            val user = response.body()!!
-            entityMapper.mapFromRemote(user)
-        }
+    override suspend fun getUser(userId: String): UserEntity {
+        val user = service.getUserById(userId)
+        return entityMapper.mapFromRemote(user)
     }
 
     /**

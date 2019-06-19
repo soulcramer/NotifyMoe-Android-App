@@ -39,3 +39,9 @@ abstract class BaseViewModel<A : BaseAction, S : BaseState>(private val initialS
 
 interface BaseAction
 interface BaseState
+
+sealed class ViewState
+object Loading : ViewState()
+object Data : ViewState()
+object Empty : ViewState()
+object Error : ViewState()

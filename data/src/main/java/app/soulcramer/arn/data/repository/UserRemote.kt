@@ -11,7 +11,7 @@ interface UserRemote {
     /**
      * Retrieve a user, from the cache
      */
-    fun getUser(userId: String): UserEntity
+    suspend fun getUser(userId: String): UserEntity
 
     /**
      * Retrieve a user, from the cache

@@ -9,10 +9,12 @@ import app.soulcramer.arn.core.bind
 import app.soulcramer.arn.core.distinctUntilChanged
 import app.soulcramer.arn.core.map
 import app.soulcramer.arn.databinding.FragmentUserBinding
-import app.soulcramer.arn.domain.interactor.Error
-import app.soulcramer.arn.domain.interactor.Loading
-import app.soulcramer.arn.domain.interactor.Status
-import app.soulcramer.arn.domain.interactor.Success
+import app.soulcramer.arn.ui.common.Data
+import app.soulcramer.arn.ui.common.Empty
+import app.soulcramer.arn.ui.common.Error
+import app.soulcramer.arn.ui.common.Loading
+import app.soulcramer.arn.ui.common.ViewState
+import app.soulcramer.arn.ui.session.SessionViewModel
 import app.soulcramer.arn.ui.user.UserContext.Action.LoadUser
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
@@ -20,6 +22,7 @@ import timber.log.Timber
 class UserFragment : Fragment() {
 
     private val userViewModel by sharedViewModel<UserViewModel>()
+    private val sessionViewModel by sharedViewModel<SessionViewModel>()
 
     private lateinit var binding: FragmentUserBinding
 
@@ -32,19 +35,27 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        sessionViewModel.state.map { it.loggedUserId }.distinctUntilChanged().bind(this, ::onLoggedUserChanged)
+
         userViewModel.state.map { it.avatar }.distinctUntilChanged().bind(this, ::onAvatarChanged)
         userViewModel.state.map { it.cover }.distinctUntilChanged().bind(this, ::onCoverChanged)
         userViewModel.state.map { it.name }.distinctUntilChanged().bind(this, ::onNameChanged)
         userViewModel.state.map { it.title }.distinctUntilChanged().bind(this, ::onRoleChanged)
         userViewModel.state.map { it.status }.distinctUntilChanged().bind(this, ::onStatusChanged)
-        userViewModel.handle(LoadUser("VJOK1ckvx"))
     }
 
-    private fun onStatusChanged(status: Status) {
+    private fun onLoggedUserChanged(loggedUserId: String?) {
+        if (loggedUserId != null) {
+            userViewModel.handle(LoadUser(loggedUserId))
+        }
+    }
+
+    private fun onStatusChanged(status: ViewState) {
         Timber.d("$status")
         binding.status = when (status) {
-            is Success -> "success"
+            is Data -> "success"
             is Error -> "error"
+            is Empty -> "empty"
             is Loading -> "loading"
         }
     }
@@ -58,7 +69,6 @@ class UserFragment : Fragment() {
     }
 
     private fun onCoverChanged(coverUrl: String) {
-        Timber.d(coverUrl)
         binding.cover = coverUrl
     }
 

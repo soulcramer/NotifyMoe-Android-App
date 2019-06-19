@@ -37,7 +37,7 @@ object Versions {
     const val material = "1.1.0-alpha07"
     const val okhttp = "4.0.0-alpha02"
     const val photoview = "2.1.3"
-    const val retrofit = "2.5.0"
+    const val retrofit = "2.6.0"
     const val timberkt = "1.5.1"
     const val threetenabp = "1.2.0"
     const val threetenbp = "1.4.0"

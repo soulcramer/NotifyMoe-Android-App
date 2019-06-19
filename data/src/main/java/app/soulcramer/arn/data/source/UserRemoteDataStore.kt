@@ -18,7 +18,7 @@ open class UserRemoteDataStore(private val userRemote: UserRemote) :
     /**
      * Retrieve a [UserEntity] instances from the API
      */
-    override fun getUser(userId: String): UserEntity {
+    override suspend fun getUser(userId: String): UserEntity {
         return userRemote.getUser(userId)
     }
 }

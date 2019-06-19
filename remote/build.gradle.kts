@@ -59,8 +59,6 @@ dependencies {
     implementation(LibrariesAndroidX.livedata)
 
 
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2")
-
     testImplementation(Libraries.Test.core)
     testImplementation(Libraries.Test.runner)
     testImplementation(Libraries.Test.truth)
