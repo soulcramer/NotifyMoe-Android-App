@@ -10,16 +10,30 @@ class UserFactory {
 
     companion object Factory {
 
-        fun makeUser(): User {
-            return User(randomUuid(), randomUuid(), randomUuid(), randomUuid(), randomUuid())
+        fun makeUser(id: String = randomUuid(),
+            name: String = randomUuid(),
+            title: String = randomUuid(),
+            avatar: String = randomUuid(),
+            cover: String = randomUuid()
+        ): User {
+            return User(id, name, title, avatar, cover)
         }
 
         fun makeUserList(count: Int): List<User> {
-            val bufferoos = mutableListOf<User>()
+            val users = mutableListOf<User>()
             repeat(count) {
-                bufferoos.add(makeUser())
+                users.add(makeUser())
             }
-            return bufferoos
+            return users
+        }
+
+        fun makeUserListWithCloseNickname(count: Int, nickname: String = ""): List<User> {
+            val users = mutableListOf<User>()
+            repeat(count) {
+                val name = nickname + randomUuid()
+                users.add(makeUser(name = name))
+            }
+            return users
         }
     }
 }

@@ -1,5 +1,5 @@
 import com.android.build.gradle.internal.dsl.TestOptions
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.application")

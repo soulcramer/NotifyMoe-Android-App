@@ -10,4 +10,6 @@ import app.soulcramer.arn.domain.model.User
 interface UserRepository {
 
     suspend fun getUser(userId: String): User
+
+    suspend fun searchUser(nickname: String): List<User>
 }
