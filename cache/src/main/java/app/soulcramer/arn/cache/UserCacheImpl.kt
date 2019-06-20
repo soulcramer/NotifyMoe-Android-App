@@ -2,7 +2,6 @@ package app.soulcramer.arn.cache
 
 import app.soulcramer.arn.cache.mapper.UserEntityMapper
 import app.soulcramer.arn.cache.model.CachedUser
-import app.soulcramer.arn.data.mapper.UserMapper
 import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.data.repository.UserCache
 import java.util.concurrent.TimeUnit
@@ -13,9 +12,8 @@ import java.util.concurrent.TimeUnit
  * operations in which data store implementation layers can carry out.
  */
 class UserCacheImpl(
-    private val database: NotifyMoeDatabase,
+    val database: NotifyMoeDatabase,
     private val entityMapper: UserEntityMapper,
-    private val mapper: UserMapper,
     private val preferencesHelper: PreferencesHelper
 ) : UserCache {
 
@@ -26,7 +24,7 @@ class UserCacheImpl(
     /**
      * Save the given list of [UserEntity] instances to the database.
      */
-    override fun saveUser(user: UserEntity) {
+    override suspend fun saveUser(user: UserEntity) {
         return saveUser(entityMapper.mapToCached(user))
     }
 
@@ -39,9 +37,22 @@ class UserCacheImpl(
     }
 
     /**
+     * Retrieve a list of [UserEntity] instances from the database.
+     */
+    override suspend fun getUsers(): List<UserEntity> {
+        val cachedUsers = userDao.getAll()
+        return cachedUsers.map(entityMapper::mapFromCached)
+    }
+
+    override suspend fun searchUsers(nickname: String): List<UserEntity> {
+        val cachedUsers = userDao.searchByNickname(nickname)
+        return cachedUsers.map(entityMapper::mapFromCached)
+    }
+
+    /**
      * Helper method for saving a [CachedUser] instance to the database.
      */
-    private fun saveUser(cachedUser: CachedUser) {
+    private suspend fun saveUser(cachedUser: CachedUser) {
         userDao.insertUsers(cachedUser)
     }
 

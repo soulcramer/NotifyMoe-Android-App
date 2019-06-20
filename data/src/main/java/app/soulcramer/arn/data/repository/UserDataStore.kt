@@ -9,7 +9,7 @@ import app.soulcramer.arn.data.model.UserEntity
  */
 interface UserDataStore {
 
-    fun saveUser(user: UserEntity)
+    suspend fun saveUser(user: UserEntity)
 
     suspend fun getUser(userId: String): UserEntity
 

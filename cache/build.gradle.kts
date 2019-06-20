@@ -71,8 +71,13 @@ dependencies {
 
 
     testImplementation("junit:junit:4.12")
-    androidTestImplementation("androidx.test.ext:junit:1.1.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
+    testImplementation(Libraries.Test.core)
+    testImplementation(Libraries.Test.runner)
+    testImplementation(Libraries.Test.truth)
+    testImplementation(Libraries.Test.truthKtx)
+    testImplementation(Libraries.Test.robolectric)
+    testImplementation(Libraries.Test.mockk)
+    testImplementation(Libraries.Test.room)
 }
 
 

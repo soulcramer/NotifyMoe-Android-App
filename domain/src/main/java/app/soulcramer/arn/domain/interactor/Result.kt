@@ -1,8 +1,6 @@
 package app.soulcramer.arn.domain.interactor
 
 import app.soulcramer.arn.domain.interactor.Result.Success
-import kotlin.contracts.ExperimentalContracts
-import kotlin.contracts.contract
 
 /**
  * A generic class that holds a value with its loading status.
@@ -26,11 +24,7 @@ sealed class Result<out R> {
 /**
  * `true` if [Result] is of type [Success] & holds non-null [Success.data].
  */
-@UseExperimental(ExperimentalContracts::class)
 val Result<*>.succeeded: Boolean
     get() {
-        contract {
-            returns(true) implies (this@succeeded is Success<*>)
-        }
         return this is Success && data != null
     }

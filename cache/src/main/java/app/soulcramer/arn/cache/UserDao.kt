@@ -11,16 +11,22 @@ import app.soulcramer.arn.cache.model.CachedUser
 @Dao
 interface UserDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertUsers(vararg users: CachedUser)
+    suspend fun insertUsers(vararg users: CachedUser)
 
     @Update
-    fun updateUsers(vararg users: CachedUser)
+    suspend fun updateUsers(vararg users: CachedUser)
 
     @Delete
-    fun deleteUsers(vararg users: CachedUser)
+    suspend fun deleteUsers(vararg users: CachedUser)
 
     @Query("SELECT * FROM users WHERE id = :userId")
     suspend fun loadById(userId: String): CachedUser
+
+    @Query("SELECT * FROM users ORDER BY name")
+    suspend fun getAll(): List<CachedUser>
+
+    @Query("SELECT * FROM users WHERE name LIKE '%'||:nickname||'%' ORDER BY name")
+    suspend fun searchByNickname(nickname: String): List<CachedUser>
 
     @Query("SELECT count(name) FROM users")
     suspend fun allUserCount(): Int

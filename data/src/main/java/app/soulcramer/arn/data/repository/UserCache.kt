@@ -16,12 +16,17 @@ interface UserCache {
     /**
      * Save a given user to the cache
      */
-    fun saveUser(user: UserEntity)
+    suspend fun saveUser(user: UserEntity)
 
     /**
      * Retrieve a User, from the cache
      */
     suspend fun getUser(userId: String): UserEntity
+
+    /**
+     * Retrieve all users, from the cache
+     */
+    suspend fun getUsers(): List<UserEntity>
 
     /**
      * Retrieve a list of Users with similar nickname, from the cache

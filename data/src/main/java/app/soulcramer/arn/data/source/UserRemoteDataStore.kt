@@ -11,7 +11,7 @@ import app.soulcramer.arn.data.repository.UserRemote
 open class UserRemoteDataStore(private val userRemote: UserRemote) :
     UserDataStore {
 
-    override fun saveUser(user: UserEntity) {
+    override suspend fun saveUser(user: UserEntity) {
         throw UnsupportedOperationException()
     }
 

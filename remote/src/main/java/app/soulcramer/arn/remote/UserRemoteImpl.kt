@@ -33,4 +33,11 @@ class UserRemoteImpl(
             entityMapper.mapFromRemote(user)
         }
     }
+
+    /**
+     * Retrieve a [UserEntity] instances from the [NotifyMoeService].
+     */
+    override suspend fun searchUsers(nickname: String): List<UserEntity> {
+        return emptyList()
+    }
 }

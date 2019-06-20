@@ -121,12 +121,12 @@ class UserCacheDataStoreTest {
     @Test
     fun `Given a empty user nickname When searching user with similar name them Then return empty list`() {
         runBlocking {
-            coEvery { mockUserCache.searchUsers(any()) } returns emptyList()
+            coEvery { mockUserCache.searchUsers(any()) } returns UserFactory.makeUserEntityList(4)
 
             val searchedUserEntities = userCacheDataStore.searchUsers("")
 
             coVerify(exactly = 1) { mockUserCache.searchUsers(any()) }
-            assertThat(searchedUserEntities).isEmpty()
+            assertThat(searchedUserEntities).hasSize(4)
         }
     }
     // </editor-fold>
@@ -134,7 +134,7 @@ class UserCacheDataStoreTest {
     // <editor-fold desc="Stub helper methods">
 
     private fun stubUserCacheSaveUser() {
-        every { mockUserCache.saveUser(any()) } just Runs
+        coEvery { mockUserCache.saveUser(any()) } just Runs
     }
 
     private fun stubUserCacheGetUser(user: UserEntity) {

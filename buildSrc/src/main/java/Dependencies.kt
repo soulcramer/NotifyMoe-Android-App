@@ -133,6 +133,7 @@ object Libraries {
         // AndroidJUnitRunner and JUnit Rules
         const val runner = "androidx.test:runner:${Versions.Test.runner}"
         const val rules = "androidx.test:rules:${Versions.Test.rules}"
+        const val room = "androidx.room:room-testing:${Versions.AndroidX.room}"
 
         // Assertions
         const val junitKtx = "androidx.test.ext:junit:${Versions.Test.junitKtx}"

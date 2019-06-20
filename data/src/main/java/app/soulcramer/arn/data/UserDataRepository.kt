@@ -20,7 +20,9 @@ class UserDataRepository(
         val dataStore = factory.retrieveDataStore()
         return dataStore.searchUsers(nickname).let { users ->
             if (dataStore is UserRemoteDataStore) {
-                users.forEach(this@UserDataRepository::saveUserEntity)
+                users.forEach {
+                    saveUserEntity(it)
+                }
             }
             users
         }.let { users ->
@@ -40,7 +42,7 @@ class UserDataRepository(
         }
     }
 
-    private fun saveUserEntity(user: UserEntity) {
+    private suspend fun saveUserEntity(user: UserEntity) {
         return factory.retrieveCacheDataStore().saveUser(user)
     }
 }
