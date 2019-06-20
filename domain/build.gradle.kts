@@ -60,7 +60,7 @@ dependencies {
     implementation(Libraries.kotlinStandardLibrary)
     implementation(Libraries.kotlinCoroutines)
 
-    implementation(LibrariesAndroidX.livedata)
+    implementation(Libraries.AndroidX.livedata)
 
     implementation(Libraries.timberKt)
 

@@ -53,8 +53,8 @@ dependencies {
     implementation(Libraries.kotlinStandardLibrary)
     implementation(Libraries.kotlinCoroutines)
 
-    implementation(LibrariesAndroidX.core)
-    implementation(LibrariesAndroidX.lifecycle)
+    implementation(Libraries.AndroidX.core)
+    implementation(Libraries.AndroidX.lifecycle)
 
     testImplementation("junit:junit:4.12")
     androidTestImplementation("androidx.test.ext:junit:1.1.0")

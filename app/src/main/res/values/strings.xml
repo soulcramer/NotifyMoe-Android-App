@@ -46,4 +46,5 @@
     <string name="genre_label_super_power">Super Powers</string>
     <string name="genre_label_supernatural">Supernatural</string>
     <string name="genre_label_vampire">Vampire</string>
+    <string name="user_avatar_description">User profile image</string>
 </resources>

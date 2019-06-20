@@ -57,11 +57,11 @@ dependencies {
     // Kotlin
     implementation(Libraries.kotlinStandardLibrary)
 
-    implementation(LibrariesAndroidX.lifecycle)
+    implementation(Libraries.AndroidX.lifecycle)
 
-    implementation(LibrariesAndroidX.room)
-    implementation(LibrariesAndroidX.roomRuntime)
-    kapt(LibrariesAndroidX.roomCompiler)
+    implementation(Libraries.AndroidX.room)
+    implementation(Libraries.AndroidX.roomRuntime)
+    kapt(Libraries.AndroidX.roomCompiler)
 
     implementation(Libraries.koin)
     implementation(Libraries.koinAndroid)

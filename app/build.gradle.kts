@@ -1,5 +1,5 @@
 import com.android.build.gradle.internal.dsl.TestOptions
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.exclude
 
 plugins {
     id("com.android.application")
@@ -93,16 +93,16 @@ dependencies {
     implementation(project(Modules.remote))
 
     // AndroidX
-    implementation(LibrariesAndroidX.activity)
-    implementation(LibrariesAndroidX.fragment)
-    implementation(LibrariesAndroidX.navigationFragment)
-    implementation(LibrariesAndroidX.navigationUi)
-    implementation(LibrariesAndroidX.recyclerView)
-    implementation(LibrariesAndroidX.materialComponent)
-    implementation(LibrariesAndroidX.constraintLayout)
-    implementation(LibrariesAndroidX.core)
-    implementation(LibrariesAndroidX.lifecycle)
-    implementation(LibrariesAndroidX.emoji)
+    implementation(Libraries.AndroidX.activity)
+    implementation(Libraries.AndroidX.fragment)
+    implementation(Libraries.AndroidX.navigationFragment)
+    implementation(Libraries.AndroidX.navigationUi)
+    implementation(Libraries.AndroidX.recyclerView)
+    implementation(Libraries.AndroidX.materialComponent)
+    implementation(Libraries.AndroidX.constraintLayout)
+    implementation(Libraries.AndroidX.core)
+    implementation(Libraries.AndroidX.lifecycle)
+    implementation(Libraries.AndroidX.emoji)
 
     implementation(Libraries.threetenbp)
     implementation(Libraries.threetenabp)
@@ -110,6 +110,10 @@ dependencies {
     // DI
     implementation(Libraries.koinAndroidXScope)
     implementation(Libraries.koinViewModel)
+
+    implementation(Libraries.epoxy)
+    implementation(Libraries.epoxyDataBinding)
+    kapt(Libraries.epoxyProcessor)
 
     implementation(Libraries.fastAdapter)
     implementation(Libraries.fastAdapterCommons)

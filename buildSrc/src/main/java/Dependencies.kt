@@ -1,4 +1,5 @@
 @file:Suppress("PublicApiImplicitType")
+
 object Modules {
     const val app = ":app"
 
@@ -12,29 +13,32 @@ object Modules {
 }
 
 object Versions {
-    const val kotlin = "1.3.31"
+
+    object AndroidX {
+        const val activity = "1.0.0-beta01"
+        const val core = "1.2.0-alpha02"
+        const val constraint_layout = "2.0.0-beta1"
+        const val fragment = "1.1.0-beta01"
+        const val emoji = "1.0.0"
+        const val lifecycle = "2.2.0-alpha01"
+        const val material = "1.1.0-alpha07"
+        const val navigation = "2.1.0-alpha05"
+        const val recyclerview = "1.1.0-alpha06"
+        const val room = "2.1.0"
+    }
+
     const val android_gradle = "3.5.0-beta04"
-
-    const val activity = "1.0.0-beta01"
     const val benManes = "0.21.0"
-    const val core = "1.2.0-alpha02"
-    const val constraint_layout = "2.0.0-beta1"
-    const val fragment = "1.1.0-beta01"
-    const val emoji = "1.0.0"
-    const val lifecycle = "2.2.0-alpha01"
-    const val navigation = "2.1.0-alpha05"
-    const val recyclerview = "1.1.0-alpha06"
-    const val room = "2.1.0"
-
     const val coroutines = "1.2.1"
+    const val epoxy = "3.6.0"
     const val fast_adapter = "3.3.1"
     const val glide = "4.9.0"
     const val gson = "2.8.5"
     const val koin = "2.0.1"
+    const val kotlin = "1.3.31"
     const val ktlint = "0.33.0"
     const val ktlintGradle = "8.0.0"
     const val leakcanary = "2.0-alpha-2"
-    const val material = "1.1.0-alpha07"
     const val okhttp = "4.0.0-alpha02"
     const val photoview = "2.1.3"
     const val retrofit = "2.6.0"
@@ -66,6 +70,28 @@ object Versions {
 }
 
 object Libraries {
+
+    object AndroidX {
+        const val activity = "androidx.activity:activity-ktx:${Versions.AndroidX.activity}"
+        const val fragment = "androidx.fragment:fragment-ktx:${Versions.AndroidX.fragment}"
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.AndroidX.navigation}"
+        const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.AndroidX.navigation}"
+        const val materialComponent = "com.google.android.material:material:${Versions.AndroidX.material}"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.constraint_layout}"
+        const val core = "androidx.core:core-ktx:${Versions.AndroidX.core}"
+        const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifecycle}"
+        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.AndroidX.lifecycle}"
+        const val emoji = "androidx.emoji:emoji:${Versions.AndroidX.emoji}"
+        const val room = "androidx.room:room-ktx:${Versions.AndroidX.room}"
+        const val roomRuntime = "androidx.room:room-runtime:${Versions.AndroidX.room}"
+        const val roomCompiler = "androidx.room:room-compiler:${Versions.AndroidX.room}"
+        const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.AndroidX.recyclerview}"
+    }
+
+    const val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
+    const val epoxyProcessor = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
+    const val epoxyDataBinding = "com.airbnb.android:epoxy-databinding:${Versions.epoxy}"
+
     const val kotlinStandardLibrary = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
@@ -131,24 +157,6 @@ object Libraries {
 
         const val mockk = "io.mockk:mockk:${Versions.Test.mockk}"
     }
-
-}
-
-object LibrariesAndroidX {
-    const val activity = "androidx.activity:activity-ktx:${Versions.activity}"
-    const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
-    const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
-    const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
-    const val materialComponent = "com.google.android.material:material:${Versions.material}"
-    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
-    const val core = "androidx.core:core-ktx:${Versions.core}"
-    const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
-    const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
-    const val emoji = "androidx.emoji:emoji:${Versions.emoji}"
-    const val room = "androidx.room:room-ktx:${Versions.room}"
-    const val roomRuntime = "androidx.room:room-runtime:${Versions.room}"
-    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
-    const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerview}"
 }
 
 object BuildConfigs {

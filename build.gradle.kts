@@ -11,7 +11,7 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:${Versions.android_gradle}")
         classpath(kotlin("gradle-plugin", Versions.kotlin))
-        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}")
+        classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.AndroidX.navigation}")
         classpath("org.jetbrains.kotlin:kotlin-android-extensions:${Versions.kotlin}")
         classpath("com.google.gms:google-services:4.2.0")
         classpath("io.fabric.tools:gradle:1.29.0")
@@ -44,6 +44,9 @@ subprojects {
         android.set(true)
         reporters.set(setOf(ReporterType.CHECKSTYLE))
         ignoreFailures.set(true)
+        debug.set(false)
+        verbose.set(false)
+        outputToConsole.set(false)
 
         filter {
             exclude("**/generated/**", "**/*.kts")

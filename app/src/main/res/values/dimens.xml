@@ -10,4 +10,6 @@
     <dimen name="spacing_huge">32dp</dimen>
 
     <dimen name="default_icon_size">128dp</dimen>
+    <dimen name="sticky_header_elevation">6dp</dimen>
+    <dimen name="fast_scroller_radius">6dp</dimen>
 </resources>

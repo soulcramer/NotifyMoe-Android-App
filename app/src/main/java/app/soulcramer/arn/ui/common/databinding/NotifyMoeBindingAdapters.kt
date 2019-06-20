@@ -6,6 +6,7 @@ import android.graphics.Outline
 import android.view.Gravity
 import android.view.View
 import android.view.ViewOutlineProvider
+import android.view.ViewTreeObserver
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.doOnLayout
@@ -171,6 +172,10 @@ fun textAppearanceAttr(view: TextView, textAppearanceStyleAttr: Int) {
     "paddingTopSystemWindowInsets",
     "paddingRightSystemWindowInsets",
     "paddingBottomSystemWindowInsets",
+    "paddingLeftGestureInsets",
+    "paddingTopGestureInsets",
+    "paddingRightGestureInsets",
+    "paddingBottomGestureInsets",
     requireAll = false
 )
 fun applySystemWindows(
@@ -178,18 +183,68 @@ fun applySystemWindows(
     systemWindowLeft: Boolean,
     systemWindowTop: Boolean,
     systemWindowRight: Boolean,
-    systemWindowBottom: Boolean
+    systemWindowBottom: Boolean,
+    gestureInsetsLeft: Boolean,
+    gestureInsetsTop: Boolean,
+    gestureInsetsRight: Boolean,
+    gestureInsetsBottom: Boolean
 ) {
+    require(!((systemWindowLeft && gestureInsetsLeft) ||
+        (systemWindowTop && gestureInsetsTop) ||
+        (systemWindowRight && gestureInsetsRight) ||
+        (systemWindowBottom && gestureInsetsBottom))) {
+        "Invalid parameters. Can not request system window and gesture inset handling for the same dimension"
+    }
+
     view.doOnApplyWindowInsets { v, insets, paddingState ->
-        val left = if (systemWindowLeft) insets.systemWindowInsetLeft else 0
-        val top = if (systemWindowTop) insets.systemWindowInsetTop else 0
-        val right = if (systemWindowRight) insets.systemWindowInsetRight else 0
-        val bottom = if (systemWindowBottom) insets.systemWindowInsetBottom else 0
+        val left = when {
+            gestureInsetsLeft -> insets.systemGestureInsets.left
+            systemWindowLeft -> insets.systemWindowInsetLeft
+            else -> 0
+        }
+        val top = when {
+            gestureInsetsTop -> insets.systemGestureInsets.top
+            systemWindowTop -> insets.systemWindowInsetTop
+            else -> 0
+        }
+        val right = when {
+            gestureInsetsRight -> insets.systemGestureInsets.right
+            systemWindowRight -> insets.systemWindowInsetRight
+            else -> 0
+        }
+        val bottom = when {
+            gestureInsetsBottom -> insets.systemGestureInsets.bottom
+            systemWindowBottom -> insets.systemWindowInsetBottom
+            else -> 0
+        }
         v.setPadding(
             paddingState.left + left,
             paddingState.top + top,
             paddingState.right + right,
             paddingState.bottom + bottom
         )
+    }
+}
+
+@BindingAdapter("materialShapeElevationBackground")
+fun materialShapeElevationBackground(view: View, oldValue: Boolean, value: Boolean) {
+    if (oldValue != value && value) {
+        val shapeDrawable = MaterialShapeDrawable.createWithElevationOverlay(view.context, view.elevation)
+        view.background = shapeDrawable
+
+        val vto = view.viewTreeObserver
+        vto.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+            override fun onPreDraw(): Boolean {
+                shapeDrawable.z = view.z
+                if (!view.isAttachedToWindow) {
+                    if (vto.isAlive) {
+                        vto.removeOnPreDrawListener(this)
+                    } else {
+                        view.viewTreeObserver.removeOnPreDrawListener(this)
+                    }
+                }
+                return true
+            }
+        })
     }
 }

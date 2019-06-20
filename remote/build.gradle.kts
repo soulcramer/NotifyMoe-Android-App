@@ -56,7 +56,7 @@ dependencies {
     implementation(Libraries.retrofitGson)
     implementation(Libraries.okhttpLogging)
 
-    implementation(LibrariesAndroidX.livedata)
+    implementation(Libraries.AndroidX.livedata)
 
 
     testImplementation(Libraries.Test.core)

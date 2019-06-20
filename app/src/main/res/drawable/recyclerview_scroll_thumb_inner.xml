@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle"
+    android:tint="?attr/colorPrimaryVariant">
+
+    <solid android:color="#FFFFFF" />
+
+    <corners
+        android:bottomLeftRadius="@dimen/fast_scroller_radius"
+        android:topLeftRadius="@dimen/fast_scroller_radius" />
+
+</shape>

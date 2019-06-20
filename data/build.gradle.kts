@@ -57,8 +57,8 @@ dependencies {
     implementation(Libraries.retrofit)
     implementation(Libraries.koin)
 
-    implementation(LibrariesAndroidX.core)
-    implementation(LibrariesAndroidX.livedata)
+    implementation(Libraries.AndroidX.core)
+    implementation(Libraries.AndroidX.livedata)
 
 
     testImplementation(Libraries.Test.core)

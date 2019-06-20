@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/users_swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:id="@+id/watched_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.airbnb.epoxy.EpoxyRecyclerView
+                android:id="@+id/users_rv"
+                style="@style/Widget.NotifyMoe.RecyclerView.FastScroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:paddingBottomSystemWindowInsets="@{ true }"
+                tools:listitem="@layout/view_holder_user_item" />
+
+            <FrameLayout
+                android:id="@+id/header_holder"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:elevation="@dimen/sticky_header_elevation"
+                app:materialShapeElevationBackground="@{ true }" />
+
+        </FrameLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</layout>

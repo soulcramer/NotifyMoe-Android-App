@@ -1,7 +1,6 @@
 package app.soulcramer.arn.ui
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
 import androidx.lifecycle.LiveData
@@ -9,11 +8,12 @@ import androidx.lifecycle.Observer
 import androidx.navigation.NavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import app.soulcramer.arn.NotifyMoeActivity
 import app.soulcramer.arn.R
 import app.soulcramer.arn.util.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : NotifyMoeActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
 
