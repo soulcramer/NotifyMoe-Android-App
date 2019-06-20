@@ -3,6 +3,7 @@ package app.soulcramer.arn.ui
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
@@ -10,8 +11,8 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import app.soulcramer.arn.NotifyMoeActivity
 import app.soulcramer.arn.R
+import app.soulcramer.arn.databinding.ActivityMainBinding
 import app.soulcramer.arn.util.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : NotifyMoeActivity() {
 
@@ -23,11 +24,12 @@ class HomeActivity : NotifyMoeActivity() {
         R.id.profileFragment
     )
 
+    private lateinit var binding: ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setSupportActionBar(binding.toolbar)
 
         if (savedInstanceState == null) {
             //            setupBottomNavigationBar()
@@ -51,12 +53,11 @@ class HomeActivity : NotifyMoeActivity() {
      * Called on first creation and when restoring state.
      */
     private fun setupBottomNavigationBar() {
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigationView)
 
         val navGraphIds = listOf(R.navigation.nav_profile)
 
         // Setup the bottom navigation view with a list of navigation graphs
-        val controller = bottomNavigationView.setupWithNavController(
+        val controller = binding.bottomNavigationView.setupWithNavController(
             navGraphIds = navGraphIds,
             fragmentManager = supportFragmentManager,
             containerId = R.id.nav_host_container,
@@ -68,7 +69,7 @@ class HomeActivity : NotifyMoeActivity() {
             val appBarConfiguration = AppBarConfiguration(bottomNavDestinations)
             toolbar?.setupWithNavController(navController, appBarConfiguration)
             navController.addOnDestinationChangedListener { _, destination, _ ->
-                bottomNavigationView.isVisible = bottomNavDestinations.contains(destination.id)
+                binding.bottomNavigationView.isVisible = bottomNavDestinations.contains(destination.id)
             }
         })
         currentNavController = controller
