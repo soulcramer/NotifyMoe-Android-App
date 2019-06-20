@@ -16,8 +16,20 @@ class UserDataRepository(
     private val userMapper: UserMapper
 ) : UserRepository {
 
+    override suspend fun searchUser(nickname: String): List<User> {
+        val dataStore = factory.retrieveDataStore()
+        return dataStore.searchUsers(nickname).let { users ->
+            if (dataStore is UserRemoteDataStore) {
+                users.forEach(this@UserDataRepository::saveUserEntity)
+            }
+            users
+        }.let { users ->
+            users.map(userMapper::mapFromEntity)
+        }
+    }
+
     override suspend fun getUser(userId: String): User {
-        val dataStore = factory.retrieveDataStore(userId)
+        val dataStore = factory.retrieveDataStore()
         return dataStore.getUser(userId).let {
             if (dataStore is UserRemoteDataStore) {
                 saveUserEntity(it)

@@ -21,4 +21,8 @@ open class UserRemoteDataStore(private val userRemote: UserRemote) :
     override suspend fun getUser(userId: String): UserEntity {
         return userRemote.getUser(userId)
     }
+
+    override suspend fun searchUsers(nickname: String): List<UserEntity> {
+        return userRemote.searchUsers(nickname)
+    }
 }

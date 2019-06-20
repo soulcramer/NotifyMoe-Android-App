@@ -35,7 +35,7 @@ object Versions {
     const val glide = "4.9.0"
     const val gson = "2.8.5"
     const val koin = "2.0.1"
-    const val kotlin = "1.3.31"
+    const val kotlin = "1.3.40"
     const val ktlint = "0.33.0"
     const val ktlintGradle = "8.0.0"
     const val leakcanary = "2.0-alpha-2"

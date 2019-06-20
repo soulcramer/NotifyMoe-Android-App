@@ -20,19 +20,19 @@ class UserFactory {
         }
 
         fun makeUserEntityList(count: Int): List<UserEntity> {
-            val bufferooEntities = mutableListOf<UserEntity>()
+            val userEntities = mutableListOf<UserEntity>()
             repeat(count) {
-                bufferooEntities.add(makeUserEntity())
+                userEntities.add(makeUserEntity())
             }
-            return bufferooEntities
+            return userEntities
         }
 
         fun makeUserList(count: Int): List<User> {
-            val bufferoos = mutableListOf<User>()
+            val users = mutableListOf<User>()
             repeat(count) {
-                bufferoos.add(makeUser())
+                users.add(makeUser())
             }
-            return bufferoos
+            return users
         }
     }
 }

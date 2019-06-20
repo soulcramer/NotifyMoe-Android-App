@@ -9,19 +9,24 @@ import app.soulcramer.arn.data.model.UserEntity
 interface UserCache {
 
     //    /**
-    //     * Clear all Bufferoos from the cache
+    //     * Clear all Users from the cache
     //     */
-    //    fun clearBufferoos(): Completable
+    //    fun clearUsers(): Completable
 
     /**
-     * Save a given list of Bufferoos to the cache
+     * Save a given user to the cache
      */
     fun saveUser(user: UserEntity)
 
     /**
-     * Retrieve a list of Bufferoos, from the cache
+     * Retrieve a User, from the cache
      */
     suspend fun getUser(userId: String): UserEntity
+
+    /**
+     * Retrieve a list of Users with similar nickname, from the cache
+     */
+    suspend fun searchUsers(nickname: String): List<UserEntity>
 
     /**
      * Checks if an element (User) exists in the cache.
