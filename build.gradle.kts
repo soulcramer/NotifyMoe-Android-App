@@ -66,8 +66,8 @@ detekt {
         "$projectDir/remote/src/main/java"
     )
     config = files("$projectDir/default-detekt-config.yml")
-    baseline = file("$projectDir/reports/baseline.xml")
-    filters = ".*test.*,.*/resources/.*,.*/tmp/.*"
+    isIgnoreFailures = true
+
     reports {
         html {
             enabled = true
@@ -75,7 +75,7 @@ detekt {
         }
         xml {
             enabled = true
-            destination = file("reports/detekt.xml")
+            destination = file("$buildDir/reports/detekt.xml")
         }
     }
 }

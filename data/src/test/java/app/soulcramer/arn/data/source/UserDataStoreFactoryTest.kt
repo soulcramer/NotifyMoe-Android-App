@@ -27,7 +27,7 @@ class UserDataStoreFactoryTest {
         userDataStoreFactory = UserDataStoreFactory(mockUserCache, mockUserCacheDataStore, mockUserRemoteDataStore)
     }
 
-    //<editor-fold desc="Retrieve Data Store">
+    // <editor-fold desc="Retrieve Data Store">
     @Test
     fun `Given user not cached When getting data store Then return remote data store`() {
         runBlocking {
@@ -62,9 +62,9 @@ class UserDataStoreFactoryTest {
             assertThat(userDataStore).isInstanceOf(UserCacheDataStore::class.java)
         }
     }
-    //</editor-fold>
+    // </editor-fold>
 
-    //<editor-fold desc="Retrieve Remote Data Store">
+    // <editor-fold desc="Retrieve Remote Data Store">
     @Test
     fun `Given userDataStoreFactory When remote data store Then return remote data store`() {
         runBlocking {
@@ -74,9 +74,9 @@ class UserDataStoreFactoryTest {
             assertThat(userDataStore).isSameInstanceAs(mockUserRemoteDataStore)
         }
     }
-    //</editor-fold>
+    // </editor-fold>
 
-    //<editor-fold desc="Retrieve Cache Data Store">
+    // <editor-fold desc="Retrieve Cache Data Store">
     @Test
     fun `Given userDataStoreFactory When cache data store Then return cache data store`() {
         runBlocking {
@@ -86,9 +86,9 @@ class UserDataStoreFactoryTest {
             assertThat(userDataStore).isSameInstanceAs(mockUserCacheDataStore)
         }
     }
-    //</editor-fold>
+    // </editor-fold>
 
-    //<editor-fold desc="Stub helper methods">
+    // <editor-fold desc="Stub helper methods">
     private fun stubUserCacheIsCached(isCached: Boolean) {
         coEvery { mockUserCache.isCached() } returns isCached
     }
@@ -96,6 +96,5 @@ class UserDataStoreFactoryTest {
     private fun stubUserCacheIsExpired(isExpired: Boolean) {
         coEvery { mockUserCache.isExpired() } returns isExpired
     }
-    //</editor-fold>
-
+    // </editor-fold>
 }

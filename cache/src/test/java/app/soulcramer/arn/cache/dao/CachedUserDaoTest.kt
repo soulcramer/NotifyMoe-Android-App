@@ -59,7 +59,7 @@ open class CachedUserDaoTest {
         }
     }
 
-    //<editor-fold desc="Get Users">
+    // <editor-fold desc="Get Users">
     @Test
     fun `Given saved users in db When searching with similar name Then return all cached users with the nickname`() {
         runBlocking {
@@ -111,6 +111,5 @@ open class CachedUserDaoTest {
             assertThat(retrievedUsers).isEmpty()
         }
     }
-    //</editor-fold>
-
+    // </editor-fold>
 }

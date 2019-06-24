@@ -1,15 +1,16 @@
 package app.soulcramer.arn.domain.interactor
 
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 /**
- * Executes business logic synchronously or asynchronously using a [Scheduler].
+ * Executes business logic synchronously or asynchronously using a [CoroutineDispatcher].
  */
 abstract class UseCase<in P, R> {
 
-    private val dispatcher = Dispatchers.IO
+    protected val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
     /** Executes the use case asynchronously and places the [Result] in a MutableLiveData
      *

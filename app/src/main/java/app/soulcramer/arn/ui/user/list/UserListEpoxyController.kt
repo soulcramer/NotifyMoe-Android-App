@@ -26,7 +26,6 @@ class UserListEpoxyController : TypedEpoxyController<List<User>>(
                 }
             }
         }
-
     }
 
     interface Callbacks {

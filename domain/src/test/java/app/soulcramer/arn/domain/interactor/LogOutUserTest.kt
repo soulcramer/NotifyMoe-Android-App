@@ -39,5 +39,4 @@ class LogOutUserTest {
     private fun mockPreferenceStorageSetCurrentUserId() {
         every { testPreferenceStorage.currentUserId = null } just Runs
     }
-
 }

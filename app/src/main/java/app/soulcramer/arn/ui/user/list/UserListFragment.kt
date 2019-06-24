@@ -22,7 +22,11 @@ class UserListFragment : NotifyMoeFragment() {
 
     private lateinit var binding: FragmentUserListBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentUserListBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root

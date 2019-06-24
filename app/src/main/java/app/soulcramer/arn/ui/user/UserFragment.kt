@@ -26,7 +26,11 @@ class UserFragment : Fragment() {
 
     private lateinit var binding: FragmentUserBinding
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentUserBinding.inflate(layoutInflater, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root

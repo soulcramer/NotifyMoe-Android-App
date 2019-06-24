@@ -48,5 +48,4 @@ class NotifyMoe : Application() {
             )*/
         }
     }
-
 }

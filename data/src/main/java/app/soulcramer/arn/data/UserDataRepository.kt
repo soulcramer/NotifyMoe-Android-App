@@ -25,9 +25,7 @@ class UserDataRepository(
                 }
             }
             users
-        }.let { users ->
-            users.map(userMapper::mapFromEntity)
-        }
+        }.map(userMapper::mapFromEntity)
     }
 
     override suspend fun getUser(userId: String): User {

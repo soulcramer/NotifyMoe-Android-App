@@ -42,5 +42,4 @@ class UserEntityMapperTest {
         assertThat(userEntity.avatar).isEqualTo(cachedUser.avatar)
         assertThat(userEntity.cover).isEqualTo(cachedUser.cover)
     }
-
 }

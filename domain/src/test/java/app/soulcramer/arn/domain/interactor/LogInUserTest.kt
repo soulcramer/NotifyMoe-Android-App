@@ -56,5 +56,4 @@ class LogInUserTest {
     private fun mockPreferenceStorageSetCurrentUserId() {
         every { testPreferenceStorage.currentUserId = any() } just Runs
     }
-
 }

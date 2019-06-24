@@ -87,7 +87,7 @@ class StatefulView : FrameLayout {
 
     private fun updateState() {
         when (state) {
-            //FIXME: The loading states doesn't show the progress bar even when the show time is
+            // FIXME: The loading states doesn't show the progress bar even when the show time is
             // higher than 500ms.
             is Loading -> {
                 resetSwipeRefresh()

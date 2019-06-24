@@ -25,16 +25,16 @@ class UserRemoteDataStoreTest {
         userRemoteDataStore = UserRemoteDataStore(mockUserRemote)
     }
 
-    //<editor-fold desc="Save Users">
+    // <editor-fold desc="Save Users">
     @Test(expected = UnsupportedOperationException::class)
     fun `Given user to save When saving user Then return throw exception`() {
         runBlocking {
             userRemoteDataStore.saveUser(UserFactory.makeUserEntity())
         }
     }
-    //</editor-fold>
+    // </editor-fold>
 
-    //<editor-fold desc="Get Users">
+    // <editor-fold desc="Get Users">
     @Test
     fun `Given a user id of existant user When getting corresponding user Then return user`() {
         runBlocking {
@@ -62,12 +62,11 @@ class UserRemoteDataStoreTest {
             coEvery { mockUserRemote.getUser(any()) } throws NoSuchElementException()
 
             userRemoteDataStore.getUser("")
-
         }
     }
-    //</editor-fold>
+    // </editor-fold>
 
-    //<editor-fold desc="Search Users">
+    // <editor-fold desc="Search Users">
     @Test
     fun `Given a user nickname When searching user with similar name them Then return list user`() {
         runBlocking {
@@ -100,13 +99,11 @@ class UserRemoteDataStoreTest {
             assertThat(searchedUserEntities).isEmpty()
         }
     }
-    //</editor-fold>
+    // </editor-fold>
 
-    //<editor-fold desc="Stub helper methods">
+    // <editor-fold desc="Stub helper methods">
     private fun stubUserCacheGetUser(user: UserEntity) {
         coEvery { mockUserRemote.getUser(any()) } returns user
-
     }
-    //</editor-fold>
-
+    // </editor-fold>
 }

@@ -8,21 +8,29 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.ceil
 import kotlin.math.floor
 
-class EqualSpacingItemDecoration @JvmOverloads constructor(private val spacing: Int,
-    private var displayMode: Int = -1) : RecyclerView.ItemDecoration() {
+class EqualSpacingItemDecoration @JvmOverloads constructor(
+    private val spacing: Int,
+    private var displayMode: Int = -1
+) : RecyclerView.ItemDecoration() {
 
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView,
-        state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
         val position = parent.getChildViewHolder(view).adapterPosition
         val itemCount = state.itemCount
         val layoutManager = parent.layoutManager
         setSpacingForDirection(outRect, layoutManager, position, itemCount)
     }
 
-    private fun setSpacingForDirection(outRect: Rect,
+    private fun setSpacingForDirection(
+        outRect: Rect,
         layoutManager: RecyclerView.LayoutManager?,
         position: Int,
-        itemCount: Int) {
+        itemCount: Int
+    ) {
 
         // Resolve display mode automatically
         if (displayMode == -1) {

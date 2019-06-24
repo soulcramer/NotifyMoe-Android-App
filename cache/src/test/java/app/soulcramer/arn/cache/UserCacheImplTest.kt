@@ -27,7 +27,7 @@ class UserCacheImplTest {
 
     private val databaseHelper = UserCacheImpl(notifyMoeDatabase, entityMapper, preferencesHelper)
 
-    //<editor-fold desc="Save Users">
+    // <editor-fold desc="Save Users">
     @Test
     fun `Given a user When saving him them Then user should be saved`() {
         runBlocking {
@@ -38,9 +38,9 @@ class UserCacheImplTest {
             checkNumRowsInUsersTable(userCount)
         }
     }
-    //</editor-fold>
+    // </editor-fold>
 
-    //<editor-fold desc="Get Users">
+    // <editor-fold desc="Get Users">
     @Test
     fun `Given saved users in db When searching with similar name Then return all cached users with the nickname`() {
         runBlocking {
@@ -56,9 +56,9 @@ class UserCacheImplTest {
             assertThat(users).containsExactlyElementsIn(userEntities)
         }
     }
-    //</editor-fold>
+    // </editor-fold>
 
-    //<editor-fold desc="Get Users">
+    // <editor-fold desc="Get Users">
 
     @Test
     fun `Given saved users in db When getting all them Then return all cahced users`() {
@@ -74,7 +74,7 @@ class UserCacheImplTest {
             assertThat(users).containsExactlyElementsIn(userEntities)
         }
     }
-    //</editor-fold>
+    // </editor-fold>
 
     private suspend fun insertUsers(cachedUsers: List<CachedUser>) {
         cachedUsers.forEach {

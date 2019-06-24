@@ -10,7 +10,8 @@ class UserFactory {
 
     companion object Factory {
 
-        fun makeUser(id: String = randomUuid(),
+        fun makeUser(
+            id: String = randomUuid(),
             name: String = randomUuid(),
             title: String = randomUuid(),
             avatar: String = randomUuid(),

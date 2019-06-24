@@ -4,29 +4,18 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.cancelChildren
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel<A : BaseAction, S : BaseState>(private val initialState: S) : ViewModel(), CoroutineScope {
-    private val job = SupervisorJob()
+abstract class BaseViewModel<A : BaseAction, S : BaseState>(private val initialState: S) : ViewModel() {
     private val internalState = MutableLiveData<S>().apply { value = initialState }
 
-    override val coroutineContext: CoroutineContext = Dispatchers.Main + job
-
-    val state = internalState as LiveData<S>
+    val state: LiveData<S> = internalState
 
     protected abstract suspend fun onHandle(action: A)
 
-    fun handle(action: A) = launch {
+    fun handle(action: A) = viewModelScope.launch {
         onHandle(action)
-    }
-
-    override fun onCleared() {
-        coroutineContext.cancelChildren()
     }
 
     @MainThread
