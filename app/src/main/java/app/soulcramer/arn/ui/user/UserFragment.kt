@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import app.soulcramer.arn.core.bind
 import app.soulcramer.arn.core.distinctUntilChanged
@@ -21,7 +22,7 @@ import timber.log.Timber
 
 class UserFragment : Fragment() {
 
-    private val userViewModel by sharedViewModel<UserViewModel>()
+    val userViewModel by sharedViewModel<UserViewModel>()
     private val sessionViewModel by sharedViewModel<SessionViewModel>()
 
     private lateinit var binding: FragmentUserBinding
@@ -65,6 +66,7 @@ class UserFragment : Fragment() {
     }
 
     private fun onRoleChanged(role: String) {
+        binding.roleTextView.isVisible = role.isNotEmpty()
         binding.role = role
     }
 

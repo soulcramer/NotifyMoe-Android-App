@@ -35,6 +35,12 @@ allprojects {
         maven(url = "https://jitpack.io")
         maven(url = "https://maven.fabric.io/public")
     }
+
+    configurations.all {
+        resolutionStrategy {
+            force("org.objenesis:objenesis:2.6")
+        }
+    }
 }
 
 subprojects {

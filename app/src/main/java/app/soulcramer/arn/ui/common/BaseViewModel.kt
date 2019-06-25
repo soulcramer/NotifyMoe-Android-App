@@ -1,6 +1,7 @@
 package app.soulcramer.arn.ui.common
 
 import androidx.annotation.MainThread
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -19,7 +20,8 @@ abstract class BaseViewModel<A : BaseAction, S : BaseState>(private val initialS
     }
 
     @MainThread
-    protected fun updateState(reducer: (S) -> S) {
+    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
+    fun updateState(reducer: (S) -> S) {
         val currentState = state.value ?: initialState
 
         internalState.value = reducer(currentState)

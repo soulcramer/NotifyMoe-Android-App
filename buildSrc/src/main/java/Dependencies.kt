@@ -64,9 +64,7 @@ object Versions {
 
         const val robolectric = "4.3"
         const val mockk = "1.9.3"
-
     }
-
 }
 
 object Libraries {
@@ -95,11 +93,7 @@ object Libraries {
     const val kotlinStandardLibrary = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
     const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
-    const val threetenabp = "com.jakewharton.threetenabp:threetenabp:${Versions.threetenabp}"
-    const val threetenbp = "org.threeten:threetenbp:${Versions.threetenbp}:no-tzdb"
-
     // DI
-
     const val koin = "org.koin:koin-core:${Versions.koin}"
     const val koinAndroid = "org.koin:koin-android:${Versions.koin}"
     const val koinAndroidXScope = "org.koin:koin-androidx-scope:${Versions.koin}"
@@ -129,6 +123,7 @@ object Libraries {
     object Test {
         // Core library
         const val core = "androidx.test:core:${Versions.Test.core}"
+        const val fragment = "androidx.fragment:fragment-testing:${Versions.AndroidX.fragment}"
 
         // AndroidJUnitRunner and JUnit Rules
         const val runner = "androidx.test:runner:${Versions.Test.runner}"
@@ -155,13 +150,17 @@ object Libraries {
         const val espressoIdlingRes = "androidx.test.espresso:espresso-idling-resource:${Versions.Test.espresso}"
 
         const val robolectric = "org.robolectric:robolectric:${Versions.Test.robolectric}"
+        const val robolectricAnnotations = "org.robolectric:annotations:${Versions.Test.robolectric}"
 
         const val mockk = "io.mockk:mockk:${Versions.Test.mockk}"
+        const val mockkInstrumented = "io.mockk:mockk-android:${Versions.Test.mockk}"
+
+        const val koin = "org.koin:koin-test:${Versions.koin}"
     }
 }
 
 object BuildConfigs {
     const val compileSdk = 28
-    const val minSdk = 23
+    const val minSdk = 24
     const val targetSdk = 28
 }

@@ -46,8 +46,8 @@ android {
 
     buildTypes {
         getByName("debug") {
-            isShrinkResources = true
-            isMinifyEnabled = true
+            isShrinkResources = false
+            isMinifyEnabled = false
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
@@ -64,11 +64,10 @@ android {
     }
 
     testOptions {
-        execution = "ANDROID_TEST_ORCHESTRATOR"
         animationsDisabled = true
 
         unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
-            setIncludeAndroidResources(true)
+            isIncludeAndroidResources = true
         })
     }
 }
@@ -104,9 +103,6 @@ dependencies {
     implementation(Libraries.AndroidX.lifecycle)
     implementation(Libraries.AndroidX.emoji)
 
-    implementation(Libraries.threetenbp)
-    implementation(Libraries.threetenabp)
-
     // DI
     implementation(Libraries.koinAndroidXScope)
     implementation(Libraries.koinViewModel)
@@ -129,15 +125,36 @@ dependencies {
 
     implementation(Libraries.glideOkhttp)
     implementation(Libraries.timberKt)
+
+    // Test
+    testImplementation(Libraries.Test.core)
+    testImplementation(Libraries.Test.runner)
+    testImplementation(Libraries.Test.truth)
+    testImplementation(Libraries.Test.truthKtx)
+    testImplementation(Libraries.Test.robolectric)
+    testImplementation(Libraries.Test.mockk)
+    testImplementation(Libraries.Test.room)
+
+    androidTestImplementation(Libraries.Test.core)
+    debugImplementation(Libraries.Test.core)
+    androidTestImplementation(Libraries.Test.runner)
+    androidTestImplementation(Libraries.Test.truth)
+    androidTestImplementation(Libraries.Test.truthKtx)
+    androidTestImplementation(Libraries.Test.junitKtx)
+    androidTestImplementation(Libraries.Test.koin)
+    androidTestImplementation(Libraries.Test.mockkInstrumented)
+    androidTestImplementation(Libraries.Test.espressoCore)
+    androidTestImplementation(Libraries.Test.robolectricAnnotations)
+    debugImplementation(Libraries.Test.fragment)
+    androidTestImplementation(Libraries.Test.fragment)
 }
 
 fun <T> propOrDef(propertyName: String, defaultValue: T): T {
     return if (hasProperty(propertyName)) property(propertyName) as T else defaultValue
 }
 
-
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = "0.8.4"
 }
 
 tasks.withType(Test::class.java) {

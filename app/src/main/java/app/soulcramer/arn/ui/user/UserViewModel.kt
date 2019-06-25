@@ -13,7 +13,10 @@ import app.soulcramer.arn.ui.user.UserContext.Action
 import app.soulcramer.arn.ui.user.UserContext.Action.LoadUser
 import app.soulcramer.arn.ui.user.UserContext.State
 
-class UserViewModel(private val getUser: GetUser) : BaseViewModel<Action, State>(State()) {
+class UserViewModel(
+    private val getUser: GetUser,
+    initialState: State = State()
+) : BaseViewModel<Action, State>(initialState) {
 
     override suspend fun onHandle(action: Action) {
         when (action) {

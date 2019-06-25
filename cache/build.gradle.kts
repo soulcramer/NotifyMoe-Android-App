@@ -34,7 +34,7 @@ android {
         animationsDisabled = true
 
         unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
-            setIncludeAndroidResources(true)
+            isIncludeAndroidResources = true
         })
     }
 
@@ -66,11 +66,6 @@ dependencies {
     implementation(Libraries.koin)
     implementation(Libraries.koinAndroid)
 
-    implementation(Libraries.threetenbp)
-    implementation(Libraries.threetenabp)
-
-
-    testImplementation("junit:junit:4.12")
     testImplementation(Libraries.Test.core)
     testImplementation(Libraries.Test.runner)
     testImplementation(Libraries.Test.truth)

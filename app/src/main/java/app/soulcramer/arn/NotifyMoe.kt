@@ -11,6 +11,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.GlobalContext
 import org.koin.core.context.startKoin
 import org.threeten.bp.zone.ZoneRulesProvider
 
@@ -18,12 +19,16 @@ class NotifyMoe : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin {
-            androidLogger()
-            // Android context
-            androidContext(this@NotifyMoe)
-            // modules
-            modules(listOf(remoteModule, cacheModule, appModule))
+
+        // this check is for RoboElectric tests that run in parallel so Koin gets set up multiple times
+        if (GlobalContext.getOrNull() == null) {
+            startKoin {
+                androidLogger()
+                // Android context
+                androidContext(this@NotifyMoe)
+                // modules
+                modules(listOf(remoteModule, cacheModule, appModule))
+            }
         }
 
         // Init ThreeTenABP
@@ -36,16 +41,6 @@ class NotifyMoe : Application() {
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())
-            /*StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
-                .detectAll()
-                .penaltyLog()
-                .build()
-            )
-            StrictMode.setVmPolicy(StrictMode.VmPolicy.Builder()
-                .detectAll()
-                .penaltyLog()
-                .build()
-            )*/
         }
     }
 }
