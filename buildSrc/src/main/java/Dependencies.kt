@@ -161,6 +161,6 @@ object Libraries {
 
 object BuildConfigs {
     const val compileSdk = 28
-    const val minSdk = 24
+    const val minSdk = 26
     const val targetSdk = 28
 }
