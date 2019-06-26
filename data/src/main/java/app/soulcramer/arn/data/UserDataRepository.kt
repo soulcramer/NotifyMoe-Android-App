@@ -6,6 +6,8 @@ import app.soulcramer.arn.data.source.UserDataStoreFactory
 import app.soulcramer.arn.data.source.UserRemoteDataStore
 import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.domain.repository.UserRepository
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.supervisorScope
 
 /**
  * Provides an implementation of the [UserRepository] interface for communicating to and from
@@ -20,8 +22,10 @@ class UserDataRepository(
         val dataStore = factory.retrieveDataStore()
         return dataStore.searchUsers(nickname).let { users ->
             if (dataStore is UserRemoteDataStore) {
-                users.forEach {
-                    saveUserEntity(it)
+                supervisorScope {
+                    launch {
+                        saveUserEntities(users)
+                    }
                 }
             }
             users
@@ -32,7 +36,11 @@ class UserDataRepository(
         val dataStore = factory.retrieveDataStore()
         return dataStore.getUser(userId).let {
             if (dataStore is UserRemoteDataStore) {
-                saveUserEntity(it)
+                supervisorScope {
+                    launch {
+                        saveUserEntity(it)
+                    }
+                }
             }
             it
         }.let { user ->
@@ -42,5 +50,9 @@ class UserDataRepository(
 
     private suspend fun saveUserEntity(user: UserEntity) {
         return factory.retrieveCacheDataStore().saveUser(user)
+    }
+
+    private suspend fun saveUserEntities(users: List<UserEntity>) {
+        return factory.retrieveCacheDataStore().saveUsers(users)
     }
 }

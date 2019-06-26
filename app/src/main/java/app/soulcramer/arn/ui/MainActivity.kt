@@ -7,6 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
 import app.soulcramer.arn.NotifyMoeActivity
@@ -14,7 +15,7 @@ import app.soulcramer.arn.R
 import app.soulcramer.arn.databinding.ActivityMainBinding
 import app.soulcramer.arn.util.setupWithNavController
 
-class HomeActivity : NotifyMoeActivity() {
+class MainActivity : NotifyMoeActivity() {
 
     private var currentNavController: LiveData<NavController>? = null
 
@@ -30,6 +31,9 @@ class HomeActivity : NotifyMoeActivity() {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         setSupportActionBar(binding.toolbar)
+
+        val navController = findNavController(R.id.nav_host_container)
+        binding.toolbar?.setupWithNavController(navController)
 
         if (savedInstanceState == null) {
             //            setupBottomNavigationBar()

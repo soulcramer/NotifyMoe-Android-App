@@ -31,7 +31,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.HomeActivity">
+        tools:context=".ui.MainActivity">
 
         <ImageView
             android:id="@+id/coverImageView"
@@ -46,7 +46,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:url="@{ cover }"
+            app:image="@{ cover }"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <ImageView
@@ -59,7 +59,7 @@
             app:imageSaturateOnLoad="@{true}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:url="@{avatar}"
+            app:image="@{avatar}"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView

@@ -3,7 +3,6 @@ package app.soulcramer.arn.cache.dao
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import app.soulcramer.arn.cache.NotifyMoeDatabase
-import app.soulcramer.arn.cache.model.CachedUser
 import app.soulcramer.arn.cache.test.factory.UserFactory
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.runBlocking
@@ -36,7 +35,7 @@ open class CachedUserDaoTest {
     fun `Given users to save When saving them Then all users should be saved`() {
         runBlocking {
             val cachedUser = UserFactory.makeCachedUser()
-            notifyMoeDatabase.userDao().insertUsers(cachedUser)
+            notifyMoeDatabase.userDao().insertUser(cachedUser)
 
             val users = notifyMoeDatabase.userDao().getAll()
             assertThat(users).isNotEmpty()
@@ -48,13 +47,11 @@ open class CachedUserDaoTest {
         runBlocking {
             val cachedUsers = UserFactory.makeCachedUserList(5)
 
-            cachedUsers.forEach {
-                notifyMoeDatabase.userDao().insertUsers(it)
-            }
+            notifyMoeDatabase.userDao().insertUsers(cachedUsers)
 
             val retrievedUsers = notifyMoeDatabase.userDao().getAll()
             assertThat(retrievedUsers).isEqualTo(
-                cachedUsers.sortedWith(compareBy({ it.name }, { it.name }))
+                cachedUsers.sortedWith(compareBy({ it.nickname }, { it.nickname }))
             )
         }
     }
@@ -67,13 +64,11 @@ open class CachedUserDaoTest {
             val cachedUsers = UserFactory.makeCachedUserList(2).toMutableList()
             val similarNameUsers = UserFactory.makeCachedUserListWithCloseNickname(2, nickname)
             cachedUsers += similarNameUsers
-            cachedUsers.forEach { cachedUser: CachedUser ->
-                notifyMoeDatabase.userDao().insertUsers(cachedUser)
-            }
+            notifyMoeDatabase.userDao().insertUsers(cachedUsers)
 
             val retrievedUsers = notifyMoeDatabase.userDao().searchByNickname(nickname)
             assertThat(retrievedUsers).isEqualTo(
-                similarNameUsers.sortedWith(compareBy({ it.name }, { it.name }))
+                similarNameUsers.sortedWith(compareBy({ it.nickname }, { it.nickname }))
             )
         }
     }
@@ -85,13 +80,11 @@ open class CachedUserDaoTest {
             val cachedUsers = UserFactory.makeCachedUserList(2).toMutableList()
             val similarNameUsers = UserFactory.makeCachedUserListWithCloseNickname(2, nickname)
             cachedUsers += similarNameUsers
-            cachedUsers.forEach { cachedUser: CachedUser ->
-                notifyMoeDatabase.userDao().insertUsers(cachedUser)
-            }
+            notifyMoeDatabase.userDao().insertUsers(cachedUsers)
 
             val retrievedUsers = notifyMoeDatabase.userDao().searchByNickname("")
             assertThat(retrievedUsers).isEqualTo(
-                cachedUsers.sortedWith(compareBy({ it.name }, { it.name }))
+                cachedUsers.sortedWith(compareBy({ it.nickname }, { it.nickname }))
             )
         }
     }
@@ -100,13 +93,11 @@ open class CachedUserDaoTest {
     fun `Given saved users in db without similar nickname When searching with similar name Then return empty list`() {
         runBlocking {
             val cachedUsers = UserFactory.makeCachedUserList(4).toMutableList()
-            cachedUsers.forEach { cachedUser: CachedUser ->
-                notifyMoeDatabase.userDao().insertUsers(cachedUser)
-            }
+            notifyMoeDatabase.userDao().insertUsers(cachedUsers)
 
             val retrievedUsers = notifyMoeDatabase.userDao().searchByNickname("qzdqzd")
             assertThat(retrievedUsers).isNotEqualTo(
-                cachedUsers.sortedWith(compareBy({ it.name }, { it.name }))
+                cachedUsers.sortedWith(compareBy({ it.nickname }, { it.nickname }))
             )
             assertThat(retrievedUsers).isEmpty()
         }

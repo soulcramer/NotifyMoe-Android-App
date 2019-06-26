@@ -10,7 +10,7 @@ object NotifyMoeTypeConverters {
 
     @TypeConverter
     @JvmStatic
-    fun toOffsetDateTime(value: String?) = value?.let { formatter.parse(value, OffsetDateTime::from) }
+    fun toOffsetDateTime(value: String?): OffsetDateTime? = value?.let { formatter.parse(value, OffsetDateTime::from) }
 
     @TypeConverter
     @JvmStatic

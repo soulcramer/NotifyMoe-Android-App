@@ -44,7 +44,7 @@
             android:contentDescription="@string/user_avatar_description"
             android:scaleType="centerCrop"
             app:imageSaturateOnLoad="@{true}"
-            app:url="@{avatarUrl}"
+            app:image="@{avatarUrl}"
             android:transitionName="@{avatarTransitionName}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

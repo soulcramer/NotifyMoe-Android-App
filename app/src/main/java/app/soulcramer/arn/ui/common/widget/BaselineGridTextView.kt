@@ -1,4 +1,4 @@
-package app.soulcramer.arn.ui.common
+package app.soulcramer.arn.ui.common.widget
 
 import android.content.Context
 import android.content.res.TypedArray

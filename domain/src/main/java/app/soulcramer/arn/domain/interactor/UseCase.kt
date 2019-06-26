@@ -12,11 +12,9 @@ abstract class UseCase<in P, R> {
 
     protected val dispatcher: CoroutineDispatcher = Dispatchers.IO
 
-    /** Executes the use case asynchronously and places the [Result] in a MutableLiveData
-     *
+    /**
+     * Executes the use case asynchronously and places the [Result] in a MutableLiveData
      * @param parameters the input parameters to run the use case with
-     * @param result the MutableLiveData where the result is posted to
-     *
      */
     suspend operator fun invoke(parameters: P): Result<R> {
         // result.value = Result.Loading add data to Loading to avoid glitches

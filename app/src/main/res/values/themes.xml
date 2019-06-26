@@ -6,7 +6,8 @@
         <!-- Customize your theme here. -->
         <item name="toolbarStyle">@style/Widget.MaterialComponents.Toolbar.Surface</item>
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">?colorPrimaryVariant</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">?android:colorBackground</item>

@@ -26,7 +26,8 @@ class UserEntityMapperTest {
         assertThat(userEntity.id).isEqualTo(userModel.id)
         assertThat(userEntity.nickname).isEqualTo(userModel.nick)
         assertThat(userEntity.role).isEqualTo(userModel.role)
-        assertThat(userEntity.avatar).isEqualTo("${userEntityMapper.avatarImageUrl}${userModel.id}.webp")
-        assertThat(userEntity.cover).isEqualTo("${userEntityMapper.coverImageUrl}${userModel.id}.webp")
+        assertThat(userEntity.hasAvatar).isEqualTo(true)
+        assertThat(userEntity.hasCover).isEqualTo(false)
+        assertThat(userEntity.proExpiresDate).isEqualTo(userModel.proExpires)
     }
 }

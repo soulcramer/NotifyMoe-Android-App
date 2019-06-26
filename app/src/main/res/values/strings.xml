@@ -47,4 +47,17 @@
     <string name="genre_label_supernatural">Supernatural</string>
     <string name="genre_label_vampire">Vampire</string>
     <string name="user_avatar_description">User profile image</string>
+    <string name="popup_sort_alpha">A-Z</string>
+    <string name="filter_users">Filter users</string>
+    <string name="header_more">More</string>
+
+    <plurals name="header_user_count">
+        <item quantity="one">%d user</item>
+        <item quantity="other">%d users</item>
+    </plurals>
+
+    <plurals name="header_user_count_filtered">
+        <item quantity="one">%d user &lt;small>(filtered)&lt;/small></item>
+        <item quantity="other">%d users &lt;small>(filtered)&lt;/small></item>
+    </plurals>
 </resources>

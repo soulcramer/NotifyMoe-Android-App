@@ -3,8 +3,6 @@ package app.soulcramer.arn.common
 import android.graphics.Rect
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.transition.AutoTransition
 import androidx.transition.TransitionManager
 
@@ -16,27 +14,30 @@ fun View.getBounds(rect: Rect) {
     rect.set(left, top, right, bottom)
 }
 
-fun View.doOnApplyWindowInsets(f: (View, WindowInsetsCompat, ViewPaddingState) -> Unit) {
-    // Create a snapshot of the view's padding state
-    val paddingState = createStateForView(this)
-    ViewCompat.setOnApplyWindowInsetsListener(this) { v, insets ->
-        f(v, insets, paddingState)
-        insets
-    }
-    requestApplyInsetsWhenAttached()
+class InitialPadding(val left: Int, val top: Int, val right: Int, val bottom: Int)
+
+class InitialMargin(val left: Int, val top: Int, val right: Int, val bottom: Int)
+
+internal fun recordInitialPaddingForView(view: View) = InitialPadding(
+    view.paddingLeft, view.paddingTop, view.paddingRight, view.paddingBottom
+)
+
+internal fun recordInitialMarginForView(view: View): InitialMargin {
+    val lp = view.layoutParams as? ViewGroup.MarginLayoutParams
+        ?: throw IllegalArgumentException("Invalid view layout params")
+    return InitialMargin(lp.leftMargin, lp.topMargin, lp.rightMargin, lp.bottomMargin)
 }
 
-/**
- * Call [View.requestApplyInsets] in a safe away. If we're attached it calls it straight-away.
- * If not it sets an [View.OnAttachStateChangeListener] and waits to be attached before calling
- * [View.requestApplyInsets].
- */
 fun View.requestApplyInsetsWhenAttached() {
     if (isAttachedToWindow) {
+        // We're already attached, just request as normal
         requestApplyInsets()
     } else {
+        // We're not attached to the hierarchy, add a listener to
+        // request when we are
         addOnAttachStateChangeListener(object : View.OnAttachStateChangeListener {
             override fun onViewAttachedToWindow(v: View) {
+                v.removeOnAttachStateChangeListener(this)
                 v.requestApplyInsets()
             }
 
@@ -44,15 +45,3 @@ fun View.requestApplyInsetsWhenAttached() {
         })
     }
 }
-
-private fun createStateForView(view: View) = ViewPaddingState(view.paddingLeft,
-    view.paddingTop, view.paddingRight, view.paddingBottom, view.paddingStart, view.paddingEnd)
-
-data class ViewPaddingState(
-    val left: Int,
-    val top: Int,
-    val right: Int,
-    val bottom: Int,
-    val start: Int,
-    val end: Int
-)

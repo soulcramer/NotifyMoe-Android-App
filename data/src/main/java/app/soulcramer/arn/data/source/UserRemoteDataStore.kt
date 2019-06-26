@@ -15,6 +15,10 @@ open class UserRemoteDataStore(private val userRemote: UserRemote) :
         throw UnsupportedOperationException()
     }
 
+    override suspend fun saveUsers(users: List<UserEntity>) {
+        throw UnsupportedOperationException()
+    }
+
     /**
      * Retrieve a [UserEntity] instances from the API
      */

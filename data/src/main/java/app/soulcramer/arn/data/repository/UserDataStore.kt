@@ -11,6 +11,8 @@ interface UserDataStore {
 
     suspend fun saveUser(user: UserEntity)
 
+    suspend fun saveUsers(users: List<UserEntity>)
+
     suspend fun getUser(userId: String): UserEntity
 
     suspend fun searchUsers(nickname: String): List<UserEntity>

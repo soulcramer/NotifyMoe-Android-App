@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.navArgs
 import app.soulcramer.arn.core.bind
 import app.soulcramer.arn.core.distinctUntilChanged
 import app.soulcramer.arn.core.map
@@ -15,7 +16,6 @@ import app.soulcramer.arn.ui.common.Empty
 import app.soulcramer.arn.ui.common.Error
 import app.soulcramer.arn.ui.common.Loading
 import app.soulcramer.arn.ui.common.ViewState
-import app.soulcramer.arn.ui.session.SessionViewModel
 import app.soulcramer.arn.ui.user.UserContext.Action.LoadUser
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
@@ -23,7 +23,7 @@ import timber.log.Timber
 class UserFragment : Fragment() {
 
     val userViewModel by sharedViewModel<UserViewModel>()
-    private val sessionViewModel by sharedViewModel<SessionViewModel>()
+    private val args by navArgs<UserFragmentArgs>()
 
     private lateinit var binding: FragmentUserBinding
 
@@ -40,19 +40,13 @@ class UserFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sessionViewModel.state.map { it.loggedUserId }.distinctUntilChanged().bind(this, ::onLoggedUserChanged)
-
         userViewModel.state.map { it.avatar }.distinctUntilChanged().bind(this, ::onAvatarChanged)
         userViewModel.state.map { it.cover }.distinctUntilChanged().bind(this, ::onCoverChanged)
         userViewModel.state.map { it.name }.distinctUntilChanged().bind(this, ::onNameChanged)
         userViewModel.state.map { it.title }.distinctUntilChanged().bind(this, ::onRoleChanged)
         userViewModel.state.map { it.status }.distinctUntilChanged().bind(this, ::onStatusChanged)
-    }
 
-    private fun onLoggedUserChanged(loggedUserId: String?) {
-        if (loggedUserId != null) {
-            userViewModel.handle(LoadUser(loggedUserId))
-        }
+        userViewModel.handle(LoadUser(args.userId))
     }
 
     private fun onStatusChanged(status: ViewState) {

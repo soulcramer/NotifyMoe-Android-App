@@ -19,6 +19,11 @@ interface UserCache {
     suspend fun saveUser(user: UserEntity)
 
     /**
+     * Save a given user list to the cache
+     */
+    suspend fun saveUsers(users: List<UserEntity>)
+
+    /**
      * Retrieve a User, from the cache
      */
     suspend fun getUser(userId: String): UserEntity

@@ -13,6 +13,8 @@ file_list = [
 "domain/build/reports/ktlint/ktlintMainSourceSetCheck.xml",
 "domain/build/reports/ktlint/ktlintTestSourceSetCheck.xml",
 "core/build/reports/ktlint/ktlintMainSourceSetCheck.xml",
+"app/build/reports/ktlint/ktlintAndroidTestSourceSetCheck.xml",
+"app/build/reports/ktlint/ktlintTestSourceSetCheck.xml",
 "app/build/reports/ktlint/ktlintMainSourceSetCheck.xml"
 ]
 

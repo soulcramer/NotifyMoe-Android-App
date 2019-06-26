@@ -37,9 +37,10 @@ class UserEntityMapperTest {
 
     private fun assertUserDataEquality(userEntity: UserEntity, cachedUser: CachedUser) {
         assertThat(userEntity.id).isEqualTo(cachedUser.id)
-        assertThat(userEntity.nickname).isEqualTo(cachedUser.name)
-        assertThat(userEntity.role).isEqualTo(cachedUser.title)
-        assertThat(userEntity.avatar).isEqualTo(cachedUser.avatar)
-        assertThat(userEntity.cover).isEqualTo(cachedUser.cover)
+        assertThat(userEntity.nickname).isEqualTo(cachedUser.nickname)
+        assertThat(userEntity.role).isEqualTo(cachedUser.role)
+        assertThat(userEntity.proExpiresDate).isEqualTo(cachedUser.proExpiresDate)
+        assertThat(userEntity.hasAvatar).isEqualTo(cachedUser.hasAvatar)
+        assertThat(userEntity.hasCover).isEqualTo(cachedUser.hasCover)
     }
 }

@@ -1,8 +1,10 @@
 package app.soulcramer.arn.cache.test.factory
 
 import app.soulcramer.arn.cache.model.CachedUser
+import app.soulcramer.arn.core.test.factory.DataFactory.Factory.randomBoolean
 import app.soulcramer.arn.core.test.factory.DataFactory.Factory.randomUuid
 import app.soulcramer.arn.data.model.UserEntity
+import java.time.OffsetDateTime
 
 /**
  * Factory class for User related instances
@@ -10,11 +12,25 @@ import app.soulcramer.arn.data.model.UserEntity
 object UserFactory {
 
     fun makeCachedUser(nickname: String = randomUuid()): CachedUser {
-        return CachedUser(randomUuid(), nickname, randomUuid(), randomUuid(), randomUuid())
+        return CachedUser(
+            randomUuid(),
+            nickname,
+            randomUuid(),
+            OffsetDateTime.now(),
+            randomBoolean(),
+            randomBoolean()
+        )
     }
 
     fun makeUserEntity(nickname: String = randomUuid()): UserEntity {
-        return UserEntity(randomUuid(), nickname, randomUuid(), randomUuid(), randomUuid())
+        return UserEntity(
+            randomUuid(),
+            nickname,
+            randomUuid(),
+            OffsetDateTime.now(),
+            randomBoolean(),
+            randomBoolean()
+        )
     }
 
     fun makeUserEntityList(count: Int): List<UserEntity> {

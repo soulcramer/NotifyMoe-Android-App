@@ -18,7 +18,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [23])
+@Config(sdk = [26])
 class UserViewModelTest {
 
     private lateinit var mockGetUser: GetUser
@@ -59,10 +59,10 @@ class UserViewModelTest {
         val state = userViewModel.state.value
 
         assertThat(state?.status).isEqualTo(Data)
-        assertThat(state?.avatar).isEqualTo(testUser.avatar)
-        assertThat(state?.cover).isEqualTo(testUser.cover)
-        assertThat(state?.name).isEqualTo(testUser.name)
-        assertThat(state?.title).isEqualTo(testUser.title)
+        assertThat(state?.avatar).isEqualTo(testUser.avatarUrl)
+        assertThat(state?.cover).isEqualTo(testUser.coverUrl)
+        assertThat(state?.name).isEqualTo(testUser.nickname)
+        assertThat(state?.title).isEqualTo(testUser.role)
     }
 
     private fun mockGetUserFailure() {

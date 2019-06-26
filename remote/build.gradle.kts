@@ -4,6 +4,7 @@ plugins {
     id("com.android.library")
     id("jacoco")
     kotlin("android")
+    kotlin("kapt")
 }
 
 android {
@@ -35,7 +36,7 @@ android {
         animationsDisabled = true
 
         unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
-            setIncludeAndroidResources(true)
+            isIncludeAndroidResources = true
         })
     }
 
@@ -45,6 +46,10 @@ android {
     }
 }
 
+kapt {
+    correctErrorTypes = true
+}
+
 dependencies {
 
     implementation(project(Modules.data))
@@ -52,12 +57,13 @@ dependencies {
 
     implementation(Libraries.koin)
 
+    implementation(Libraries.moshi)
+    kapt(Libraries.moshiCodeGen)
     implementation(Libraries.retrofit)
-    implementation(Libraries.retrofitGson)
+    implementation(Libraries.retrofitMoshi)
     implementation(Libraries.okhttpLogging)
 
     implementation(Libraries.AndroidX.livedata)
-
 
     testImplementation(Libraries.Test.core)
     testImplementation(Libraries.Test.runner)
@@ -66,7 +72,6 @@ dependencies {
     testImplementation(Libraries.Test.robolectric)
     testImplementation(Libraries.Test.mockk)
 }
-
 
 jacoco {
     toolVersion = "0.8.0"
@@ -108,4 +113,3 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         include("jacoco/testDebugUnitTest.exec", "outputs/code-coverage/connected/*coverage.ec")
     })
 }
-

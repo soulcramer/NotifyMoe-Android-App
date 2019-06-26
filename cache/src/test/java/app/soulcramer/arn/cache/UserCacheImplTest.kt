@@ -14,7 +14,7 @@ import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [23])
+@Config(sdk = [26])
 class UserCacheImplTest {
 
     private var notifyMoeDatabase = Room.inMemoryDatabaseBuilder(
@@ -76,10 +76,12 @@ class UserCacheImplTest {
     }
     // </editor-fold>
 
+    private suspend fun insertUser(cachedUser: CachedUser) {
+        notifyMoeDatabase.userDao().insertUser(cachedUser)
+    }
+
     private suspend fun insertUsers(cachedUsers: List<CachedUser>) {
-        cachedUsers.forEach {
-            notifyMoeDatabase.userDao().insertUsers(it)
-        }
+        notifyMoeDatabase.userDao().insertUsers(cachedUsers)
     }
 
     private suspend fun checkNumRowsInUsersTable(expectedRows: Int) {

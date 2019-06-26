@@ -2,6 +2,7 @@ package app.soulcramer.arn.cache.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.time.OffsetDateTime
 
 /**
  * Model used solely for the caching of a user
@@ -10,8 +11,9 @@ import androidx.room.PrimaryKey
 data class CachedUser(
     @PrimaryKey
     val id: String,
-    val name: String,
-    val title: String,
-    val avatar: String,
-    val cover: String
+    val nickname: String,
+    val role: String,
+    val proExpiresDate: OffsetDateTime?,
+    val hasAvatar: Boolean,
+    val hasCover: Boolean
 )

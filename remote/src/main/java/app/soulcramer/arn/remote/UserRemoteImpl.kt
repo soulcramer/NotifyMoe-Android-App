@@ -3,7 +3,8 @@ package app.soulcramer.arn.remote
 import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.data.repository.UserRemote
 import app.soulcramer.arn.remote.mapper.UserEntityMapper
-import app.soulcramer.arn.remote.model.UserModel
+import app.soulcramer.arn.remote.mapper.UserModelMapper
+import app.soulcramer.arn.remote.model.user.UserModel
 
 /**
  * Remote implementation for retrieving User instance. This class implements the
@@ -12,7 +13,8 @@ import app.soulcramer.arn.remote.model.UserModel
  */
 class UserRemoteImpl(
     private val service: NotifyMoeService,
-    private val entityMapper: UserEntityMapper
+    private val entityMapper: UserEntityMapper,
+    private val modelMapper: UserModelMapper
 ) : UserRemote {
 
     /**
@@ -38,6 +40,11 @@ class UserRemoteImpl(
      * Retrieve a [UserEntity] instances from the [NotifyMoeService].
      */
     override suspend fun searchUsers(nickname: String): List<UserEntity> {
-        return emptyList()
+        return getAllUsers()
+    }
+
+    suspend fun getAllUsers(): List<UserEntity> {
+        val users = service.getAllUsers().data.allUser
+        return users.map(modelMapper::mapFromRemote).map(entityMapper::mapFromRemote)
     }
 }

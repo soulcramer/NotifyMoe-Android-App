@@ -29,6 +29,14 @@ class UserCacheImpl(
     }
 
     /**
+     * Save the given list of [UserEntity] instances to the database.
+     */
+    override suspend fun saveUsers(users: List<UserEntity>) {
+        val cachedUsers = users.map(entityMapper::mapToCached)
+        return saveCachedUsers(cachedUsers)
+    }
+
+    /**
      * Retrieve a list of [UserEntity] instances from the database.
      */
     override suspend fun getUser(userId: String): UserEntity {
@@ -53,7 +61,14 @@ class UserCacheImpl(
      * Helper method for saving a [CachedUser] instance to the database.
      */
     private suspend fun saveUser(cachedUser: CachedUser) {
-        userDao.insertUsers(cachedUser)
+        userDao.insertUser(cachedUser)
+    }
+
+    /**
+     * Helper method for saving a [CachedUser] instance to the database.
+     */
+    private suspend fun saveCachedUsers(cachedUsers: List<CachedUser>) {
+        userDao.insertUsers(cachedUsers)
     }
 
     /**

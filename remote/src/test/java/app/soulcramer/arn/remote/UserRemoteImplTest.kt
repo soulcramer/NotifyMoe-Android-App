@@ -2,7 +2,8 @@ package app.soulcramer.arn.remote
 
 import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.remote.mapper.UserEntityMapper
-import app.soulcramer.arn.remote.model.UserModel
+import app.soulcramer.arn.remote.mapper.UserModelMapper
+import app.soulcramer.arn.remote.model.user.UserModel
 import app.soulcramer.arn.remote.test.factory.UserFactory
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery
@@ -19,6 +20,9 @@ import org.junit.runners.JUnit4
 class UserRemoteImplTest {
 
     private lateinit var entityMapper: UserEntityMapper
+
+    private lateinit var modelMapper: UserModelMapper
+
     @MockK
     private lateinit var notifyMoeService: NotifyMoeService
 
@@ -28,7 +32,8 @@ class UserRemoteImplTest {
     fun setUp() {
         notifyMoeService = mockk()
         entityMapper = UserEntityMapper()
-        userRemoteImpl = UserRemoteImpl(notifyMoeService, entityMapper)
+        modelMapper = UserModelMapper()
+        userRemoteImpl = UserRemoteImpl(notifyMoeService, entityMapper, modelMapper)
     }
 
     // <editor-fold desc="Get User">

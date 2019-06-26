@@ -23,6 +23,14 @@ open class UserCacheDataStore(private val userCache: UserCache) : UserDataStore 
     }
 
     /**
+     * Save a given [UserEntity] instance to the cache
+     */
+    override suspend fun saveUsers(users: List<UserEntity>) {
+        userCache.saveUsers(users)
+        userCache.setLastCacheTime(System.currentTimeMillis())
+    }
+
+    /**
      * Retrieve a [UserEntity] instance from the cache
      */
     override suspend fun getUser(userId: String): UserEntity {

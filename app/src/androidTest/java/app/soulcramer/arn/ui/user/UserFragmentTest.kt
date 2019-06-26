@@ -1,5 +1,6 @@
 package app.soulcramer.arn.ui.user
 
+import androidx.core.os.bundleOf
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
@@ -8,6 +9,7 @@ import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.soulcramer.arn.R
 import app.soulcramer.arn.cache.cacheModule
+import app.soulcramer.arn.core.test.factory.DataFactory
 import app.soulcramer.arn.di.appModule
 import app.soulcramer.arn.domain.interactor.GetUser
 import app.soulcramer.arn.domain.interactor.Result
@@ -45,11 +47,15 @@ class UserFragmentTest : KoinTest {
 
     @Test
     fun givenSuccessUserInfo_whenShowingHim_thenAllInfoShown() = runBlocking<Unit> {
-        val testUser = UserFactory.makeUser(name = "Scott", title = "editor")
-        val testState = UserContext.State(name = testUser.name, title = testUser.title, status = Data)
+        val testUser = UserFactory.makeUser(name = "Scott", role = "editor")
+        val testState = UserContext.State(name = testUser.nickname, title = testUser.role, status = Data)
         stubGetUserSuccess(testUser)
 
-        launchFragmentInContainer<UserFragment>().onFragment {
+        val fragmentBundle = bundleOf(
+            "userId" to DataFactory.randomUuid(),
+            "userNickname" to "Scott"
+        )
+        launchFragmentInContainer<UserFragment>(fragmentBundle).onFragment {
             it.userViewModel.updateState { testState }
         }
         delay(TimeUnit.SECONDS.toMillis(1))
@@ -60,11 +66,15 @@ class UserFragmentTest : KoinTest {
 
     @Test
     fun givenErrorUserInfo_whenShowingHim_thenShowError() = runBlocking<Unit> {
-        val testUser = UserFactory.makeUser(name = "Scott", title = "editor")
-        val testState = UserContext.State(name = testUser.name, title = testUser.title, status = Error)
+        val testUser = UserFactory.makeUser(name = "Scott", role = "editor")
+        val testState = UserContext.State(name = testUser.nickname, title = testUser.role, status = Error)
         stubGetUserFailure(Exception())
 
-        launchFragmentInContainer<UserFragment>().onFragment {
+        val fragmentBundle = bundleOf(
+            "userId" to DataFactory.randomUuid(),
+            "userNickname" to "Scott"
+        )
+        launchFragmentInContainer<UserFragment>(fragmentBundle).onFragment {
             it.userViewModel.updateState { testState }
         }
         delay(TimeUnit.SECONDS.toMillis(1))
@@ -76,11 +86,15 @@ class UserFragmentTest : KoinTest {
 
     @Test
     fun givenErrorUserInfo_whenShowingHim_thenShowLoading() = runBlocking<Unit> {
-        val testUser = UserFactory.makeUser(name = "Scott", title = "editor")
-        val testState = UserContext.State(name = testUser.name, title = testUser.title, status = Loading)
+        val testUser = UserFactory.makeUser(name = "Scott", role = "editor")
+        val testState = UserContext.State(name = testUser.nickname, title = testUser.role, status = Loading)
         stubGetUserLoading()
 
-        launchFragmentInContainer<UserFragment>().onFragment {
+        val fragmentBundle = bundleOf(
+            "userId" to DataFactory.randomUuid(),
+            "userNickname" to "Scott"
+        )
+        launchFragmentInContainer<UserFragment>(fragmentBundle).onFragment {
             it.userViewModel.updateState { testState }
         }
         delay(TimeUnit.SECONDS.toMillis(1))

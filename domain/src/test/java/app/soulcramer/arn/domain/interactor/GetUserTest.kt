@@ -50,7 +50,7 @@ class GetUserTest {
             assertThat(result).isInstanceOf(Success::class.java)
 
             val user = (result as Success).data
-            assertThat(user.name).isEqualTo(testUser.name)
+            assertThat(user.nickname).isEqualTo(testUser.nickname)
         }
     }
 }

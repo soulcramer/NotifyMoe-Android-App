@@ -21,7 +21,7 @@
             android:name="android.test.runner"
             android:required="false" />
         <activity
-            android:name="app.soulcramer.arn.ui.HomeActivity"
+            android:name="app.soulcramer.arn.ui.MainActivity"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

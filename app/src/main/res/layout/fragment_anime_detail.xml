@@ -72,7 +72,7 @@
 
                 <!-- The text color is set to an opaque color for Emoji.
              The caption text appearance is set via spans. -->
-                <app.soulcramer.arn.ui.common.BaselineGridTextView
+                <app.soulcramer.arn.ui.common.widget.BaselineGridTextView
                     android:id="@+id/genres"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
                     tools:text="Drama // Fantasy" />
 
 
-                <app.soulcramer.arn.ui.common.BaselineGridTextView
+                <app.soulcramer.arn.ui.common.widget.BaselineGridTextView
                     android:id="@+id/synopsis"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"

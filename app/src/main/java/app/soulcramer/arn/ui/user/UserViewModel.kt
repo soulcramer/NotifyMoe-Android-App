@@ -39,10 +39,10 @@ class UserViewModel(
 
     private fun State.copyWithNewUser(user: User): State {
         return copy(
-            title = user.title,
-            name = user.name,
-            avatar = user.avatar,
-            cover = user.cover,
+            title = user.role,
+            name = user.nickname,
+            avatar = user.avatarUrl,
+            cover = user.coverUrl,
             status = Data
         )
     }

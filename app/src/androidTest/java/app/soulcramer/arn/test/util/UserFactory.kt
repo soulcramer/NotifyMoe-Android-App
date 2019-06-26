@@ -1,7 +1,9 @@
 package app.soulcramer.arn.test.util
 
+import app.soulcramer.arn.core.test.factory.DataFactory.Factory.randomBoolean
 import app.soulcramer.arn.core.test.factory.DataFactory.Factory.randomUuid
 import app.soulcramer.arn.domain.model.User
+import java.time.OffsetDateTime
 
 /**
  * Factory class for User related instances
@@ -10,11 +12,12 @@ object UserFactory {
     fun makeUser(
         id: String = randomUuid(),
         name: String = randomUuid(),
-        title: String = randomUuid(),
-        avatar: String = randomUuid(),
-        cover: String = randomUuid()
+        role: String = randomUuid(),
+        proExpiresDate: OffsetDateTime = OffsetDateTime.now(),
+        hasAvatar: Boolean = randomBoolean(),
+        hasCover: Boolean = randomBoolean()
     ): User {
-        return User(id, name, title, avatar, cover)
+        return User(id, name, role, proExpiresDate, hasAvatar, hasCover)
     }
 
     fun makeUserList(count: Int): List<User> {
