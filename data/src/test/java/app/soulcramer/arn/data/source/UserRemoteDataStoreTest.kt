@@ -66,41 +66,6 @@ class UserRemoteDataStoreTest {
     }
     // </editor-fold>
 
-    // <editor-fold desc="Search Users">
-    @Test
-    fun `Given a user nickname When searching user with similar name them Then return list user`() {
-        runBlocking {
-            coEvery { mockUserRemote.searchUsers(any()) } returns UserFactory.makeUserEntityList(4)
-
-            val searchedUserEntities = userRemoteDataStore.searchUsers("qzdq")
-
-            assertThat(searchedUserEntities).hasSize(4)
-        }
-    }
-
-    @Test
-    fun `Given a non existant user nickname When searching user with similar name them Then return empty user`() {
-        runBlocking {
-            coEvery { mockUserRemote.searchUsers(any()) } returns emptyList()
-
-            val searchedUserEntities = userRemoteDataStore.searchUsers("qzdq")
-
-            assertThat(searchedUserEntities).isEmpty()
-        }
-    }
-
-    @Test
-    fun `Given a empty user nickname When searching user with similar name them Then return empty list`() {
-        runBlocking {
-            coEvery { mockUserRemote.searchUsers(any()) } returns emptyList()
-
-            val searchedUserEntities = userRemoteDataStore.searchUsers("")
-
-            assertThat(searchedUserEntities).isEmpty()
-        }
-    }
-    // </editor-fold>
-
     // <editor-fold desc="Stub helper methods">
     private fun stubUserCacheGetUser(user: UserEntity) {
         coEvery { mockUserRemote.getUser(any()) } returns user
