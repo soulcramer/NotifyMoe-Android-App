@@ -1,5 +1,6 @@
 package app.soulcramer.arn.data
 
+import androidx.paging.DataSource
 import app.soulcramer.arn.data.mapper.UserMapper
 import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.data.source.UserDataStoreFactory
@@ -18,18 +19,15 @@ class UserDataRepository(
     private val userMapper: UserMapper
 ) : UserRepository {
 
-    override suspend fun searchUser(nickname: String): List<User> {
-        val dataStore = factory.retrieveDataStore()
-        return dataStore.searchUsers(nickname).let { users ->
-            if (dataStore is UserRemoteDataStore) {
-                supervisorScope {
-                    launch {
-                        saveUserEntities(users)
-                    }
-                }
-            }
-            users
-        }.map(userMapper::mapFromEntity)
+    override suspend fun searchUser(nickname: String, forceRefresh: Boolean): DataSource.Factory<Int, User> {
+        val dataStore = factory.retrieveDataStore(forceRefresh)
+        if (dataStore is UserRemoteDataStore) {
+            val users = dataStore.searchAllUsers(nickname)
+            saveUserEntities(users)
+        }
+        return factory.retrieveCacheDataStore()
+            .searchUsers(nickname)
+            .map(userMapper::mapFromEntity)
     }
 
     override suspend fun getUser(userId: String): User {

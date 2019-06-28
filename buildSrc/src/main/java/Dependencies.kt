@@ -21,6 +21,7 @@ object Versions {
         const val fragment = "1.1.0-beta01"
         const val emoji = "1.0.0"
         const val lifecycle = "2.2.0-alpha01"
+        const val paging = "2.1.0"
         const val material = "1.1.0-alpha07"
         const val navigation = "2.1.0-alpha05"
         const val recyclerview = "1.1.0-alpha06"
@@ -72,27 +73,31 @@ object Libraries {
 
     object AndroidX {
         const val activity = "androidx.activity:activity-ktx:${Versions.AndroidX.activity}"
-        const val fragment = "androidx.fragment:fragment-ktx:${Versions.AndroidX.fragment}"
-        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.AndroidX.navigation}"
-        const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.AndroidX.navigation}"
-        const val materialComponent = "com.google.android.material:material:${Versions.AndroidX.material}"
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.constraint_layout}"
         const val core = "androidx.core:core-ktx:${Versions.AndroidX.core}"
-        const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifecycle}"
-        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.AndroidX.lifecycle}"
         const val emoji = "androidx.emoji:emoji:${Versions.AndroidX.emoji}"
+        const val fragment = "androidx.fragment:fragment-ktx:${Versions.AndroidX.fragment}"
+        const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifecycle}"
+        const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.AndroidX.lifecycle}"
+        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.AndroidX.lifecycle}"
+        const val materialComponent = "com.google.android.material:material:${Versions.AndroidX.material}"
+        const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.AndroidX.navigation}"
+        const val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.AndroidX.navigation}"
+        const val paging = "androidx.paging:paging-runtime-ktx:${Versions.AndroidX.paging}"
+        const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.AndroidX.recyclerview}"
         const val room = "androidx.room:room-ktx:${Versions.AndroidX.room}"
         const val roomRuntime = "androidx.room:room-runtime:${Versions.AndroidX.room}"
         const val roomCompiler = "androidx.room:room-compiler:${Versions.AndroidX.room}"
-        const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.AndroidX.recyclerview}"
     }
 
     const val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
     const val epoxyProcessor = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
     const val epoxyDataBinding = "com.airbnb.android:epoxy-databinding:${Versions.epoxy}"
+    const val epoxyPaging = "com.airbnb.android:epoxy-paging:${Versions.epoxy}"
 
     const val kotlinStandardLibrary = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.kotlin}"
-    const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
+    const val kotlinCoroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    const val kotlinCoroutinesAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
     // DI
     const val koin = "org.koin:koin-core:${Versions.koin}"

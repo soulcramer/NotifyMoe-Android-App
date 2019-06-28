@@ -47,7 +47,6 @@ android {
     useLibrary("android.test.runner")
     useLibrary("android.test.base")
     useLibrary("android.test.mock")
-
 }
 
 tasks.withType<KotlinCompile>().all {
@@ -59,8 +58,10 @@ dependencies {
 
     implementation(Libraries.kotlinStandardLibrary)
     implementation(Libraries.kotlinCoroutines)
+    implementation(Libraries.kotlinCoroutinesAndroid)
 
     implementation(Libraries.AndroidX.livedata)
+    implementation(Libraries.AndroidX.paging)
 
     implementation(Libraries.timberKt)
 
@@ -70,7 +71,6 @@ dependencies {
     testImplementation(Libraries.Test.truthKtx)
     testImplementation(Libraries.Test.robolectric)
     testImplementation(Libraries.Test.mockk)
-
 }
 
 jacoco {

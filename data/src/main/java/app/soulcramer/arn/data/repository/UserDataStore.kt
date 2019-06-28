@@ -1,5 +1,6 @@
 package app.soulcramer.arn.data.repository
 
+import androidx.paging.DataSource
 import app.soulcramer.arn.data.model.UserEntity
 
 /**
@@ -15,5 +16,5 @@ interface UserDataStore {
 
     suspend fun getUser(userId: String): UserEntity
 
-    suspend fun searchUsers(nickname: String): List<UserEntity>
+    suspend fun searchUsers(nickname: String): DataSource.Factory<Int, UserEntity>
 }

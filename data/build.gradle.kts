@@ -41,15 +41,15 @@ android {
         animationsDisabled = true
 
         unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
-            setIncludeAndroidResources(true)
+            isIncludeAndroidResources = true
         })
     }
-
 }
 
 dependencies {
 
     implementation(Libraries.kotlinCoroutines)
+    implementation(Libraries.kotlinCoroutinesAndroid)
 
     implementation(project(Modules.core))
     implementation(project(Modules.domain))
@@ -59,7 +59,7 @@ dependencies {
 
     implementation(Libraries.AndroidX.core)
     implementation(Libraries.AndroidX.livedata)
-
+    implementation(Libraries.AndroidX.paging)
 
     testImplementation(Libraries.Test.core)
     testImplementation(Libraries.Test.runner)
@@ -68,7 +68,6 @@ dependencies {
     testImplementation(Libraries.Test.robolectric)
     testImplementation(Libraries.Test.mockk)
 }
-
 
 jacoco {
     toolVersion = "0.8.0"

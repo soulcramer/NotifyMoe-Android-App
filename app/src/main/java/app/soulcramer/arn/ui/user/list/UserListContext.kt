@@ -1,5 +1,6 @@
 package app.soulcramer.arn.ui.user.list
 
+import androidx.paging.PagedList
 import app.soulcramer.arn.domain.SortOption
 import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.ui.common.BaseAction
@@ -16,7 +17,7 @@ interface UserListContext {
     }
 
     data class State(
-        val users: List<User> = emptyList(),
+        val users: PagedList<User>? = null,
         val isRefreshing: Boolean = false,
         val status: ViewState = Data,
         val filterActive: Boolean = false,

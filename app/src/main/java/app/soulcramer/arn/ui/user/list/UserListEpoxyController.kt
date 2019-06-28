@@ -3,44 +3,71 @@ package app.soulcramer.arn.ui.user.list
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
-import android.text.Editable
-import android.text.TextWatcher
+import app.soulcramer.arn.PlaceholderUserItemBindingModel_
+import app.soulcramer.arn.UserItemBindingModel_
 import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.filter
 import app.soulcramer.arn.header
+import app.soulcramer.arn.ui.common.DebouncingQueryTextListener
 import app.soulcramer.arn.ui.common.SortPopupMenuListener
+import app.soulcramer.arn.ui.common.epoxy.EpoxyModelProperty
 import app.soulcramer.arn.ui.common.popupMenuItemIdToSortOption
-import app.soulcramer.arn.userItem
 import com.airbnb.epoxy.EpoxyAsyncUtil
-import com.airbnb.epoxy.TypedEpoxyController
+import com.airbnb.epoxy.EpoxyModel
+import com.airbnb.epoxy.paging.PagedListEpoxyController
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 import org.koin.core.parameter.parametersOf
 
 class UserListEpoxyController(
     private val context: Context
-) : TypedEpoxyController<List<User>>(
+) : PagedListEpoxyController<User>(
     Handler(Looper.getMainLooper()),
     EpoxyAsyncUtil.getAsyncBackgroundHandler()
 ), KoinComponent {
 
+    init {
+        isDebugLoggingEnabled = true
+    }
+
+    override fun onExceptionSwallowed(exception: RuntimeException) {
+        throw exception
+    }
+
     private val textCreator: UserListTextCreator by inject { parametersOf(context) }
 
     var callbacks: Callbacks? = null
+    var onFilterChanged: DebouncingQueryTextListener? = null
 
-    var viewState: UserListContext.State = UserListContext.State()
+    var viewState by EpoxyModelProperty { UserListContext.State() }
 
-    override fun buildModels(users: List<User>) {
+    override fun buildItemModel(currentPosition: Int, item: User?): EpoxyModel<*> {
+        return if (item != null) {
+            UserItemBindingModel_().apply {
+                id(item.id)
+                nickname(item.nickname)
+                avatarUrl(item.avatarUrl)
+                contentDescription("${item.nickname} info")
+                avatarTransitionName("user_${item.id}")
+                clickListener { _ ->
+                    callbacks?.onUserClicked(item)
+                }
+            }
+        } else {
+            PlaceholderUserItemBindingModel_().id("item_placeholder_$currentPosition")
+        }
+    }
 
+    override fun addModels(models: List<EpoxyModel<*>>) {
         header {
             id("header")
-            titleString(textCreator.showHeaderCount(users.size, viewState.filterActive))
+            titleString(textCreator.showHeaderCount(models.size, viewState.filterActive))
         }
 
         filter {
             id("filters")
             filter(viewState.filter)
-            watcher(filterTextWatcher())
+            watcher(onFilterChanged)
 
             popupMenuListener(SortPopupMenuListener(viewState.sort, viewState.availableSorts))
             popupMenuClickListener { menuItem ->
@@ -49,43 +76,10 @@ class UserListEpoxyController(
                 true
             }
         }
-
-        addUsers(users)
-    }
-
-    private fun filterTextWatcher(): TextWatcher {
-        return object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-                callbacks?.onFilterChanged(s?.toString() ?: "")
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                // Not used
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                // Not used
-            }
-        }
-    }
-
-    private fun addUsers(users: List<User>) {
-        users.forEach { user ->
-            userItem {
-                id(user.id)
-                nickname(user.nickname)
-                avatarUrl(user.avatarUrl)
-                contentDescription("${user.nickname} info")
-                avatarTransitionName("user_${user.id}")
-                clickListener { _ ->
-                    callbacks?.onUserClicked(user)
-                }
-            }
-        }
+        super.addModels(models)
     }
 
     interface Callbacks {
         fun onUserClicked(item: User)
-        fun onFilterChanged(filter: String)
     }
 }

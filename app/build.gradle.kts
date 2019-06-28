@@ -84,6 +84,7 @@ dependencies {
     // Kotlin JDK
     implementation(Libraries.kotlinStandardLibrary)
     implementation(Libraries.kotlinCoroutines)
+    implementation(Libraries.kotlinCoroutinesAndroid)
 
     implementation(project(Modules.core))
     implementation(project(Modules.domain))
@@ -93,15 +94,17 @@ dependencies {
 
     // AndroidX
     implementation(Libraries.AndroidX.activity)
-    implementation(Libraries.AndroidX.fragment)
-    implementation(Libraries.AndroidX.navigationFragment)
-    implementation(Libraries.AndroidX.navigationUi)
-    implementation(Libraries.AndroidX.recyclerView)
-    implementation(Libraries.AndroidX.materialComponent)
+    implementation(Libraries.AndroidX.emoji)
     implementation(Libraries.AndroidX.constraintLayout)
     implementation(Libraries.AndroidX.core)
+    implementation(Libraries.AndroidX.fragment)
     implementation(Libraries.AndroidX.lifecycle)
-    implementation(Libraries.AndroidX.emoji)
+    implementation(Libraries.AndroidX.lifecycleRuntime)
+    implementation(Libraries.AndroidX.materialComponent)
+    implementation(Libraries.AndroidX.navigationFragment)
+    implementation(Libraries.AndroidX.navigationUi)
+    implementation(Libraries.AndroidX.paging)
+    implementation(Libraries.AndroidX.recyclerView)
 
     // DI
     implementation(Libraries.koinAndroidXScope)
@@ -109,6 +112,7 @@ dependencies {
 
     implementation(Libraries.epoxy)
     implementation(Libraries.epoxyDataBinding)
+    implementation(Libraries.epoxyPaging)
     kapt(Libraries.epoxyProcessor)
 
     implementation(Libraries.fastAdapter)

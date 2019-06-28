@@ -1,5 +1,6 @@
 package app.soulcramer.arn.data.repository
 
+import androidx.paging.DataSource
 import app.soulcramer.arn.data.model.UserEntity
 
 /**
@@ -36,7 +37,7 @@ interface UserCache {
     /**
      * Retrieve a list of Users with similar nickname, from the cache
      */
-    suspend fun searchUsers(nickname: String): List<UserEntity>
+    suspend fun searchUsers(nickname: String): DataSource.Factory<Int, UserEntity>
 
     /**
      * Checks if an element (User) exists in the cache.

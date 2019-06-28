@@ -24,7 +24,8 @@ class SearchUsersTest {
 
     @Test
     fun `Given empty search nickname When searching corresponding the user Then return all users`() = runBlocking {
-        coEvery { testUserRepository.searchUser("") } returns UserFactory.makeUserList(5, "Scott")
+        coEvery { testUserRepository.searchUser("", parameters.forceRefresh) } returns UserFactory.makeUserList(5,
+            "Scott")
 
         val result = searchUsers("")
 
@@ -36,7 +37,7 @@ class SearchUsersTest {
 
     @Test
     fun `Given a search nickname When searching non existent users Then return empty list`() = runBlocking {
-        coEvery { testUserRepository.searchUser(any()) } returns emptyList()
+        coEvery { testUserRepository.searchUser(any(), parameters.forceRefresh) } returns emptyList()
 
         val result = searchUsers("qzdqzd")
 
@@ -50,7 +51,7 @@ class SearchUsersTest {
     fun `Given a search nickname When searching existent users Then return list of users`() = runBlocking {
         val searchedNickname = "abcd"
         coEvery {
-            testUserRepository.searchUser(searchedNickname)
+            testUserRepository.searchUser(searchedNickname, parameters.forceRefresh)
         } returns UserFactory.makeUserList(5, searchedNickname)
 
         val result = searchUsers(searchedNickname)

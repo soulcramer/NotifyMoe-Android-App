@@ -33,7 +33,7 @@ class UserDataStoreFactoryTest {
         runBlocking {
             stubUserCacheIsCached(false)
 
-            val userDataStore = userDataStoreFactory.retrieveDataStore()
+            val userDataStore = userDataStoreFactory.retrieveDataStore(forceRefresh)
 
             assertThat(userDataStore).isInstanceOf(UserRemoteDataStore::class.java)
         }
@@ -45,7 +45,7 @@ class UserDataStoreFactoryTest {
             stubUserCacheIsCached(true)
             stubUserCacheIsExpired(true)
 
-            val userDataStore = userDataStoreFactory.retrieveDataStore()
+            val userDataStore = userDataStoreFactory.retrieveDataStore(forceRefresh)
 
             assertThat(userDataStore).isInstanceOf(UserRemoteDataStore::class.java)
         }
@@ -57,7 +57,7 @@ class UserDataStoreFactoryTest {
             stubUserCacheIsCached(true)
             stubUserCacheIsExpired(false)
 
-            val userDataStore = userDataStoreFactory.retrieveDataStore()
+            val userDataStore = userDataStoreFactory.retrieveDataStore(forceRefresh)
 
             assertThat(userDataStore).isInstanceOf(UserCacheDataStore::class.java)
         }

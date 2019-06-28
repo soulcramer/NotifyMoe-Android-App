@@ -42,7 +42,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-
 }
 
 kapt {
@@ -58,7 +57,7 @@ dependencies {
     implementation(Libraries.kotlinStandardLibrary)
 
     implementation(Libraries.AndroidX.lifecycle)
-
+    implementation(Libraries.AndroidX.paging)
     implementation(Libraries.AndroidX.room)
     implementation(Libraries.AndroidX.roomRuntime)
     kapt(Libraries.AndroidX.roomCompiler)
@@ -74,7 +73,6 @@ dependencies {
     testImplementation(Libraries.Test.mockk)
     testImplementation(Libraries.Test.room)
 }
-
 
 jacoco {
     toolVersion = "0.8.0"

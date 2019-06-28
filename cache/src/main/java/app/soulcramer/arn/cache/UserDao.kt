@@ -1,5 +1,6 @@
 package app.soulcramer.arn.cache
 
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -28,9 +29,22 @@ interface UserDao {
     @Query("SELECT * FROM users ORDER BY nickname")
     suspend fun getAll(): List<CachedUser>
 
-    @Query("SELECT * FROM users WHERE nickname LIKE '%'||:nickname||'%' ORDER BY nickname")
-    suspend fun searchByNickname(nickname: String): List<CachedUser>
+    @Query(USER_QUERY_ORDER_ALPHA_FILTER)
+    fun searchByNickname(nickname: String): DataSource.Factory<Int, CachedUser>
 
     @Query("SELECT count(nickname) FROM users")
     suspend fun allUserCount(): Int
+
+    companion object {
+        private const val USER_QUERY_ORDER_ALPHA_FILTER = """
+            SELECT * FROM users 
+            WHERE nickname LIKE '%'||:nickname||'%' 
+                AND hasAvatar = 1 
+                AND nickname != '' 
+                AND nickname != 'g%' 
+                AND nickname != 'fb%' 
+                AND nickname != 't%' 
+            ORDER BY nickname ASC
+        """
+    }
 }

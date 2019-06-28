@@ -23,13 +23,6 @@
                 app:paddingBottomSystemWindowInsets="@{ true }"
                 tools:listitem="@layout/view_holder_user_item" />
 
-            <FrameLayout
-                android:id="@+id/header_holder"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:elevation="@dimen/sticky_header_elevation"
-                app:materialShapeElevationBackground="@{ true }" />
-
         </FrameLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

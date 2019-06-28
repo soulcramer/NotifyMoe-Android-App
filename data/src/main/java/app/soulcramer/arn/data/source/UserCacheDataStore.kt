@@ -1,5 +1,6 @@
 package app.soulcramer.arn.data.source
 
+import androidx.paging.DataSource
 import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.data.repository.UserCache
 import app.soulcramer.arn.data.repository.UserDataStore
@@ -10,7 +11,7 @@ import app.soulcramer.arn.data.repository.UserDataStore
  */
 open class UserCacheDataStore(private val userCache: UserCache) : UserDataStore {
 
-    override suspend fun searchUsers(nickname: String): List<UserEntity> {
+    override suspend fun searchUsers(nickname: String): DataSource.Factory<Int, UserEntity> {
         return userCache.searchUsers(nickname)
     }
 

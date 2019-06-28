@@ -1,5 +1,6 @@
 package app.soulcramer.arn.cache
 
+import androidx.paging.DataSource
 import app.soulcramer.arn.cache.mapper.UserEntityMapper
 import app.soulcramer.arn.cache.model.CachedUser
 import app.soulcramer.arn.data.model.UserEntity
@@ -52,7 +53,7 @@ class UserCacheImpl(
         return cachedUsers.map(entityMapper::mapFromCached)
     }
 
-    override suspend fun searchUsers(nickname: String): List<UserEntity> {
+    override suspend fun searchUsers(nickname: String): DataSource.Factory<Int, UserEntity> {
         val cachedUsers = userDao.searchByNickname(nickname)
         return cachedUsers.map(entityMapper::mapFromCached)
     }
