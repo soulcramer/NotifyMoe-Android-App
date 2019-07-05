@@ -44,7 +44,6 @@ android {
             setIncludeAndroidResources(true)
         })
     }
-
 }
 
 dependencies {
@@ -60,7 +59,6 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
 }
-
 
 jacoco {
     toolVersion = "0.8.0"

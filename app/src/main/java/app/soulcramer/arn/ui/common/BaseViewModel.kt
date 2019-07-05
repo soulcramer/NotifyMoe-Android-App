@@ -1,6 +1,5 @@
 package app.soulcramer.arn.ui.common
 
-import androidx.annotation.AnyThread
 import androidx.annotation.MainThread
 import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.LiveData
@@ -27,16 +26,6 @@ abstract class BaseViewModel<A : BaseAction, S : BaseState>(private val initialS
 
         internalState.value = reducer(currentState)
     }
-
-    @AnyThread
-    @VisibleForTesting(otherwise = VisibleForTesting.PROTECTED)
-    fun updateStateAsync(reducer: suspend (S) -> S) {
-        val currentState = state.value ?: initialState
-
-        viewModelScope.launch {
-            internalState.postValue(reducer(currentState))
-        }
-    }
 }
 
 interface BaseAction
@@ -47,3 +36,4 @@ object Loading : ViewState()
 object Data : ViewState()
 object Empty : ViewState()
 object Error : ViewState()
+object NetworkError : ViewState()

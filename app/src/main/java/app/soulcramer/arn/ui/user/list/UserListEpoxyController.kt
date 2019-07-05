@@ -3,12 +3,14 @@ package app.soulcramer.arn.ui.user.list
 import android.content.Context
 import android.os.Handler
 import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import app.soulcramer.arn.PlaceholderUserItemBindingModel_
 import app.soulcramer.arn.UserItemBindingModel_
+import app.soulcramer.arn.core.lazyFast
 import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.filter
 import app.soulcramer.arn.header
-import app.soulcramer.arn.ui.common.DebouncingQueryTextListener
 import app.soulcramer.arn.ui.common.SortPopupMenuListener
 import app.soulcramer.arn.ui.common.epoxy.EpoxyModelProperty
 import app.soulcramer.arn.ui.common.popupMenuItemIdToSortOption
@@ -16,11 +18,9 @@ import com.airbnb.epoxy.EpoxyAsyncUtil
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging.PagedListEpoxyController
 import org.koin.core.KoinComponent
-import org.koin.core.inject
-import org.koin.core.parameter.parametersOf
 
 class UserListEpoxyController(
-    private val context: Context
+    context: Context
 ) : PagedListEpoxyController<User>(
     Handler(Looper.getMainLooper()),
     EpoxyAsyncUtil.getAsyncBackgroundHandler()
@@ -34,10 +34,11 @@ class UserListEpoxyController(
         throw exception
     }
 
-    private val textCreator: UserListTextCreator by inject { parametersOf(context) }
+    private val textCreator: UserListTextCreator by lazyFast {
+        UserListTextCreator(context)
+    }
 
     var callbacks: Callbacks? = null
-    var onFilterChanged: DebouncingQueryTextListener? = null
 
     var viewState by EpoxyModelProperty { UserListContext.State() }
 
@@ -67,7 +68,7 @@ class UserListEpoxyController(
         filter {
             id("filters")
             filter(viewState.filter)
-            watcher(onFilterChanged)
+            watcher(filterTextWatcher())
 
             popupMenuListener(SortPopupMenuListener(viewState.sort, viewState.availableSorts))
             popupMenuClickListener { menuItem ->
@@ -79,7 +80,24 @@ class UserListEpoxyController(
         super.addModels(models)
     }
 
+    private fun filterTextWatcher(): TextWatcher {
+        return object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                callbacks?.onFilterChanged(s?.toString() ?: "")
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // Not used
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                // Not used
+            }
+        }
+    }
+
     interface Callbacks {
         fun onUserClicked(item: User)
+        fun onFilterChanged(filter: String)
     }
 }

@@ -9,13 +9,13 @@ import app.soulcramer.arn.domain.interactor.Result.Success
 sealed class Result<out R> {
 
     data class Success<out T>(val data: T) : Result<T>()
-    data class Failure(val exception: Exception) : Result<Nothing>()
+    data class Failure<out T>(val exception: Exception, val data: T? = null) : Result<T>()
     object Loading : Result<Nothing>()
 
     override fun toString(): String {
         return when (this) {
             is Success<*> -> "Success[data=$data]"
-            is Failure -> "Failure[exception=$exception]"
+            is Failure<*> -> "Failure[exception=$exception, data=$data]"
             Loading -> "Loading"
         }
     }

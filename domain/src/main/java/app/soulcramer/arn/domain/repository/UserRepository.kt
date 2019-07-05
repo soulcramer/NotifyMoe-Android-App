@@ -1,6 +1,7 @@
 package app.soulcramer.arn.domain.repository
 
 import androidx.paging.DataSource
+import app.soulcramer.arn.domain.interactor.Result
 import app.soulcramer.arn.domain.model.User
 
 /**
@@ -12,5 +13,5 @@ interface UserRepository {
 
     suspend fun getUser(userId: String): User
 
-    suspend fun searchUser(nickname: String, forceRefresh: Boolean): DataSource.Factory<Int, User>
+    suspend fun searchUser(nickname: String, forceRefresh: Boolean): Result<DataSource.Factory<Int, User>>
 }

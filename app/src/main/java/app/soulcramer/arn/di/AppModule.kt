@@ -15,7 +15,7 @@ import app.soulcramer.arn.prefs.SharedPreferenceStorage
 import app.soulcramer.arn.ui.session.SessionViewModel
 import app.soulcramer.arn.ui.user.UserViewModel
 import app.soulcramer.arn.ui.user.list.UserListEpoxyController
-import app.soulcramer.arn.ui.user.list.UserListTextCreator
+import app.soulcramer.arn.ui.user.list.UserListFragment
 import app.soulcramer.arn.ui.user.list.UserListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -45,7 +45,7 @@ val appModule: Module = module(override = true) {
 
     viewModel { UserListViewModel(get()) }
 
-    factory { (context: Context) -> UserListEpoxyController(context) }
-
-    factory { (context: Context) -> UserListTextCreator(context) }
+    scope(named<UserListFragment>()) {
+        scoped { (context: Context) -> UserListEpoxyController(context) }
+    }
 }

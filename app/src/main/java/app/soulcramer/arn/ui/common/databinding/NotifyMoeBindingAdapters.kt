@@ -82,6 +82,11 @@ fun visibleIfNotNull(view: View, target: Any?) {
     view.isVisible = target != null
 }
 
+@BindingAdapter("visibleIfNotEmpty")
+fun visibleIfNotEmpty(view: View, target: CharSequence?) {
+    view.isVisible = target.isNullOrEmpty()
+}
+
 @BindingAdapter("backgroundScrim")
 fun backgroundScrim(view: View, color: Int) {
     view.background = ScrimUtil.makeCubicGradientScrimDrawable(color, 16, Gravity.BOTTOM)

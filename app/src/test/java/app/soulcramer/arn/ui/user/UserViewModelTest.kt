@@ -76,5 +76,4 @@ class UserViewModelTest {
     private fun mockGetUserSuccess(user: User) {
         coEvery { mockGetUser.invoke(any()) } returns Result.Success(user)
     }
-
 }

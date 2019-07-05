@@ -1,6 +1,7 @@
 package app.soulcramer.arn.domain.interactor
 
 import androidx.paging.PagedList
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -25,9 +26,11 @@ abstract class UseCase<in P, R> {
                     execute(parameters).let { useCaseResult ->
                         Result.Success(useCaseResult)
                     }
+                } catch (e: CancellationException) {
+                    throw e
                 } catch (e: Exception) {
                     Timber.e(e)
-                    Result.Failure(e)
+                    Result.Failure<R>(e)
                 }
             }
         } catch (e: Exception) {
@@ -55,21 +58,8 @@ abstract class SuspendingUseCase<in P, R> {
      * @param parameters the input parameters to run the use case with
      */
     suspend operator fun invoke(parameters: P): Result<R> {
-        // result.value = Result.Loading add data to Loading to avoid glitches
-        return try {
-            withContext(dispatcher) {
-                try {
-                    execute(parameters).let { useCaseResult ->
-                        Result.Success(useCaseResult)
-                    }
-                } catch (e: Exception) {
-                    Timber.e(e)
-                    Result.Failure(e)
-                }
-            }
-        } catch (e: Exception) {
-            Timber.d(e)
-            Result.Failure(e)
+        return withContext(dispatcher) {
+            execute(parameters)
         }
     }
 
@@ -77,13 +67,13 @@ abstract class SuspendingUseCase<in P, R> {
      * Override this to set the code to be executed.
      */
     @Throws(RuntimeException::class)
-    protected abstract suspend fun execute(parameters: P): R
+    protected abstract suspend fun execute(parameters: P): Result<R>
 }
 
 /**
  * Executes business logic synchronously or asynchronously using a [CoroutineDispatcher].
  */
-abstract class PagingUseCase<in P : PagingUseCase.Parameters<T>, T> : UseCase<P, PagedList<T>>() {
+abstract class PagingUseCase<in P : PagingUseCase.Parameters<T>, T> : SuspendingUseCase<P, PagedList<T>>() {
     interface Parameters<T> {
         val pagingConfig: PagedList.Config
         val boundaryCallback: PagedList.BoundaryCallback<T>?

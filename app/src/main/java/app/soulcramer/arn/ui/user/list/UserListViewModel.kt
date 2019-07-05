@@ -1,5 +1,6 @@
 package app.soulcramer.arn.ui.user.list
 
+import android.accounts.NetworkErrorException
 import androidx.paging.PagedList
 import app.soulcramer.arn.domain.interactor.Result
 import app.soulcramer.arn.domain.interactor.Result.Failure
@@ -10,12 +11,19 @@ import app.soulcramer.arn.ui.common.BaseViewModel
 import app.soulcramer.arn.ui.common.Data
 import app.soulcramer.arn.ui.common.Error
 import app.soulcramer.arn.ui.common.Loading
+import app.soulcramer.arn.ui.common.NetworkError
 import app.soulcramer.arn.ui.user.list.UserListContext.Action
 import app.soulcramer.arn.ui.user.list.UserListContext.Action.SearchUser
 import app.soulcramer.arn.ui.user.list.UserListContext.State
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class UserListViewModel(private val searchUsers: SearchUsers) : BaseViewModel<Action, State>(State()) {
+
+    private var searchJob: Job? = null
 
     private val boundaryCallback = object : PagedList.BoundaryCallback<User>() {
         override fun onZeroItemsLoaded() {
@@ -31,9 +39,19 @@ class UserListViewModel(private val searchUsers: SearchUsers) : BaseViewModel<Ac
         }
     }
 
+    init {
+        handle(SearchUser())
+    }
+
     override suspend fun onHandle(action: Action) {
         when (action) {
-            is SearchUser -> searchUser(action)
+            is SearchUser -> coroutineScope {
+                searchJob?.cancel()
+                searchJob = launch {
+                    delay(SEARCH_DEBOUNCE_PERIOD)
+                    searchUser(action)
+                }
+            }
         }
     }
 
@@ -67,10 +85,17 @@ class UserListViewModel(private val searchUsers: SearchUsers) : BaseViewModel<Ac
     private fun updateStateOnResultType(result: Result<PagedList<User>>) {
         updateState { state ->
             return@updateState when (result) {
-                is Failure -> state.copy(status = Error)
+                is Failure -> state.copyWithError(result.exception)
                 is Result.Loading -> state.copy(status = Loading)
                 is Success<PagedList<User>> -> state.copyWithNewUserList(result.data)
             }
+        }
+    }
+
+    private fun State.copyWithError(exception: Exception): State {
+        return when (exception) {
+            is NetworkErrorException -> copy(status = NetworkError)
+            else -> copy(status = Error)
         }
     }
 
@@ -86,5 +111,7 @@ class UserListViewModel(private val searchUsers: SearchUsers) : BaseViewModel<Ac
             .setPageSize(20)
             .setEnablePlaceholders(true)
             .build()
+
+        private const val SEARCH_DEBOUNCE_PERIOD = 300L
     }
 }

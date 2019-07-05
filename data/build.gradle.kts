@@ -9,7 +9,6 @@ plugins {
 android {
     compileSdkVersion(BuildConfigs.compileSdk)
 
-
     defaultConfig {
         minSdkVersion(BuildConfigs.minSdk)
         targetSdkVersion(BuildConfigs.targetSdk)
@@ -109,4 +108,3 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         include("jacoco/testDebugUnitTest.exec", "outputs/code-coverage/connected/*coverage.ec")
     })
 }
-

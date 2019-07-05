@@ -1,6 +1,7 @@
 package app.soulcramer.arn.domain.interactor
 
 import androidx.arch.core.executor.ArchTaskExecutor
+import androidx.paging.DataSource
 import androidx.paging.PagedList
 import app.soulcramer.arn.domain.SortOption
 import app.soulcramer.arn.domain.model.User
@@ -12,8 +13,39 @@ import java.util.concurrent.Executors
  */
 class SearchUsers(private val userRepository: UserRepository) : PagingUseCase<SearchUsers.Params, User>() {
 
-    override suspend fun execute(parameters: Params): PagedList<User> {
-        val source = userRepository.searchUser(parameters.filter, parameters.forceRefresh).create()
+    override suspend fun execute(parameters: Params): Result<PagedList<User>> {
+        val result = userRepository.searchUser(parameters.filter, parameters.forceRefresh)
+
+        return when (result) {
+            is Result.Success -> buildSuccessResponse(result, parameters)
+            is Result.Failure -> buildFailureResponse(result, parameters)
+            else -> defaultFailure()
+        }
+    }
+
+    private fun defaultFailure(): Result.Failure<PagedList<User>> =
+        Result.Failure(Exception("Couldn't search users"))
+
+    private fun buildFailureResponse(
+        result: Result.Failure<DataSource.Factory<Int, User>>,
+        parameters: Params
+    ): Result<PagedList<User>> {
+        val source = result.data?.create() ?: return defaultFailure()
+        return Result.Failure(result.exception, buildPagedList(source, parameters))
+    }
+
+    private fun buildSuccessResponse(
+        result: Result.Success<DataSource.Factory<Int, User>>,
+        parameters: Params
+    ): Result<PagedList<User>> {
+        val source = result.data.create()
+        return Result.Success(buildPagedList(source, parameters))
+    }
+
+    private fun buildPagedList(
+        source: DataSource<Int, User>,
+        parameters: Params
+    ): PagedList<User> {
         return PagedList.Builder(source, parameters.pagingConfig)
             .setBoundaryCallback(parameters.boundaryCallback)
             .setFetchExecutor(Executors.newSingleThreadExecutor())

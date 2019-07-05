@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import app.soulcramer.arn.core.bind
@@ -15,6 +14,7 @@ import app.soulcramer.arn.ui.common.Data
 import app.soulcramer.arn.ui.common.Empty
 import app.soulcramer.arn.ui.common.Error
 import app.soulcramer.arn.ui.common.Loading
+import app.soulcramer.arn.ui.common.NetworkError
 import app.soulcramer.arn.ui.common.ViewState
 import app.soulcramer.arn.ui.user.UserContext.Action.LoadUser
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -56,11 +56,11 @@ class UserFragment : Fragment() {
             is Error -> "error"
             is Empty -> "empty"
             is Loading -> "loading"
+            NetworkError -> "network error"
         }
     }
 
     private fun onRoleChanged(role: String) {
-        binding.roleTextView.isVisible = role.isNotEmpty()
         binding.role = role
     }
 

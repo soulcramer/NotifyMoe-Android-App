@@ -1,12 +1,15 @@
 package app.soulcramer.arn.data
 
+import android.accounts.NetworkErrorException
 import androidx.paging.DataSource
 import app.soulcramer.arn.data.mapper.UserMapper
 import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.data.source.UserDataStoreFactory
 import app.soulcramer.arn.data.source.UserRemoteDataStore
+import app.soulcramer.arn.domain.interactor.Result
 import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.domain.repository.UserRepository
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.supervisorScope
 
@@ -19,12 +22,22 @@ class UserDataRepository(
     private val userMapper: UserMapper
 ) : UserRepository {
 
-    override suspend fun searchUser(nickname: String, forceRefresh: Boolean): DataSource.Factory<Int, User> {
+    override suspend fun searchUser(nickname: String, forceRefresh: Boolean): Result<DataSource.Factory<Int, User>> {
         val dataStore = factory.retrieveDataStore(forceRefresh)
         if (dataStore is UserRemoteDataStore) {
-            val users = dataStore.searchAllUsers(nickname)
-            saveUserEntities(users)
+            try {
+                val users = dataStore.searchAllUsers(nickname)
+                saveUserEntities(users)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                return Result.Failure(NetworkErrorException(e), getSearchedUsersDataSource(nickname))
+            }
         }
+        return Result.Success(getSearchedUsersDataSource(nickname))
+    }
+
+    private suspend fun getSearchedUsersDataSource(nickname: String): DataSource.Factory<Int, User> {
         return factory.retrieveCacheDataStore()
             .searchUsers(nickname)
             .map(userMapper::mapFromEntity)

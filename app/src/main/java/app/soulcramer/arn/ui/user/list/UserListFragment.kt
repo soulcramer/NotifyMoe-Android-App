@@ -10,14 +10,14 @@ import app.soulcramer.arn.NotifyMoeFragment
 import app.soulcramer.arn.core.bind
 import app.soulcramer.arn.core.distinctUntilChanged
 import app.soulcramer.arn.core.map
+import app.soulcramer.arn.core.switchMap
 import app.soulcramer.arn.databinding.FragmentUserListBinding
 import app.soulcramer.arn.domain.model.User
-import app.soulcramer.arn.ui.common.DebouncingQueryTextListener
 import app.soulcramer.arn.ui.common.SpacingItemDecorator
 import app.soulcramer.arn.ui.common.ViewState
 import app.soulcramer.arn.ui.common.recyclerview.HideImeOnScrollListener
 import app.soulcramer.arn.ui.user.list.UserListContext.Action.SearchUser
-import org.koin.android.ext.android.inject
+import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import org.koin.core.parameter.parametersOf
 import timber.log.Timber
@@ -26,7 +26,7 @@ class UserListFragment : NotifyMoeFragment() {
 
     private val userListViewModel by sharedViewModel<UserListViewModel>()
 
-    private val controller: UserListEpoxyController by inject { parametersOf(context) }
+    private val controller: UserListEpoxyController by currentScope.inject { parametersOf(context) }
 
     private lateinit var binding: FragmentUserListBinding
 
@@ -46,12 +46,11 @@ class UserListFragment : NotifyMoeFragment() {
 
         initController()
         initRecyclerView()
-        binding.usersSwipeRefresh.setOnRefreshListener { userListViewModel.handle(SearchUser(forceRefresh = true)) }
+        binding.usersSwipeRefresh.setOnRefreshListener {
+            userListViewModel.handle(SearchUser(forceRefresh = true))
+        }
         bindState()
 
-        if (savedInstanceState == null) {
-            userListViewModel.handle(SearchUser())
-        }
         scheduleStartPostponedTransitions()
     }
 
@@ -61,9 +60,10 @@ class UserListFragment : NotifyMoeFragment() {
                 val direction = UserListFragmentDirections.navigateToUserProfile(item.id, item.nickname)
                 findNavController().navigate(direction)
             }
-        }
-        controller.onFilterChanged = DebouncingQueryTextListener(viewLifecycleOwner.lifecycle) { filter ->
-            userListViewModel.handle(SearchUser(filter))
+
+            override fun onFilterChanged(filter: String) {
+                userListViewModel.handle(SearchUser(filter))
+            }
         }
     }
 
@@ -76,7 +76,15 @@ class UserListFragment : NotifyMoeFragment() {
     }
 
     private fun bindState() {
-        userListViewModel.state.distinctUntilChanged().bind(this) { controller.viewState = it }
+        userListViewModel.state.map {
+            it.filter
+        }.switchMap {
+            userListViewModel.state
+        }.distinctUntilChanged()
+            .bind(this) {
+                controller.viewState = it
+            }
+
         userListViewModel.state.map { it.users }.distinctUntilChanged().bind(this, ::onUserListChanged)
         userListViewModel.state.map { it.isRefreshing }.distinctUntilChanged().bind(this, ::onIsRefreshingChanged)
     }
