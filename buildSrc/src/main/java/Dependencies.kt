@@ -28,7 +28,7 @@ object Versions {
         const val room = "2.1.0"
     }
 
-    const val android_gradle = "3.5.0-beta05"
+    const val android_gradle = "3.6.0-alpha04"
     const val benManes = "0.21.0"
     const val buildScan = "2.3"
     const val coroutines = "1.2.1"

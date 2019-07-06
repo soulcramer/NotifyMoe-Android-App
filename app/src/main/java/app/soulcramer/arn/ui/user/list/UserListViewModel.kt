@@ -59,22 +59,25 @@ class UserListViewModel(private val searchUsers: SearchUsers) : BaseViewModel<Ac
         val filter = action.searchedNickname
         val forceRefresh = action.forceRefresh
         setFilter(filter, forceRefresh)
-        val result = searchUsers(SearchUsers.Params(
+        val params = SearchUsers.Params(
             sort = state.value!!.sort,
             filter = state.value!!.filter,
             forceRefresh = forceRefresh,
             pagingConfig = PAGING_CONFIG,
             boundaryCallback = boundaryCallback
-        ))
+        )
+        val result = searchUsers(params)
         updateState { it.copy(isRefreshing = false) }
         updateStateOnResultType(result)
     }
 
     private fun setFilter(filter: String, forceRefresh: Boolean) {
         updateState { currentState ->
-            currentState.copy(filter = currentState.getFilter(filter, forceRefresh),
+            currentState.copy(
+                filter = currentState.getFilter(filter, forceRefresh),
                 filterActive = filter.isNotEmpty(),
-                isRefreshing = forceRefresh)
+                isRefreshing = forceRefresh
+            )
         }
     }
 
