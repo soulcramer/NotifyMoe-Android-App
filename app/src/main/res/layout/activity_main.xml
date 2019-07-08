@@ -23,9 +23,9 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 style="?toolbarStyle"
-                android:elevation="4dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:elevation="4dp"
                 tools:title="Dashboard" />
         </com.google.android.material.appbar.AppBarLayout>
 

@@ -12,8 +12,8 @@
         android:title="Profile" />
     <item
         android:id="@+id/list"
-        android:icon="@drawable/ic_view_list_black_24dp"
         android:checked="true"
+        android:icon="@drawable/ic_view_list_black_24dp"
         android:title="List" />
     <item
         android:id="@+id/settings"

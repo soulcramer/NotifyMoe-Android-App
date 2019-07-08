@@ -10,7 +10,7 @@
         android:id="@+id/profileFragment"
         android:name="app.soulcramer.arn.ui.user.UserFragment"
         android:label="{userNickname}"
-        tools:layout="@layout/fragment_user" >
+        tools:layout="@layout/fragment_user">
         <argument
             android:name="userId"
             app:argType="string" />

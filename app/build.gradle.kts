@@ -115,11 +115,6 @@ dependencies {
     implementation(Libraries.epoxyPaging)
     kapt(Libraries.epoxyProcessor)
 
-    implementation(Libraries.fastAdapter)
-    implementation(Libraries.fastAdapterCommons)
-    implementation(Libraries.fastAdapterExtensions)
-    implementation(Libraries.fastAdapterExpandable)
-
     // Leak Canary
     debugImplementation(Libraries.leackCanary)
 
@@ -158,7 +153,7 @@ fun <T> propOrDef(propertyName: String, defaultValue: T): T {
 }
 
 jacoco {
-    toolVersion = "0.8.4"
+    toolVersion = Versions.Test.jacoco
 }
 
 tasks.withType(Test::class.java) {

@@ -6,7 +6,6 @@ buildscript {
     repositories {
         google()
         jcenter()
-        maven(url = "https://maven.fabric.io/public")
     }
 
     dependencies {
@@ -14,10 +13,7 @@ buildscript {
         classpath(kotlin("gradle-plugin", Versions.kotlin))
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.AndroidX.navigation}")
         classpath("org.jetbrains.kotlin:kotlin-android-extensions:${Versions.kotlin}")
-        classpath("com.google.gms:google-services:4.2.0")
-        classpath("io.fabric.tools:gradle:1.29.0")
-        classpath("com.google.firebase:firebase-plugins:2.0.0")
-        classpath("org.jacoco:org.jacoco.core:0.8.4")
+        classpath("org.jacoco:org.jacoco.core:${Versions.Test.jacoco}")
     }
 }
 
@@ -35,14 +31,13 @@ allprojects {
         google()
         jcenter()
         maven(url = "https://jitpack.io")
-        maven(url = "https://maven.fabric.io/public")
     }
 
-    configurations.all {
-        resolutionStrategy {
-            force("org.objenesis:objenesis:2.6")
-        }
-    }
+    //    configurations.all {
+    //        resolutionStrategy {
+    //            force("org.objenesis:objenesis:2.6")
+    //        }
+    //    }
 }
 
 subprojects {

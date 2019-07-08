@@ -15,35 +15,34 @@ object Modules {
 object Versions {
 
     object AndroidX {
-        const val activity = "1.0.0-beta01"
+        const val activity = "1.1.0-alpha01"
         const val core = "1.2.0-alpha02"
-        const val constraint_layout = "2.0.0-beta1"
-        const val fragment = "1.1.0-beta01"
+        const val constraint_layout = "2.0.0-beta2"
+        const val fragment = "1.2.0-alpha01"
         const val emoji = "1.0.0"
-        const val lifecycle = "2.2.0-alpha01"
+        const val lifecycle = "2.2.0-alpha02"
         const val paging = "2.1.0"
         const val material = "1.1.0-alpha07"
-        const val navigation = "2.1.0-alpha05"
-        const val recyclerview = "1.1.0-alpha06"
+        const val navigation = "2.1.0-alpha06"
+        const val recyclerview = "1.1.0-beta01"
         const val room = "2.1.0"
     }
 
-    const val android_gradle = "3.6.0-alpha04"
+    const val android_gradle = "3.5.0-beta05"
     const val benManes = "0.21.0"
     const val buildScan = "2.3"
-    const val coroutines = "1.2.1"
-    const val detekt = "1.0.0-RC15"
-    const val epoxy = "3.6.0"
-    const val fast_adapter = "3.3.1"
+    const val coroutines = "1.3.0-M2"
+    const val detekt = "1.0.0-RC16"
+    const val epoxy = "3.7.0"
     const val glide = "4.9.0"
     const val gson = "2.8.5"
     const val koin = "2.0.1"
     const val kotlin = "1.3.41"
     const val ktlint = "0.33.0"
-    const val ktlintGradle = "8.0.0"
+    const val ktlintGradle = "8.1.0"
     const val leakcanary = "2.0-alpha-2"
     const val moshi = "1.8.0"
-    const val okhttp = "4.0.0-alpha02"
+    const val okhttp = "4.0.0"
     const val photoview = "2.1.3"
     const val retrofit = "2.6.0"
     const val timberkt = "1.5.1"
@@ -52,22 +51,24 @@ object Versions {
 
     object Test {
         // Core library
-        const val core = "1.2.0"
+        const val core = "1.2.1-alpha01"
 
         // AndroidJUnitRunner and JUnit Rules
-        const val runner = "1.2.0"
+        const val runner = "1.3.0-alpha01"
         const val rules = "1.1.0"
 
+        const val jacoco = "0.8.4"
+
         // Assertions
-        const val junitKtx = "1.1.1"
-        const val truthKtx = "1.2.0"
-        const val truth = "0.45"
+        const val junitKtx = "1.1.2-alpha01"
+        const val truthKtx = "1.3.0-alpha01"
+        const val truth = "1.0-rc2"
 
         // Espresso dependencies
-        const val espresso = "3.2.0"
+        const val espresso = "3.3.0-alpha01"
 
         const val robolectric = "4.3"
-        const val mockk = "1.9.3"
+        const val mockk = "1.9.2"
     }
 }
 
@@ -106,11 +107,6 @@ object Libraries {
     const val koinAndroid = "org.koin:koin-android:${Versions.koin}"
     const val koinAndroidXScope = "org.koin:koin-androidx-scope:${Versions.koin}"
     const val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
-
-    const val fastAdapter = "com.mikepenz:fastadapter:${Versions.fast_adapter}"
-    const val fastAdapterCommons = "com.mikepenz:fastadapter-commons:${Versions.fast_adapter}"
-    const val fastAdapterExtensions = "com.mikepenz:fastadapter-extensions:${Versions.fast_adapter}"
-    const val fastAdapterExpandable = "com.mikepenz:fastadapter-extensions-expandable:${Versions.fast_adapter}"
 
     // Leak Canary
     const val leackCanary = "com.squareup.leakcanary:leakcanary-android:${Versions.leakcanary}"

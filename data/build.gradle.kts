@@ -69,7 +69,7 @@ dependencies {
 }
 
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = Versions.Test.jacoco
 }
 
 tasks.withType(Test::class.java) {

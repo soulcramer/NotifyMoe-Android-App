@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/network.no_connection.error.title" />
+        android:text="@string/network_no_connection_error_title" />
 
     <TextView
         android:id="@+id/subtitle"
@@ -32,5 +32,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/network.no_connection.error.description" />
+        android:text="@string/network_no_connection_error_description" />
 </LinearLayout>

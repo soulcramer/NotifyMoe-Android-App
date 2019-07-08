@@ -6,7 +6,6 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import app.soulcramer.arn.R
 import app.soulcramer.arn.cache.cacheModule
 import app.soulcramer.arn.core.test.factory.DataFactory
@@ -25,13 +24,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 import org.koin.test.KoinTest
 import java.util.concurrent.TimeUnit
 
-@RunWith(AndroidJUnit4::class)
 class UserFragmentTest : KoinTest {
 
     lateinit var mockGetUser: GetUser

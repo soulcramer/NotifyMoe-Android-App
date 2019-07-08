@@ -33,7 +33,7 @@ class MainActivity : NotifyMoeActivity() {
         setSupportActionBar(binding.toolbar)
 
         val navController = findNavController(R.id.nav_host_container)
-        binding.toolbar?.setupWithNavController(navController)
+        binding.toolbar.setupWithNavController(navController)
 
         if (savedInstanceState == null) {
             //            setupBottomNavigationBar()
