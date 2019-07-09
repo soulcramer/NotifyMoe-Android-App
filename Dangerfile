@@ -30,13 +30,6 @@ end
 
 warn("This PR is quite a big one! Maybe try splitting this into separate tasks next time 🙂") if git.lines_of_code > 600
 
-
-#
-# Report inline ktlint issues
-#
-checkstyle_format.base_path = Dir.pwd
-checkstyle_format.report '/bitrise/src/build/reports/ktlint/ktlint-report.xml'
-
 # AndroidLint
 android_lint.report_file = "/bitrise/src/build/reports/lint/lint-report.xml"
 android_lint.skip_gradle_task = true

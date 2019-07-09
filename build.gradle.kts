@@ -1,6 +1,12 @@
+import Versions.buildScan
+import Versions.kotlin
+import Versions.ktlint
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.detekt
+import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.include
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
+import java.io.File
+import java.nio.file.Files.delete
 
 buildscript {
     repositories {
@@ -123,7 +129,7 @@ tasks {
 
     register("runChecksForDanger") {
         group = "Reporting"
-        dependsOn(named("ktlintCheck"),
+        dependsOn(
             "${Modules.domain}:lint",
             "${Modules.data}:lint",
             "${Modules.cache}:lint",
@@ -132,8 +138,6 @@ tasks {
             "${Modules.app}:lint"
         )
 
-        val file = file("${project.rootDir}/build/reports/ktlint")
-        if (!file.exists()) file.mkdirs()
         val lintFile = File("${project.rootDir}/build/reports/lint")
         if (!lintFile.exists()) lintFile.mkdirs()
     }
