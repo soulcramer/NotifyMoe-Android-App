@@ -83,6 +83,7 @@ workflows:
       - install-missing-android-tools@2.3.5:
           inputs:
             - gradlew_path: "$PROJECT_LOCATION/gradlew"
+            - android_home: "$ANDROID_HOME"
       - avd-manager@0.9.2: {}
       - script:
           inputs:
@@ -94,18 +95,51 @@ workflows:
                 set -x
 
                 bundle install
-                ./gradlew ktlintCheck runChecksForDanger
-          title: Run ktlint
+                ./gradlew runChecksForDanger
+          title: Run lint
       - script:
           inputs:
             - runner_bin: python
-            - is_debug: 'yes'
-            - content: "./scripts/danger/mergeKtlint.py "
-          title: Create ktlint merge report
-      - script:
-          inputs:
-            - runner_bin: python
-            - content: "./scripts/danger/mergeAndroidLint.py"
+            - content: |-
+                import sys
+                import os.path
+                from xml.etree import ElementTree
+
+                first = None
+                file_list = [
+                "cache/build/reports/lint-results.xml",
+                "app/build/reports/lint-results.xml",
+                "core/build/reports/lint-results.xml",
+                "domain/build/reports/lint-results.xml",
+                "data/build/reports/lint-results.xml",
+                "remote/build/reports/lint-results.xml"
+                ]
+
+                lintFile = 'lint-report-orig.xml'
+                editedlintFile = 'lint-report.xml'
+
+                for filename in file_list:
+                    if os.path.isfile(filename):
+                        data = ElementTree.parse(filename).getroot()
+                        if first is None:
+                            first = data
+                        else:
+                            first.extend(data)
+                if first is not None:
+                    f = open( lintFile, 'w' )
+                    f.write( "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n" )
+                    f.write( ElementTree.tostring(first) )
+                    f.close()
+
+                delete_list = ["/bitrise/src/"]
+                fin = open(lintFile)
+                fout = open(editedlintFile, "w+")
+                for line in fin:
+                    for word in delete_list:
+                        line = line.replace(word, "")
+                    fout.write(line)
+                fin.close()
+                fout.close()
           title: Create Android lint report
       - script:
           title: Copy reports to deploy path
@@ -118,13 +152,9 @@ workflows:
                 set -x
 
                 # write your script here
-                cp ktlint-report.xml $BITRISE_DEPLOY_DIR/ktlint-report.xml
-                cp ktlint-report.xml $BITRISE_SOURCE_DIR/build/reports/ktlint/ktlint-report.xml
-
                 cp lint-report.xml $BITRISE_DEPLOY_DIR/lint-report.xml
                 cp lint-report.xml $BITRISE_SOURCE_DIR/build/reports/lint/lint-report.xml
 
-                less /bitrise/src/build/reports/ktlint/ktlint-report.xml
                 less /bitrise/src/build/reports/lint/lint-report.xml
       - script@1.1.5:
           inputs:

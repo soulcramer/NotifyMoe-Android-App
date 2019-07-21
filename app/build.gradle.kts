@@ -74,6 +74,7 @@ android {
 
 tasks.withType<KotlinCompile>().all {
     kotlinOptions.freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
+    kotlinOptions.jvmTarget = "1.8"
 }
 
 kapt {

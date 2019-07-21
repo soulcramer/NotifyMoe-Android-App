@@ -1,6 +1,5 @@
 package app.soulcramer.arn.di
 
-import android.content.Context
 import app.soulcramer.arn.data.UserDataRepository
 import app.soulcramer.arn.data.mapper.UserMapper
 import app.soulcramer.arn.data.source.UserDataStoreFactory
@@ -14,8 +13,6 @@ import app.soulcramer.arn.domain.repository.UserRepository
 import app.soulcramer.arn.prefs.SharedPreferenceStorage
 import app.soulcramer.arn.ui.session.SessionViewModel
 import app.soulcramer.arn.ui.user.UserViewModel
-import app.soulcramer.arn.ui.user.list.UserListEpoxyController
-import app.soulcramer.arn.ui.user.list.UserListFragment
 import app.soulcramer.arn.ui.user.list.UserListViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -44,8 +41,4 @@ val appModule: Module = module(override = true) {
     viewModel { SessionViewModel(get(), get(), get()) }
 
     viewModel { UserListViewModel(get()) }
-
-    scope(named<UserListFragment>()) {
-        scoped { (context: Context) -> UserListEpoxyController(context) }
-    }
 }

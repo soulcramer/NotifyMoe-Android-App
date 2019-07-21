@@ -17,16 +17,16 @@ import app.soulcramer.arn.ui.common.SpacingItemDecorator
 import app.soulcramer.arn.ui.common.ViewState
 import app.soulcramer.arn.ui.common.recyclerview.HideImeOnScrollListener
 import app.soulcramer.arn.ui.user.list.UserListContext.Action.SearchUser
-import org.koin.androidx.scope.currentScope
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import org.koin.core.parameter.parametersOf
 import timber.log.Timber
 
 class UserListFragment : NotifyMoeFragment() {
 
     private val userListViewModel by sharedViewModel<UserListViewModel>()
 
-    private val controller: UserListEpoxyController by currentScope.inject { parametersOf(context) }
+    private val controller: UserListEpoxyController by lazy {
+        UserListEpoxyController(UserListTextCreator(context!!))
+    }
 
     private lateinit var binding: FragmentUserListBinding
 
@@ -52,6 +52,13 @@ class UserListFragment : NotifyMoeFragment() {
         bindState()
 
         scheduleStartPostponedTransitions()
+    }
+
+    override fun onDestroyView() {
+        // If the user spam exit/enter the fragment the detach callback from the RecyclerView is called after the new
+        // attach which crash the app because epoxy see that the controller is leaked.
+        binding.usersRv.adapter = null
+        super.onDestroyView()
     }
 
     private fun initController() {

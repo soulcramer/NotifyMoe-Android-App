@@ -1,13 +1,11 @@
 package app.soulcramer.arn.ui.user.list
 
-import android.content.Context
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import app.soulcramer.arn.PlaceholderUserItemBindingModel_
 import app.soulcramer.arn.UserItemBindingModel_
-import app.soulcramer.arn.core.lazyFast
 import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.filter
 import app.soulcramer.arn.header
@@ -17,14 +15,13 @@ import app.soulcramer.arn.ui.common.popupMenuItemIdToSortOption
 import com.airbnb.epoxy.EpoxyAsyncUtil
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging.PagedListEpoxyController
-import org.koin.core.KoinComponent
 
 class UserListEpoxyController(
-    context: Context
+    private val textCreator: UserListTextCreator
 ) : PagedListEpoxyController<User>(
     Handler(Looper.getMainLooper()),
     EpoxyAsyncUtil.getAsyncBackgroundHandler()
-), KoinComponent {
+) {
 
     init {
         isDebugLoggingEnabled = true
@@ -32,10 +29,6 @@ class UserListEpoxyController(
 
     override fun onExceptionSwallowed(exception: RuntimeException) {
         throw exception
-    }
-
-    private val textCreator: UserListTextCreator by lazyFast {
-        UserListTextCreator(context)
     }
 
     var callbacks: Callbacks? = null

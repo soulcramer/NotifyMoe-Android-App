@@ -22,16 +22,16 @@ object Versions {
         const val emoji = "1.0.0"
         const val lifecycle = "2.2.0-alpha02"
         const val paging = "2.1.0"
-        const val material = "1.1.0-alpha07"
-        const val navigation = "2.1.0-alpha06"
+        const val material = "1.1.0-alpha08"
+        const val navigation = "2.1.0-beta02"
         const val recyclerview = "1.1.0-beta01"
-        const val room = "2.1.0"
+        const val room = "2.2.0-alpha01"
     }
 
-    const val android_gradle = "3.5.0-beta05"
+    const val android_gradle = "3.5.0-rc01"
     const val benManes = "0.21.0"
     const val buildScan = "2.3"
-    const val coroutines = "1.3.0-M2"
+    const val coroutines = "1.3.0-RC"
     const val detekt = "1.0.0-RC16"
     const val epoxy = "3.7.0"
     const val glide = "4.9.0"
@@ -40,9 +40,9 @@ object Versions {
     const val kotlin = "1.3.41"
     const val ktlint = "0.33.0"
     const val ktlintGradle = "8.1.0"
-    const val leakcanary = "2.0-alpha-2"
+    const val leakcanary = "2.0-alpha-3"
     const val moshi = "1.8.0"
-    const val okhttp = "4.0.0"
+    const val okhttp = "4.0.1"
     const val photoview = "2.1.3"
     const val retrofit = "2.6.0"
     const val timberkt = "1.5.1"
@@ -51,24 +51,24 @@ object Versions {
 
     object Test {
         // Core library
-        const val core = "1.2.1-alpha01"
+        const val core = "1.2.1-alpha02"
 
         // AndroidJUnitRunner and JUnit Rules
-        const val runner = "1.3.0-alpha01"
+        const val runner = "1.3.0-alpha02"
         const val rules = "1.1.0"
 
         const val jacoco = "0.8.4"
 
         // Assertions
-        const val junitKtx = "1.1.2-alpha01"
-        const val truthKtx = "1.3.0-alpha01"
-        const val truth = "1.0-rc2"
+        const val junitKtx = "1.1.2-alpha02"
+        const val truthKtx = "1.3.0-alpha02"
+        const val truth = "1.0"
 
         // Espresso dependencies
-        const val espresso = "3.3.0-alpha01"
+        const val espresso = "3.3.0-alpha02"
 
         const val robolectric = "4.3"
-        const val mockk = "1.9.2"
+        const val mockk = "1.9.3"
     }
 }
 

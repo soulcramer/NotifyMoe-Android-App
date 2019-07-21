@@ -1,12 +1,6 @@
-import Versions.buildScan
-import Versions.kotlin
-import Versions.ktlint
 import io.gitlab.arturbosch.detekt.Detekt
 import io.gitlab.arturbosch.detekt.detekt
-import org.gradle.internal.impldep.org.junit.experimental.categories.Categories.CategoryFilter.include
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
-import java.io.File
-import java.nio.file.Files.delete
 
 buildscript {
     repositories {
