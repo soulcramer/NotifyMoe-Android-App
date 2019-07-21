@@ -4,11 +4,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_profile"
-    app:startDestination="@id/profileFragment">
+    app:startDestination="@id/userListFragment">
 
     <fragment
         android:id="@+id/profileFragment"
         android:name="app.soulcramer.arn.ui.user.UserFragment"
-        android:label="UserFragment"
-        tools:layout="@layout/fragment_user" />
+        android:label="{userNickname}"
+        tools:layout="@layout/fragment_user">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <argument
+            android:name="userNickname"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/userListFragment"
+        android:name="app.soulcramer.arn.ui.user.list.UserListFragment"
+        android:label="NotifyMoe users"
+        tools:layout="@layout/fragment_user_list">
+        <action
+            android:id="@+id/navigateToUserProfile"
+            app:destination="@id/profileFragment"
+            app:launchSingleTop="true" />
+    </fragment>
 </navigation>

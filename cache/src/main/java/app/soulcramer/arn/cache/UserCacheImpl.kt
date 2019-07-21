@@ -1,8 +1,8 @@
 package app.soulcramer.arn.cache
 
+import androidx.paging.DataSource
 import app.soulcramer.arn.cache.mapper.UserEntityMapper
 import app.soulcramer.arn.cache.model.CachedUser
-import app.soulcramer.arn.data.mapper.UserMapper
 import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.data.repository.UserCache
 import java.util.concurrent.TimeUnit
@@ -12,11 +12,11 @@ import java.util.concurrent.TimeUnit
  * [UserCache] from the Data layer as it is that layers responsibility for defining the
  * operations in which data store implementation layers can carry out.
  */
-class UserCacheImpl(private val database: NotifyMoeDatabase,
+class UserCacheImpl(
+    val database: NotifyMoeDatabase,
     private val entityMapper: UserEntityMapper,
-    private val mapper: UserMapper,
-    private val preferencesHelper: PreferencesHelper) :
-    UserCache {
+    private val preferencesHelper: PreferencesHelper
+) : UserCache {
 
     private val EXPIRATION_TIME = TimeUnit.HOURS.toMillis(3)
 
@@ -25,8 +25,16 @@ class UserCacheImpl(private val database: NotifyMoeDatabase,
     /**
      * Save the given list of [UserEntity] instances to the database.
      */
-    override fun saveUser(user: UserEntity) {
+    override suspend fun saveUser(user: UserEntity) {
         return saveUser(entityMapper.mapToCached(user))
+    }
+
+    /**
+     * Save the given list of [UserEntity] instances to the database.
+     */
+    override suspend fun saveUsers(users: List<UserEntity>) {
+        val cachedUsers = users.map(entityMapper::mapToCached)
+        return saveCachedUsers(cachedUsers)
     }
 
     /**
@@ -38,10 +46,30 @@ class UserCacheImpl(private val database: NotifyMoeDatabase,
     }
 
     /**
+     * Retrieve a list of [UserEntity] instances from the database.
+     */
+    override suspend fun getUsers(): List<UserEntity> {
+        val cachedUsers = userDao.getAll()
+        return cachedUsers.map(entityMapper::mapFromCached)
+    }
+
+    override suspend fun searchUsers(nickname: String): DataSource.Factory<Int, UserEntity> {
+        val cachedUsers = userDao.searchByNickname(nickname)
+        return cachedUsers.map(entityMapper::mapFromCached)
+    }
+
+    /**
      * Helper method for saving a [CachedUser] instance to the database.
      */
-    private fun saveUser(cachedUser: CachedUser) {
-        userDao.insertUsers(cachedUser)
+    private suspend fun saveUser(cachedUser: CachedUser) {
+        userDao.insertUser(cachedUser)
+    }
+
+    /**
+     * Helper method for saving a [CachedUser] instance to the database.
+     */
+    private suspend fun saveCachedUsers(cachedUsers: List<CachedUser>) {
+        userDao.insertUsers(cachedUsers)
     }
 
     /**
@@ -73,5 +101,4 @@ class UserCacheImpl(private val database: NotifyMoeDatabase,
     private fun getLastCacheUpdateTimeMillis(): Long {
         return preferencesHelper.lastCacheTime
     }
-
 }

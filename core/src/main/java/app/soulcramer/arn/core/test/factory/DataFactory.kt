@@ -32,7 +32,5 @@ class DataFactory {
             }
             return items
         }
-
     }
-
 }

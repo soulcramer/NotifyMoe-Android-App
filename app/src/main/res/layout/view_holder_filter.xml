@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="filter"
+            type="CharSequence" />
+
+        <variable
+            name="watcher"
+            type="android.text.TextWatcher" />
+
+        <variable
+            name="popupMenuClickListener"
+            type="androidx.appcompat.widget.PopupMenu.OnMenuItemClickListener" />
+
+        <variable
+            name="popupMenuListener"
+            type="app.soulcramer.arn.ui.common.widget.PopupMenuButton.PopupMenuListener" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingHorizontal="@dimen/spacing_normal"
+        android:paddingVertical="@dimen/spacing_micro"
+        android:transitionGroup="true">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/filter_text_input_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="@string/filter_users"
+            app:endIconMode="clear_text">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/filter_text_input_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:addTextChangedListener="@{watcher}"
+                android:inputType="text|textPersonName"
+                android:maxLines="1"
+                android:text="@{filter}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <app.soulcramer.arn.ui.common.widget.PopupMenuButton
+            android:id="@+id/season_menu_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="@dimen/spacing_small"
+            android:src="@drawable/ic_sort_black_24dp"
+            app:menu="@menu/popup_sort"
+            app:popupMenuClickListener="@{popupMenuClickListener}"
+            app:popupMenuListener="@{popupMenuListener}" />
+
+    </LinearLayout>
+</layout>

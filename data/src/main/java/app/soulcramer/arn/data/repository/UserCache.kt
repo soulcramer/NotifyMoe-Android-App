@@ -1,5 +1,6 @@
 package app.soulcramer.arn.data.repository
 
+import androidx.paging.DataSource
 import app.soulcramer.arn.data.model.UserEntity
 
 /**
@@ -9,19 +10,34 @@ import app.soulcramer.arn.data.model.UserEntity
 interface UserCache {
 
     //    /**
-    //     * Clear all Bufferoos from the cache
+    //     * Clear all Users from the cache
     //     */
-    //    fun clearBufferoos(): Completable
+    //    fun clearUsers(): Completable
 
     /**
-     * Save a given list of Bufferoos to the cache
+     * Save a given user to the cache
      */
-    fun saveUser(user: UserEntity)
+    suspend fun saveUser(user: UserEntity)
 
     /**
-     * Retrieve a list of Bufferoos, from the cache
+     * Save a given user list to the cache
+     */
+    suspend fun saveUsers(users: List<UserEntity>)
+
+    /**
+     * Retrieve a User, from the cache
      */
     suspend fun getUser(userId: String): UserEntity
+
+    /**
+     * Retrieve all users, from the cache
+     */
+    suspend fun getUsers(): List<UserEntity>
+
+    /**
+     * Retrieve a list of Users with similar nickname, from the cache
+     */
+    suspend fun searchUsers(nickname: String): DataSource.Factory<Int, UserEntity>
 
     /**
      * Checks if an element (User) exists in the cache.
@@ -44,5 +60,4 @@ interface UserCache {
      * @return true, the cache is expired, otherwise false.
      */
     fun isExpired(): Boolean
-
 }

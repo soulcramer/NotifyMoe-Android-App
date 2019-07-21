@@ -17,7 +17,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/common.error.title" />
+        android:text="@string/common_error_title" />
 
     <TextView
         android:id="@+id/subtitle"
@@ -25,5 +25,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/common.error.no_result" />
+        android:text="@string/common_error_no_result" />
 </LinearLayout>

@@ -4,4 +4,5 @@
     <item name="drawer_debug" type="id" />
     <item name="item_manga" type="id" />
     <item name="simple_animelist_item" type="id" />
+    <item name="loading" type="id" />
 </resources>

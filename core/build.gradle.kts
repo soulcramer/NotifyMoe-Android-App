@@ -44,7 +44,6 @@ android {
             setIncludeAndroidResources(true)
         })
     }
-
 }
 
 dependencies {
@@ -53,17 +52,16 @@ dependencies {
     implementation(Libraries.kotlinStandardLibrary)
     implementation(Libraries.kotlinCoroutines)
 
-    implementation(LibrariesAndroidX.core)
-    implementation(LibrariesAndroidX.lifecycle)
+    implementation(Libraries.AndroidX.core)
+    implementation(Libraries.AndroidX.lifecycle)
 
     testImplementation("junit:junit:4.12")
     androidTestImplementation("androidx.test.ext:junit:1.1.0")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
 }
 
-
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = Versions.Test.jacoco
 }
 
 tasks.withType(Test::class.java) {

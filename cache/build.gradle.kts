@@ -34,7 +34,7 @@ android {
         animationsDisabled = true
 
         unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
-            setIncludeAndroidResources(true)
+            isIncludeAndroidResources = true
         })
     }
 
@@ -42,7 +42,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-
 }
 
 kapt {
@@ -57,27 +56,26 @@ dependencies {
     // Kotlin
     implementation(Libraries.kotlinStandardLibrary)
 
-    implementation(LibrariesAndroidX.lifecycle)
-
-    implementation(LibrariesAndroidX.room)
-    implementation(LibrariesAndroidX.roomRuntime)
-    kapt(LibrariesAndroidX.roomCompiler)
+    implementation(Libraries.AndroidX.lifecycle)
+    implementation(Libraries.AndroidX.paging)
+    implementation(Libraries.AndroidX.room)
+    implementation(Libraries.AndroidX.roomRuntime)
+    kapt(Libraries.AndroidX.roomCompiler)
 
     implementation(Libraries.koin)
     implementation(Libraries.koinAndroid)
 
-    implementation(Libraries.threetenbp)
-    implementation(Libraries.threetenabp)
-
-
-    testImplementation("junit:junit:4.12")
-    androidTestImplementation("androidx.test.ext:junit:1.1.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
+    testImplementation(Libraries.Test.core)
+    testImplementation(Libraries.Test.runner)
+    testImplementation(Libraries.Test.truth)
+    testImplementation(Libraries.Test.truthKtx)
+    testImplementation(Libraries.Test.robolectric)
+    testImplementation(Libraries.Test.mockk)
+    testImplementation(Libraries.Test.room)
 }
 
-
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = Versions.Test.jacoco
 }
 
 tasks.withType(Test::class.java) {

@@ -31,7 +31,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.HomeActivity">
+        tools:context=".ui.MainActivity">
 
         <ImageView
             android:id="@+id/coverImageView"
@@ -40,13 +40,13 @@
             android:contentDescription="@string/user_cover_image_cd"
             android:scaleType="centerCrop"
             app:foregroundScrim="@{ android.graphics.Color.BLACK }"
+            app:image="@{ cover }"
             app:imageSaturateOnLoad="@{ true }"
             app:layout_constraintBottom_toBottomOf="@+id/space"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
-            app:url="@{ cover }"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
         <ImageView
@@ -56,10 +56,10 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginTop="@dimen/spacing_normal"
             android:contentDescription="@string/user_avatar_image_cd"
+            app:image="@{avatar}"
             app:imageSaturateOnLoad="@{true}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:url="@{avatar}"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
@@ -75,6 +75,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/avatarImageView"
             app:layout_constraintVertical_chainStyle="packed"
+            app:layout_goneMarginBottom="@dimen/spacing_normal"
             tools:text="@tools:sample/first_names" />
 
         <TextView
@@ -90,6 +91,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/avatarImageView"
+            app:visibleIfNotEmpty="@{role}"
             tools:text="@tools:sample/lorem" />
 
         <Space

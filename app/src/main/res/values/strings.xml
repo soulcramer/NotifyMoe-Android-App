@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">AniNotifier</string>
 
-    <string name="tab.myprofile.title">My profile</string>
-    <string name="common.empty.title">Oh oh ?</string>
-    <string name="common.empty.description">It\'s empty here. This is weird…</string>
-    <string name="common.error.title">Oh no !</string>
-    <string name="common.error.description">Something went wrong…</string>
-    <string name="common.error.no_result">No result</string>
-    <string name="network.no_connection.error.title">No connexion</string>
-    <string name="network.no_connection.error.description">We\'re not able to connect to the server, do you have internet?</string>
+    <string name="tab_myprofile_title">My profile</string>
+    <string name="common_empty_title">Oh oh ?</string>
+    <string name="common_empty_description">It\'s empty here. This is weird…</string>
+    <string name="common_error_title">Oh no !</string>
+    <string name="common_error_description">Something went wrong…</string>
+    <string name="common_error_no_result">No result</string>
+    <string name="network_no_connection_error_title">No connexion</string>
+    <string name="network_no_connection_error_description">We\'re not able to connect to the server, do you have internet?</string>
     <string name="user_cover_image_cd">user cover image</string>
     <string name="user_avatar_image_cd">user avatar image</string>
     <string name="anime_cover_image_cd">anime cover image</string>
@@ -46,4 +46,18 @@
     <string name="genre_label_super_power">Super Powers</string>
     <string name="genre_label_supernatural">Supernatural</string>
     <string name="genre_label_vampire">Vampire</string>
+    <string name="user_avatar_description">User profile image</string>
+    <string name="popup_sort_alpha">A-Z</string>
+    <string name="filter_users">Filter users</string>
+    <string name="header_more">More</string>
+
+    <plurals name="header_user_count">
+        <item quantity="one">%d user</item>
+        <item quantity="other">%d users</item>
+    </plurals>
+
+    <plurals name="header_user_count_filtered">
+        <item quantity="one">%d user &lt;small>(filtered)&lt;/small></item>
+        <item quantity="other">%d users &lt;small>(filtered)&lt;/small></item>
+    </plurals>
 </resources>

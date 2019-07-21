@@ -1,9 +1,9 @@
 package app.soulcramer.arn.ui.user
 
-import app.soulcramer.arn.domain.interactor.Status
-import app.soulcramer.arn.domain.interactor.Success
 import app.soulcramer.arn.ui.common.BaseAction
 import app.soulcramer.arn.ui.common.BaseState
+import app.soulcramer.arn.ui.common.Data
+import app.soulcramer.arn.ui.common.ViewState
 
 interface UserContext {
     sealed class Action : BaseAction {
@@ -15,6 +15,6 @@ interface UserContext {
         val title: String = "",
         val avatar: String = "",
         val cover: String = "",
-        val status: Status = Success
+        val status: ViewState = Data
     ) : BaseState
 }

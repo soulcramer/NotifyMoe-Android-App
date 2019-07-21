@@ -9,7 +9,6 @@ plugins {
 android {
     compileSdkVersion(BuildConfigs.compileSdk)
 
-
     defaultConfig {
         minSdkVersion(BuildConfigs.minSdk)
         targetSdkVersion(BuildConfigs.targetSdk)
@@ -41,15 +40,15 @@ android {
         animationsDisabled = true
 
         unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
-            setIncludeAndroidResources(true)
+            isIncludeAndroidResources = true
         })
     }
-
 }
 
 dependencies {
 
     implementation(Libraries.kotlinCoroutines)
+    implementation(Libraries.kotlinCoroutinesAndroid)
 
     implementation(project(Modules.core))
     implementation(project(Modules.domain))
@@ -57,9 +56,9 @@ dependencies {
     implementation(Libraries.retrofit)
     implementation(Libraries.koin)
 
-    implementation(LibrariesAndroidX.core)
-    implementation(LibrariesAndroidX.livedata)
-
+    implementation(Libraries.AndroidX.core)
+    implementation(Libraries.AndroidX.livedata)
+    implementation(Libraries.AndroidX.paging)
 
     testImplementation(Libraries.Test.core)
     testImplementation(Libraries.Test.runner)
@@ -69,9 +68,8 @@ dependencies {
     testImplementation(Libraries.Test.mockk)
 }
 
-
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = Versions.Test.jacoco
 }
 
 tasks.withType(Test::class.java) {
@@ -110,4 +108,3 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         include("jacoco/testDebugUnitTest.exec", "outputs/code-coverage/connected/*coverage.ec")
     })
 }
-

@@ -1,8 +1,8 @@
 package app.soulcramer.arn.ui.common
 
-//class AnimeDetailsTextCreator(
+// class AnimeDetailsTextCreator(
 //    private val context: Context
-//) {
+// ) {
 //    fun showTitle(anime: Anime): CharSequence = buildSpannedString {
 //        inSpans(textAppearanceSpanForAttribute(context, R.attr.textAppearanceHeadline6)) {
 //            append(anime.role.canonical)
@@ -43,4 +43,4 @@ package app.soulcramer.arn.ui.common
 //    fun genreContentDescription(genres: List<Genre>?): CharSequence? {
 //        return genres?.joinToString(", ") { context.getString(GenreStringer.getLabel(it)) }
 //    }
-//}
+// }
