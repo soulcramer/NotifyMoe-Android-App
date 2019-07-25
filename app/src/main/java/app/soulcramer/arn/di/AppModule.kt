@@ -3,11 +3,11 @@ package app.soulcramer.arn.di
 import app.soulcramer.arn.data.UserDataRepository
 import app.soulcramer.arn.data.mapper.UserMapper
 import app.soulcramer.arn.data.source.UserDataStoreFactory
-import app.soulcramer.arn.domain.interactor.GetUser
-import app.soulcramer.arn.domain.interactor.HasLoggedUser
-import app.soulcramer.arn.domain.interactor.LogInUser
-import app.soulcramer.arn.domain.interactor.LogOutUser
-import app.soulcramer.arn.domain.interactor.SearchUsers
+import app.soulcramer.arn.domain.interactor.user.GetUser
+import app.soulcramer.arn.domain.interactor.user.HasLoggedUser
+import app.soulcramer.arn.domain.interactor.user.LogInUser
+import app.soulcramer.arn.domain.interactor.user.LogOutUser
+import app.soulcramer.arn.domain.interactor.user.SearchUsers
 import app.soulcramer.arn.domain.prefs.PreferenceStorage
 import app.soulcramer.arn.domain.repository.UserRepository
 import app.soulcramer.arn.prefs.SharedPreferenceStorage

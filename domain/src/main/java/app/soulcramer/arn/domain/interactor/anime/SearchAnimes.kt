@@ -1,20 +1,22 @@
-package app.soulcramer.arn.domain.interactor
+package app.soulcramer.arn.domain.interactor.anime
 
 import androidx.arch.core.executor.ArchTaskExecutor
 import androidx.paging.DataSource
 import androidx.paging.PagedList
 import app.soulcramer.arn.domain.SortOption
-import app.soulcramer.arn.domain.model.User
-import app.soulcramer.arn.domain.repository.UserRepository
+import app.soulcramer.arn.domain.interactor.PagingUseCase
+import app.soulcramer.arn.domain.interactor.Result
+import app.soulcramer.arn.domain.model.anime.Anime
+import app.soulcramer.arn.domain.repository.AnimeRepository
 import java.util.concurrent.Executors
 
 /**
- * Use case used for searching a list of [User] instances by their nickname from the [UserRepository]
+ * Use case used for searching a list of [Anime] instances by their nickname from the [AnimeRepository]
  */
-class SearchUsers(private val userRepository: UserRepository) : PagingUseCase<SearchUsers.Params, User>() {
+class SearchAnimes(private val animeRepository: AnimeRepository) : PagingUseCase<SearchAnimes.Params, Anime>() {
 
-    override suspend fun execute(parameters: Params): Result<PagedList<User>> {
-        val result = userRepository.searchUser(parameters.filter, parameters.forceRefresh)
+    override suspend fun execute(parameters: Params): Result<PagedList<Anime>> {
+        val result = animeRepository.searchAnime(parameters.filter, parameters.forceRefresh)
 
         return when (result) {
             is Result.Success -> buildSuccessResponse(result, parameters)
@@ -23,29 +25,29 @@ class SearchUsers(private val userRepository: UserRepository) : PagingUseCase<Se
         }
     }
 
-    private fun defaultFailure(): Result.Failure<PagedList<User>> =
-        Result.Failure(Exception("Couldn't search users"))
+    private fun defaultFailure(): Result.Failure<PagedList<Anime>> =
+        Result.Failure(Exception("Couldn't search animes"))
 
     private fun buildFailureResponse(
-        result: Result.Failure<DataSource.Factory<Int, User>>,
+        result: Result.Failure<DataSource.Factory<Int, Anime>>,
         parameters: Params
-    ): Result<PagedList<User>> {
+    ): Result<PagedList<Anime>> {
         val source = result.data?.create() ?: return defaultFailure()
         return Result.Failure(result.exception, buildPagedList(source, parameters))
     }
 
     private fun buildSuccessResponse(
-        result: Result.Success<DataSource.Factory<Int, User>>,
+        result: Result.Success<DataSource.Factory<Int, Anime>>,
         parameters: Params
-    ): Result<PagedList<User>> {
+    ): Result<PagedList<Anime>> {
         val source = result.data.create()
         return Result.Success(buildPagedList(source, parameters))
     }
 
     private fun buildPagedList(
-        source: DataSource<Int, User>,
+        source: DataSource<Int, Anime>,
         parameters: Params
-    ): PagedList<User> {
+    ): PagedList<Anime> {
         return PagedList.Builder(source, parameters.pagingConfig)
             .setBoundaryCallback(parameters.boundaryCallback)
             .setFetchExecutor(Executors.newSingleThreadExecutor())
@@ -58,6 +60,6 @@ class SearchUsers(private val userRepository: UserRepository) : PagingUseCase<Se
         val forceRefresh: Boolean,
         val sort: SortOption,
         override val pagingConfig: PagedList.Config,
-        override val boundaryCallback: PagedList.BoundaryCallback<User>?
-    ) : Parameters<User>
+        override val boundaryCallback: PagedList.BoundaryCallback<Anime>?
+    ) : Parameters<Anime>
 }

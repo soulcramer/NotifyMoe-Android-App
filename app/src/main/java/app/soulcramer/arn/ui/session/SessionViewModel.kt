@@ -1,11 +1,11 @@
 package app.soulcramer.arn.ui.session
 
-import app.soulcramer.arn.domain.interactor.HasLoggedUser
-import app.soulcramer.arn.domain.interactor.LogInUser
-import app.soulcramer.arn.domain.interactor.LogOutUser
 import app.soulcramer.arn.domain.interactor.Result
 import app.soulcramer.arn.domain.interactor.Result.Success
 import app.soulcramer.arn.domain.interactor.invoke
+import app.soulcramer.arn.domain.interactor.user.HasLoggedUser
+import app.soulcramer.arn.domain.interactor.user.LogInUser
+import app.soulcramer.arn.domain.interactor.user.LogOutUser
 import app.soulcramer.arn.ui.common.BaseViewModel
 import app.soulcramer.arn.ui.session.SessionContext.Action
 import app.soulcramer.arn.ui.session.SessionContext.Action.*

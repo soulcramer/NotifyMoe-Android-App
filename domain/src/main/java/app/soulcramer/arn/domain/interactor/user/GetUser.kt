@@ -1,5 +1,6 @@
-package app.soulcramer.arn.domain.interactor
+package app.soulcramer.arn.domain.interactor.user
 
+import app.soulcramer.arn.domain.interactor.UseCase
 import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.domain.repository.UserRepository
 

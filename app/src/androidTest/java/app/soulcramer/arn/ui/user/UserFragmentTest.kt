@@ -10,8 +10,8 @@ import app.soulcramer.arn.R
 import app.soulcramer.arn.cache.cacheModule
 import app.soulcramer.arn.core.test.factory.DataFactory
 import app.soulcramer.arn.di.appModule
-import app.soulcramer.arn.domain.interactor.GetUser
 import app.soulcramer.arn.domain.interactor.Result
+import app.soulcramer.arn.domain.interactor.user.GetUser
 import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.remote.remoteModule
 import app.soulcramer.arn.test.util.UserFactory

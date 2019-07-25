@@ -1,6 +1,7 @@
-package app.soulcramer.arn.domain.interactor
+package app.soulcramer.arn.domain.interactor.user
 
 import app.soulcramer.arn.domain.interactor.Result.Success
+import app.soulcramer.arn.domain.interactor.succeeded
 import app.soulcramer.arn.domain.prefs.PreferenceStorage
 import com.google.common.truth.Truth.assertThat
 import io.mockk.coEvery

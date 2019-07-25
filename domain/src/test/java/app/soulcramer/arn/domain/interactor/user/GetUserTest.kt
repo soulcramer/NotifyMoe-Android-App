@@ -1,4 +1,4 @@
-package app.soulcramer.arn.domain.interactor
+package app.soulcramer.arn.domain.interactor.user
 
 import app.soulcramer.arn.domain.interactor.Result.Failure
 import app.soulcramer.arn.domain.interactor.Result.Success

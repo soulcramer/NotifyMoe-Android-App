@@ -5,7 +5,7 @@ import androidx.paging.PagedList
 import app.soulcramer.arn.domain.interactor.Result
 import app.soulcramer.arn.domain.interactor.Result.Failure
 import app.soulcramer.arn.domain.interactor.Result.Success
-import app.soulcramer.arn.domain.interactor.SearchUsers
+import app.soulcramer.arn.domain.interactor.user.SearchUsers
 import app.soulcramer.arn.domain.model.User
 import app.soulcramer.arn.ui.common.BaseViewModel
 import app.soulcramer.arn.ui.common.Data
