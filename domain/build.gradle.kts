@@ -1,4 +1,5 @@
 import com.android.build.gradle.internal.dsl.TestOptions
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     id("com.android.library")
@@ -46,7 +47,10 @@ android {
     useLibrary("android.test.runner")
     useLibrary("android.test.base")
     useLibrary("android.test.mock")
+}
 
+tasks.withType<KotlinCompile>().all {
+    kotlinOptions.freeCompilerArgs += "-Xuse-experimental=kotlin.Experimental"
 }
 
 dependencies {
@@ -54,8 +58,10 @@ dependencies {
 
     implementation(Libraries.kotlinStandardLibrary)
     implementation(Libraries.kotlinCoroutines)
+    implementation(Libraries.kotlinCoroutinesAndroid)
 
-    implementation(LibrariesAndroidX.livedata)
+    implementation(Libraries.AndroidX.livedata)
+    implementation(Libraries.AndroidX.paging)
 
     implementation(Libraries.timberKt)
 
@@ -65,11 +71,10 @@ dependencies {
     testImplementation(Libraries.Test.truthKtx)
     testImplementation(Libraries.Test.robolectric)
     testImplementation(Libraries.Test.mockk)
-
 }
 
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = Versions.Test.jacoco
 }
 
 tasks.withType(Test::class.java) {

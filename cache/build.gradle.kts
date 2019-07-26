@@ -16,6 +16,14 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = mapOf(
+                    "room.incremental" to "true"
+                )
+            }
+        }
     }
 
     buildTypes {
@@ -34,7 +42,7 @@ android {
         animationsDisabled = true
 
         unitTests(delegateClosureOf<TestOptions.UnitTestOptions> {
-            setIncludeAndroidResources(true)
+            isIncludeAndroidResources = true
         })
     }
 
@@ -57,27 +65,26 @@ dependencies {
     // Kotlin
     implementation(Libraries.kotlinStandardLibrary)
 
-    implementation(LibrariesAndroidX.lifecycle)
-
-    implementation(LibrariesAndroidX.room)
-    implementation(LibrariesAndroidX.roomRuntime)
-    kapt(LibrariesAndroidX.roomCompiler)
+    implementation(Libraries.AndroidX.lifecycle)
+    implementation(Libraries.AndroidX.paging)
+    implementation(Libraries.AndroidX.room)
+    implementation(Libraries.AndroidX.roomRuntime)
+    kapt(Libraries.AndroidX.roomCompiler)
 
     implementation(Libraries.koin)
     implementation(Libraries.koinAndroid)
 
-    implementation(Libraries.threetenbp)
-    implementation(Libraries.threetenabp)
-
-
-    testImplementation("junit:junit:4.12")
-    androidTestImplementation("androidx.test.ext:junit:1.1.0")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.1.1")
+    testImplementation(Libraries.Test.core)
+    testImplementation(Libraries.Test.runner)
+    testImplementation(Libraries.Test.truth)
+    testImplementation(Libraries.Test.truthKtx)
+    testImplementation(Libraries.Test.robolectric)
+    testImplementation(Libraries.Test.mockk)
+    testImplementation(Libraries.Test.room)
 }
 
-
 jacoco {
-    toolVersion = "0.8.0"
+    toolVersion = Versions.Test.jacoco
 }
 
 tasks.withType(Test::class.java) {
@@ -97,12 +104,14 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         html.isEnabled = true
     }
 
-    val fileFilter = mutableSetOf("**/R.class",
+    val fileFilter = mutableSetOf(
+        "**/R.class",
         "**/R$*.class",
         "**/BuildConfig.*",
         "**/Manifest*.*",
         "**/*Test*.*",
-        "android/**/*.*")
+        "android/**/*.*"
+    )
     val debugTree = fileTree("${project.buildDir}/tmp/kotlin-classes/debug") {
         exclude(fileFilter)
     }

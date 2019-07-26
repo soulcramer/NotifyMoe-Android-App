@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.content.Context" />
+
+        <variable
+            name="title"
+            type="int" />
+
+        <variable
+            name="titleString"
+            type="CharSequence" />
+
+        <variable
+            name="buttonTitle"
+            type="int" />
+
+        <variable
+            name="buttonClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:transitionGroup="true">
+
+        <TextView
+            android:id="@+id/header_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/header_margin"
+            android:layout_marginEnd="@dimen/header_margin"
+            android:gravity="center_vertical"
+            android:text="@{titleString ?? context.getString(title)}"
+            android:textAppearance="?attr/textAppearanceSubtitle1"
+            tools:text="Popular" />
+
+        <TextView
+            android:id="@+id/header_more"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginStart="@dimen/header_margin"
+            android:layout_marginEnd="@dimen/header_margin"
+            android:gravity="center_vertical"
+            android:onClick="@{buttonClickListener}"
+            android:text="@{buttonTitle != 0 ? context.getString(buttonTitle) : @string/header_more}"
+            android:textAllCaps="true"
+            android:textAppearance="?attr/textAppearanceButton"
+            android:textColor="@color/colorAccent"
+            app:visibleIfNotNull="@{buttonClickListener}" />
+
+    </FrameLayout>
+</layout>

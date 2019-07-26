@@ -1,51 +1,48 @@
 package app.soulcramer.arn.remote
 
-import com.google.gson.FieldNamingPolicy
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+import app.soulcramer.arn.remote.util.IsoDurationJsonAdapter
+import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
+import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.create
+import java.time.Duration
 
 /**
- * Provide "make" methods to create instances of [BufferooService]
- * and its related dependencies, such as OkHttpClient, Gson, etc.
+ * Provide "make" methods to create instances of [NotifyMoeServiceFactory]
+ * and its related dependencies, such as OkHttpClient, Moshi, etc.
  */
 object NotifyMoeServiceFactory {
 
     fun makeNotifyMoeService(isDebug: Boolean): NotifyMoeService {
         val okHttpClient = makeOkHttpClient(
             makeLoggingInterceptor(isDebug))
-        return makeBufferooService(okHttpClient, makeGson())
+        return makeBufferooService(okHttpClient, makeMoshi())
     }
 
-    private fun makeBufferooService(okHttpClient: OkHttpClient, gson: Gson): NotifyMoeService {
+    private fun makeBufferooService(okHttpClient: OkHttpClient, moshi: Moshi): NotifyMoeService {
         val retrofit = Retrofit.Builder()
             .baseUrl("https://notify.moe/")
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
-        return retrofit.create(NotifyMoeService::class.java)
+        return retrofit.create()
     }
 
     private fun makeOkHttpClient(httpLoggingInterceptor: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
+            .connectTimeout(Duration.ofMinutes(2))
+            .readTimeout(Duration.ofMinutes(2))
             .build()
     }
 
-    private fun makeGson(): Gson {
-        return GsonBuilder()
-            .setLenient()
-            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .create()
+    private fun makeMoshi(): Moshi {
+        return Moshi.Builder().run {
+            add(IsoDurationJsonAdapter())
+            build()
+        }
     }
 
     private fun makeLoggingInterceptor(isDebug: Boolean): HttpLoggingInterceptor {

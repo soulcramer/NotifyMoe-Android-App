@@ -1,10 +1,10 @@
 package app.soulcramer.arn.ui.common
 
-//import androidx.annotation.StringRes
-//import app.soulcramer.arn.R
-//import app.soulcramer.arn.model.anime.Genre
+// import androidx.annotation.StringRes
+// import app.soulcramer.arn.R
+// import app.soulcramer.arn.model.anime.Genre
 //
-//object GenreStringer {
+// object GenreStringer {
 //    fun getEmoji(genre: Genre): String = when (genre) {
 //        Genre.DRAMA -> "\uD83D\uDE28"
 //        Genre.FANTASY -> "\uD83E\uDDD9"
@@ -75,4 +75,4 @@ package app.soulcramer.arn.ui.common
 //        Genre.SUPERNATURAL -> R.string.genre_label_supernatural
 //        Genre.VAMPIRE -> R.string.genre_label_vampire
 //    }
-//}
+// }

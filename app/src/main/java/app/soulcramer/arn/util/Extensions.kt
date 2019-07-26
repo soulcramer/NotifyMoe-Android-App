@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-
 import android.content.Context
 import android.util.TypedValue
 import android.view.LayoutInflater

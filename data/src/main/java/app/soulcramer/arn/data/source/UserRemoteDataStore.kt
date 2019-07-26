@@ -1,5 +1,6 @@
 package app.soulcramer.arn.data.source
 
+import androidx.paging.DataSource
 import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.data.repository.UserDataStore
 import app.soulcramer.arn.data.repository.UserRemote
@@ -11,14 +12,26 @@ import app.soulcramer.arn.data.repository.UserRemote
 open class UserRemoteDataStore(private val userRemote: UserRemote) :
     UserDataStore {
 
-    override fun saveUser(user: UserEntity) {
+    override suspend fun saveUser(user: UserEntity) {
+        throw UnsupportedOperationException()
+    }
+
+    override suspend fun saveUsers(users: List<UserEntity>) {
         throw UnsupportedOperationException()
     }
 
     /**
      * Retrieve a [UserEntity] instances from the API
      */
-    override fun getUser(userId: String): UserEntity {
+    override suspend fun getUser(userId: String): UserEntity {
         return userRemote.getUser(userId)
+    }
+
+    override suspend fun searchUsers(nickname: String): DataSource.Factory<Int, UserEntity> {
+        throw UnsupportedOperationException()
+    }
+
+    suspend fun searchAllUsers(nickname: String): List<UserEntity> {
+        return userRemote.searchUsers(nickname)
     }
 }

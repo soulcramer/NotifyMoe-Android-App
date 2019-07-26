@@ -3,7 +3,7 @@ package app.soulcramer.arn.data.mapper
 import app.soulcramer.arn.data.model.UserEntity
 import app.soulcramer.arn.data.test.factory.UserFactory
 import app.soulcramer.arn.domain.model.User
-import org.junit.Assert.assertEquals
+import com.google.common.truth.Truth.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,8 +35,11 @@ class UserMapperTest {
     }
 
     private fun assertUserDataEquality(userFactoryEntity: UserEntity, user: User) {
-        assertEquals(userFactoryEntity.nickname, user.name)
-        assertEquals(userFactoryEntity.role, user.title)
-        assertEquals(userFactoryEntity.avatar, user.avatar)
+        assertThat(user.id).isEqualTo(userFactoryEntity.id)
+        assertThat(user.nickname).isEqualTo(userFactoryEntity.nickname)
+        assertThat(user.role).isEqualTo(userFactoryEntity.role)
+        assertThat(user.proExpiresDate).isEqualTo(userFactoryEntity.proExpiresDate)
+        assertThat(user.hasAvatar).isEqualTo(userFactoryEntity.hasAvatar)
+        assertThat(user.hasCover).isEqualTo(userFactoryEntity.hasCover)
     }
 }

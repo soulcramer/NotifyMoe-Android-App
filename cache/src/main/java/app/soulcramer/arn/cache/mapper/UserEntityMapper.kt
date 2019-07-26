@@ -13,13 +13,13 @@ class UserEntityMapper : EntityMapper<CachedUser, UserEntity> {
      * Map a [UserEntity] instance to a [CachedUser] instance
      */
     override fun mapToCached(type: UserEntity): CachedUser {
-        return CachedUser(type.id, type.nickname, type.role, type.avatar, type.cover)
+        return CachedUser(type.id, type.nickname, type.role, type.proExpiresDate, type.hasAvatar, type.hasCover)
     }
 
     /**
      * Map a [CachedUser] instance to a [UserEntity] instance
      */
     override fun mapFromCached(type: CachedUser): UserEntity {
-        return UserEntity(type.id, type.name, type.title, type.avatar, type.cover)
+        return UserEntity(type.id, type.nickname, type.role, type.proExpiresDate, type.hasAvatar, type.hasCover)
     }
 }

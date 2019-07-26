@@ -1,5 +1,6 @@
 package app.soulcramer.arn.data.repository
 
+import androidx.paging.DataSource
 import app.soulcramer.arn.data.model.UserEntity
 
 /**
@@ -9,7 +10,11 @@ import app.soulcramer.arn.data.model.UserEntity
  */
 interface UserDataStore {
 
-    fun saveUser(user: UserEntity)
+    suspend fun saveUser(user: UserEntity)
 
-    fun getUser(userId: String): UserEntity
+    suspend fun saveUsers(users: List<UserEntity>)
+
+    suspend fun getUser(userId: String): UserEntity
+
+    suspend fun searchUsers(nickname: String): DataSource.Factory<Int, UserEntity>
 }
