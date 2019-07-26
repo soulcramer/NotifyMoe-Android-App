@@ -16,6 +16,14 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = mapOf(
+                    "room.incremental" to "true"
+                )
+            }
+        }
     }
 
     buildTypes {
@@ -42,6 +50,7 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
 }
 
 kapt {
@@ -95,12 +104,14 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         html.isEnabled = true
     }
 
-    val fileFilter = mutableSetOf("**/R.class",
+    val fileFilter = mutableSetOf(
+        "**/R.class",
         "**/R$*.class",
         "**/BuildConfig.*",
         "**/Manifest*.*",
         "**/*Test*.*",
-        "android/**/*.*")
+        "android/**/*.*"
+    )
     val debugTree = fileTree("${project.buildDir}/tmp/kotlin-classes/debug") {
         exclude(fileFilter)
     }

@@ -1,4 +1,4 @@
-package app.soulcramer.arn.domain.interactor
+package app.soulcramer.arn.domain.interactor.user
 
 import app.soulcramer.arn.domain.repository.UserRepository
 import io.mockk.mockk
